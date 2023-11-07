@@ -1,0 +1,5 @@
+* text=auto
+
+# Файлы Bash скриптов и .yml файлы сохраняют переносы строк LF даже на Windows.
+*.sh text eol=lf
+*.yml text eol=lf
