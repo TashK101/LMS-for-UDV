@@ -13,5 +13,23 @@ namespace external_training.Data
         {
 
         }
+
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<TrainingApplication> TrainingApplications { get; set; }
+        public DbSet<SelectedTrainingCourse> SelectedTrainingCourses { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder
+                .Entity<SelectedTrainingCourse>()
+                .Property(e => e.Status)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (TrainingStatus)Enum.Parse(typeof(TrainingStatus), v));
+        }
     }
 }
