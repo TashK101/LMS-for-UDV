@@ -25,11 +25,11 @@ namespace external_training.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder
-                .Entity<SelectedTrainingCourse>()
+                .Entity<TrainingApplication>()
                 .Property(e => e.Status)
                 .HasConversion(
                     v => v.ToString(),
-                    v => (TrainingStatus)Enum.Parse(typeof(TrainingStatus), v));
+                    v => (ApplicationStatus)Enum.Parse(typeof(ApplicationStatus), v));
         }
     }
 }
