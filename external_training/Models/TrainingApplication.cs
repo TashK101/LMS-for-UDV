@@ -32,6 +32,7 @@ namespace external_training.Models
         public string ApplicationNotes { get; set; } = null!;
 
         public bool IsApprovedByManager { get; set; }
+        public bool IsArchived { get; set; }
 
         [EnumDataType(typeof(ApplicationStatus))]
         public ApplicationStatus Status { get; set; }

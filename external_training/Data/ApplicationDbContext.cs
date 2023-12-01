@@ -19,6 +19,7 @@ namespace external_training.Data
         public DbSet<TrainingApplication> TrainingApplications { get; set; }
         public DbSet<SelectedTrainingCourse> SelectedTrainingCourses { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
