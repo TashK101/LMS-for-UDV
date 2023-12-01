@@ -1,3 +1,3 @@
 @echo off
-wsl sudo docker compose down
+docker-compose down
 pause

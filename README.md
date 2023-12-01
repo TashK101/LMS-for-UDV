@@ -10,24 +10,18 @@
 
 Когда придумываете пароль в Ubuntu, делайте его несложным, так как придётся его часто вводить.
 
-### Установка докера
-Заходим в Ubuntu (можно найти на начальном экране или в поиске)).
-Там вводим следующие команды:
-* `curl -fsSL https://get.docker.com -o get-docker.sh`
-* `sh get-docker.sh`
+### Установка Docker Desktop
+Для windows скачиваем [Docker Desktop](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe) и просто устанавливаем с настройками по умолчанию.
 
-Если начнёт ругаться на wsl, всё равно продолжаем установку.
+На Mac можно поставить по [официальной инструкции](https://docs.docker.com/desktop/install/mac-install/).
 
 ## КАк запускать проект?
-Перед началом рабботы нужно запустить Postgres. Он у нас запускается из docker образа.
+Перед началом работы нужно запустить Postgres. Он запускается из docker образа.
 В windows можно просто нажать на файл `external_training\start_docker_compose.bat`. Тогда запустится сам Postgres и ещё pgAdmin. 
 
-pgAdmin назодится по адресу http://localhost:5050
+Также на Mac и в Windows можно запустить через консоль командой `docker-compose up -d`.
 
-Потом нужно применить миграции к бд. 
-ДЛя этого запускаем файл `external_training\apply_migrations.bat` (только для windows).
-
-Если будет ругаться, счто dotnet ef не найден, нужно в консоли выполнить команду `dotnet tool install --global dotnet-ef` и опять выполнить миграцию.
+pgAdmin находится по адресу http://localhost:5050
 
 Ура! теперь можно из IDE запускать проект, и всё должно работать.
 
