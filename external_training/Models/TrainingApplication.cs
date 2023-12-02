@@ -39,6 +39,10 @@ namespace external_training.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
+        public string UserId { get; set; } = null!;
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser User { get; set; } = null!;
+
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
         public virtual SelectedTrainingCourse? SelectedCourse { get; set; }

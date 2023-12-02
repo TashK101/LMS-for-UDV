@@ -11,5 +11,7 @@ namespace external_training.Models
 
         public int? TeamId { get; set; }
         public Team? Team { get; set; }
+
+        public virtual ICollection<TrainingApplication> TrainingApplications { get; set; } = new List<TrainingApplication>();
     }
 }
