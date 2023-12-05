@@ -2,6 +2,7 @@ using Duende.IdentityServer.Services;
 using external_training.Data;
 using external_training.Models;
 using external_training.Repositories;
+using external_training.Services;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -41,6 +42,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
 builder.Services.AddTransient<IEventSink, UserRegistrationEventHandler>();
 
 var app = builder.Build();
