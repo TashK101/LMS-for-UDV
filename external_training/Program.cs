@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Services;
 using external_training.Data;
 using external_training.Models;
 using external_training.Repositories;
@@ -40,6 +41,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddTransient<IEventSink, UserRegistrationEventHandler>();
 
 var app = builder.Build();
 
