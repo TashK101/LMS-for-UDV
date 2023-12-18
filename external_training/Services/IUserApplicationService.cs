@@ -1,8 +1,8 @@
 ﻿using external_training.Controllers.DtoModels;
-
+ 
 namespace external_training.Services
 {
-    public interface IApplicationService
+    public interface IUserApplicationService
     {
         Task CreateCommentAsync(CommentCreation commentCreation, string userId);
         Task CreateTrainingApplicationAsync(TrainingApplicationRequest request, string userId);

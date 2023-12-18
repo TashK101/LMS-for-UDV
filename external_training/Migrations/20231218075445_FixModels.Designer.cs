@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using external_training.Data;
@@ -11,9 +12,11 @@ using external_training.Data;
 namespace external_training.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231218075445_FixModels")]
+    partial class FixModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -552,6 +555,10 @@ namespace external_training.Migrations
                     b.Property<DateTime>("DesiredEnd")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("DesiredManagerName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<decimal>("EstimatedCostPerParticipant")
                         .HasColumnType("numeric");
 
@@ -566,10 +573,6 @@ namespace external_training.Migrations
 
                     b.Property<bool>("IsTrainingOnline")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("ManagerId")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<int>("PlannedParticipantsCount")
                         .HasColumnType("integer");
@@ -612,8 +615,6 @@ namespace external_training.Migrations
                     b.HasKey("TrainingApplicationId");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("ManagerId");
 
                     b.HasIndex("TeamId");
 
@@ -756,12 +757,6 @@ namespace external_training.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("external_training.Models.ApplicationUser", "Manager")
-                        .WithMany()
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("external_training.Models.Team", "Team")
                         .WithMany()
                         .HasForeignKey("TeamId")
@@ -775,8 +770,6 @@ namespace external_training.Migrations
                         .IsRequired();
 
                     b.Navigation("Department");
-
-                    b.Navigation("Manager");
 
                     b.Navigation("Team");
 

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace external_training.Repositories
 {
-    public class ApplicationRepository : IApplicationRepository
+    public class UserApplicationRepository : IUserApplicationRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public ApplicationRepository(ApplicationDbContext context)
+        public UserApplicationRepository(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -31,6 +31,7 @@ namespace external_training.Repositories
         public async Task<TrainingApplication?> GetAsync(int applicationId)
         {
             return await _context.TrainingApplications
+                .Include(a => a.Manager)
                 .Include(a => a.User)
                 .Include(a => a.Department)
                 .Include(a => a.Team)
@@ -62,3 +63,4 @@ namespace external_training.Repositories
         }
     }
 }
+ 

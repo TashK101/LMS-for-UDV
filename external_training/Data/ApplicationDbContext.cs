@@ -24,6 +24,11 @@ namespace external_training.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<TrainingApplication>()
+                .HasOne(t => t.Manager)
+                .WithMany()
+                .HasForeignKey(t => t.ManagerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder
                 .Entity<TrainingApplication>()

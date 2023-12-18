@@ -2,7 +2,7 @@
 
 namespace external_training.Repositories
 {
-    public interface IApplicationRepository
+    public interface IUserApplicationRepository
     {
         Task AddAsync(TrainingApplication trainingApplication);
         Task AddCommentAsync(Comment comment);

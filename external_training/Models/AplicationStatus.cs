@@ -3,6 +3,7 @@
     public enum ApplicationStatus
     {
         NotApproved,
+        AwaitingManagerApproval,
         CourseSelection,
         AwaitingContract,
         AwaitingPayment,

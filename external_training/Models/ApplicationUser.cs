@@ -5,6 +5,8 @@ namespace external_training.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string FullName { get; set; } = string.Empty;
+
         public string? ManagerId { get; set; }
         [ForeignKey("ManagerId")]
         public virtual ApplicationUser? Manager { get; set; }

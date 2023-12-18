@@ -11,7 +11,10 @@ namespace external_training.Models
         public string TrainingTopic { get; set; } = null!;
         public int PlannedParticipantsCount { get; set; }
         public string PlannedParticipantsNames { get; set; } = null!;
-        public string DesiredManagerName { get; set; } = null!;
+
+        public string ManagerId { get; set; } = null!;
+        [ForeignKey("ManagerId")]
+        public virtual ApplicationUser Manager { get; set; } = null!;
 
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]

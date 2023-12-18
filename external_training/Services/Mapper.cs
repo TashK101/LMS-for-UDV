@@ -1,38 +1,21 @@
 ﻿using external_training.Controllers.DtoModels;
 using external_training.Models;
-using external_training.Repositories;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace external_training.Services
 {
-    public class ApplicationService : IApplicationService
+    public static class Mapper
     {
-        private readonly IApplicationRepository _applicationRepository;
-
-        public ApplicationService(IApplicationRepository applicationRepository)
-        {
-            _applicationRepository = applicationRepository;
-        }
-
-        public async Task CreateTrainingApplicationAsync(TrainingApplicationRequest request, string userId)
-        {
-            TrainingApplication trainingApplication = MapToTrainingApplication(request, userId);
-            await _applicationRepository.AddAsync(trainingApplication);
-        }
-
-        private TrainingApplication MapToTrainingApplication(TrainingApplicationRequest request, string userId)
+        public static TrainingApplication MapToTrainingApplication(TrainingApplicationRequest request, ApplicationUser user)
         {
             return new TrainingApplication
             {
                 TrainingTopic = request.TrainingTopic,
                 PlannedParticipantsCount = request.PlannedParticipantsCount,
                 PlannedParticipantsNames = request.PlannedParticipantsNames,
-                DesiredManagerName = request.DesiredManagerName,
+                ManagerId = request.DesiredManagerId,
+
+                TeamId = user.TeamId ?? 0,
+                DepartmentId = user.Team!.DepartmentId,
                 IsTrainingOnline = request.IsTrainingOnline,
                 IsCorporateTraining = request.IsCorporateTraining,
                 DesiredBegin = request.DesiredBegin,
@@ -43,21 +26,37 @@ namespace external_training.Services
                 TrainingGoals = request.TrainingGoals,
                 SkillsToBeAcquired = request.SkillsToBeAcquired,
                 ApplicationNotes = request.ApplicationNotes,
-                UserId = userId,
+                UserId = user.Id,
                 CreatedAt = DateTime.UtcNow,
                 Status = ApplicationStatus.AwaitingManagerApproval
             };
         }
 
-        public async Task<DetaileTrainingApplicationResponse?> GetTrainingApplicationAsync(int applicationId)
+        public static SelectedCourseResponse MapToSelectedCourseResponse(SelectedTrainingCourse selectedCourse, TrainingApplication application)
         {
-            var application = await _applicationRepository.GetAsync(applicationId);
-            if (application == null)
-                return null; ;
-            return mapToDetaileTrainingApplicationResponse(application);
+            return new SelectedCourseResponse
+            {
+                TrainingApplicationId = application.TrainingApplicationId,
+                TrainingTopic = application.TrainingTopic,
+                Status = application.Status.ToString(),
+                ApplicationUserId = application.UserId,
+                DesiredManagerName = application.Manager.FullName,
+                EducationalCenter = selectedCourse.EducationalCenter,
+                CourseName = selectedCourse.CourseName,
+                ParticipantsCount = selectedCourse.ParticipantsCount,
+                ParticipantsNames = selectedCourse.ParticipantsNames,
+                Department = application.Department?.Name ?? string.Empty,
+                Team = application.Team?.Name ?? string.Empty,
+                IsTrainingOnline = selectedCourse.IsTrainingOnline,
+                IsCorporateTraining = selectedCourse.IsCorporateTraining,
+                Begin = selectedCourse.Begin,
+                End = selectedCourse.End,
+                CostPerParticipant = selectedCourse.CostPerParticipant,
+                Comments = application.Comments.Select(mapToCommentDto).ToList()
+            };
         }
 
-        private DetaileTrainingApplicationResponse mapToDetaileTrainingApplicationResponse(TrainingApplication application)
+        public static DetaileTrainingApplicationResponse MapToDetaileTrainingApplicationResponse(TrainingApplication application)
         {
             var ApplicationDto = new DetaileTrainingApplicationResponse
             {
@@ -84,7 +83,7 @@ namespace external_training.Services
             return ApplicationDto;
         }
 
-        private CommentDto mapToCommentDto(Comment comment)
+        public static CommentDto mapToCommentDto(Comment comment)
         {
             var CommentDto = new CommentDto
             {
@@ -95,19 +94,19 @@ namespace external_training.Services
             return CommentDto;
         }
 
-        public async Task<IEnumerable<ShortTrainingApplicationResponse>> GetTrainingApplicationsAsync(string userId)
+        public static Comment mapToComment(CommentCreation commentCreation, string userId)
         {
-            var applications = await _applicationRepository.GetApplicationsAsync(userId);
-            return applications.Select(mapToShortTrainingApplicationResponse).ToList();
+            var comment = new Comment
+            {
+                TrainingApplicationId = commentCreation.TrainingApplicationId,
+                Content = commentCreation.Comment,
+                CreatedAt = DateTime.UtcNow,
+                UserId = userId
+            };
+            return comment;
         }
 
-        public async Task<IEnumerable<ShortTrainingApplicationResponse>> GetArchivedApplicationsAsync(string userId)
-        {
-            var applications = await _applicationRepository.GetArchivedApplicationsAsync(userId);
-            return applications.Select(mapToShortTrainingApplicationResponse).ToList();
-        }
-
-        private ShortTrainingApplicationResponse mapToShortTrainingApplicationResponse(TrainingApplication application)
+        public static ShortTrainingApplicationResponse MapToShortTrainingApplicationResponse(TrainingApplication application)
         {
             var ApplicationDto = new ShortTrainingApplicationResponse
             {
@@ -120,17 +119,6 @@ namespace external_training.Services
             return ApplicationDto;
         }
 
-        public async Task CreateCommentAsync(CommentCreation commentCreation, string userId)
-        {
-            var comment = new Comment
-            {
-                TrainingApplicationId = commentCreation.TrainingApplicationId,
-                Content = commentCreation.Comment,
-                CreatedAt = DateTime.UtcNow,
-                UserId = userId
-            };
 
-            await _applicationRepository.AddCommentAsync(comment);
-        }
     }
 }
