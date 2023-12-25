@@ -1,7 +1,6 @@
 import { JSX } from "react/jsx-runtime";
 
-export default SignInErrorPage;
-function SignInErrorPage() : JSX.Element {
+export function SignInErrorPage() : JSX.Element {
     return (
         <body>
             <div className="user-page">

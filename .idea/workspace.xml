@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="556be0e5-f986-4366-9f95-8cea71da43f6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/tsconfig.node.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +72,7 @@
       <workItem from="1703372011976" duration="4529000" />
       <workItem from="1703435719339" duration="2282000" />
       <workItem from="1703539940299" duration="5743000" />
-      <workItem from="1703545915473" duration="757000" />
+      <workItem from="1703545915473" duration="1473000" />
     </task>
     <servers />
   </component>
