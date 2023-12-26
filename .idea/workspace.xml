@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/tailwind.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/postcss.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/drop-down-menu/drop-down-menu-element.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-file-2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-file-2.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/tailwind.output.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/tailwind.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,11 +69,17 @@
       <option name="presentableId" value="Default" />
       <updated>1703609988247</updated>
       <workItem from="1703609990730" duration="4941000" />
-      <workItem from="1703615091287" duration="1423000" />
+      <workItem from="1703615091287" duration="1887000" />
+      <workItem from="1703627256992" duration="3645000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/external_training/ClientApp/tailwind.config.js" />
+      </list>
+    </option>
   </component>
 </project>
