@@ -1,4 +1,5 @@
 import { JSX } from "react/jsx-runtime";
+import DropDownMenuElement from './test-file-2';
 
 export function SignInErrorPage() : JSX.Element {
     return (
@@ -25,6 +26,7 @@ export function SignInErrorPage() : JSX.Element {
                         <div className="sign-in__submit">
                             <button className="sign-in__btn" type="submit">Sign in</button>
                         </div>
+                        <DropDownMenuElement elementLabel="Labeblblblblbllblblblbl" ></DropDownMenuElement>
                     </form>
                 </div>
             </div>
