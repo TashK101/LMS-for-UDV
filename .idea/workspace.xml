@@ -5,31 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/api/api.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/api/token.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/loading-page/loading-page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/icons/logo-with-udv.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/middlewares/redirect.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/store.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/notifications.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/state.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/AppRoutes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/Counter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/FetchData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/Home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/Layout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/NavMenu.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/NavMenu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/api-authorization/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/api-authorization/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/api/api.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/api/token.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/api/token.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/loading-page/loading-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/loading-page/loading-page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/external_training.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/external_training.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +66,22 @@
       <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\components" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="apply_migrations" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="LMS-for-UDV" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="apply_migrations.bat" />
+      <option name="PARAMETERS" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Batch.apply_migrations" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -98,16 +98,11 @@
       <workItem from="1704283104659" duration="1823000" />
       <workItem from="1704887627112" duration="16904000" />
       <workItem from="1704922641330" duration="1667000" />
-      <workItem from="1704971853247" duration="1961000" />
+      <workItem from="1704971853247" duration="8883000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/external_training/ClientApp/tailwind.config.js" />
-      </list>
-    </option>
   </component>
 </project>
