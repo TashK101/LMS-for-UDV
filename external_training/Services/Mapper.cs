@@ -119,6 +119,14 @@ namespace external_training.Services
             return ApplicationDto;
         }
 
-
+        public static ManagerInfo MapToManagerInfo(ApplicationUser manager)
+        {
+            var managerInfo = new ManagerInfo
+            {
+                ManagerId = manager.Id,
+                FullName = manager.FullName
+            };
+            return managerInfo;
+        }
     }
 }
