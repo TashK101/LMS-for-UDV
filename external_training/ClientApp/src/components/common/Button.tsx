@@ -6,7 +6,7 @@ interface SubmitButtonProps {
 
 export function SubmitButton({ text }: SubmitButtonProps) {
     return (
-        <button type="submit" className="w-[120px] h-[40px] rounded-[100px] bg-color5 border border-color8">
+        <button type="submit" className="w-[120px] h-[40px] rounded-[100px] bg-color5 border-[1px] border-color8">
             <p className="font-golos text-color7 text-[14px] font-[500]">{text}</p>
         </button>
     )

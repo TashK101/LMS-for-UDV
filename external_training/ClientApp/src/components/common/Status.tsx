@@ -31,9 +31,9 @@ interface StatusComponentProps {
 export function StatusComponent({ statusType }: StatusComponentProps) {
     const status = statusMap.get(statusType)
     return (
-        <div className="bg-white border border-color2 rounded-[8px] flex flex-row items-center gap-[8px] px-[8px] py-[6px]">
+        <div className="bg-white border-[1px] border-color2 rounded-[8px] flex flex-row items-center gap-[8px] px-[8px] py-[6px]">
             {status?.children}
-            <H400 fontSize={16} text={status?.title ?? ""} />
+            <p className="font-golos text-color7 text-[16px] font-[400]">{status?.title ?? ""}</p>
         </div>
     )
 }

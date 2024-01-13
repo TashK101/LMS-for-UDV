@@ -8,7 +8,7 @@ export function Card({ children }: CardProps) {
     return (
         <div className="
         bg-white 
-        border border-gray-300 
+        border-[1px] border-gray-300 
         rounded-[10px] shadow-lg
         p-7">
             {children}

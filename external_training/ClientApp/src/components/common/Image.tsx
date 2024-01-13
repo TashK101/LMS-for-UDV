@@ -31,9 +31,9 @@ export function ProfileImage({ name, surname }: ProfileImageProps) {
         w-[50px] h-[50px] 
         overflow-hidden bg-color5 
         rounded-full
-        border border-color6
+        border-[1px] border-color6
         ">
-            <H500 fontSize={16} text={createText(name, surname)} />
+            <p className="font-golos text-color7 text-[16px] font-[500]">{createText(name, surname)}</p>
         </div>
     )
 }

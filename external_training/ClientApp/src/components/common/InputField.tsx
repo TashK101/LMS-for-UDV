@@ -18,7 +18,7 @@ export function TextField({ label = "", placeholder = "", required = true, value
                 className="font-golos font-normal 
                 text-base placeholder:text-color3 
                 w-full max-w-sm 
-                outline-0 border border-color2 rounded 
+                outline-0 border-[1px] border-color2 rounded 
                 h-[56px] p-[16px]
                 "
                 placeholder={placeholder}
@@ -37,7 +37,7 @@ export function TextArea({ label = "", placeholder = "", required = true, value,
                 className='font-golos font-normal 
                 text-base placeholder:text-color3 
                 w-full max-w-sm 
-                outline-0 border border-color2 rounded
+                outline-0 border-[1px] border-color2 rounded
                 h-[101px] p-[16px]'
                 placeholder={placeholder}
                 required={required}
@@ -77,7 +77,7 @@ function PasswordInput({ placeholder, required, value, onChange }: PasswordInput
                 className="font-golos font-normal 
           text-base placeholder:text-color3 
           w-full max-w-sm 
-          outline-0 border border-color2 rounded 
+          outline-0 border-[1px] border-color2 rounded 
           h-[56px] p-[16px]"
                 required={required}
                 value={value}
@@ -121,7 +121,7 @@ export function CounterInput({ label = "", required = true, value, onChange }: C
                     type="text"
                     className="font-golos font-normal 
                 text-base text-center placeholder:text-color3 
-                outline-0 border border-color2 rounded-[5px] 
+                outline-0 border-[1px] border-color2 rounded-[5px] 
                 w-[49px] h-42[px] p-[8px]
                 "
                     required={required}
