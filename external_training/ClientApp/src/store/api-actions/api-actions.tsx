@@ -18,7 +18,7 @@ export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
             dispatch(setLoadingStatus(true));
             const {data} = await api.get<any>('weatherforecast');
             //dispatch(loadNotifications(data));
-            dispatch(redirectToRoute('/test'))
+            dispatch(redirectToRoute('/fetch-data'))
         } finally{
             dispatch(setLoadingStatus(false));
         }
