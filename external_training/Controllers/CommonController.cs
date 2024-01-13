@@ -33,7 +33,7 @@ namespace external_training.Controllers
             var id = User.Identity.Name;
             var user =await _userManager.FindByIdAsync(id);
             user.FullName = name;
-            _userManager.UpdateAsync(user);
+            await _userManager.UpdateAsync(user);
             var updateUser = await _userManager.FindByIdAsync(id);
             return Ok(updateUser.FullName);
         }
