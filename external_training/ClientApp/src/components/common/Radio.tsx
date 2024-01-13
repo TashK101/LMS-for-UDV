@@ -22,7 +22,7 @@ export function RadioGroup({ label, name, required = true, radios, onChange }: R
                         <input
                             type="radio"
                             name={name}
-                            className='w-5 h-5 accent-yellow-900 border-2'
+                            className='w-5 h-5 accent-amber-800 border-2'
                             required={required}
                             value={index}
                             onChange={(event) => onChange(event.target.value)}
@@ -55,7 +55,7 @@ export function RadioGroupWithComponent({ label, name, required = true, radios, 
                         <input
                             type="radio"
                             name={name}
-                            className='w-5 h-5 accent-yellow-900 border-2'
+                            className='w-5 h-5 accent-amber-800 border-2'
                             required={required}
                             value={index}
                             onChange={(event) => onChange(event.target.value)}

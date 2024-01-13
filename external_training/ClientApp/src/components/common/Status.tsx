@@ -1,5 +1,4 @@
 import { ApprovedIcon, AwaitManagerApprovalIcon, AwaitPaymentAndContractIcon, AwaitPaymentIcon, CourseSelectionIcon, NotApprovedIcon } from "./Icons";
-import { H400 } from "./Text";
 
 export enum StatusType {
     NOT_APPROVED,

@@ -128,7 +128,7 @@ export function CounterInput({ label = "", required = true, value, onChange }: C
                     value={value}
                     onChange={(event) => {
                         const value = event.target.value
-                        if (value.length == 0) {
+                        if (value.length === 0) {
                             onChange(0)
                             return
                         }

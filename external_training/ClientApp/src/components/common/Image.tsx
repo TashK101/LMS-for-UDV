@@ -1,4 +1,4 @@
-import { H500, H600 } from "./Text"
+import { H600 } from "./Text"
 
 interface ProfileImageProps {
     name: string,
