@@ -71,6 +71,7 @@ builder.Services.AddAuthentication()
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserApplicationRepository, UserApplicationRepository>();
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
 builder.Services.AddTransient<IEventSink, UserRegistrationEventHandler>();
