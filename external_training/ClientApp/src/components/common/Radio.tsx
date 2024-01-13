@@ -18,7 +18,7 @@ export function RadioGroup({ label, name, required = true, radios, onChange }: R
         <Form label={label}>
             <div>
                 {radios.map((radio, index) =>
-                    <div key={index} className="flex gap-5 items-center p-3.5">
+                    <div key={index} className="flex gap-[20px] items-center p-3.5">
                         <input
                             type="radio"
                             name={name}
@@ -51,7 +51,7 @@ export function RadioGroupWithComponent({ label, name, required = true, radios, 
         <Form label={label}>
             <div>
                 {radios.map((radio, index) =>
-                    <div key={index} className="flex gap-5 items-center p-3.5">
+                    <div key={index} className="flex gap-[20px] items-center p-3.5">
                         <input
                             type="radio"
                             name={name}

@@ -1,4 +1,4 @@
-import { H400, H500 } from "./Text"
+import { H400 } from "./Text"
 
 interface SubmitButtonProps {
     text: string
@@ -7,7 +7,7 @@ interface SubmitButtonProps {
 export function SubmitButton({ text }: SubmitButtonProps) {
     return (
         <button type="submit" className="w-[120px] h-[40px] rounded-[100px] bg-color5 border border-color8">
-            <H500 text={text} fontSize={14} />
+            <p className="font-golos text-color7 text-[14px] font-[500]">{text}</p>
         </button>
     )
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { H400 } from './Text';
 
 interface CardProps {
     children: React.ReactNode
@@ -34,6 +33,6 @@ interface CardIndexProps {
 
 export function CardIndex({ index, count }: CardIndexProps) {
     return (
-        <H400 text={`${index} из ${count}`} fontSize={14} color='color3' />
+        <p className="font-golos text-color3 text-[14px] font-[400]">{`${index} из ${count}`}</p>
     )
 }
