@@ -3,6 +3,7 @@ import {getToken} from './token.ts';
 import {store} from '../store/store';
 import {setError} from '../store/reducer';
 import {StatusCodes} from 'http-status-codes';
+import authService from '../components/api-authorization/AuthorizeService'
 
 export const BACKEND_URL = 'https://localhost:44441';
 export const REQUEST_TIMEOUT = 5000;
@@ -25,10 +26,15 @@ export const createAPI = (): AxiosInstance => {
 
     api.interceptors.request.use(
         (config: AxiosRequestConfig) => {
-            const token = getToken();
+            let value : any;
+            const getToken = async () =>
+            {
+                const token = await authService.getAccessToken();
+            }
+            getToken().then((r) => {value = r})
 
-            if (token && config.headers) {
-                config.headers['x-token'] = token;
+            if (value && config.headers) {
+                config.headers['Authorization'] = value;
             }
 
             return config;

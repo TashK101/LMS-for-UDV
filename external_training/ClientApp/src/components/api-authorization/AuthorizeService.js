@@ -142,8 +142,8 @@ export class AuthorizeService {
 
   unsubscribe(subscriptionId) {
     const subscriptionIndex = this._callbacks
-      .map((element, index) => element.subscription === subscriptionId ? { found: true, index } : { found: false })
-      .filter(element => element.found === true);
+        .map((element, index) => element.subscription === subscriptionId ? { found: true, index } : { found: false })
+        .filter(element => element.found === true);
     if (subscriptionIndex.length !== 1) {
       throw new Error(`Found an invalid number of subscriptions ${subscriptionIndex.length}`);
     }

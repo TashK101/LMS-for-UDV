@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {State} from "../../../types/state";
 import {fetchNotificationsAction} from "../../../store/api-actions/api-actions";
+import authService from '../../api-authorization/AuthorizeService'
 
 export function LoadingPage() : JSX.Element {
     const dispatch = useAppDispatch();
