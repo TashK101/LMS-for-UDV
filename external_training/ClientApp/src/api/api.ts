@@ -1,5 +1,4 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
-import {getToken} from './token.ts';
 import {store} from '../store/store';
 import {setError} from '../store/reducer';
 import {StatusCodes} from 'http-status-codes';
@@ -15,7 +14,6 @@ export const STATUS_CODE_MAPPING: Record<number, boolean> = {
     [StatusCodes.NOT_FOUND]: true
 };
 
-
 const shouldDisplayError = (response: AxiosResponse) => !!STATUS_CODE_MAPPING[response.status];
 
 export const createAPI = (): AxiosInstance => {
@@ -24,17 +22,21 @@ export const createAPI = (): AxiosInstance => {
         timeout : REQUEST_TIMEOUT,
     });
 
+
     api.interceptors.request.use(
-        (config: AxiosRequestConfig) => {
-            let value : any;
-            const getToken = async () =>
-            {
-                const token = await authService.getAccessToken();
+        async (config: AxiosRequestConfig) => {
+            let value: any;
+
+            try {
+                // Wait for the promise to resolve
+                value = await authService.getAccessToken();
+            } catch (error) {
+                // Handle any errors that might occur while getting the access token
+                console.error("Error getting access token:", error);
             }
-            getToken().then((r) => {value = r})
 
             if (value && config.headers) {
-                config.headers['Authorization'] = value;
+                config.headers['Authorization'] = `Bearer ${value}`;
             }
 
             return config;
