@@ -11,7 +11,7 @@ const AppRoutes = [
     },
     {
         path: '/counter',
-        element: <LoadingPage />
+        element: <Home />
     },
     {
         path: '/fetch-data',

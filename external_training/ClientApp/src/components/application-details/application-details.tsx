@@ -1,22 +1,15 @@
 //import { Comment }
 //import { Header }
 //import { backButton}
-import {Application} from "../../../types/application";
 import './application-details.css'
-// export default function ApplicationDetails({elementLabel} : ApplicationDetailsProps) : JSX.Element {
-//     return (
-//         <div className="self-stretch h-14 flex-col justify-start items-start flex hover:bg-[#EDEDED]">
-//             <div className="self-stretch h-14 px-3 py-2 justify-start items-center gap-3 inline-flex">
-//                 <div className="w-6 h-6 relative" />
-//                 <div className="grow shrink basis-0 flex-col justify-start items-start inline-flex">
-//                     <div className="self-stretch text-zinc-900 text-base font-normal font-['Golos']">{elementLabel}</div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {getApplicationDetails} from "../../store/selectors";
+import {fetchApplicationDetailsAction} from "../../store/api-actions/api-actions";
 
-export function ApplicationDetails(application: Application): JSX.Element {
+export function ApplicationDetails(): JSX.Element {
+    const dispatch = useAppDispatch();
+    dispatch(fetchApplicationDetailsAction(1));
+    const application = useAppSelector(getApplicationDetails);
     return (
         <div>
             <div className='application-details'>

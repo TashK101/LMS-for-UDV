@@ -1,10 +1,12 @@
 import {store} from "../store/store";
 import {Notifications} from "./notifications";
+import {Application} from "./application";
 
 export type SystemProcess = {
     isDataLoading: boolean;
     error: string | null;
-    notifications: Notifications[]
+    notifications: Notifications[],
+    application: Application | undefined,
 };
 
 export type State = ReturnType<typeof store.getState>;

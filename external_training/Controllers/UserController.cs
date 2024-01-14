@@ -3,6 +3,13 @@ using external_training.Models;
 using external_training.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace external_training.Controllers
 {
@@ -35,6 +42,7 @@ namespace external_training.Controllers
         }
 
         [HttpGet("training_application")]
+        [EnableCors("OurCorsPolicy")]
         public async Task<ActionResult<DetaileTrainingApplicationResponse>> GetTrainingApplication(int trainingApplicationId)
         {
             var application = await _applicationService.GetTrainingApplicationAsync(trainingApplicationId);

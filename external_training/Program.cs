@@ -15,6 +15,18 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("OurCorsPolicy",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7240")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+        });
+});
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -103,6 +115,8 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseCors();
 
 app.UseAuthentication();
 app.UseIdentityServer();

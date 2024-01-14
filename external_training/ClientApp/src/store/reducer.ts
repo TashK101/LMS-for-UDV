@@ -1,11 +1,13 @@
 import {createSlice, createAction, PayloadAction} from '@reduxjs/toolkit';
 import {SystemProcess} from '../types/state';
 import {Notifications} from "../types/notifications";
+import {Application} from "../types/application";
 
 const initialState: SystemProcess = {
     error: null,
     isDataLoading: false,
-    notifications: []
+    notifications: [],
+    application: undefined,
 };
 
 export const systemProcess = createSlice({
@@ -21,7 +23,10 @@ export const systemProcess = createSlice({
         loadNotifications : (state, action : PayloadAction<Notifications[]>) => {
             state.notifications = action.payload;
         },
+        loadApplicationDetails : (state, action : PayloadAction<Application>) => {
+            state.application = action.payload;
+        },
     }
 });
 export const redirectToRoute = createAction<string>('app/redirectToRoute');
-export const {setLoadingStatus, setError, loadNotifications} = systemProcess.actions;
+export const {setLoadingStatus, setError, loadNotifications, loadApplicationDetails} = systemProcess.actions;
