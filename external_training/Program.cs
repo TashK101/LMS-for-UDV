@@ -73,7 +73,9 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserApplicationRepository, UserApplicationRepository>();
+builder.Services.AddScoped<IManagerApplicationRepository, ManagerApplicationRepository>();
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
+builder.Services.AddScoped<IManagerApplicationService, ManagerApplicationService>();
 builder.Services.AddTransient<IEventSink, UserRegistrationEventHandler>();
 
 var app = builder.Build();

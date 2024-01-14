@@ -1,6 +1,6 @@
 export type Notifications =
     {
-        date: Date,
+        date: string,
         text: string,
         trainingTopic: string,
     }

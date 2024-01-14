@@ -73,6 +73,13 @@ namespace external_training.Controllers
             return Ok();
         }
 
+        [HttpGet("comments")]
+        public async Task<ActionResult<IEnumerable<CommentDto>>> GetComments(int trainingApplicationId)
+        {
+            var comments = await _applicationService.GetComments(trainingApplicationId);
+            return Ok(comments);
+        }
+
         [HttpGet("events")]
         public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents(EventRequest eventRequest)
         {
