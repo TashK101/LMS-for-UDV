@@ -5,7 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/calendar-utils/courseStatus.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/calendar-utils/courses-field-utils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/calendar-utils/date-utils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/calendar-utils/enums.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/calendar-utils/universal-props.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/calendar-courses-table.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/calendar-field.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/courses-table-row.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/table-course-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/timeline-cell.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/icons/down-select-arrow-icon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/icons/left-arrow-icon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/icons/left-calendar-arrow-icon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/icons/right-calendar-arrow-icon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/large-calendar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/title/choose-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/small-calendar/custom-locale.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/small-calendar/small-calendar-datepicker.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/current-applications-utils/application-card.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/current-applications-utils/application-status.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/current-applications-utils/icons/checkmark-icon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/current-applications-utils/icons/ellipsis-icon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/current-applications-utils/icons/plus-icon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/current-applications-utils/icons/status-icons.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/current-applications-utils/mode-switch-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/current-applications/current-applications-page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/.env.development" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/Layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,26 +63,44 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2a5YcqKDbWsnYr0bhcARLPIqQgi" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.typescriptcompiler&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\lisac\\Documents\\GitHub\\LMS-for-UDV\\external_training\\ClientApp\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Jest.App.test.js.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "marias__experimental__branch",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/HP Laptop/Desktop/LMS-for-UDV",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "C:/Users/HP Laptop/Desktop/LMS-for-UDV/external_training/ClientApp/node_modules/react-scripts",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\HP Laptop\\Desktop\\LMS-for-UDV\\external_training\\ClientApp\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\HP Laptop\Desktop\LMS-for-UDV\external_training\ClientApp\src\components\current-applications-utils\icons" />
+      <recent name="C:\Users\HP Laptop\Desktop\LMS-for-UDV\external_training\ClientApp\src\components\calendars" />
+      <recent name="C:\Users\HP Laptop\Desktop\LMS-for-UDV\external_training\ClientApp\src\components\large-calendar\title" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -63,6 +113,9 @@
       <workItem from="1703615091287" duration="1887000" />
       <workItem from="1703627256992" duration="4262000" />
       <workItem from="1703660654247" duration="3551000" />
+      <workItem from="1705002577362" duration="39652000" />
+      <workItem from="1705092663393" duration="15922000" />
+      <workItem from="1705186329228" duration="16740000" />
     </task>
     <servers />
   </component>
