@@ -9,18 +9,26 @@ namespace external_training.Services
     {
         private readonly IUserApplicationRepository _applicationRepository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserRepository _userRepository;
 
-        public UserApplicationService(IUserApplicationRepository applicationRepository, UserManager<ApplicationUser> userManager)
+        public UserApplicationService(IUserApplicationRepository applicationRepository, UserManager<ApplicationUser> userManager, IUserRepository userRepository)
         {
             _applicationRepository = applicationRepository;
             _userManager = userManager;
+            _userRepository = userRepository;
         }
 
         public async Task CreateTrainingApplicationAsync(TrainingApplicationRequest request, string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userRepository.GetAsync(userId);
             TrainingApplication trainingApplication = Mapper.MapToTrainingApplication(request, user!);
             await _applicationRepository.AddAsync(trainingApplication);
+        }
+
+        public async Task<IEnumerable<ManagerInfo>> GetManagersAsync()
+        {
+            var managers = await _userManager.GetUsersInRoleAsync("Manager");
+            return managers.Select(Mapper.MapToManagerInfo).ToList();
         }
 
         public async Task<DetaileTrainingApplicationResponse?> GetTrainingApplicationAsync(int applicationId)

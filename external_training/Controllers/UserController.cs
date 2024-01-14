@@ -27,11 +27,11 @@ namespace external_training.Controllers
             return Ok();
         }
 
-        [HttpGet("manager_names")]
-        public async Task<ActionResult<IEnumerable<string>>> GetManagerNames()
+        [HttpGet("managers")]
+        public async Task<ActionResult<IEnumerable<ManagerInfo>>> GetManagers()
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            var managers = _applicationService.GetManagersAsync();
+            return Ok(managers);
         }
 
         [HttpGet("training_application")]
