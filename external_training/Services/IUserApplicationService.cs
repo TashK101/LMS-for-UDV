@@ -10,5 +10,6 @@ namespace external_training.Services
         Task<IEnumerable<ShortTrainingApplicationResponse>> GetArchivedApplicationsAsync(string userId);
         Task<DetaileTrainingApplicationResponse?> GetTrainingApplicationAsync(int applicationId);
         Task<IEnumerable<ShortTrainingApplicationResponse>> GetTrainingApplicationsAsync(string userId);
+        Task<IEnumerable<CommentDto>> GetComments(int applicationId);
     }
 }
