@@ -1,4 +1,5 @@
 ﻿using external_training.Controllers.DtoModels;
+using external_training.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,19 @@ namespace external_training.Controllers
     [Authorize(Roles = "Admin,Manager")]
     public class ManagerController : ControllerBase
     {
+        private readonly IManagerApplicationService _managerApplicationService;
+
+        public ManagerController(IManagerApplicationService managerApplicationService)
+        {
+            _managerApplicationService = managerApplicationService;
+        }
+
         [HttpGet("pending_applications")]
         public async Task<ActionResult<IEnumerable<ShortTrainingApplicationResponse>>> GetPendingApplications()
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            var id = User.Identity.Name;
+            var applications = _managerApplicationService.GetPendingApplications(id);
+            return Ok(applications);
         }
 
         [HttpPost("decline_application")]

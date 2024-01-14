@@ -1,9 +1,33 @@
 import { JSX } from "react/jsx-runtime";
 import DropDownMenuElement from './test-file-2';
+import {Comments} from "../../comments/comments";
+import {CommentsType} from "../../../types/comments";
+
+
+const comms : CommentsType = [
+    {
+        content: "aaaaaaaaaaaaaaaa пневмоноультра-микроскопический кремниевулканокониоз как твои дела пневмоноультра-микроскопический кремниевулканокониоз пневмоноультра-микроскопический кремниевулканокониоз",
+        createdAt : "ddddd",
+        userFullName : "A A A",
+        userId : '0'
+    },
+    {
+        content: "тестовые данные термогидроэлектростанция термогидроэлектростанция тестовых данных",
+        createdAt : "ddgggdd",
+        userFullName : "D D D",
+        userId : '1'
+    },
+    {
+        content: "Привет, да, конечно! Я буду рада тебя видеть на своём курсе, мы уже созвонились с юристами",
+        createdAt : "ddgggdd",
+        userFullName : "D D D",
+        userId : '0'
+    }
+]
 
 export function SignInErrorPage() : JSX.Element {
     return (
-        <body>
+        <>
             <div className="user-page">
                 <header className="page-header user-page__head">
                     <h1 className="page-title user-page__title">Sign in</h1>
@@ -28,8 +52,9 @@ export function SignInErrorPage() : JSX.Element {
                         </div>
                         <DropDownMenuElement elementLabel="Labeblblblblbllblblblbl" ></DropDownMenuElement>
                     </form>
+                    <Comments comments={comms} authorId='0'/>
                 </div>
             </div>
-        </body>
+        </>
     );
 }

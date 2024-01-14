@@ -68,5 +68,11 @@ namespace external_training.Services
             var comment = Mapper.mapToComment(commentCreation, userId);
             await _applicationRepository.AddCommentAsync(comment);
         }
+
+        public async Task<IEnumerable<CommentDto>> GetComments(int applicationId)
+        {
+            var comments = await _applicationRepository.GetComments(applicationId);
+            return comments.Select(Mapper.MapToCommentDto).ToList();
+        }
     }
 }

@@ -18,37 +18,70 @@ const shouldDisplayError = (response: AxiosResponse) => !!STATUS_CODE_MAPPING[re
 
 export const createAPI = (): AxiosInstance => {
     const api = axios.create({
-        baseURL : BACKEND_URL,
-        timeout : REQUEST_TIMEOUT,
+        baseURL: BACKEND_URL,
+        timeout: REQUEST_TIMEOUT,
     });
 
+    let isRefreshing = false;
+    let refreshPromise: Promise<string> | null = null;
 
     api.interceptors.request.use(
         async (config: AxiosRequestConfig) => {
-            let value: any;
+            let token: any;
 
             try {
-                // Wait for the promise to resolve
-                value = await authService.getAccessToken();
+                token = await authService.getAccessToken();
             } catch (error) {
-                // Handle any errors that might occur while getting the access token
-                console.error("Error getting access token:", error);
+                console.error('Error getting access token:', error);
             }
 
-            if (value && config.headers) {
-                config.headers['Authorization'] = `Bearer ${value}`;
+            if (token && config.headers) {
+                config.headers['Authorization'] = `Bearer ${token}`;
             }
 
             return config;
         },
     );
 
-    api.interceptors.response.use((response) => response, (error: AxiosError) => {
-        if (error.response?.data && shouldDisplayError(error.response)) {
-            store.dispatch(setError(error.response.data.toString()));
+    api.interceptors.response.use(
+        (response) => response,
+        async (error: AxiosError) => {
+            if (error.response?.status === StatusCodes.UNAUTHORIZED) {
+                const originalRequest = error.config;
+
+                if (!isRefreshing) {
+                    isRefreshing = true;
+
+                    try {
+                        const newToken = await authService.refreshToken();
+                        authService.setAccessToken(newToken);
+
+                        originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+                        return api(originalRequest);
+                    } catch (refreshError) {
+                        console.error('Token refresh failed:', refreshError);
+                        // Redirect to login or handle the situation based on your application's requirements
+                    } finally {
+                        isRefreshing = false;
+                    }
+                } else if (!refreshPromise) {
+                    refreshPromise = new Promise((resolve) => {
+                        authService.onTokenRefresh(() => {
+                            originalRequest.headers['Authorization'] = `Bearer ${authService.getAccessToken()}`;
+                            resolve(api(originalRequest));
+                        });
+                    });
+
+                    return refreshPromise;
                 }
-        throw error;
-    }
+            }
+
+            if (error.response?.data && shouldDisplayError(error.response)) {
+                store.dispatch(setError(error.response.data.toString()));
+            }
+
+            throw error;
+        },
     );
 
     return api;
