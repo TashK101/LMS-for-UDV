@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {systemProcess} from './reducer';
+import {systemProcess} from './system-process/system-process';
 import {createAPI} from '../api/api';
 import {redirect} from '../middlewares/redirect';
 

@@ -1,7 +1,7 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import browserHistory from '../history-route/browser-history';
 import {Middleware} from 'redux';
-import {systemProcess} from '../store/reducer';
+import {systemProcess} from '../store/system-process/system-process';
 
 type Reducer = ReturnType<typeof systemProcess.reducer>
 export const redirect: Middleware<unknown, Reducer> =
