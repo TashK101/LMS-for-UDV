@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { CardIndex, CardWithColumn} from "../../common/Card";
+import { CardIndex, CardWithColumn } from "../../common/Card";
 import { CounterInput, TextArea, TextField } from '../../common/InputField';
 import { RadioGroup } from '../../common/Radio';
 import { SubmitButton } from '../../common/Button';
+import { Form } from "../../common/Form";
+import SmallCalendarDatePicker from "../../calendars/small-calendar/small-calendar-datepicker";
 
 export function CreateApplicationPage() {
   const count = 5;
@@ -21,6 +23,8 @@ export function CreateApplicationPage() {
   const [note, setNote] = useState('')
   const [format, setFormat] = useState('')
   const [classmates, setClassmates] = useState('')
+  const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>();
+  const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>();
 
 
   const submitHandler = (event: React.FormEvent) => {
@@ -68,6 +72,13 @@ export function CreateApplicationPage() {
           ]}
           onChange={setClassmates}
         />
+
+        <Form label="Желаемые даты">
+          <SmallCalendarDatePicker
+            setFirstSelectedDate={setFirstSelectedDate}
+            setSecondSelectedDate={setSecondSelectedDate}
+          />
+        </Form>
 
         <TextField label="Стоимость на одного" value={price} onChange={setPrice} />
         <TextField label="Похожие курсы (если есть)" required={false} value={sameCourses} onChange={setSameCourses} />

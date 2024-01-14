@@ -6,6 +6,9 @@ import { CounterInput, TextField } from '../../common/InputField';
 import { RadioGroup, RadioGroupWithComponent } from '../../common/Radio';
 import { SubmitButton2 } from '../../common/Button';
 import { StatusComponent, StatusType } from '../../common/Status';
+import SmallCalendarDatePicker from '../../calendars/small-calendar/small-calendar-datepicker';
+import { Form } from '../../common/Form';
+import { ModeSwitchButton } from '../../current-applications-utils/mode-switch-button';
 
 export function ApplicationPage() {
   const count = 3
@@ -20,6 +23,9 @@ export function ApplicationPage() {
   const [department, setDepartment] = useState('UX/UI')
   const [team, setTeam] = useState("Команда 29")
   const [status, setStatus] = useState('')
+  const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>();
+  const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>();
+  const [showSecond, setShowSecond] = useState(false);
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault()
@@ -27,8 +33,7 @@ export function ApplicationPage() {
   }
 
   return (
-    <form
-      onSubmit={submitHandler}
+    <div
       className="flex flex-col mx-auto max-w-2xl gap-[40px] mt-[72px] mb-[80px]">
       <H700 text='Компьютерное зрение' />
 
@@ -42,57 +47,74 @@ export function ApplicationPage() {
         <InfoBlock label='Согласовал' fullName='Петров Пётр Петрович' />
       </div>
 
-      <div className='flex flex-col gap-[30px]'>
-        <CardWithColumn>
-          <CardIndex index={1} count={count} />
-          <TextField label='Учебный центр' value={eduCenter} onChange={setEduCenter} />
-          <TextField label='Название курса' value={courseTitle} onChange={setCourseTitle} />
-          <RadioGroup
-            label='Формат'
-            name='Формат'
-            radios={[
-              { title: 'Онлайн' },
-              { title: 'Оффлайн' }
-            ]}
-            onChange={setFormat}
-          />
-          <RadioGroup
-            label='Однокурсники'
-            name='Однокурсники'
-            radios={[
-              { title: 'Только коллеги' },
-              { title: 'Люди из других компаний' }
-            ]}
-            onChange={setClassmates}
-          />
-          <TextField label='Стоимость на одного' value={price} onChange={setPrice} />
-        </CardWithColumn>
+      <ModeSwitchButton contentMode={showSecond}
+        setContentMode={setShowSecond}
+        leftPartText={"Исходная заявка"}
+        rightPartText={"Оформление"} />
 
-        <CardWithColumn>
-          <CardIndex index={2} count={count} />
-          <CounterInput label="Количество участников" value={numberOfPeople} onChange={setNumberOfPeople} />
-          <TextField label='ФИО участников' value={fullName} onChange={setFullName} />
-          <TextField label="Департамент" value={department} onChange={setDepartment} />
-          <TextField label="Отдел/команда" value={team} onChange={setTeam} />
-        </CardWithColumn>
+      {showSecond &&
+        <form
+          onSubmit={submitHandler}
+          className='flex flex-col gap-[30px]'>
+          <CardWithColumn>
+            <CardIndex index={1} count={count} />
+            <TextField label='Учебный центр' value={eduCenter} onChange={setEduCenter} />
+            <TextField label='Название курса' value={courseTitle} onChange={setCourseTitle} />
+            <RadioGroup
+              label='Формат'
+              name='Формат'
+              radios={[
+                { title: 'Онлайн' },
+                { title: 'Оффлайн' }
+              ]}
+              onChange={setFormat}
+            />
+            <RadioGroup
+              label='Однокурсники'
+              name='Однокурсники'
+              radios={[
+                { title: 'Только коллеги' },
+                { title: 'Люди из других компаний' }
+              ]}
+              onChange={setClassmates}
+            />
+            <Form label="Желаемые даты">
+              <SmallCalendarDatePicker
+                setFirstSelectedDate={setFirstSelectedDate}
+                setSecondSelectedDate={setSecondSelectedDate}
+              />
+            </Form>
+            <TextField label='Стоимость на одного' value={price} onChange={setPrice} />
+          </CardWithColumn>
 
-        <CardWithColumn>
-          <CardIndex index={3} count={count} />
-          <RadioGroupWithComponent
-            label='Изменить статус'
-            name='Изменить статус'
-            radios={[
-              { children: <StatusComponent statusType={StatusType.AWAIT_CONTRACT_AND_PAYMENT} /> },
-              { children: <StatusComponent statusType={StatusType.AWAIT_PAYMENT} /> },
-              { children: <StatusComponent statusType={StatusType.APPROVED} /> }
-            ]}
-            onChange={setStatus}
-          />
-        </CardWithColumn>
-      </div>
+          <CardWithColumn>
+            <CardIndex index={2} count={count} />
+            <CounterInput label="Количество участников" value={numberOfPeople} onChange={setNumberOfPeople} />
+            <TextField label='ФИО участников' value={fullName} onChange={setFullName} />
+            <TextField label="Департамент" value={department} onChange={setDepartment} />
+            <TextField label="Отдел/команда" value={team} onChange={setTeam} />
+          </CardWithColumn>
 
-      <SubmitButton2 text='Оформить' />
-    </form>
+          <CardWithColumn>
+            <CardIndex index={3} count={count} />
+            <RadioGroupWithComponent
+              label='Изменить статус'
+              name='Изменить статус'
+              radios={[
+                { children: <StatusComponent statusType={StatusType.AWAIT_CONTRACT_AND_PAYMENT} /> },
+                { children: <StatusComponent statusType={StatusType.AWAIT_PAYMENT} /> },
+                { children: <StatusComponent statusType={StatusType.APPROVED} /> }
+              ]}
+              onChange={setStatus}
+            />
+          </CardWithColumn>
+
+          <div className='mt-[10px]'>
+            <SubmitButton2 text='Оформить' />
+          </div>
+        </form>
+      }
+    </div>
   )
 }
 
