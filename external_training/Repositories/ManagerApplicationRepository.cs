@@ -2,5 +2,6 @@
 {
     public class ManagerApplicationRepository : IManagerApplicationRepository
     {
+        public ManagerApplicationRepository() { }
     }
 }
