@@ -25,7 +25,7 @@ const comms : CommentsType = [
     }
 ]
 
-export function SignInErrorPage() : JSX.Element {
+export function SignInErrorPage(): JSX.Element {
     return (
         <>
             <div className="user-page">
@@ -58,3 +58,4 @@ export function SignInErrorPage() : JSX.Element {
         </>
     );
 }
+
