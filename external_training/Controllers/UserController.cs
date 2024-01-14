@@ -82,6 +82,13 @@ namespace external_training.Controllers
             return Ok(comments);
         }
 
+        [HttpGet("notifications")]
+        public async Task<ActionResult<IEnumerable<NotificationResponse>>> GetNotifications()
+        {
+            var notifications = await _applicationService.GetNotificationsAsync(User!.Identity!.Name!);
+            return Ok(notifications);
+        }
+
         [HttpGet("events")]
         public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents(EventRequest eventRequest)
         {

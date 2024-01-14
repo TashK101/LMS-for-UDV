@@ -7,6 +7,7 @@
         public string Status { get; set; } = string.Empty;
         public string DesiredManagerId { get; set; } = string.Empty;
         public string DesiredManagerName { get; set; } = string.Empty;
+        public string ApplicationUserId { get; set; } = string.Empty;
         public string ApplicationUserName { get; set; } = string.Empty;
         public int PlannedParticipantsCount { get; set; }
         public string PlannedParticipantsNames { get; set; } = string.Empty;

@@ -8,11 +8,13 @@ namespace external_training.Services
     {
         private readonly IManagerApplicationRepository _managerApplicationRepository;
         private readonly IUserApplicationRepository _userApplicationRepository;
+        private INotificationRepository _notificationRepository;
 
-        public ManagerApplicationService(IManagerApplicationRepository managerApplicationRepository, IUserApplicationRepository userApplicationRepository)
+        public ManagerApplicationService(IManagerApplicationRepository managerApplicationRepository, IUserApplicationRepository userApplicationRepository, INotificationRepository notificationRepository)
         {
             _managerApplicationRepository = managerApplicationRepository;
             _userApplicationRepository = userApplicationRepository;
+            _notificationRepository = notificationRepository;
         }
 
         public async Task<IEnumerable<ShortTrainingApplicationResponse>> GetPendingApplicationsAsync(string managerId)
@@ -34,7 +36,27 @@ namespace external_training.Services
                 return false;
             else if (application.Status != ApplicationStatus.AwaitingManagerApproval)
                 return false;
-            return await _managerApplicationRepository.DeclineApplicationAsync(applicationId);
+            var status = await _managerApplicationRepository.DeclineApplicationAsync(applicationId);
+            if (status)
+            {
+                var userNotification = new Notification
+                {
+                    Text = "Заявка отклонена",
+                    CreatedAt = DateTime.UtcNow,
+                    TrainingApplicationId = applicationId,
+                    UserId = application.UserId
+                };
+                await _notificationRepository.AddNotificationAsync(userNotification);
+                var adminNotification = new Notification
+                {
+                    Text = "Заявка отклонена",
+                    CreatedAt = DateTime.UtcNow,
+                    TrainingApplicationId = applicationId,
+                    UserId = "1e27f5cd-ba5c-48fa-bf4c-250e67a29ae9"
+                };
+                await _notificationRepository.AddNotificationAsync(adminNotification);
+            }
+            return status;
         }
 
         public async Task<bool> AcceptApplicationAsync(int applicationId)
@@ -44,7 +66,55 @@ namespace external_training.Services
                 return false;
             else if (application.Status != ApplicationStatus.AwaitingManagerApproval)
                 return false;
-            return await _managerApplicationRepository.AcceptApplicationAsync(applicationId);
+            var status = await _managerApplicationRepository.AcceptApplicationAsync(applicationId);
+            if (status)
+            {
+                var userNotification = new Notification
+                {
+                    Text = "Заявка одобрена согласующим",
+                    CreatedAt = DateTime.UtcNow,
+                    TrainingApplicationId = applicationId,
+                    UserId = application.UserId
+                };
+                await _notificationRepository.AddNotificationAsync(userNotification);
+                var adminNotification = new Notification
+                {
+                    Text = "Заявка одобрена согласующим",
+                    CreatedAt = DateTime.UtcNow,
+                    TrainingApplicationId = applicationId,
+                    UserId = "1e27f5cd-ba5c-48fa-bf4c-250e67a29ae9"
+                };
+                await _notificationRepository.AddNotificationAsync(adminNotification);
+            }
+            return status;
+        }
+
+        public async Task CreateCommentAsync(CommentCreation commentCreation, string userId)
+        {
+            var comment = Mapper.mapToComment(commentCreation, userId);
+            await _userApplicationRepository.AddCommentAsync(comment);
+            var userNotification = new Notification
+            {
+                Text = "Новый комментарий",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = comment.TrainingApplicationId,
+                UserId = comment.UserId
+            };
+            await _notificationRepository.AddNotificationAsync(userNotification);
+            var adminNotification = new Notification
+            {
+                Text = "Новый комментарий",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = comment.TrainingApplicationId,
+                UserId = "1e27f5cd-ba5c-48fa-bf4c-250e67a29ae9"
+            };
+            await _notificationRepository.AddNotificationAsync(adminNotification);
+        }
+
+        public async Task<IEnumerable<CommentDto>> GetComments(int applicationId)
+        {
+            var comments = await _userApplicationRepository.GetComments(applicationId);
+            return comments.Select(Mapper.MapToCommentDto).ToList();
         }
     }
 }

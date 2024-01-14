@@ -16,10 +16,11 @@ namespace external_training.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(TrainingApplication trainingApplication)
+        public async Task<int> AddAsync(TrainingApplication trainingApplication)
         {
             await _context.TrainingApplications.AddAsync(trainingApplication);
             await _context.SaveChangesAsync();
+            return trainingApplication.TrainingApplicationId;
         }
 
         public async Task AddCommentAsync(Comment comment)

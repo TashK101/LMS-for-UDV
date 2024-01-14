@@ -4,7 +4,7 @@ namespace external_training.Repositories
 {
     public interface IUserApplicationRepository
     {
-        Task AddAsync(TrainingApplication trainingApplication);
+        Task<int> AddAsync(TrainingApplication trainingApplication);
         Task AddCommentAsync(Comment comment);
         Task<TrainingApplication?> GetAsync(int applicationId);
         Task<SelectedTrainingCourse?> GetSelectedCourseAsync(int applicationId);

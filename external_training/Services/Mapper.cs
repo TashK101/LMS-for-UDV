@@ -1,5 +1,6 @@
 ﻿using external_training.Controllers.DtoModels;
 using external_training.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace external_training.Services
 {
@@ -64,7 +65,8 @@ namespace external_training.Services
                 TrainingApplicationId = application.TrainingApplicationId,
                 TrainingTopic = application.TrainingTopic,
                 Status = application.Status.ToString(),
-                ApplicationUserName = application.User.UserName!,
+                ApplicationUserId = application.User.Id,
+                ApplicationUserName = application.User.FullName,
                 DesiredManagerId = application.Manager.Id,
                 DesiredManagerName = application.Manager.FullName,
                 PlannedParticipantsCount = application.PlannedParticipantsCount,
@@ -150,6 +152,18 @@ namespace external_training.Services
                 TrainingApplicationId = courseRequest.TrainingApplicationId,
             }
             ; return course;
+        }
+
+        public static NotificationResponse MapToNotificationResponse(Notification notification)
+        {
+            var notificationResponse = new NotificationResponse
+            {
+                TrainingApplicationId = notification.TrainingApplicationId,
+                UserId = notification.UserId,
+                TrainingTopic = notification.TrainingApplication.TrainingTopic,
+                CreatedAt = notification.CreatedAt
+            };
+            return notificationResponse;
         }
     }
 }

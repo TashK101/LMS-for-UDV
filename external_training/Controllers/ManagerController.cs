@@ -51,5 +51,19 @@ namespace external_training.Controllers
             var applications = await _managerApplicationService.GetArchivedApplicationsAsync(id);
             return Ok(applications);
         }
+
+        [HttpPost("comment")]
+        public async Task<ActionResult> CreateComment(CommentCreation commentCreation)
+        {
+            await _managerApplicationService.CreateCommentAsync(commentCreation, User!.Identity!.Name!);
+            return Ok();
+        }
+
+        [HttpGet("comments")]
+        public async Task<ActionResult<IEnumerable<CommentDto>>> GetComments(int trainingApplicationId)
+        {
+            var comments = await _managerApplicationService.GetComments(trainingApplicationId);
+            return Ok(comments);
+        }
     }
 }

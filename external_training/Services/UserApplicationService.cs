@@ -1,7 +1,10 @@
 ﻿using external_training.Controllers.DtoModels;
 using external_training.Models;
 using external_training.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Xml.Linq;
 
 namespace external_training.Services
 {
@@ -10,19 +13,37 @@ namespace external_training.Services
         private readonly IUserApplicationRepository _applicationRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserRepository _userRepository;
+        private INotificationRepository _notificationRepository;
 
-        public UserApplicationService(IUserApplicationRepository applicationRepository, UserManager<ApplicationUser> userManager, IUserRepository userRepository)
+        public UserApplicationService(IUserApplicationRepository applicationRepository, UserManager<ApplicationUser> userManager, IUserRepository userRepository, INotificationRepository notificationRepository)
         {
             _applicationRepository = applicationRepository;
             _userManager = userManager;
             _userRepository = userRepository;
+            _notificationRepository = notificationRepository;
         }
 
         public async Task CreateTrainingApplicationAsync(TrainingApplicationRequest request, string userId)
         {
             var user = await _userRepository.GetAsync(userId);
             TrainingApplication trainingApplication = Mapper.MapToTrainingApplication(request, user!);
-            await _applicationRepository.AddAsync(trainingApplication);
+            var applicationId = await _applicationRepository.AddAsync(trainingApplication);
+            var managerNotification = new Notification
+            {
+                Text = "Новая заявка для одобрения",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = applicationId,
+                UserId = trainingApplication.ManagerId
+            };
+            await _notificationRepository.AddNotificationAsync(managerNotification);
+            var adminNotification = new Notification
+            {
+                Text = "Новая заявка",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = applicationId,
+                UserId = "1e27f5cd-ba5c-48fa-bf4c-250e67a29ae9"
+            };
+            await _notificationRepository.AddNotificationAsync(adminNotification);
         }
 
         public async Task<IEnumerable<ManagerInfo>> GetManagersAsync()
@@ -67,12 +88,26 @@ namespace external_training.Services
         {
             var comment = Mapper.mapToComment(commentCreation, userId);
             await _applicationRepository.AddCommentAsync(comment);
+            var adminNotification = new Notification
+            {
+                Text = "Новый комментарий",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = comment.TrainingApplicationId,
+                UserId = "1e27f5cd-ba5c-48fa-bf4c-250e67a29ae9"
+            };
+            await _notificationRepository.AddNotificationAsync(adminNotification);
         }
 
         public async Task<IEnumerable<CommentDto>> GetComments(int applicationId)
         {
             var comments = await _applicationRepository.GetComments(applicationId);
             return comments.Select(Mapper.MapToCommentDto).ToList();
+        }
+
+        public async Task<IEnumerable<NotificationResponse>> GetNotificationsAsync(string userId)
+        {
+            var notifications = await _notificationRepository.GetNotificationsAsync(userId);
+            return notifications.Select(Mapper.MapToNotificationResponse).ToList();
         }
     }
 }
