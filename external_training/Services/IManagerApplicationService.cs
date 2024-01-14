@@ -4,6 +4,9 @@ namespace external_training.Services
 {
     public interface IManagerApplicationService
     {
-        Task<IEnumerable<ShortTrainingApplicationResponse>> GetPendingApplications(string managerId);
+        Task<bool> AcceptApplicationAsync(int applicationId);
+        Task<bool> DeclineApplicationAsync(int applicationId);
+        Task<IEnumerable<ShortTrainingApplicationResponse>> GetArchivedApplicationsAsync(string managerId);
+        Task<IEnumerable<ShortTrainingApplicationResponse>> GetPendingApplicationsAsync(string managerId);
     }
 }

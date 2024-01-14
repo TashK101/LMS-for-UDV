@@ -12,12 +12,12 @@ namespace external_training.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserApplicationService _applicationService;
-        private readonly ILogger<UserController> _loggre;
+        private readonly ILogger<UserController> _logger;
 
         public UserController(IUserApplicationService applicationService, ILogger<UserController> logger)
         {
             _applicationService = applicationService;
-            _loggre = logger;
+            _logger = logger;
         }
 
         [HttpPost("training_application")]
@@ -30,7 +30,7 @@ namespace external_training.Controllers
         [HttpGet("managers")]
         public async Task<ActionResult<IEnumerable<ManagerInfo>>> GetManagers()
         {
-            var managers = _applicationService.GetManagersAsync();
+            var managers = await _applicationService.GetManagersAsync();
             return Ok(managers);
         }
 
@@ -62,8 +62,10 @@ namespace external_training.Controllers
         [HttpGet("course")]
         public async Task<ActionResult<SelectedCourseResponse>> GetSelectedCourseResponse(int trainingApplicationId)
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            var course = await _applicationService.GetSelectedCourseAsync(trainingApplicationId);
+            if (course == null)
+                return NotFound();
+            return Ok(course);
         }
 
         [HttpPost("comment")] 

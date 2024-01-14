@@ -71,4 +71,3 @@ namespace external_training.Repositories
         }
     }
 }
- 

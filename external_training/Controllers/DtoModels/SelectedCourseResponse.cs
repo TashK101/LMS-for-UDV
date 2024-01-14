@@ -6,6 +6,7 @@
         public string TrainingTopic { get; set; } = string.Empty;
         public string Status { get; set; } = string.Empty;
         public string ApplicationUserId { get; set; } = string.Empty;
+        public string DesiredManagerId { get; set; } = string.Empty;
         public string DesiredManagerName { get; set; } = string.Empty;
         public string EducationalCenter { get; set; } = string.Empty;
         public string CourseName { get; set; } = string.Empty;

@@ -40,6 +40,7 @@ namespace external_training.Services
                 TrainingTopic = application.TrainingTopic,
                 Status = application.Status.ToString(),
                 ApplicationUserId = application.UserId,
+                DesiredManagerId = application.Manager.Id,
                 DesiredManagerName = application.Manager.FullName,
                 EducationalCenter = selectedCourse.EducationalCenter,
                 CourseName = selectedCourse.CourseName,
@@ -64,6 +65,8 @@ namespace external_training.Services
                 TrainingTopic = application.TrainingTopic,
                 Status = application.Status.ToString(),
                 ApplicationUserName = application.User.UserName!,
+                DesiredManagerId = application.Manager.Id,
+                DesiredManagerName = application.Manager.FullName,
                 PlannedParticipantsCount = application.PlannedParticipantsCount,
                 PlannedParticipantsNames = application.PlannedParticipantsNames,
                 Department = application.Department.Name,
@@ -128,6 +131,25 @@ namespace external_training.Services
                 FullName = manager.FullName
             };
             return managerInfo;
+        }
+
+        public static SelectedTrainingCourse MapToSelectedTrainingCourse(SelectedCourseRequest courseRequest)
+        {
+            var course = new SelectedTrainingCourse
+            {
+                EducationalCenter = courseRequest.EducationalCenter,
+                CourseName = courseRequest.CourseName,
+                ParticipantsCount = courseRequest.ParticipantsCount,
+                ParticipantsNames = courseRequest.ParticipantsNames,
+                IsTrainingOnline = courseRequest.IsTrainingOnline,
+                IsCorporateTraining = courseRequest.IsCorporateTraining,
+                Begin = courseRequest.Begin,
+                End = courseRequest.End,
+                CostPerParticipant = courseRequest.CostPerParticipant,
+                TotalCost = courseRequest.CostPerParticipant * courseRequest.ParticipantsCount,
+                TrainingApplicationId = courseRequest.TrainingApplicationId,
+            }
+            ; return course;
         }
     }
 }
