@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/comments/comment.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/comments/comments.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" afterDir="false" />
     </list>
@@ -16,6 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
         <option value="TypeScript JSX File" />
       </list>
     </option>
@@ -32,6 +36,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2a5YcqKDbWsnYr0bhcARLPIqQgi" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -51,6 +58,29 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\store" />
+      <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\icons" />
+      <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\components" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="apply_migrations" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+      <module name="LMS-for-UDV" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="WORKING_DIRECTORY" value="./external_training" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="apply_migrations.bat" />
+      <option name="PARAMETERS" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Batch.apply_migrations" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -63,15 +93,16 @@
       <workItem from="1703615091287" duration="1887000" />
       <workItem from="1703627256992" duration="4262000" />
       <workItem from="1703660654247" duration="3551000" />
+      <workItem from="1703718493728" duration="666000" />
+      <workItem from="1704283104659" duration="1823000" />
+      <workItem from="1704887627112" duration="16904000" />
+      <workItem from="1704922641330" duration="1667000" />
+      <workItem from="1704971853247" duration="8883000" />
+      <workItem from="1705135978927" duration="11919000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/external_training/ClientApp/tailwind.config.js" />
-      </list>
-    </option>
   </component>
 </project>

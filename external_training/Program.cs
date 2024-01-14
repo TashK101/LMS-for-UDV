@@ -71,6 +71,7 @@ builder.Services.AddAuthentication()
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserApplicationRepository, UserApplicationRepository>();
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
 builder.Services.AddTransient<IEventSink, UserRegistrationEventHandler>();
@@ -82,11 +83,13 @@ if (app.Environment.IsDevelopment())
     app.UseMigrationsEndPoint();
     app.UseSwagger();
     app.UseSwaggerUI();
+
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         dbContext.Database.Migrate();
     }
+
     RolesInitializer.Initialize(app.Services).Wait();
 }
 else
