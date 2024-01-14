@@ -1,9 +1,33 @@
 import { JSX } from "react/jsx-runtime";
 import DropDownMenuElement from './test-file-2';
+import {Comments} from "../../comments/comments";
+import {CommentsType} from "../../../types/comments";
+
+
+const comms : CommentsType = [
+    {
+        content: "aaaaaaaaaaaaaaaa пневмоноультра-микроскопический кремниевулканокониоз как твои дела пневмоноультра-микроскопический кремниевулканокониоз пневмоноультра-микроскопический кремниевулканокониоз",
+        createdAt : "ddddd",
+        userFullName : "A A A",
+        userId : '0'
+    },
+    {
+        content: "тестовые данные термогидроэлектростанция термогидроэлектростанция тестовых данных",
+        createdAt : "ddgggdd",
+        userFullName : "D D D",
+        userId : '1'
+    },
+    {
+        content: "Привет, да, конечно! Я буду рада тебя видеть на своём курсе, мы уже созвонились с юристами",
+        createdAt : "ddgggdd",
+        userFullName : "D D D",
+        userId : '0'
+    }
+]
 
 export function SignInErrorPage() : JSX.Element {
     return (
-        <body>
+        <>
             <div className="user-page">
                 <header className="page-header user-page__head">
                     <h1 className="page-title user-page__title">Sign in</h1>
@@ -28,23 +52,9 @@ export function SignInErrorPage() : JSX.Element {
                         </div>
                         <DropDownMenuElement elementLabel="Labeblblblblbllblblblbl" ></DropDownMenuElement>
                     </form>
-
-                    <div className="w-[430px] h-48 flex-col justify-start items-start gap-2.5 inline-flex">
-                        <div className="py-[5px] justify-center items-center gap-2.5 inline-flex">
-                            <div className="w-[60px] h-[60px] p-2.5 bg-orange-100 rounded-[100px] border border-amber-500 justify-center items-center flex">
-                                <div className="w-10 h-10 text-center text-zinc-800 text-base font-medium font-['Golos'] leading-normal tracking-tight">ЛЛ</div>
-                            </div>
-                            <div className="flex-col justify-center items-start gap-2.5 inline-flex">
-                                <div className="text-center text-zinc-800 text-xl font-normal font-['Golos']">Лина Линова</div>
-                                <div className="text-zinc-500 text-base font-normal font-['Golos']">25.10.2023</div>
-                            </div>
-                        </div>
-                        <div className="px-[30px] py-5 bg-white rounded-[5px] shadow border border-stone-300 flex-col justify-center items-end gap-2.5 flex">
-                            <div className="w-[370px] text-zinc-800 text-xl font-normal font-['Golos']">Подойдёт ли курс, заточенный под обучение именно технологии распознавания лиц?</div>
-                        </div>
-                    </div>
+                    <Comments comments={comms} authorId='0'/>
                 </div>
             </div>
-        </body>
+        </>
     );
 }

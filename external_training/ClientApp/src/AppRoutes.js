@@ -7,7 +7,7 @@ import {SignInErrorPage} from "./components/pages/test-page/test-page";
 const AppRoutes = [
     {
         index: true,
-        element: <Home />
+        element: <LoadingPage />
     },
     {
         path: '/counter',
