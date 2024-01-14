@@ -1,17 +1,18 @@
 import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
-import {LoadingPage} from "./components/pages/loading-page/loading-page";
+import {StartPage} from "./components/pages/start-page/start-page";
 import {SignInErrorPage} from "./components/pages/test-page/test-page";
+import {NotificationsPage} from "./components/pages/notifications-page/notifications-page";
 
 const AppRoutes = [
     {
         index: true,
-        element: <LoadingPage />
+        element: <StartPage />
     },
     {
-        path: '/counter',
-        element: <LoadingPage />
+        path: '/notifications',
+        element: <NotificationsPage />
     },
     {
         path: '/fetch-data',

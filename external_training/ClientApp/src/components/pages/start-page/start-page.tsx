@@ -2,17 +2,17 @@ import {Zoom} from "react-awesome-reveal";
 import {LogoUDV} from "../../../icons/logo-with-udv";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-import {useAppDispatch, useAppSelector} from "../../../hooks";
+import {useAppDispatch} from "../../../hooks";
 import {fetchNotificationsAction} from "../../../store/api-actions/api-actions";
 
-export function LoadingPage() : JSX.Element {
+export function StartPage() : JSX.Element {
     const dispatch = useAppDispatch();
     dispatch(fetchNotificationsAction())
     const navigate = useNavigate();
     useEffect(() => {
-        setTimeout(() => {
-            navigate('/test')
-        }, 3000)
+            setTimeout(() => {
+                navigate('/test')
+            }, 2500)
     }, [])
     return (
     <div className="w-screen h-screen bg-amber-500 justify-center items-center inline-flex">
