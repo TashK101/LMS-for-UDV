@@ -160,6 +160,7 @@ namespace external_training.Services
             {
                 TrainingApplicationId = notification.TrainingApplicationId,
                 UserId = notification.UserId,
+                Text = notification.Text,
                 TrainingTopic = notification.TrainingApplication.TrainingTopic,
                 CreatedAt = notification.CreatedAt
             };
