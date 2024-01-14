@@ -28,6 +28,14 @@ namespace external_training.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<Comment>> GetComments(int applicationId)
+        {
+            return await _context.Comments
+                .Include(c => c.User)
+                .Where(c => c.TrainingApplicationId == applicationId)
+                .ToListAsync();
+        }
+
         public async Task<TrainingApplication?> GetAsync(int applicationId)
         {
             return await _context.TrainingApplications

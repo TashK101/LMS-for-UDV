@@ -2,11 +2,12 @@ import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizati
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import {LoadingPage} from "./components/pages/loading-page/loading-page";
+import {SignInErrorPage} from "./components/pages/test-page/test-page";
 
 const AppRoutes = [
     {
         index: true,
-        element: <Home />
+        element: <LoadingPage />
     },
     {
         path: '/counter',
@@ -16,6 +17,10 @@ const AppRoutes = [
         path: '/fetch-data',
         requireAuth: true,
         element: <FetchData />
+    },
+    {
+        path: '/test',
+        element: <SignInErrorPage/>
     },
     ...ApiAuthorzationRoutes
 ];

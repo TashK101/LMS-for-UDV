@@ -52,7 +52,7 @@ namespace external_training.Services
                 Begin = selectedCourse.Begin,
                 End = selectedCourse.End,
                 CostPerParticipant = selectedCourse.CostPerParticipant,
-                Comments = application.Comments.Select(mapToCommentDto).ToList()
+                Comments = application.Comments.Select(MapToCommentDto).ToList()
             };
         }
 
@@ -78,18 +78,19 @@ namespace external_training.Services
                 TrainingGoals = application.TrainingGoals,
                 SkillsToBeAcquired = application.SkillsToBeAcquired,
                 ApplicationNotes = application.ApplicationNotes,
-                Comments = application.Comments.Select(mapToCommentDto).ToList(),
+                Comments = application.Comments.Select(MapToCommentDto).ToList(),
             };
             return ApplicationDto;
         }
 
-        public static CommentDto mapToCommentDto(Comment comment)
+        public static CommentDto MapToCommentDto(Comment comment)
         {
             var CommentDto = new CommentDto
             {
                 Content = comment.Content!,
                 CreatedAt = comment.CreatedAt,
-                UserId = comment.UserId
+                UserId = comment.UserId,
+                UserFullName = comment.User.FullName
             };
             return CommentDto;
         }
