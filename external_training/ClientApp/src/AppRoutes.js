@@ -5,6 +5,7 @@ import {StartPage} from "./components/pages/start-page/start-page";
 import {SignInErrorPage} from "./components/pages/test-page/test-page";
 import {NotificationsPage} from "./components/pages/notifications-page/notifications-page";
 import {ApplicationDetails} from "./components/application-details/application-details";
+import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
 
 const AppRoutes = [
     {
@@ -29,8 +30,8 @@ const AppRoutes = [
         element: <FetchData/>
     },
     {
-        path: '/counter',
-        element: <ApplicationDetails/>
+        path: '/applicationDetails/:id',
+        element: <ApplicationDetailsPage />
     },
     ...ApiAuthorzationRoutes
 ];

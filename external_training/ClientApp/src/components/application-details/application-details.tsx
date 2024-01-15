@@ -10,11 +10,14 @@ import {TextValueBlock} from "./text-value-block";
 import {useEffect} from "react";
 import { CommentSendField} from "./comment-send-field";
 
-export function ApplicationDetails(): JSX.Element {
+export type ApplicationDetailsProps={
+    id: number;
+}
+export function ApplicationDetails({id}:ApplicationDetailsProps): JSX.Element {
 
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(fetchApplicationDetailsAction(1));
+        dispatch(fetchApplicationDetailsAction(id));
     }, []);
 
     const application = useAppSelector(getApplicationDetails);
