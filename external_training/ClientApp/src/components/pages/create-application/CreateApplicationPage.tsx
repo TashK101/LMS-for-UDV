@@ -31,8 +31,8 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
   const [note, setNote] = useState('')
   const [format, setFormat] = useState('')
   const [classmates, setClassmates] = useState('')
-  const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>();
-  const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>();
+  const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>(new Date("2024-01-15"));
+  const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>(new Date("2024-01-17"));
 
 
   const submitHandler = async (event: React.FormEvent) => {
@@ -100,12 +100,12 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
           onChange={setClassmates}
         />
 
-        <Form label="Желаемые даты">
+        {/* <Form label="Желаемые даты">
           <SmallCalendarDatePicker
             setFirstSelectedDate={setFirstSelectedDate}
             setSecondSelectedDate={setSecondSelectedDate}
           />
-        </Form>
+        </Form> */}
 
         <TextField label="Стоимость на одного" value={price} onChange={setPrice} />
         <TextField label="Похожие курсы (если есть)" required={false} value={sameCourses} onChange={setSameCourses} />
