@@ -37,14 +37,14 @@
 }
 .half-transparent-text {
     font-family: 'Golos', serif;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 16px;
+    line-height: 20px;
     color: rgba(0,0,0,0.50);
     width: 300px;
 }
 .regular-text {
     font-family: 'Golos', serif;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 24px;
     margin-left: 20px;
     width: 500px;
@@ -58,3 +58,23 @@ hr.solid {
     padding: 20px 0 20px 0;
 }
 
+.sendBtn {
+    border-radius: 999px;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    font-family: 'Golos', serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    background-color: #fd9a60;
+    outline: 0 solid transparent;
+    padding: 8px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 1px solid #ef642b;
+    margin-top: 20px;
+}

@@ -9,7 +9,7 @@ export class ApplicationDetailsPage extends Component {
         return (
             <div>
 
-                <ApplicationDetails {...mockApplicationDetails}/>
+                <ApplicationDetails />
             </div>
         );
     }

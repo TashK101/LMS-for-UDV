@@ -33,9 +33,7 @@ export const fetchApplicationDetailsAction = createAsyncThunk<void, number, {
             dispatch(setLoadingStatus(true));
             const {data} = await api.get<Application>(`api/user/training_application`,
                 {
-                    baseURL: 'https://localhost:7240',
                     params: { trainingApplicationId: id },
-
                 }, );
             dispatch(loadApplicationDetails(data));
         } finally{

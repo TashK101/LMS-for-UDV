@@ -1,4 +1,4 @@
-//import { Comment }
+import { CommentsType } from "./comments";
 
 export type Application = {
     trainingApplicationId: number;
@@ -19,5 +19,5 @@ export type Application = {
     trainingGoals: string;
     skillsToBeAcquired: string;
     applicationNotes: string;
-    //comments: Comment[];
+    comments: CommentsType;
 }
