@@ -29,9 +29,7 @@ const comms : CommentsType = [
 ]
 
 export function SignInErrorPage() : JSX.Element {
-    const dispatch = useAppDispatch();
-    const test = useAppSelector(getApplication)
-    const userName = useAppSelector(getfullName);
+    const test = useAppSelector(getTest)
     return (
         <>
             <div className="user-page">
@@ -59,9 +57,7 @@ export function SignInErrorPage() : JSX.Element {
                         <DropDownMenuElement elementLabel="Labeblblblblbllblblblbl" ></DropDownMenuElement>
                     </form>
                     <Comments comments={comms} authorId='0'/>
-                    <div>{test?.trainingTopic}</div>
-                    <p>{userName}</p>
-                    <Header/>
+                    {test && <div>{test.trainingTopic}</div>}
                 </div>
             </div>
         </>

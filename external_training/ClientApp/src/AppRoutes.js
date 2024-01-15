@@ -6,6 +6,7 @@ import {SignInErrorPage} from "./components/pages/test-page/test-page";
 import {NotificationsPage} from "./components/pages/notifications-page/notifications-page";
 import {ApplicationDetails} from "./components/application-details/application-details";
 import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
+import {CurrentApplicationsPage} from "./components/pages/current-applications/current-applications-page";
 
 const AppRoutes = [
     {

@@ -2,6 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {AppDispatch, State} from "../../types/state";
 import {AxiosInstance} from "axios";
 import {
+    loadEvents,
     loadNotifications,
     loadStartConfig,
     loadTest,
@@ -12,6 +13,7 @@ import {Notifications} from "../../types/notifications";
 import {Application} from "../../types/application";
 import {StartConfig} from "../../types/startConfig";
 
+import {EventsType} from "../../types/event.tsx";
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
@@ -45,7 +47,24 @@ export const fetchApplicationDetailsAction = createAsyncThunk<void, number, {
                     params: { trainingApplicationId: id }
                 } );
             dispatch(loadTest(data));
-        } finally{
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const fetchEventsAction = createAsyncThunk<void, undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/fetchEvents',
+    async (_arg,  {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.get<EventsType>('/api/user/events');
+            dispatch(loadEvents(data));
+        } finally {
             dispatch(setLoadingStatus(false));
         }
     },
