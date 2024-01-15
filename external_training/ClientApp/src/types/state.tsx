@@ -8,6 +8,7 @@ export type SystemProcess = {
     notifications: Notifications[];
     application: Application | undefined;
     role: string;
+    userFullName: string;
 };
 
 export type State = ReturnType<typeof store.getState>;

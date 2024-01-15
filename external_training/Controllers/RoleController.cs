@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace external_training.Controllers
 {
-    [Route("serviceApi/role")]
+    [Route("api/role")]
     [ApiController]
     [Authorize]
     public class RoleController : ControllerBase
@@ -24,12 +24,17 @@ namespace external_training.Controllers
         }
 
         [HttpGet("now")]
-        public async Task<ActionResult<IList<string>>> GetNow()
+        public async Task<ActionResult<RoleResponse>> GetNow()
         {
             var id = User.Identity.Name;
             var user = await _userManager.FindByIdAsync(id);
             var roles = await _userManager.GetRolesAsync(user!);
-            return Ok(roles);
+            var role = new RoleResponse
+            {
+                UserFullName = user.FullName,
+                RoleName = roles.FirstOrDefault()
+            };
+            return Ok(role);
         }
 
         [HttpPost("AddToRoleUser")]

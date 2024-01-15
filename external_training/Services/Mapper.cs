@@ -1,5 +1,6 @@
 ﻿using external_training.Controllers.DtoModels;
 using external_training.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace external_training.Services
 {
@@ -40,6 +41,7 @@ namespace external_training.Services
                 TrainingTopic = application.TrainingTopic,
                 Status = application.Status.ToString(),
                 ApplicationUserId = application.UserId,
+                DesiredManagerId = application.Manager.Id,
                 DesiredManagerName = application.Manager.FullName,
                 EducationalCenter = selectedCourse.EducationalCenter,
                 CourseName = selectedCourse.CourseName,
@@ -63,7 +65,10 @@ namespace external_training.Services
                 TrainingApplicationId = application.TrainingApplicationId,
                 TrainingTopic = application.TrainingTopic,
                 Status = application.Status.ToString(),
-                ApplicationUserName = application.User.UserName!,
+                ApplicationUserId = application.User.Id,
+                ApplicationUserName = application.User.FullName,
+                DesiredManagerId = application.Manager.Id,
+                DesiredManagerName = application.Manager.FullName,
                 PlannedParticipantsCount = application.PlannedParticipantsCount,
                 PlannedParticipantsNames = application.PlannedParticipantsNames,
                 Department = application.Department.Name,
@@ -128,6 +133,51 @@ namespace external_training.Services
                 FullName = manager.FullName
             };
             return managerInfo;
+        }
+
+        public static SelectedTrainingCourse MapToSelectedTrainingCourse(SelectedCourseRequest courseRequest)
+        {
+            var course = new SelectedTrainingCourse
+            {
+                EducationalCenter = courseRequest.EducationalCenter,
+                CourseName = courseRequest.CourseName,
+                ParticipantsCount = courseRequest.ParticipantsCount,
+                ParticipantsNames = courseRequest.ParticipantsNames,
+                IsTrainingOnline = courseRequest.IsTrainingOnline,
+                IsCorporateTraining = courseRequest.IsCorporateTraining,
+                Begin = courseRequest.Begin,
+                End = courseRequest.End,
+                CostPerParticipant = courseRequest.CostPerParticipant,
+                TotalCost = courseRequest.CostPerParticipant * courseRequest.ParticipantsCount,
+                TrainingApplicationId = courseRequest.TrainingApplicationId,
+            }
+            ; return course;
+        }
+
+        public static NotificationResponse MapToNotificationResponse(Notification notification)
+        {
+            var notificationResponse = new NotificationResponse
+            {
+                TrainingApplicationId = notification.TrainingApplicationId,
+                UserId = notification.UserId,
+                Text = notification.Text,
+                TrainingTopic = notification.TrainingApplication.TrainingTopic,
+                CreatedAt = notification.CreatedAt
+            };
+            return notificationResponse;
+        }
+
+        public static EventResponse MapToEventResponse(SelectedTrainingCourse course)
+        {
+            var eventResponse = new EventResponse
+            {
+                TrainingApplicationId = course.TrainingApplicationId,
+                CourseName = course.CourseName,
+                Status = course.TrainingApplication.Status.ToString(),
+Begin = course.Begin,
+End = course.End
+            };
+            return eventResponse;
         }
     }
 }

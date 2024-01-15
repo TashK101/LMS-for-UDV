@@ -17,8 +17,38 @@ namespace external_training.Repositories
         {
             return await _context.TrainingApplications
                 .Include(a => a.Comments)
-                .Where(a => a.ManagerId == managerId && a.IsArchived == false && a.Status == ApplicationStatus.AwaitingManagerApproval)
+                .Where(a => a.ManagerId == managerId && a.Status == ApplicationStatus.AwaitingManagerApproval)
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TrainingApplication>> GetArchivedApplicationsAsync(string managerId)
+        {
+            return await _context.TrainingApplications
+                .Include(a => a.Comments)
+                .Where(a => a.ManagerId == managerId && a.Status != ApplicationStatus.AwaitingManagerApproval)
+                .ToListAsync();
+        }
+
+        public async Task<bool> DeclineApplicationAsync(int applicationId)
+        {
+            var updateCount = await _context.TrainingApplications
+                .Where(a => a.TrainingApplicationId == applicationId)
+                .ExecuteUpdateAsync(
+                    s => s.SetProperty(a => a.Status, a => ApplicationStatus.NotApproved));
+            if (updateCount > 0)
+                return true;
+            return false;
+        }
+
+        public async Task<bool> AcceptApplicationAsync(int applicationId)
+        {
+            var updateCount = await _context.TrainingApplications
+                .Where(a => a.TrainingApplicationId == applicationId)
+                .ExecuteUpdateAsync(
+                    s => s.SetProperty(a => a.Status, a => ApplicationStatus.CourseSelection));
+            if (updateCount > 0)
+                return true;
+            return false;
         }
     }
 }
