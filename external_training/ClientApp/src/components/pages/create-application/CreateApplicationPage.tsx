@@ -6,8 +6,15 @@ import { SubmitButton } from '../../common/Button';
 import { Form } from "../../common/Form";
 import SmallCalendarDatePicker from "../../calendars/small-calendar/small-calendar-datepicker";
 import { INewApplication } from "../../../types/new-application";
+import { useAppDispatch } from "../../../hooks";
+import { postNewApplicationAction } from "../../../store/api-actions/api-actions";
 
-export function CreateApplicationPage() {
+interface CreateApplicationPageProps {
+  onSubmit: () => void
+}
+
+export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) {
+  const dispatch = useAppDispatch();
   const count = 5;
 
   const [topic, setTopic] = useState('')
@@ -47,6 +54,9 @@ export function CreateApplicationPage() {
       skillsToBeAcquired: skills,
       applicationNotes: note,
     }
+    dispatch(postNewApplicationAction(newApplication))
+
+    onSubmit()
   }
 
   return (

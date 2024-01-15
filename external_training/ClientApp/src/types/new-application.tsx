@@ -14,9 +14,3 @@ export type INewApplication = {
     skillsToBeAcquired: string
     applicationNotes: string
 }
-
-export type INewApplicationState = {
-    isDataLoading: boolean
-    error: string | null
-    application: INewApplication
-}
