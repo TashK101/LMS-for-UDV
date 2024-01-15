@@ -11,6 +11,7 @@ import {
 import {Application} from "../../types/application";
 import {EventsType} from "../../types/event.tsx";
 import {TrainingApplicationType} from "../../types/training-application.tsx";
+import { INewApplication } from "../../types/new-application.tsx";
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
