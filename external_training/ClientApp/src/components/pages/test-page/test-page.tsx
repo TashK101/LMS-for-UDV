@@ -4,6 +4,7 @@ import {Comments} from "../../comments/comments";
 import {CommentsType} from "../../../types/comments";
 import {useAppSelector} from "../../../hooks";
 import {getTest} from "../../../store/system-process/system-getters";
+import LargeCalendar from "../../calendars/large-calendar/large-calendar.tsx";
 
 
 const comms : CommentsType = [
@@ -31,6 +32,7 @@ export function SignInErrorPage() : JSX.Element {
     const test = useAppSelector(getTest)
     return (
         <>
+            <LargeCalendar />
             <div className="user-page">
                 <header className="page-header user-page__head">
                     <h1 className="page-title user-page__title">Sign in</h1>

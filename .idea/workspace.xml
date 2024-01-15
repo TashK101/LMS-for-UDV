@@ -5,25 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/avatar/header-avatar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-getters.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/application.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/event.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/.env.development" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/AppRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/AppRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/api/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/NavMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/NavMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/notification/notification.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/notification/notification.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/loading-page/loading-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/start-page/start-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/notifications-page/notifications-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/notifications-page/notifications-page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/calendar-utils/universal-props.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/calendar-utils/universal-props.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/calendar-courses-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/calendar-courses-table.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/middlewares/redirect.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/middlewares/redirect.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/setupProxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/setupProxy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-process.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/types/notifications.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/notifications.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-process.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/types/state.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/state.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="marias_experimental_branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,21 +52,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.typescriptcompiler&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\lisac\\Documents\\GitHub\\LMS-for-UDV\\external_training\\ClientApp\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "vlads__experiments",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.typescriptcompiler",
+    "ts.external.directory.path": "C:\\LMS-for-UDV\\external_training\\ClientApp\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\store\system-process" />
@@ -95,11 +86,6 @@
       <option name="PARAMETERS" value="" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Batch.apply_migrations" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -126,5 +112,28 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/calendar-courses-table.tsx</url>
+          <line>13</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
