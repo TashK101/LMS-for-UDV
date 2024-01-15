@@ -4,3 +4,4 @@ export const getIsDataLoading = (state: State) => state.isDataLoading;
 export const getApplication = (state: State) => state.application;
 export const getRole = (state: State) => state.role;
 export const getfullName = (state: State) => state.userFullName;
+export const getApplicationDetails = (state: State) => state.application;

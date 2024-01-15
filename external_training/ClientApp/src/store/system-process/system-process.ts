@@ -34,7 +34,10 @@ export const systemProcess = createSlice({
         loadTest : (state, action : PayloadAction<Application>) => {
             state.application = action.payload;
         },
+        loadApplicationDetails : (state, action : PayloadAction<Application>) => {
+            state.application = action.payload;
+        },
     }
 });
 export const redirectToRoute = createAction<string>('app/redirectToRoute');
-export const {setLoadingStatus, setError, loadNotifications, loadTest, loadStartConfig} = systemProcess.actions;
+export const {setLoadingStatus, setError, loadNotifications, loadTest, loadStartConfig, loadApplicationDetails} = systemProcess.actions;

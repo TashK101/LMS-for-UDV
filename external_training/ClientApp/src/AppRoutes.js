@@ -4,6 +4,7 @@ import { Home } from "./components/Home";
 import {StartPage} from "./components/pages/start-page/start-page";
 import {SignInErrorPage} from "./components/pages/test-page/test-page";
 import {NotificationsPage} from "./components/pages/notifications-page/notifications-page";
+import {ApplicationDetails} from "./components/application-details/application-details";
 
 const AppRoutes = [
     {
@@ -26,6 +27,10 @@ const AppRoutes = [
     {
         path: '/catalogapplications',
         element: <FetchData/>
+    },
+    {
+        path: '/counter',
+        element: <ApplicationDetails/>
     },
     ...ApiAuthorzationRoutes
 ];
