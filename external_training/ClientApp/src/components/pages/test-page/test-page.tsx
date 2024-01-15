@@ -2,6 +2,8 @@ import { JSX } from "react/jsx-runtime";
 import DropDownMenuElement from './test-file-2';
 import {Comments} from "../../comments/comments";
 import {CommentsType} from "../../../types/comments";
+import {useAppSelector} from "../../../hooks";
+import {getTest} from "../../../store/system-process/system-getters";
 
 
 const comms : CommentsType = [
@@ -25,7 +27,8 @@ const comms : CommentsType = [
     }
 ]
 
-export function SignInErrorPage(): JSX.Element {
+export function SignInErrorPage() : JSX.Element {
+    const test = useAppSelector(getTest)
     return (
         <>
             <div className="user-page">
@@ -53,9 +56,9 @@ export function SignInErrorPage(): JSX.Element {
                         <DropDownMenuElement elementLabel="Labeblblblblbllblblblbl" ></DropDownMenuElement>
                     </form>
                     <Comments comments={comms} authorId='0'/>
+                    {test && <div>{test.trainingTopic}</div>}
                 </div>
             </div>
         </>
     );
 }
-
