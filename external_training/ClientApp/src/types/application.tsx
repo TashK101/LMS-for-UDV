@@ -4,7 +4,10 @@ export type Application = {
     trainingApplicationId: number;
     trainingTopic: string;
     status: string;
-    applicationUserName: string;
+    "desiredManagerId": string;
+    desiredManagerName: string;
+    "applicationUserId": string,
+    "applicationUserName": string,
     plannedParticipantsCount: number;
     plannedParticipantsNames: string;
     department: string;

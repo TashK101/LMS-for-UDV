@@ -35,7 +35,8 @@ export function ApplicationDetails({id}:ApplicationDetailsProps): JSX.Element {
                         ['Количество участников', application?.plannedParticipantsCount],
                         ['ФИО участников', application?.plannedParticipantsNames],
                         ['Департамент', application?.department],
-                        ['Отдел/команда', application?.team]
+                        ['Отдел/команда', application?.team],
+                        ['Согласующий руководитель', application?.desiredManagerName]
                     ]}/>
                     <TextValueBlock textValueProps={[
                         ['Формат', `${application?.isTrainingOnline ? 'Онлайн' : 'Оффлайн'}, ${application?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании'}`],
