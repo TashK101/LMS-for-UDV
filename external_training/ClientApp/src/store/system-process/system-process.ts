@@ -2,16 +2,23 @@ import {createSlice, createAction, PayloadAction} from '@reduxjs/toolkit';
 import {SystemProcess} from '../types/state';
 import {Notifications} from "../types/notifications";
 import {Application} from "../types/application";
+import {SystemProcess} from '../../types/state';
+import {Notifications} from "../../types/notifications";
+import {Application} from "../../types/application";
 
 const initialState: SystemProcess = {
     error: null,
     isDataLoading: false,
     notifications: [],
     application: undefined,
+    notifications: [],
+    application: undefined,
+    role: '',
+
 };
 
 export const systemProcess = createSlice({
-    name: 'TEST',
+    name: 'SYSTEM',
     initialState,
     reducers: {
         setError : (state, action : PayloadAction<string | null>) => {
@@ -23,10 +30,16 @@ export const systemProcess = createSlice({
         loadNotifications : (state, action : PayloadAction<Notifications[]>) => {
             state.notifications = action.payload;
         },
+        loadRole : (state, action : PayloadAction<string>) => {
+            state.role = action.payload;
+        },
+        loadTest : (state, action : PayloadAction<Application>) => {
+            state.application = action.payload;
+        },
         loadApplicationDetails : (state, action : PayloadAction<Application>) => {
             state.application = action.payload;
         },
     }
 });
 export const redirectToRoute = createAction<string>('app/redirectToRoute');
-export const {setLoadingStatus, setError, loadNotifications, loadApplicationDetails} = systemProcess.actions;
+export const {setLoadingStatus, setError, loadNotifications, loadApplicationDetails, loadTest} = systemProcess.actions;

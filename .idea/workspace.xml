@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/AppRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/AppRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/avatar/comment-avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/avatar/comment-avatar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/comments/comment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/comments/comment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/comments/comments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/comments/comments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/loading-page/loading-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/loading-page/loading-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/types/comments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/comments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +57,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\store\system-process" />
       <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\store" />
       <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\icons" />
       <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\components" />
@@ -106,7 +98,7 @@
       <workItem from="1704971853247" duration="8883000" />
       <workItem from="1705135978927" duration="11919000" />
       <workItem from="1705186137370" duration="214000" />
-      <workItem from="1705232330773" duration="11374000" />
+      <workItem from="1705232330773" duration="44914000" />
     </task>
     <servers />
   </component>

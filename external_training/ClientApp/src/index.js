@@ -11,7 +11,7 @@ import {store} from "./store/store";
 import browserHistory from "./history-route/browser-history";
 import HistoryRouter from "./history-route/history-route";
 
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 

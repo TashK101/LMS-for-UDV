@@ -1,6 +1,6 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {store} from '../store/store';
-import {setError} from '../store/reducer';
+import {setError} from '../store/system-process/system-process';
 import {StatusCodes} from 'http-status-codes';
 import authService from '../components/api-authorization/AuthorizeService'
 
@@ -20,6 +20,7 @@ export const createAPI = (): AxiosInstance => {
     const api = axios.create({
         baseURL: BACKEND_URL,
         timeout: REQUEST_TIMEOUT,
+
     });
 
     let isRefreshing = false;
