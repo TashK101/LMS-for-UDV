@@ -5,25 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/icons/bell.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/icons/letter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/icons/logo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/AppRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/AppRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/avatar/header-avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/avatar/header-avatar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/notification/notification.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/notification/notification.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/notifications-page/notifications-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/notifications-page/notifications-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/start-page/start-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/start-page/start-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-getters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-getters.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-process.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/types/notifications.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/notifications.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/types/state.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/state.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

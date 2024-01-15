@@ -20,7 +20,8 @@ export function Header () : JSX.Element {
         getToken();
     }, [])
 
-    const decoded = jwtDecode(token);
+    //const decoded = jwtDecode(token);
+    console.log(token)
 
     return (
         <div className="w-full inline-flex relative bg-white shadow">
