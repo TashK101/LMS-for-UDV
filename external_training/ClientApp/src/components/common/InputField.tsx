@@ -20,6 +20,7 @@ export function TextField({ label = "", placeholder = "", required = true, value
                 w-full max-w-sm 
                 outline-0 border-[1px] border-color2 rounded 
                 h-[56px] p-[16px]
+                focus:border-color6
                 "
                 placeholder={placeholder}
                 required={required}
@@ -38,7 +39,8 @@ export function TextArea({ label = "", placeholder = "", required = true, value,
                 text-base placeholder:text-color3 
                 w-full max-w-sm 
                 outline-0 border-[1px] border-color2 rounded
-                h-[101px] p-[16px]'
+                h-[101px] p-[16px]
+                focus:border-color6'
                 placeholder={placeholder}
                 required={required}
                 value={value}
@@ -78,7 +80,8 @@ function PasswordInput({ placeholder, required, value, onChange }: PasswordInput
           text-base placeholder:text-color3 
           w-full max-w-sm 
           outline-0 border-[1px] border-color2 rounded 
-          h-[56px] p-[16px]"
+          h-[56px] p-[16px]
+          focus:border-color6"
                 required={required}
                 value={value}
                 onChange={(event) => onChange(event.target.value)}
@@ -123,6 +126,7 @@ export function CounterInput({ label = "", required = true, value, onChange }: C
                 text-base text-center placeholder:text-color3 
                 outline-0 border-[1px] border-color2 rounded-[5px] 
                 w-[49px] h-42[px] p-[8px]
+                focus:border-color6
                 "
                     required={required}
                     value={value}

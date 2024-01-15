@@ -5,6 +5,7 @@ import {StartPage} from "./components/pages/start-page/start-page";
 import {SignInErrorPage} from "./components/pages/test-page/test-page";
 import {NotificationsPage} from "./components/pages/notifications-page/notifications-page";
 import {SettingsPage} from "./components/pages/settings/SettingsPage";
+import {ApplicationPage} from "./components/pages/application/ApplicationPage";
 
 const AppRoutes = [
     {
@@ -27,6 +28,10 @@ const AppRoutes = [
     {
         path: '/settings',
         element: <SettingsPage/>
+    },
+    {
+        path: '/details',
+        element: <ApplicationPage/>
     },
     ...ApiAuthorzationRoutes
 ];
