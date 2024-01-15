@@ -166,5 +166,18 @@ namespace external_training.Services
             };
             return notificationResponse;
         }
+
+        public static EventResponse MapToEventResponse(SelectedTrainingCourse course)
+        {
+            var eventResponse = new EventResponse
+            {
+                TrainingApplicationId = course.TrainingApplicationId,
+                CourseName = course.CourseName,
+                Status = course.TrainingApplication.Status.ToString(),
+Begin = course.Begin,
+End = course.End
+            };
+            return eventResponse;
+        }
     }
 }

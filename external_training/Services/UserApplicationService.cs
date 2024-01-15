@@ -3,6 +3,7 @@ using external_training.Models;
 using external_training.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Xml.Linq;
 
@@ -108,6 +109,12 @@ namespace external_training.Services
         {
             var notifications = await _notificationRepository.GetNotificationsAsync(userId);
             return notifications.Select(Mapper.MapToNotificationResponse).ToList();
+        }
+
+        public async Task<IEnumerable<EventResponse>> GetEventsAsync()
+        {
+            var events = await _applicationRepository.GetActiveCoursesAsync();
+            return events.Select(Mapper.MapToEventResponse).ToList();
         }
     }
 }

@@ -11,5 +11,6 @@ namespace external_training.Repositories
         Task<IEnumerable<TrainingApplication>> GetApplicationsAsync(string userId);
         Task<IEnumerable<TrainingApplication>> GetArchivedApplicationsAsync(string userId);
         Task<IEnumerable<Comment>> GetComments(int applicationId);
+        Task<IEnumerable<SelectedTrainingCourse>> GetActiveCoursesAsync();
     }
 }

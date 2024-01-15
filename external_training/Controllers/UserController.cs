@@ -90,10 +90,10 @@ namespace external_training.Controllers
         }
 
         [HttpGet("events")]
-        public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents(EventRequest eventRequest)
+        public async Task<ActionResult<IEnumerable<EventResponse>>> GetEvents()
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            var events = await _applicationService.GetEventsAsync();
+            return Ok(events);
         }
     }
 }
