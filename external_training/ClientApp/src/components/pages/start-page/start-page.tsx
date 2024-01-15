@@ -16,7 +16,7 @@ export function StartPage() : JSX.Element {
     const navigate = useNavigate();
     useEffect(() => {
             setTimeout(() => {
-                navigate('/test')
+                navigate('/calendar')
             }, 2500)
     }, [])
     return (

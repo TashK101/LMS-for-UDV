@@ -9,6 +9,7 @@ import {fetchApplicationDetailsAction} from "../../store/api-actions/api-actions
 import {TextValueBlock} from "./text-value-block";
 import {useEffect} from "react";
 import { CommentSendField} from "./comment-send-field";
+import {Header} from "../header/header";
 
 export type ApplicationDetailsProps={
     id: number;
@@ -23,13 +24,13 @@ export function ApplicationDetails({id}:ApplicationDetailsProps): JSX.Element {
     const application = useAppSelector(getApplicationDetails);
     return (
         <div>
+            <Header/>
             <div className='application-details'>
                 <h2 className='topic-text'>{application?.trainingTopic}</h2>
                 <p className='bold-text'>Статус:</p>
                 {application?.status}
                 <p className='bold-text'>Подал:</p>
                 {application?.applicationUserName}
-                {/*рук*/}
                 <div className='pending-application-details'>
                     <TextValueBlock textValueProps={[
                         ['Количество участников', application?.plannedParticipantsCount],

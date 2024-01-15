@@ -7,6 +7,7 @@ import {NotificationsPage} from "./components/pages/notifications-page/notificat
 import {ApplicationDetails} from "./components/application-details/application-details";
 import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
 import {CurrentApplicationsPage} from "./components/pages/current-applications/current-applications-page";
+import LargeCalendar from "./components/calendars/large-calendar/large-calendar";
 
 const AppRoutes = [
     {
@@ -31,8 +32,12 @@ const AppRoutes = [
         element: <FetchData/>
     },
     {
-        path: '/applicationDetails/:id',
-        element: <ApplicationDetailsPage />
+        path: '/calendar',
+        element: <LargeCalendar />
+    },
+    {
+        path: '/cur_applications',
+        element: <CurrentApplicationsPage/>
     },
     ...ApiAuthorzationRoutes
 ];

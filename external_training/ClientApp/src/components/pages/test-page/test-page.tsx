@@ -29,7 +29,7 @@ const comms : CommentsType = [
 ]
 
 export function SignInErrorPage() : JSX.Element {
-    const test = useAppSelector(getTest)
+    //const test = useAppSelector(getTest)
     return (
         <>
             <div className="user-page">
@@ -57,7 +57,7 @@ export function SignInErrorPage() : JSX.Element {
                         <DropDownMenuElement elementLabel="Labeblblblblbllblblblbl" ></DropDownMenuElement>
                     </form>
                     <Comments comments={comms} authorId='0'/>
-                    {test && <div>{test.trainingTopic}</div>}
+                    {/*{test && <div>{test.trainingTopic}</div>}*/}
                 </div>
             </div>
         </>
