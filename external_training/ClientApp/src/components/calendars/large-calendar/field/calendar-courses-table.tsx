@@ -12,35 +12,6 @@ type CalendarCoursesTableProps = {
     chosenDate: Date;
 }
 
-
-// const ccourses: ICourse[] = [
-//     {
-//         title: "Компьютерное зрение",
-//         startDate: new Date(2024, 0, 10),
-//         endDate: new Date(2024, 0, 18),
-//         status: CourseStatus.Confirmed,
-//     },
-//     {
-//         title: "Основы web-разработки",
-//         startDate: new Date(2024, 0, 2),
-//         endDate: new Date(2024, 0, 24),
-//         status: CourseStatus.Waiting,
-//     },
-//     {
-//         title:
-//             "Прекрасные и замечательные пределы, а также удивительные метаморфозы математического анализа",
-//         startDate: new Date(2023, 0, 23),
-//         endDate: new Date(2023, 2, 2),
-//         status: CourseStatus.Confirmed,
-//     },
-//     {
-//         title: "PYTHON OLIMPYCS",
-//         startDate: new Date(2024, 3, 30),
-//         endDate: new Date(2024, 4, 3),
-//         status: CourseStatus.Waiting,
-//     },
-// ];
-
 const getEvents = (state: State) => state.events;
 
 export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: CalendarCoursesTableProps) {
@@ -50,11 +21,12 @@ export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: 
     }, []);
 
     const events = useAppSelector(getEvents);
-    let courses : ICourse[] = [];
+    let courses: ICourse[] = [];
     if (events) {
         for (let i = 0; i < events.length; i++) {
             let event = events[i];
             courses.push({
+                trainingApplicationId: event.trainingApplicationId,
                 title: event.courseName,
                 startDate: new Date(event.begin),
                 endDate: new Date(event.end),

@@ -13,7 +13,7 @@ type ApplicationCardProps = {
         title: string;
         date: Date;
         status: ApplicationStatus;
-        comments_count: number;
+        commentsCount: number;
     }
 }
 
@@ -55,7 +55,7 @@ export function ApplicationCard({application}: ApplicationCardProps) {
                     {statusesIcons[application.status]}
                     <p className={"flex items-center"}>{application.status}</p>
                 </div>
-                <p className={"mt-[20px] text-[#898989]"}>{application.comments_count} комментариев</p>
+                <p className={"mt-[20px] text-[#898989]"}>{application.commentsCount} комментариев</p>
             </div>
         </div>
     )

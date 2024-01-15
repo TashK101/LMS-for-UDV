@@ -6,6 +6,7 @@ export type UniversalClassAndChildrenProps = {
 }
 
 export interface ICourse {
+    trainingApplicationId: number;
     title: string;
     startDate: Date;
     endDate: Date;
