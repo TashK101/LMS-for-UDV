@@ -5,14 +5,14 @@ import {useEffect} from "react";
 import {useAppDispatch} from "../../../hooks";
 import {
     fetchApplicationDetailsAction,
-    fetchNotificationsAction,
-    fetchStartConfigAction
+    fetchNotificationsAction, fetchRoleAction,
 } from "../../../store/api-actions/api-actions";
 
 export function StartPage() : JSX.Element {
     const dispatch = useAppDispatch();
-    dispatch(fetchApplicationDetailsAction(1))
-    dispatch(fetchStartConfigAction)
+    dispatch(fetchApplicationDetailsAction(1));
+    dispatch(fetchRoleAction());
+    dispatch(fetchNotificationsAction());
     const navigate = useNavigate();
     useEffect(() => {
             setTimeout(() => {

@@ -1,8 +1,8 @@
 export type NotificationType =
     {
-        date: string,
+        createdAt: string,
         text: string,
         trainingId: number,
     }
 
-export type Notifications = Notification[]
+export type Notifications = NotificationType[];
