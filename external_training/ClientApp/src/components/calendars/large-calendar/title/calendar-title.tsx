@@ -1,4 +1,3 @@
-import LeftArrowIcon from "../icons/left-arrow-icon.tsx";
 import ChooseButton from "./choose-button.tsx";
 import React from "react";
 
@@ -72,7 +71,6 @@ export default function CalendarTitle({chosenMonth, chosenYear, setChosenMonth, 
     return (
         <div className="flex items-center justify-between gap-[61px] py-[33px] pr-[67px] pl-[50px]">
             <div className="flex items-center gap-[61px]">
-                <LeftArrowIcon/>
                 <div className="flex items-center gap-[25px]">
                     <ChooseButton options={monthsOps} currentValue={chosenMonth} setCurrentValue={setChosenMonth}/>
                     <ChooseButton options={yearsOps} currentValue={chosenYear} setCurrentValue={setChosenYear}/>

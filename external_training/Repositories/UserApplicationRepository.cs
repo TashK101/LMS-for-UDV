@@ -16,10 +16,11 @@ namespace external_training.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(TrainingApplication trainingApplication)
+        public async Task<int> AddAsync(TrainingApplication trainingApplication)
         {
             await _context.TrainingApplications.AddAsync(trainingApplication);
             await _context.SaveChangesAsync();
+            return trainingApplication.TrainingApplicationId;
         }
 
         public async Task AddCommentAsync(Comment comment)
@@ -69,6 +70,13 @@ namespace external_training.Repositories
                 .Where(a => a.UserId == userId && a.IsArchived)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<SelectedTrainingCourse>> GetActiveCoursesAsync()
+        {
+            return await _context.SelectedTrainingCourses
+                .Include(c => c.TrainingApplication)
+                .Where(c => c.TrainingApplication.IsArchived == false)
+                .ToListAsync();
+        }
     }
 }
- 

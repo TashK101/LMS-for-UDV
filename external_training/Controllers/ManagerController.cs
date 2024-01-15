@@ -22,29 +22,48 @@ namespace external_training.Controllers
         public async Task<ActionResult<IEnumerable<ShortTrainingApplicationResponse>>> GetPendingApplications()
         {
             var id = User.Identity.Name;
-            var applications = _managerApplicationService.GetPendingApplications(id);
+            var applications = await _managerApplicationService.GetPendingApplicationsAsync(id);
             return Ok(applications);
         }
 
         [HttpPost("decline_application")]
         public async Task<ActionResult> DeclineApplication(int TrainingApplicationId)
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            var IsSuccess = await _managerApplicationService.DeclineApplicationAsync(TrainingApplicationId);
+            if (IsSuccess)
+                return Ok();
+            return NotFound();
         }
 
         [HttpPost("accept_application")]
         public async Task<ActionResult> AcceptApplication(int TrainingApplicationId)
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            var IsSuccess = await _managerApplicationService.AcceptApplicationAsync(TrainingApplicationId);
+            if (IsSuccess)
+                return Ok();
+            return NotFound();
         }
 
         [HttpGet("archived_applications")]
         public async Task<ActionResult<IEnumerable<ShortTrainingApplicationResponse>>> GetArchivedApplications()
         {
-            await Task.Yield();
-            throw new NotImplementedException();
+            var id = User.Identity.Name;
+            var applications = await _managerApplicationService.GetArchivedApplicationsAsync(id);
+            return Ok(applications);
+        }
+
+        [HttpPost("comment")]
+        public async Task<ActionResult> CreateComment(CommentCreation commentCreation)
+        {
+            await _managerApplicationService.CreateCommentAsync(commentCreation, User!.Identity!.Name!);
+            return Ok();
+        }
+
+        [HttpGet("comments")]
+        public async Task<ActionResult<IEnumerable<CommentDto>>> GetComments(int trainingApplicationId)
+        {
+            var comments = await _managerApplicationService.GetComments(trainingApplicationId);
+            return Ok(comments);
         }
     }
 }

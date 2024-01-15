@@ -8,10 +8,8 @@ import {
     redirectToRoute,
     setLoadingStatus
 } from "../system-process/system-process";
-import {Notifications} from "../../types/notifications";
-import authService from '../../components/api-authorization/AuthorizeService'
 import {Application} from "../../types/application";
-import {EventDataType, EventsType} from "../../types/event.tsx";
+import {EventsType} from "../../types/event.tsx";
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
@@ -31,21 +29,16 @@ export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
     },
 );
 
-export const fetchEventsAction = createAsyncThunk<void, EventDataType, {
+export const fetchEventsAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
 }>(
     'data/fetchEvents',
-    async ({year, month}, {dispatch, extra: api}) => {
+    async (_arg,  {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.get<EventsType>('/api/user/events', {
-                data: {
-                    "year": {year},
-                    "month": {month}
-                }
-            });
+            const {data} = await api.get<EventsType>('/api/user/events');
             dispatch(loadEvents(data));
         } finally {
             dispatch(setLoadingStatus(false));

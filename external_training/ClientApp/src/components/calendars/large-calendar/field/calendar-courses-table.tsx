@@ -4,6 +4,8 @@ import {useAppDispatch, useAppSelector} from "../../../../hooks";
 import {fetchEventsAction} from "../../../../store/api-actions/api-actions.ts";
 import {useEffect} from "react";
 import {State} from "../../../../types/state.tsx";
+import {getLastDayOfChosenMonth} from "../../calendar-utils/date-utils.ts";
+import {CourseStatus} from "../../calendar-utils/courseStatus.ts";
 
 type CalendarCoursesTableProps = {
     currentMonthMaxDate: number;
@@ -44,10 +46,7 @@ const getEvents = (state: State) => state.events;
 export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: CalendarCoursesTableProps) {
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(fetchEventsAction({
-            year: chosenDate.getFullYear(),
-            month: chosenDate.getMonth()
-        }));
+        dispatch(fetchEventsAction());
     }, []);
 
     const events = useAppSelector(getEvents);
@@ -56,21 +55,21 @@ export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: 
         for (let i = 0; i < events.length; i++) {
             let event = events[i];
             courses.push({
-                title: event.trainingTopic,
+                title: event.courseName,
                 startDate: new Date(event.begin),
                 endDate: new Date(event.end),
-                status: event.status
+                status: event.status === "Approved" ? CourseStatus.Confirmed : CourseStatus.Waiting
             })
         }
     }
 
 
     const minTableHeight = 10;
-    // const filteredCourses: ICourse[] = courses.filter((c: ICourse) => {
-    //     return (c.startDate < chosenDate && c.endDate >= chosenDate) ||
-    //         (c.startDate >= chosenDate && c.startDate <= getLastDayOfChosenMonth(chosenDate));
-    // })
-    const numCourses = courses.length;
+    const filteredCourses: ICourse[] = courses.filter((c: ICourse) => {
+        return (c.startDate < chosenDate && c.endDate >= chosenDate) ||
+            (c.startDate >= chosenDate && c.startDate <= getLastDayOfChosenMonth(chosenDate));
+    })
+    const numCourses = filteredCourses.length;
     const height = numCourses >= minTableHeight ? 0 : minTableHeight - numCourses;
 
     return (
@@ -92,7 +91,7 @@ export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: 
                     .map((_, i) => (
                         <CoursesTableRow
                             key={i}
-                            course={courses[i]}
+                            course={filteredCourses[i]}
                             chosenDate={chosenDate}
                         />
                     ))}

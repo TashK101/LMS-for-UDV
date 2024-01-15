@@ -4,17 +4,90 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/event.tsx" afterDir="false" />
+    <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="add backendMethods to L calendar">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/.env.development" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/AppRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/AppRoutes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/calendar-utils/universal-props.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/calendar-utils/universal-props.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/calendar-courses-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/calendar-courses-table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/title/calendar-title.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/title/calendar-title.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-process.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/types/state.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/state.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/types/event.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/event.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/AdminController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/AdminController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/CommonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/CommonController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/CommentCreation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/CommentCreation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/CommentDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/CommentDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/DetaileTrainingApplicationResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/DetaileTrainingApplicationResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/EventRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/EventRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/EventResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/EventResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/ManagerInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/ManagerInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/SelectedCourseRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/SelectedCourseRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/SelectedCourseResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/SelectedCourseResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/ShortTrainingApplicationResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/ShortTrainingApplicationResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/TrainingApplicationRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/DtoModels/TrainingApplicationRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/ManagerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/ManagerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/OidcConfigurationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/OidcConfigurationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/RoleController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/RoleController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Controllers/WeatherForecastController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Controllers/WeatherForecastController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Data/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Data/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/InitializeRoles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/InitializeRoles.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231106102920_InitialCreate.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231106102920_InitialCreate.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231106102920_InitialCreate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231106102920_InitialCreate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231106165107_AddRolesSupport.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231106165107_AddRolesSupport.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231106165107_AddRolesSupport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231106165107_AddRolesSupport.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231107164435_AddModels.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231107164435_AddModels.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231107164435_AddModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231107164435_AddModels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231123123850_UpdateAplicationModels.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231123123850_UpdateAplicationModels.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231123123850_UpdateAplicationModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231123123850_UpdateAplicationModels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231201171902_AddNotifications.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231201171902_AddNotifications.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231201171902_AddNotifications.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231201171902_AddNotifications.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231202085223_AddRelationBetweenUserAndApplication.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231202085223_AddRelationBetweenUserAndApplication.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231202085223_AddRelationBetweenUserAndApplication.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231202085223_AddRelationBetweenUserAndApplication.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231218075445_FixModels.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231218075445_FixModels.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231218075445_FixModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231218075445_FixModels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231218104932_AddManagerToApplication.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231218104932_AddManagerToApplication.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/20231218104932_AddManagerToApplication.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/20231218104932_AddManagerToApplication.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Models/AplicationStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Models/AplicationStatus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Models/ApplicationUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Models/ApplicationUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Models/Comment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Models/Comment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Models/Department.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Models/Department.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Models/Notification.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Models/Notification.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Models/SelectedTrainingCourse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Models/SelectedTrainingCourse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Models/Team.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Models/Team.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Models/TrainingApplication.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Models/TrainingApplication.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Pages/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Pages/Error.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Pages/Error.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Pages/Error.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Pages/Shared/_LoginPartial.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Pages/Shared/_LoginPartial.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Pages/_ViewImports.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Pages/_ViewImports.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ProfileService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ProfileService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Properties/serviceDependencies.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Properties/serviceDependencies.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Properties/serviceDependencies.local.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Properties/serviceDependencies.local.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/AdminApplicationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Repositories/AdminApplicationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/IAdminApplicationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Repositories/IAdminApplicationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/IManagerApplicationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Repositories/IManagerApplicationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/INotificationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Repositories/INotificationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/IUserApplicationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Repositories/IUserApplicationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Repositories/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/ManagerApplicationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Repositories/ManagerApplicationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/NotificationRepository.cs.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/UserApplicationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Repositories/UserApplicationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Services/IManagerApplicationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Services/IManagerApplicationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Services/IUserApplicationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Services/IUserApplicationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Services/ManagerApplicationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Services/ManagerApplicationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Services/Mapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Services/Mapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/Services/UserApplicationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/Services/UserApplicationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/UserRegistrationEventHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/UserRegistrationEventHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/WeatherForecast.cs" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/WeatherForecast.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/apply_migrations.bat" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/apply_migrations.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/external_training.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/external_training.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/start_docker_compose.bat" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/start_docker_compose.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/stop_docker_compose.bat" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/stop_docker_compose.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,22 +125,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "vlads__experiments",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.typescriptcompiler",
-    "ts.external.directory.path": "C:\\LMS-for-UDV\\external_training\\ClientApp\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;vlads__experiments&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.typescriptcompiler&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\LMS-for-UDV\\external_training\\ClientApp\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\store\system-process" />
@@ -124,13 +197,16 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add backendMethods to L calendar" />
+    <option name="LAST_COMMIT_MESSAGE" value="add backendMethods to L calendar" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/external_training/ClientApp/src/components/calendars/large-calendar/field/calendar-courses-table.tsx</url>
-          <line>13</line>
-          <properties lambdaOrdinal="-1" />
+          <line>15</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

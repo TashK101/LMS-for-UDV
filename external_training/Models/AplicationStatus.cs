@@ -7,6 +7,7 @@
         CourseSelection,
         AwaitingContract,
         AwaitingPayment,
-        AwaitingContractAndPayment
+        AwaitingContractAndPayment,
+        Approved
     }
 }

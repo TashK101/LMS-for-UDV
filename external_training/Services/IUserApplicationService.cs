@@ -11,5 +11,8 @@ namespace external_training.Services
         Task<DetaileTrainingApplicationResponse?> GetTrainingApplicationAsync(int applicationId);
         Task<IEnumerable<ShortTrainingApplicationResponse>> GetTrainingApplicationsAsync(string userId);
         Task<IEnumerable<CommentDto>> GetComments(int applicationId);
+        Task<SelectedCourseResponse?> GetSelectedCourseAsync(int applicationId);
+        Task<IEnumerable<NotificationResponse>> GetNotificationsAsync(string userId);
+        Task<IEnumerable<EventResponse>> GetEventsAsync();
     }
 }

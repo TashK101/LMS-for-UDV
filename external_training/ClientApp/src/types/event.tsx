@@ -1,6 +1,6 @@
 export type EventType = {
     trainingApplicationId: number,
-    trainingTopic: string,
+    courseName: string,
     status: string,
     begin: string,
     end: string,
