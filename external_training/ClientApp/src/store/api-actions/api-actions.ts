@@ -24,8 +24,8 @@ export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
     async (_arg, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.get<Application>('/api/user/training_application?trainingApplicationId=1');
-            dispatch(loadTest(data));
+            const {data} = await api.get<Notifications>('api/user/notifications');
+            dispatch(loadNotifications(data));
         } finally{
             dispatch(setLoadingStatus(false));
         }
@@ -61,7 +61,7 @@ export const fetchStartConfigAction = createAsyncThunk<void, undefined, {
     async (__args, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.get<StartConfig>(`api/role/now`);
+            const {data} = await api.get<StartConfig>('api/role/now');
             dispatch(loadStartConfig(data));
         } finally{
             dispatch(setLoadingStatus(false));

@@ -5,58 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/startConfig.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/avatar/comment-avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/avatar/comment-avatar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/avatar/header-avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/avatar/header-avatar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/start-page/start-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/start-page/start-page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/setupProxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/setupProxy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/api-actions/api-actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-getters.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-getters.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-process.ts" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/store/system-process/system-process.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/types/state.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/types/state.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/AdminController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/CommonController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/CommentCreation.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/CommentDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/DetaileTrainingApplicationResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/EventRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/EventResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/ManagerInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/SelectedCourseRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/SelectedCourseResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/ShortTrainingApplicationResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/DtoModels/TrainingApplicationRequest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/ManagerController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/OidcConfigurationController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/RoleController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/UserController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Controllers/WeatherForecastController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Models/AplicationStatus.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Models/ApplicationUser.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Models/Comment.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Models/Department.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Models/Notification.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Models/SelectedTrainingCourse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Models/Team.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Models/TrainingApplication.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/AdminApplicationRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/IAdminApplicationRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/IManagerApplicationRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/INotificationRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/IUserApplicationRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/IUserRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/ManagerApplicationRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/NotificationRepository.cs.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/UserApplicationRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Repositories/UserRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Services/IManagerApplicationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Services/IUserApplicationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Services/ManagerApplicationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Services/Mapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/Services/UserApplicationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/external_training/appsettings.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +106,7 @@
       <workItem from="1705135978927" duration="11919000" />
       <workItem from="1705186137370" duration="214000" />
       <workItem from="1705232330773" duration="44914000" />
-      <workItem from="1705302087431" duration="1630000" />
+      <workItem from="1705302087431" duration="4096000" />
     </task>
     <servers />
   </component>

@@ -11,7 +11,6 @@ const initialState: SystemProcess = {
     application: undefined,
     role: '',
     userFullName: '',
-
 };
 
 export const systemProcess = createSlice({
@@ -24,7 +23,7 @@ export const systemProcess = createSlice({
         setLoadingStatus : (state, action : PayloadAction<boolean>) => {
             state.isDataLoading = action.payload;
         },
-        loadNotifications : (state, action : PayloadAction<Notifications[]>) => {
+        loadNotifications : (state, action : PayloadAction<Notifications>) => {
             state.notifications = action.payload;
         },
         loadStartConfig : (state, action : PayloadAction<StartConfig>) => {
