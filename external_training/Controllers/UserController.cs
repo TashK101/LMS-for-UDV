@@ -2,6 +2,7 @@
 using external_training.Models;
 using external_training.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace external_training.Controllers
@@ -12,12 +13,14 @@ namespace external_training.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserApplicationService _applicationService;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserApplicationService applicationService, ILogger<UserController> logger)
+        public UserController(IUserApplicationService applicationService, ILogger<UserController> logger, UserManager<ApplicationUser> userManager)
         {
             _applicationService = applicationService;
             _logger = logger;
+            _userManager = userManager;
         }
 
         [HttpPost("training_application")]
@@ -94,6 +97,20 @@ namespace external_training.Controllers
         {
             var events = await _applicationService.GetEventsAsync();
             return Ok(events);
+        }
+
+        [HttpGet("role")]
+        public async Task<ActionResult<RoleResponse>> GetRole()
+        {
+            var id = User.Identity.Name;
+            var user = await _userManager.FindByIdAsync(id);
+            var roles = await _userManager.GetRolesAsync(user!);
+            var role = new RoleResponse
+            {
+                UserFullName = user.FullName,
+                RoleName = roles.FirstOrDefault()
+            };
+            return Ok(role);
         }
     }
 }

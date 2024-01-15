@@ -21,7 +21,7 @@ export function Notification({notification}: NotificationProps) : JSX.Element {
                 <div className="text-zinc-800 text-xl font-normal font-['Golos']">{application?.trainingTopic}</div>
             </div>
             <div className="flex-col justify-center items-start gap-5 inline-flex">
-                <div className="text-zinc-500 text-base font-normal font-['Golos']">10.10.2023  15:05</div>
+                <div className="text-zinc-500 text-base font-normal font-['Golos']">{notification?.createdAt}</div>
             </div>
         </button>
     )

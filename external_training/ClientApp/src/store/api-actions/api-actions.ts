@@ -9,7 +9,6 @@ import {
     setLoadingStatus
 } from "../system-process/system-process";
 import {Notifications} from "../../types/notifications";
-import authService from '../../components/api-authorization/AuthorizeService'
 import {Application} from "../../types/application";
 import {StartConfig} from "../../types/startConfig";
 
@@ -24,8 +23,8 @@ export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
     async (_arg, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.get<Application>('/api/user/training_application?trainingApplicationId=1');
-            dispatch(loadTest(data));
+            const {data} = await api.get<Notifications>(`api/user/notifications`);
+            dispatch(loadNotifications(data));
         } finally{
             dispatch(setLoadingStatus(false));
         }
@@ -58,10 +57,27 @@ export const fetchStartConfigAction = createAsyncThunk<void, undefined, {
     extra: AxiosInstance;
 }>(
     'data/fetchStartConfig',
-    async (__args, {dispatch, extra: api}) => {
+    async (_args, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.get<StartConfig>(`api/role/now`);
+            const {data} = await api.get<StartConfig>('api/user/role');
+            dispatch(loadStartConfig(data));
+        } finally{
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const fetchRoleAction = createAsyncThunk<void, undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/fetchApplicationDetails',
+    async (_arg, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.get<StartConfig>(`api/user/role`);
             dispatch(loadStartConfig(data));
         } finally{
             dispatch(setLoadingStatus(false));

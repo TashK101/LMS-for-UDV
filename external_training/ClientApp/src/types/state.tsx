@@ -5,7 +5,7 @@ import {Application} from "./application";
 export type SystemProcess = {
     isDataLoading: boolean;
     error: string | null;
-    notifications: Notifications[];
+    notifications: Notifications;
     application: Application | undefined;
     role: string;
     userFullName: string;
