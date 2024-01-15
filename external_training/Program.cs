@@ -74,8 +74,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserApplicationRepository, UserApplicationRepository>();
 builder.Services.AddScoped<IManagerApplicationRepository, ManagerApplicationRepository>();
+builder.Services.AddScoped<IAdminApplicationRepository, AdminApplicationRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
 builder.Services.AddScoped<IManagerApplicationService, ManagerApplicationService>();
+builder.Services.AddScoped<IAdminApplicationService, AdminApplicationService>();
+builder.Services.AddScoped<IAdminApplicationService, AdminApplicationService>();
 builder.Services.AddTransient<IEventSink, UserRegistrationEventHandler>();
 
 var app = builder.Build();
@@ -85,13 +89,11 @@ if (app.Environment.IsDevelopment())
     app.UseMigrationsEndPoint();
     app.UseSwagger();
     app.UseSwaggerUI();
-
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         dbContext.Database.Migrate();
     }
-
     RolesInitializer.Initialize(app.Services).Wait();
 }
 else
