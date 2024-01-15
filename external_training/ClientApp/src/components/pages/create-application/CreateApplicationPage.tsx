@@ -5,6 +5,7 @@ import { RadioGroup } from '../../common/Radio';
 import { SubmitButton } from '../../common/Button';
 import { Form } from "../../common/Form";
 import SmallCalendarDatePicker from "../../calendars/small-calendar/small-calendar-datepicker";
+import { INewApplication } from "../../../types/new-application";
 
 export function CreateApplicationPage() {
   const count = 5;
@@ -27,9 +28,25 @@ export function CreateApplicationPage() {
   const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>();
 
 
-  const submitHandler = (event: React.FormEvent) => {
+  const submitHandler = async (event: React.FormEvent) => {
     event.preventDefault()
-    console.log("hello")
+
+    const newApplication: INewApplication = {
+      trainingTopic: topic,
+      plannedParticipantsCount: numberOfPeople,
+      plannedParticipantsNames: name,
+      desiredManagerId: manager,
+      isTrainingOnline: format === '1',
+      isCorporateTraining: classmates === '1',
+      desiredBegin: firstSelectedDate?.toLocaleDateString() ?? "",
+      desiredEnd: secondSelectedDate?.toLocaleDateString() ?? "",
+      estimatedCostPerParticipant: +price,
+      similarPrograms: sameCourses,
+      relevanceReason: motivation,
+      trainingGoals: goals,
+      skillsToBeAcquired: skills,
+      applicationNotes: note,
+    }
   }
 
   return (
