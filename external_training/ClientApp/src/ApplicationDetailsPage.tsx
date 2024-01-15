@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { RouteProps } from 'react-router';
 import { ApplicationDetails} from "./components/application-details/application-details";
 
