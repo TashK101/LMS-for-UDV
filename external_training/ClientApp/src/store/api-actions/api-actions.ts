@@ -24,3 +24,23 @@ export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
         }
     },
 );
+
+export const fetchApplicationDetailsAction = createAsyncThunk<void, number, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/fetchApplicationDetails',
+    async (id, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.get<Application>(`api/user/training_application`,
+                {
+                    params: { trainingApplicationId: id }
+                } );
+            dispatch(loadTest(data));
+        } finally{
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);

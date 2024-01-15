@@ -3,7 +3,8 @@ import DropDownMenuElement from './test-file-2';
 import {Comments} from "../../comments/comments";
 import {CommentsType} from "../../../types/comments";
 import {useAppSelector} from "../../../hooks";
-import {getTest} from "../../../store/system-process/system-getters";
+import {getApplication, getTest} from "../../../store/system-process/system-getters";
+import {Header} from "../../header/header";
 
 
 const comms : CommentsType = [
@@ -28,7 +29,7 @@ const comms : CommentsType = [
 ]
 
 export function SignInErrorPage() : JSX.Element {
-    const test = useAppSelector(getTest)
+    const test = useAppSelector(getApplication)
     return (
         <>
             <div className="user-page">
@@ -56,7 +57,8 @@ export function SignInErrorPage() : JSX.Element {
                         <DropDownMenuElement elementLabel="Labeblblblblbllblblblbl" ></DropDownMenuElement>
                     </form>
                     <Comments comments={comms} authorId='0'/>
-                    {test && <div>{test.trainingTopic}</div>}
+                    <div>{test?.trainingTopic}</div>
+                    <Header/>
                 </div>
             </div>
         </>

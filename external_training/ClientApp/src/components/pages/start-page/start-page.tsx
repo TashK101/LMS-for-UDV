@@ -3,11 +3,11 @@ import {LogoUDV} from "../../../icons/logo-with-udv";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {useAppDispatch} from "../../../hooks";
-import {fetchNotificationsAction} from "../../../store/api-actions/api-actions";
+import {fetchApplicationDetailsAction, fetchNotificationsAction} from "../../../store/api-actions/api-actions";
 
 export function StartPage() : JSX.Element {
     const dispatch = useAppDispatch();
-    dispatch(fetchNotificationsAction())
+    dispatch(fetchApplicationDetailsAction(1))
     const navigate = useNavigate();
     useEffect(() => {
             setTimeout(() => {

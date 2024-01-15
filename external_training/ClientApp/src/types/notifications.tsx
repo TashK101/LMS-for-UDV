@@ -1,7 +1,8 @@
-export type Notifications =
+export type NotificationType =
     {
-        userId : string;
         date: string,
         text: string,
-        trainingTopic: string,
+        trainingId: number,
     }
+
+export type Notifications = Notification[]

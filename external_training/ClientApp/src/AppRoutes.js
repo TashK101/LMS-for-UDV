@@ -23,6 +23,10 @@ const AppRoutes = [
         path: '/test',
         element: <SignInErrorPage/>
     },
+    {
+        path: '/catalogapplications',
+        element: <FetchData/>
+    },
     ...ApiAuthorzationRoutes
 ];
 

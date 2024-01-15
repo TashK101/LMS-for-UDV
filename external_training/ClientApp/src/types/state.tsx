@@ -6,7 +6,8 @@ export type SystemProcess = {
     isDataLoading: boolean;
     error: string | null;
     notifications: Notifications[];
-    test: Application | undefined;
+    application: Application | undefined;
+    role: string;
 };
 
 export type State = ReturnType<typeof store.getState>;

@@ -7,7 +7,8 @@ const initialState: SystemProcess = {
     error: null,
     isDataLoading: false,
     notifications: [],
-    test: undefined,
+    application: undefined,
+    role: '',
 
 };
 
@@ -24,9 +25,11 @@ export const systemProcess = createSlice({
         loadNotifications : (state, action : PayloadAction<Notifications[]>) => {
             state.notifications = action.payload;
         },
+        loadRole : (state, action : PayloadAction<string>) => {
+            state.role = action.payload;
+        },
         loadTest : (state, action : PayloadAction<Application>) => {
-            state.test = action.payload;
-            console.log(action.payload);
+            state.application = action.payload;
         },
     }
 });
