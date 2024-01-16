@@ -100,12 +100,12 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
           onChange={setClassmates}
         />
 
-        {/* <Form label="Желаемые даты">
+        {<Form label="Желаемые даты">
           <SmallCalendarDatePicker
             setFirstSelectedDate={setFirstSelectedDate}
             setSecondSelectedDate={setSecondSelectedDate}
           />
-        </Form> */}
+        </Form>}
 
         <TextField label="Стоимость на одного" value={price} onChange={setPrice} />
         <TextField label="Похожие курсы (если есть)" required={false} value={sameCourses} onChange={setSameCourses} />
