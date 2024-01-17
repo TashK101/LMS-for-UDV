@@ -4,12 +4,15 @@ import AppRoutes from './AppRoutes';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import { Layout } from './components/Layout';
 import './custom.css';
+import HistoryRouter from "./history-route/history-route";
+import browserHistory from "./history-route/browser-history";
 
 export default class App extends Component {
     static displayName = App.name;
 
     render() {
         return (
+            <HistoryRouter history={browserHistory}>
             <Layout>
                 <Routes>
                     {AppRoutes.map((route, index) => {
@@ -18,6 +21,7 @@ export default class App extends Component {
                     })}
                 </Routes>
             </Layout>
+            </HistoryRouter>
         );
     }
 }

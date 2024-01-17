@@ -67,20 +67,3 @@ export const fetchStartConfigAction = createAsyncThunk<void, undefined, {
         }
     },
 );
-
-export const fetchRoleAction = createAsyncThunk<void, undefined, {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-}>(
-    'data/fetchApplicationDetails',
-    async (_arg, {dispatch, extra: api}) => {
-        try {
-            dispatch(setLoadingStatus(true));
-            const {data} = await api.get<StartConfig>(`api/user/role`);
-            dispatch(loadStartConfig(data));
-        } finally{
-            dispatch(setLoadingStatus(false));
-        }
-    },
-);

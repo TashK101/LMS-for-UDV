@@ -5,9 +5,8 @@ import {Logo} from "../../icons/logo";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {fetchNotificationsAction, fetchStartConfigAction} from "../../store/api-actions/api-actions";
+import {fetchStartConfigAction} from "../../store/api-actions/api-actions";
 import {getfullName, getRole} from "../../store/system-process/system-getters";
-import {DropdownMenu} from "reactstrap";
 import DropDownMenu from "../drop-down-menu/drop-down-menu";
 
 export function Header () : JSX.Element {
@@ -17,7 +16,7 @@ export function Header () : JSX.Element {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(fetchStartConfigAction);
+        dispatch(fetchStartConfigAction());
     }, []);
 
     const role = useAppSelector(getRole);
@@ -25,15 +24,15 @@ export function Header () : JSX.Element {
     const userId = 1;
 
     return (
-        <div>
-            <div className="w-full inline-flex relative bg-white shadow">
+        <div className="w-full fixed top-0 left-0">
+            <div className="w-full h-[80px] inline-flex relative bg-white shadow">
                 <div className="w-1/2 px-[30px]">
                     <Logo/>
                 </div>
                 <div className="w-1/2 px-[50px] py-[15px]">
                     <div className="flex justify-end items-center gap-[22px]">
                         <button onMouseEnter={() => setIsBellHover(true)} onMouseLeave={() => setIsBellHover(false)} onClick={() => navigate('/notifications', {state: userId})}><Bell isHover={isBellHover}/></button>
-                        {role === 'Admin' && <button onMouseEnter={() => setIsLetterHover(true)} onMouseLeave={() => setIsLetterHover(false)} onClick={() => navigate('/catalogapplications')}><Letter isHover={isLetterHover}/></button>}
+                        {role !== 'User' && <button onMouseEnter={() => setIsLetterHover(true)} onMouseLeave={() => setIsLetterHover(false)} onClick={() => navigate('/catalogapplications')}><Letter isHover={isLetterHover}/></button>}
                         <button onClick={() => setIsMenuVisible(!isMenuVisible)}><HeaderAvatar userFullName={fullName}/></button>
                     </div>
                 </div>
