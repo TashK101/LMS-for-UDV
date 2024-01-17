@@ -16,13 +16,14 @@ import {State} from "../../../types/state.tsx";
 import {getRole} from "../../../store/system-process/system-getters.tsx";
 
 
-const ApplicationsStatusTrans = {
+export const ApplicationsStatusTrans = {
     "Approved": ApplicationStatus.Approved,
     "NotApproved": ApplicationStatus.NotApproved,
     "AwaitingManagerApproval": ApplicationStatus.AwaitingManagerApproval,
     "CourseSelection": ApplicationStatus.CourseSelection,
     "AwaitingPayment": ApplicationStatus.AwaitingPayment,
     "AwaitingContractAndPayment": ApplicationStatus.AwaitingContractAndPayment,
+    "AwaitingContract": ApplicationStatus.AwaitingContract
 }
 
 export type CurrentApplicationType = {

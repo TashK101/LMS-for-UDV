@@ -12,7 +12,7 @@ export function TextValueBlock({textValueProps}: textValueBlockProps): JSX.Eleme
                     <div className='regular-text'>{t[1]}</div>
                 </div>
                 :
-                <div></div>
+                null
         )}
     </div>
     <hr className="solid"></hr>

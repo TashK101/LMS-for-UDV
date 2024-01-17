@@ -13,11 +13,11 @@ export function NotificationsPage() : JSX.Element {
     const notifications = useAppSelector(getNotifications);
     return(
         <div className="w-full h-[832px] relative bg-white">
-            <div className="left-[203px] top-[234px] absolute flex-col justify-start items-start gap-[30px] inline-flex">
+            <Header/>
+            <div className="left-[203px] top-[150px] absolute text-zinc-800 text-[32px] font-semibold font-['Golos'] tracking-wider">Уведомления</div>
+            <div className="left-[200px] top-[245px] absolute flex-col justify-start items-start gap-[40px] inline-flex">
                 {notifications.map((element) => <Notification notification={element}/>)}
             </div>
-            <div className="left-[203px] top-[150px] absolute text-zinc-800 text-[32px] font-semibold font-['Golos'] tracking-wider">Уведомления</div>
-            <Header/>
         </div>
     )
 }

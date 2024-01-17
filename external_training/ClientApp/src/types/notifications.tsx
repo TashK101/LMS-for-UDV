@@ -2,7 +2,8 @@ export type NotificationType =
     {
         createdAt: string,
         text: string,
-        trainingId: number,
+        trainingApplicationId: number,
+        trainingTopic: string,
     }
 
 export type Notifications = NotificationType[];
