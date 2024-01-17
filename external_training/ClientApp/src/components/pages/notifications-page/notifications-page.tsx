@@ -12,10 +12,10 @@ export function NotificationsPage() : JSX.Element {
     }, []);
     const notifications = useAppSelector(getNotifications);
     return(
-        <div className="w-full h-full relative bg-white">
+        <div className="w-screen h-screen relative bg-white">
             <Header/>
-            <div className="pl-[100px] pt-[150px] pb-[50px] text-zinc-800 text-[32px] font-semibold font-['Golos'] tracking-wider">Уведомления</div>
-            <div className="pl-[95px] flex-col justify-start items-start gap-[40px] inline-flex">
+            <div className="pl-[350px] pt-[220px] pb-[50px] text-zinc-800 text-[32px] font-semibold font-['Golos'] tracking-wider">Уведомления</div>
+            <div className="pl-[355px] flex-col justify-start items-start gap-[40px] inline-flex">
                 {notifications.map((element) => <Notification key={element.createdAt} notification={element}/>)}
             </div>
         </div>

@@ -13,14 +13,12 @@ export default class App extends Component {
     render() {
         return (
             <HistoryRouter history={browserHistory}>
-            <Layout>
                 <Routes>
                     {AppRoutes.map((route, index) => {
                         const { element, requireAuth, ...rest } = route;
                         return <Route key={index} {...rest} element={requireAuth ? <AuthorizeRoute {...rest} element={element} /> : element} />;
                     })}
                 </Routes>
-            </Layout>
             </HistoryRouter>
         );
     }
