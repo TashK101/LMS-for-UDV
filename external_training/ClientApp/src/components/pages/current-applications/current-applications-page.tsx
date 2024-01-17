@@ -5,6 +5,7 @@ import {ApplicationCard} from "../../current-applications-utils/application-card
 import {ApplicationStatus} from "../../current-applications-utils/application-status.ts";
 import {ModeSwitchButton} from "../../current-applications-utils/mode-switch-button.tsx";
 import {
+    fetchStartConfigAction,
     fetchUserTrainingApplicationsAction
 } from "../../../store/api-actions/api-actions.ts";
 import {Modal, ModalContext} from "../../common/Modal.tsx";
@@ -12,6 +13,7 @@ import {CreateApplicationPage} from "../create-application/CreateApplicationPage
 import {Header} from "../../header/header.tsx";
 import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {State} from "../../../types/state.tsx";
+import {getRole} from "../../../store/system-process/system-getters.tsx";
 
 
 const ApplicationsStatusTrans = {
@@ -43,8 +45,10 @@ export function CurrentApplicationsPage(): JSX.Element {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchUserTrainingApplicationsAction());
+        dispatch(fetchStartConfigAction);
     }, []);
 
+    const role = useAppSelector(getRole);
     const trainingApplications = useAppSelector(getTrainingApplications);
     const applications: CurrentApplicationType[] = []
 
@@ -70,9 +74,10 @@ export function CurrentApplicationsPage(): JSX.Element {
 
     return (
         <div>
-            {modal && <Modal onClose={close}>
-                <CreateApplicationPage onSubmit={close}/>
-            </Modal>}
+            {modal &&
+                <Modal onClose={close}>
+                    <CreateApplicationPage onSubmit={close}/>
+                </Modal>}
 
             <Header/>
             <div className={"mx-[55px] mt-[40px] flex font-medium items-center justify-between"}>
