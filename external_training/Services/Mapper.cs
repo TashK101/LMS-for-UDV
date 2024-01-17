@@ -117,6 +117,7 @@ namespace external_training.Services
             var ApplicationDto = new ShortTrainingApplicationResponse
             {
                 TrainingApplicationId = application.TrainingApplicationId,
+                UserFullName = application.User.FullName,
                 TrainingTopic = application.TrainingTopic,
                 CreatedAt = application.CreatedAt,
                 Status = application.Status.ToString(),
@@ -174,8 +175,8 @@ namespace external_training.Services
                 TrainingApplicationId = course.TrainingApplicationId,
                 CourseName = course.CourseName,
                 Status = course.TrainingApplication.Status.ToString(),
-Begin = course.Begin,
-End = course.End
+                Begin = course.Begin,
+                End = course.End
             };
             return eventResponse;
         }
