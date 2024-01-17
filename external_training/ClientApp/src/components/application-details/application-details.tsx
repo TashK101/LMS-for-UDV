@@ -1,6 +1,8 @@
 import {Comments} from "../comments/comments";
-//import { Header }
-//import { backButton}
+import { useState } from "react"
+import { Form } from "./Form"
+import {ApplicationsStatusTrans} from "../pages/current-applications/current-applications-page";
+import {statusesIcons} from "../current-applications-utils/application-card";
 import {stringToDate} from "../../string-to-date";
 import './application-details.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
@@ -10,6 +12,8 @@ import {TextValueBlock} from "./text-value-block";
 import {useEffect} from "react";
 import { CommentSendField} from "./comment-send-field";
 import {Header} from "../header/header";
+import {ApplicationDetailsAvatar} from "../avatar/header-avatar";
+import {flash} from "react-awesome-reveal/dist/animations/attention_seekers";
 
 export type ApplicationDetailsProps={
     id: number;
@@ -22,15 +26,22 @@ export function ApplicationDetails({id}:ApplicationDetailsProps): JSX.Element {
     }, []);
 
     const application = useAppSelector(getApplicationDetails);
+    // @ts-ignore
+    const status = ApplicationsStatusTrans[application?.status]
     return (
         <div>
             <Header/>
             <div className='application-details'>
                 <h2 className='topic-text'>{application?.trainingTopic}</h2>
                 <p className='bold-text'>Статус:</p>
-                {application?.status}
+                <div className='flex border-2 rounded-xl items-center w-fit pr-4'>
+                    {statusesIcons[status]}
+                    {status}
+                </div>
                 <p className='bold-text'>Подал:</p>
-                {application?.applicationUserName}
+                <div className='flex items-center gap-[10px]'>{application?.applicationUserName &&
+                <ApplicationDetailsAvatar userFullName={application?.applicationUserName}/>}
+                    {application?.applicationUserName}</div>
                 <div className='pending-application-details'>
                     <TextValueBlock textValueProps={[
                         ['Количество участников', application?.plannedParticipantsCount],

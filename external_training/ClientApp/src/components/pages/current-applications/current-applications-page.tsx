@@ -14,13 +14,14 @@ import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {State} from "../../../types/state.tsx";
 
 
-const ApplicationsStatusTrans = {
+export const ApplicationsStatusTrans = {
     "Approved": ApplicationStatus.Approved,
     "NotApproved": ApplicationStatus.NotApproved,
     "AwaitingManagerApproval": ApplicationStatus.AwaitingManagerApproval,
     "CourseSelection": ApplicationStatus.CourseSelection,
     "AwaitingPayment": ApplicationStatus.AwaitingPayment,
     "AwaitingContractAndPayment": ApplicationStatus.AwaitingContractAndPayment,
+    "AwaitingContract": ApplicationStatus.AwaitingContract
 }
 
 export type CurrentApplicationType = {

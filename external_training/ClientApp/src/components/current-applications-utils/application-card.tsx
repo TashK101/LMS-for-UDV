@@ -14,7 +14,7 @@ type ApplicationCardProps = {
     application: CurrentApplicationType;
 }
 
-const statusesIcons = {
+export const statusesIcons = {
     [ApplicationStatus.Approved]: <ApprovedIcon/>,
     [ApplicationStatus.AwaitingManagerApproval]: <AwaitingManagerApprovalIcon/>,
     [ApplicationStatus.AwaitingContractAndPayment]: <AwaitingContractAndPaymentIcon/>,
