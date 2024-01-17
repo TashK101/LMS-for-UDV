@@ -5,4 +5,5 @@ export enum ApplicationStatus {
     CourseSelection = "Идёт подбор курса",
     AwaitingPayment = "Ждёт оплату",
     AwaitingContractAndPayment = "Ждёт договор и оплату",
+    AwaitingContract = "Ждёт договор",
 }

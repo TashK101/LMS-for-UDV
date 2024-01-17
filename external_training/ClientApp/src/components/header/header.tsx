@@ -5,7 +5,7 @@ import {Logo} from "../../icons/logo";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {fetchNotificationsAction, fetchStartConfigAction} from "../../store/api-actions/api-actions";
+import {fetchStartConfigAction} from "../../store/api-actions/api-actions";
 import {getfullName, getRole} from "../../store/system-process/system-getters";
 
 export function Header () : JSX.Element {

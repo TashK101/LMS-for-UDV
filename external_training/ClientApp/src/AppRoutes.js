@@ -1,6 +1,5 @@
 import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
-import { FetchData } from "./components/FetchData";
-import { Home } from "./components/Home";
+import {FetchData} from "./components/FetchData";
 import {StartPage} from "./components/pages/start-page/start-page";
 import {SignInErrorPage} from "./components/pages/test-page/test-page";
 import {NotificationsPage} from "./components/pages/notifications-page/notifications-page";
@@ -8,21 +7,21 @@ import {SettingsPage} from "./components/pages/settings/SettingsPage";
 import {ApplicationPage} from "./components/pages/application/ApplicationPage";
 import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
 import {CurrentApplicationsPage} from "./components/pages/current-applications/current-applications-page";
-import LargeCalendar from "./components/calendars/large-calendar/large-calendar";
+import {CalendarPage} from "./components/pages/calendar-page/calendar-page";
 
 const AppRoutes = [
     {
         index: true,
-        element: <StartPage />
+        element: <StartPage/>
     },
     {
         path: '/notifications',
-        element: <NotificationsPage />
+        element: <NotificationsPage/>
     },
     {
         path: '/fetch-data',
         requireAuth: true,
-        element: <FetchData />
+        element: <FetchData/>
     },
     {
         path: '/test',
@@ -34,7 +33,7 @@ const AppRoutes = [
     },
     {
         path: '/calendar',
-        element: <LargeCalendar />
+        element: <CalendarPage/>
     },
     {
         path: '/cur_applications',
@@ -51,6 +50,10 @@ const AppRoutes = [
     {
         path: '/details',
         element: <ApplicationPage/>
+    },
+    {
+        path: '/applicationDetails/:id',
+        element: <ApplicationDetailsPage/>
     },
     ...ApiAuthorzationRoutes
 ];

@@ -1,6 +1,5 @@
 import TableCourseButton from "./table-course-button.tsx";
 import {ICourse} from "../../calendar-utils/universal-props.ts";
-import {getCheckedCourseEndDate, isCourseStartThisMonth} from "../../calendar-utils/courses-field-utils.ts";
 import {getLastDayOfChosenMonth} from "../../calendar-utils/date-utils.ts";
 import clsx from "clsx";
 
@@ -10,10 +9,7 @@ type CoursesTableRowProps = {
 }
 
 export default function CoursesTableRow({course, chosenDate}: CoursesTableRowProps) {
-    const courseStartThisMonth = isCourseStartThisMonth(
-        chosenDate,
-        course.startDate,
-    );
+
 
     let isLeftBorderInside = course.startDate >= chosenDate;
     let isRightBorderInside = course.endDate <= getLastDayOfChosenMonth(chosenDate);
@@ -21,42 +17,33 @@ export default function CoursesTableRow({course, chosenDate}: CoursesTableRowPro
     const leftBorderPadding = isLeftBorderInside ? "pl-1" : "pl-0";
     const rightBorderPadding = isRightBorderInside ? "pr-1" : "pr-0";
 
-    const checkedCourseEndDate = getCheckedCourseEndDate(course, chosenDate);
+    const tdsToRenderCount = isLeftBorderInside ? course.startDate.getDate() - 1 : 0;
+    const colSpanCount = isRightBorderInside
+        ? (isLeftBorderInside
+            ? course.endDate.getDate() - course.startDate.getDate() + 1
+            : course.endDate.getDate())
+        : (isLeftBorderInside
+            ? getLastDayOfChosenMonth(chosenDate).getDate() - course.startDate.getDate() + 1
+            : getLastDayOfChosenMonth(chosenDate).getDate());
 
-    if (courseStartThisMonth) {
-        return (
-            <tr className="h-[42px]">
-                {Array(course.startDate.getDate() - 1)
-                    .fill(0)
-                    .map((_, i) => (
-                        <td key={i}></td>
-                    ))}
-                <td
-                    colSpan={
-                        checkedCourseEndDate.getDate() - course.startDate.getDate() + 1
-                    }
-                    className={clsx(leftBorderPadding, rightBorderPadding, "max-w-[30px] w-auto")}
-                >
-                    <TableCourseButton courseStatus={course.status} isLeftBorderRounded={isLeftBorderInside}
-                                       isRightBorderRounded={isRightBorderInside}>
-                        {course.title}
-                    </TableCourseButton>
-                </td>
-            </tr>
-        );
-    } else {
-        return (
-            <tr>
-                <td
-                    colSpan={checkedCourseEndDate.getDate()}
-                    className={clsx(leftBorderPadding, rightBorderPadding, "max-w-[30px] w-auto")}
-                >
-                    <TableCourseButton courseStatus={course.status} isLeftBorderRounded={isLeftBorderInside}
-                                       isRightBorderRounded={isRightBorderInside}>
-                        {course.title}
-                    </TableCourseButton>
-                </td>
-            </tr>
-        );
-    }
+    return (
+        <tr className="h-[42px]">
+            {Array(tdsToRenderCount)
+                .fill(0)
+                .map((_, i) => (
+                    <td key={i}></td>
+                ))}
+            <td
+                colSpan={colSpanCount}
+                className={clsx(leftBorderPadding, rightBorderPadding, "max-w-[30px] w-auto")}
+            >
+                <TableCourseButton
+                    courseId={course.trainingApplicationId}
+                    courseStatus={course.status}
+                    isLeftBorderRounded={isLeftBorderInside}
+                    isRightBorderRounded={isRightBorderInside}>
+                    {course.title}
+                </TableCourseButton>
+            </td>
+        </tr>);
 }

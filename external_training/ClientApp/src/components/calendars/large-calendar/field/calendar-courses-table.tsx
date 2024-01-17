@@ -12,6 +12,7 @@ type CalendarCoursesTableProps = {
     chosenDate: Date;
 }
 
+
 const getEvents = (state: State) => state.events;
 
 export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: CalendarCoursesTableProps) {
@@ -34,7 +35,6 @@ export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: 
             })
         }
     }
-
 
     const minTableHeight = 10;
     const filteredCourses: ICourse[] = courses.filter((c: ICourse) => {

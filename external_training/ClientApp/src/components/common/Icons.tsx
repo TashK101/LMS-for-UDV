@@ -115,8 +115,10 @@ export function NotApprovedIcon() {
 
 export function CloseModalIcon() {
     return (
-        <svg width="28" height="26" viewBox="0 0 28 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M27.5 2.61857L24.7807 0L14 10.3814L3.21929 0L0.5 2.61857L11.2807 13L0.5 23.3814L3.21929 26L14 15.6186L24.7807 26L27.5 23.3814L16.7193 13L27.5 2.61857Z" fill="#898989" />
+        <svg
+            className={"hover:text-black text-[#898989] hover:cursor-pointer"}
+            width="28" height="26" viewBox="0 0 28 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M27.5 2.61857L24.7807 0L14 10.3814L3.21929 0L0.5 2.61857L11.2807 13L0.5 23.3814L3.21929 26L14 15.6186L24.7807 26L27.5 23.3814L16.7193 13L27.5 2.61857Z" fill="currentColor" />
         </svg>
     )
 }

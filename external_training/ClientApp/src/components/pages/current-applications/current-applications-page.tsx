@@ -1,81 +1,35 @@
-import { useContext, useEffect, useState } from "react";
+import {useContext, useEffect, useState} from "react";
 import clsx from "clsx";
 import {PlusIcon} from "../../current-applications-utils/icons/plus-icon.tsx";
 import {ApplicationCard} from "../../current-applications-utils/application-card.tsx";
 import {ApplicationStatus} from "../../current-applications-utils/application-status.ts";
 import {ModeSwitchButton} from "../../current-applications-utils/mode-switch-button.tsx";
+import {
+    fetchUserTrainingApplicationsAction
+} from "../../../store/api-actions/api-actions.ts";
+import {Modal, ModalContext} from "../../common/Modal.tsx";
+import {CreateApplicationPage} from "../create-application/CreateApplicationPage.tsx";
+import {Header} from "../../header/header.tsx";
 import {useAppDispatch, useAppSelector} from "../../../hooks";
-import {fetchTrainingApplicationsAction} from "../../../store/api-actions/api-actions.ts";
 import {State} from "../../../types/state.tsx";
-import { Modal, ModalContext } from "../../common/Modal.tsx";
-import { CreateApplicationPage } from "../create-application/CreateApplicationPage.tsx";
 
-type ApplicationType = {
-    title: string,
-    date: Date,
-    status: ApplicationStatus,
-    commentsCount: number,
-}
 
 const ApplicationsStatusTrans = {
     "Approved": ApplicationStatus.Approved,
-    "NotApproved" : ApplicationStatus.NotApproved,
-    "AwaitingManagerApproval" : ApplicationStatus.AwaitingManagerApproval,
-    "CourseSelection" : ApplicationStatus.CourseSelection,
-    "AwaitingPayment" : ApplicationStatus.AwaitingPayment,
-    "AwaitingContractAndPayment" : ApplicationStatus.AwaitingContractAndPayment,
+    "NotApproved": ApplicationStatus.NotApproved,
+    "AwaitingManagerApproval": ApplicationStatus.AwaitingManagerApproval,
+    "CourseSelection": ApplicationStatus.CourseSelection,
+    "AwaitingPayment": ApplicationStatus.AwaitingPayment,
+    "AwaitingContractAndPayment": ApplicationStatus.AwaitingContractAndPayment,
 }
-//
-// const applications = [
-//     {
-//         title: "Компьютерное зрение, но с очень длинным названием",
-//         date: new Date(2023, 11, 13),
-//         status: ApplicationStatus.Approved,
-//         comments_count: 0
-//     },
-//     {
-//         title: "НААААААААААААААААААААААЗВАНИЕ",
-//         date: new Date(2024, 0, 32),
-//         status: ApplicationStatus.AwaitingContractAndPayment,
-//         comments_count: 4
-//     },
-//     {
-//         title: "Будующеведение",
-//         date: new Date(3000, 6, 9),
-//         status: ApplicationStatus.AwaitingManagerApproval,
-//         comments_count: 0
-//     },
-//     {
-//         title: "Компьютерное зрение",
-//         date: new Date(2023, 11, 13),
-//         status: ApplicationStatus.NotApproved,
-//         comments_count: 0
-//     },
-//     {
-//         title: "Компьютерное зрение",
-//         date: new Date(2023, 11, 13),
-//         status: ApplicationStatus.AwaitingManagerApproval,
-//         comments_count: 0
-//     },
-//     {
-//         title: "Компьютерное зрение",
-//         date: new Date(2023, 11, 13),
-//         status: ApplicationStatus.AwaitingManagerApproval,
-//         comments_count: 0
-//     },
-//     {
-//         title: "Компьютерное зрение",
-//         date: new Date(2023, 11, 13),
-//         status: ApplicationStatus.AwaitingManagerApproval,
-//         comments_count: 0
-//     },
-//     {
-//         title: "Компьютерное зрение",
-//         date: new Date(2023, 11, 13),
-//         status: ApplicationStatus.AwaitingManagerApproval,
-//         comments_count: 0
-//     }
-// ]
+
+export type CurrentApplicationType = {
+    id: number,
+    title: string,
+    date: Date,
+    status: ApplicationStatus,
+    comments_count: number
+}
 
 const getTrainingApplications = (state: State) => state.trainingApplications;
 
@@ -88,43 +42,44 @@ export function CurrentApplicationsPage(): JSX.Element {
 
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(fetchTrainingApplicationsAction());
+        dispatch(fetchUserTrainingApplicationsAction());
     }, []);
 
-    const trApplications = useAppSelector(getTrainingApplications);
-    const applications: ApplicationType[] = [];
+    const trainingApplications = useAppSelector(getTrainingApplications);
+    const applications: CurrentApplicationType[] = []
 
-    if (trApplications) {
-        for (let i = 0; i < trApplications.length; i++) {
-            let appl = trApplications[i];
+    if (trainingApplications) {
+        for (let i = 0; i < trainingApplications.length; i++) {
+            let trAppl = trainingApplications[i];
             applications.push({
-                title: appl.trainingTopic,
-                date: new Date(appl.createdAt),
+                id: trAppl.trainingApplicationId,
+                title: trAppl.trainingTopic,
+                date: new Date(trAppl.createdAt),
                 // @ts-ignore
-                status: ApplicationsStatusTrans[appl.status],
-                commentsCount: appl.commentsCount,
+                status: ApplicationsStatusTrans[trAppl.status],
+                comments_count: trAppl.commentsCount,
             })
         }
     }
-
 
     const filteredApplications = historyMode ?
         applications.filter((appl) => appl.status === ApplicationStatus.Approved) :
         applications.filter((appl) => appl.status !== ApplicationStatus.Approved);
 
-    const { modal, open, close } = useContext(ModalContext)
+    const {modal, open, close} = useContext(ModalContext)
 
     return (
         <div>
             {modal && <Modal onClose={close}>
-                <CreateApplicationPage onSubmit={close} />
+                <CreateApplicationPage onSubmit={close}/>
             </Modal>}
 
+            <Header/>
             <div className={"mx-[55px] mt-[40px] flex font-medium items-center justify-between"}>
                 <ModeSwitchButton contentMode={historyMode}
-                    setContentMode={setHistoryMode}
-                    leftPartText={"Текущие заявки"}
-                    rightPartText={"История"}/>
+                                  setContentMode={setHistoryMode}
+                                  leftPartText={"Текущие заявки"}
+                                  rightPartText={"История"}/>
                 <button
                     className={newApplicationButtonStyle}
                     onClick={open}>

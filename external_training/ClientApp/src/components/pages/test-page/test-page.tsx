@@ -2,9 +2,6 @@ import { JSX } from "react/jsx-runtime";
 import DropDownMenuElement from './test-file-2';
 import {Comments} from "../../comments/comments";
 import {CommentsType} from "../../../types/comments";
-import {useAppDispatch, useAppSelector} from "../../../hooks";
-import {getApplication, getfullName} from "../../../store/system-process/system-getters";
-import {Header} from "../../header/header";
 
 
 const comms : CommentsType = [

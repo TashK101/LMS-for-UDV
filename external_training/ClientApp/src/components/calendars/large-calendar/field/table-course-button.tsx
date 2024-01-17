@@ -1,12 +1,15 @@
 import clsx from "clsx";
 import {CourseStatus} from "../../calendar-utils/courseStatus.ts";
+import {useNavigate} from "react-router-dom";
 
 type TableCourseButtonProps = {
     children?: string;
     className?: string;
     courseStatus: CourseStatus;
+    courseId: number;
     isLeftBorderRounded: boolean;
     isRightBorderRounded: boolean;
+    colsSpanCount?: number;
 }
 
 const ButtonVariants = {
@@ -18,9 +21,11 @@ export default function TableCourseButton({
                                               children,
                                               className,
                                               courseStatus,
+                                              courseId,
                                               isLeftBorderRounded,
-                                              isRightBorderRounded
-                                          }: TableCourseButtonProps) {
+                                              isRightBorderRounded,
+                                          }: TableCourseButtonProps
+) {
     const leftBorder = isLeftBorderRounded ? "rounded-l-lg" : "";
     const rightBorder = isRightBorderRounded ? "rounded-r-lg" : "";
     const buttonClassName = clsx(
@@ -31,5 +36,23 @@ export default function TableCourseButton({
         ButtonVariants[courseStatus],
     );
 
-    return <button className={buttonClassName}>{children}</button>;
+    const navigate = useNavigate();
+    const onClickRedirectHandler = () => navigate(`/application_details/${courseId}`);
+
+    // <div className={clsx("flex justify-center", phraseLen > maxPhraseLen ? "[&_p]:hover:flex" : "")}>
+    // <p
+    //     ref={el}
+    //     onClick={onClickRedirectHandler}
+    //     className={clsx(
+    //         "items-center hidden absolute h-[38px] rounded-lg overflow-hidden",
+    //         "text-ellipsis whitespace-nowrap px-4 border-2 bg-red-500 cursor-pointer"
+    //     )}>{children}</p>
+
+    return (
+        <button
+            onClick={onClickRedirectHandler}
+            className={buttonClassName}>
+            {children}
+        </button>
+    );
 }

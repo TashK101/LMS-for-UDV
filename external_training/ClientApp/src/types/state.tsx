@@ -2,18 +2,19 @@ import {store} from "../store/store";
 import {Notifications} from "./notifications";
 import {Application} from "./application";
 import {EventType} from "./event.tsx";
-import {TrainingApplicationType} from "./training-application.tsx";
+import {ShortApplicationInfoType} from "./short-application-info.tsx";
+
 
 export type SystemProcess = {
     isDataLoading: boolean;
     error: string | null;
-    notifications: Notifications;
     application: Application | undefined;
     role: string;
     userFullName: string;
-    notifications: Notifications[];
+    notifications: Notifications;
     events: EventType[];
-    trainingApplications: TrainingApplicationType[];
+    trainingApplications: ShortApplicationInfoType[];
+
 };
 
 export type State = ReturnType<typeof store.getState>;

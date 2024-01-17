@@ -2,17 +2,9 @@ import {Zoom} from "react-awesome-reveal";
 import {LogoUDV} from "../../../icons/logo-with-udv";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-import {useAppDispatch} from "../../../hooks";
-import {
-    fetchApplicationDetailsAction,
-    fetchNotificationsAction, fetchRoleAction,
-} from "../../../store/api-actions/api-actions";
+import {fetchNotificationsAction,} from "../../../store/api-actions/api-actions";
 
 export function StartPage() : JSX.Element {
-    const dispatch = useAppDispatch();
-    dispatch(fetchApplicationDetailsAction(1));
-    dispatch(fetchRoleAction());
-    dispatch(fetchNotificationsAction());
     const navigate = useNavigate();
     useEffect(() => {
             setTimeout(() => {

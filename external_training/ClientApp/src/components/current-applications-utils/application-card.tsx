@@ -7,14 +7,11 @@ import {
     AwaitingPaymentIcon, CourseSelectionIcon, NotApprovedIcon
 } from "./icons/status-icons.tsx";
 import {ApplicationStatus} from "./application-status.ts";
+import {CurrentApplicationType} from "../pages/current-applications/current-applications-page.tsx";
+import {useNavigate} from "react-router-dom";
 
 type ApplicationCardProps = {
-    application: {
-        title: string;
-        date: Date;
-        status: ApplicationStatus;
-        commentsCount: number;
-    }
+    application: CurrentApplicationType;
 }
 
 const statusesIcons = {
@@ -23,7 +20,8 @@ const statusesIcons = {
     [ApplicationStatus.AwaitingContractAndPayment]: <AwaitingContractAndPaymentIcon/>,
     [ApplicationStatus.AwaitingPayment]: <AwaitingPaymentIcon/>,
     [ApplicationStatus.NotApproved]: <NotApprovedIcon/>,
-    [ApplicationStatus.CourseSelection]: <CourseSelectionIcon/>
+    [ApplicationStatus.CourseSelection]: <CourseSelectionIcon/>,
+    [ApplicationStatus.AwaitingContract]: <AwaitingContractAndPaymentIcon/>
 }
 
 export function ApplicationCard({application}: ApplicationCardProps) {
@@ -40,8 +38,11 @@ export function ApplicationCard({application}: ApplicationCardProps) {
         "border-2 rounded-2xl border-[#F59D0E] bg-gradient-to-r from-[#FFF6E9] to-[#FFFFFF]",
     )
 
+    const navigate = useNavigate();
+
     return (
         <div
+            onClick={() => navigate(`/application_details/${application.id}`)}
             className={cardStyle}>
             <div className={""}>
                 <div className={"flex justify-between "}>
@@ -55,7 +56,7 @@ export function ApplicationCard({application}: ApplicationCardProps) {
                     {statusesIcons[application.status]}
                     <p className={"flex items-center"}>{application.status}</p>
                 </div>
-                <p className={"mt-[20px] text-[#898989]"}>{application.commentsCount} комментариев</p>
+                <p className={"mt-[20px] text-[#898989]"}>{application.comments_count} комментариев</p>
             </div>
         </div>
     )

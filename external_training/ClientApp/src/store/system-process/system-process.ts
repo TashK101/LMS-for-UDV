@@ -4,7 +4,7 @@ import {Notifications} from "../../types/notifications";
 import {Application} from "../../types/application";
 import {EventType} from "../../types/event.tsx";
 import {StartConfig} from "../../types/startConfig";
-import {TrainingApplicationType} from "../../types/training-application.tsx";
+import {ShortApplicationInfoType} from "../../types/short-application-info.tsx";
 
 const initialState: SystemProcess = {
     error: null,
@@ -13,6 +13,8 @@ const initialState: SystemProcess = {
     application: undefined,
     role: '',
     userFullName: '',
+    events: [],
+    trainingApplications: [],
 };
 
 export const systemProcess = createSlice({
@@ -41,11 +43,12 @@ export const systemProcess = createSlice({
         loadEvents : (state, action : PayloadAction<EventType[]>) => {
             state.events = action.payload;
         },
-        loadTrainingApplications : (state, action : PayloadAction<TrainingApplicationType[]>) => {
+        loadTrainingApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
             state.trainingApplications = action.payload;
         },
     }
 });
 export const redirectToRoute = createAction<string>('app/redirectToRoute');
 export const {setLoadingStatus, setError, loadNotifications, loadTest, loadEvents, loadStartConfig, loadTrainingApplications, loadApplicationDetails} = systemProcess.actions;
+//export const {setLoadingStatus, setError, loadNotifications, loadTest, loadEvents, loadStartConfig, loadApplicationDetails, loadTrainingApplications} = systemProcess.actions;
 
