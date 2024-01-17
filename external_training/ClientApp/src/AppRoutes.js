@@ -52,10 +52,6 @@ const AppRoutes = [
         path: '/details',
         element: <ApplicationPage/>
     },
-    {
-        path: '/applicationDetails/:id',
-        element: <ApplicationDetailsPage/>
-    },
     ...ApiAuthorzationRoutes
 ];
 
