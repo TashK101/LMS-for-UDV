@@ -4,7 +4,7 @@ import {setError} from '../store/system-process/system-process';
 import {StatusCodes} from 'http-status-codes';
 import authService from '../components/api-authorization/AuthorizeService'
 
-export const BACKEND_URL = 'https://localhost:44441';
+export const BACKEND_URL = '';
 export const REQUEST_TIMEOUT = 5000;
 
 
