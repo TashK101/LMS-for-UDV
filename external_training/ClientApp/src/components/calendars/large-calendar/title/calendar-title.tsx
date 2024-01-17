@@ -74,9 +74,6 @@ export default function CalendarTitle({chosenMonth, chosenYear, setChosenMonth, 
                 <div className="flex items-center gap-[25px]">
                     <ChooseButton options={monthsOps} currentValue={chosenMonth} setCurrentValue={setChosenMonth}/>
                     <ChooseButton options={yearsOps} currentValue={chosenYear} setCurrentValue={setChosenYear}/>
-                    <div>
-                        Выбрано: {chosenMonth + 1}.{chosenYear}
-                    </div>
                 </div>
             </div>
             <div className="flex items-center gap-[40px]">

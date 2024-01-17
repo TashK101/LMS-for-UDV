@@ -4,6 +4,8 @@ import {AxiosInstance} from "axios";
 import {
     loadEvents,
     loadNotifications,
+    loadTest,
+    loadTrainingApplications,
     loadStartConfig,
     loadTest,
     redirectToRoute,
@@ -14,6 +16,8 @@ import {Application} from "../../types/application";
 import {StartConfig} from "../../types/startConfig";
 
 import {EventsType} from "../../types/event.tsx";
+import {TrainingApplicationType} from "../../types/training-application.tsx";
+import { INewApplication } from "../../types/new-application.tsx";
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
@@ -99,6 +103,39 @@ export const fetchRoleAction = createAsyncThunk<void, undefined, {
             const {data} = await api.get<StartConfig>(`api/user/role`);
             dispatch(loadStartConfig(data));
         } finally{
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const fetchTrainingApplicationsAction = createAsyncThunk<void, undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/fetchEvents',
+    async (_arg,  {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.get<TrainingApplicationType[]>('/api/user/training_applications');
+            dispatch(loadTrainingApplications(data));
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const postNewApplicationAction = createAsyncThunk<void, INewApplication, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/postNewApplication',
+    async (_arg: INewApplication, { dispatch, extra: api }) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const { data } = await api.post<INewApplication>('/api/user/training_application', _arg);
+        } finally {
             dispatch(setLoadingStatus(false));
         }
     },

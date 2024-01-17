@@ -10,17 +10,20 @@ import {Provider} from "react-redux";
 import {store} from "./store/store";
 import browserHistory from "./history-route/browser-history";
 import HistoryRouter from "./history-route/history-route";
+import { ModalState } from './components/common/Modal';
 
 document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
 root.render(
-    <HistoryRouter history={browserHistory}>
+  <HistoryRouter history={browserHistory}>
+    <ModalState>
       <Provider store={store}>
-    <App />
+        <App />
       </Provider>
-    </HistoryRouter>);
+    </ModalState>
+  </HistoryRouter>);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
