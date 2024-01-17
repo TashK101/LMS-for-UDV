@@ -108,6 +108,7 @@ namespace external_training.Controllers
             var role = new RoleResponse
             {
                 UserId = id,
+                UserEmail = user.Email,
                 UserFullName = user.FullName,
                 RoleName = roles.FirstOrDefault()
             };
