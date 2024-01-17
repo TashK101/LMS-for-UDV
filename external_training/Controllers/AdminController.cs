@@ -32,6 +32,15 @@ namespace external_training.Controllers
             return Ok();
         }
 
+        [HttpPost("change_status")]
+        public async Task<StatusCodeResult> ChangeStatus(int applicationId, string status)
+        {
+            var isChanged = await _adminApplicationService.ChangeStatusAsync(applicationId, status);
+            if (isChanged)
+                return Ok();
+            return BadRequest();
+        }
+
         [HttpGet("archived_applications")]
         public async Task<ActionResult<IEnumerable<ShortTrainingApplicationResponse>>> GetArchivedApplications()
         {
