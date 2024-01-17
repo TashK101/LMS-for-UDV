@@ -35,8 +35,9 @@ namespace external_training.Repositories
         {
             var updateCount = await _context.TrainingApplications
                 .Where(a => a.TrainingApplicationId == applicationId)
-                .ExecuteUpdateAsync(
-                    s => s.SetProperty(a => a.Status, a => ApplicationStatus.NotApproved));
+                .ExecuteUpdateAsync(s => s
+                    .SetProperty(a => a.Status, a => ApplicationStatus.NotApproved)
+                    .SetProperty(a => a.IsArchived, a => true));
             if (updateCount > 0)
                 return true;
             return false;
