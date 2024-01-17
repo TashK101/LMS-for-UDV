@@ -4,7 +4,6 @@ import { Home } from "./components/Home";
 import {StartPage} from "./components/pages/start-page/start-page";
 import {SignInErrorPage} from "./components/pages/test-page/test-page";
 import {NotificationsPage} from "./components/pages/notifications-page/notifications-page";
-import {ApplicationDetails} from "./components/application-details/application-details";
 import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
 import {CurrentApplicationsPage} from "./components/pages/current-applications/current-applications-page";
 import LargeCalendar from "./components/calendars/large-calendar/large-calendar";
@@ -38,6 +37,10 @@ const AppRoutes = [
     {
         path: '/cur_applications',
         element: <CurrentApplicationsPage/>
+    },
+    {
+        path: '/application_details/:id',
+        element: <ApplicationDetailsPage/>
     },
     ...ApiAuthorzationRoutes
 ];
