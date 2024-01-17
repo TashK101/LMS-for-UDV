@@ -2,14 +2,15 @@ import {Zoom} from "react-awesome-reveal";
 import {LogoUDV} from "../../../icons/logo-with-udv";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-import {fetchNotificationsAction,} from "../../../store/api-actions/api-actions";
 import {ApplicationPaths} from '../../api-authorization/ApiAuthorizationConstants';
+//import {AuthorizeService} from '../../api-authorization/AuthorizeService';
 
 export function StartPage() : JSX.Element {
     const navigate = useNavigate();
     useEffect(() => {
             setTimeout(() => {
-                navigate(ApplicationPaths.LogOut)
+                //if (AuthorizeService.isAu)
+                navigate('/calendar')
             }, 2500)
     }, [])
     return (
