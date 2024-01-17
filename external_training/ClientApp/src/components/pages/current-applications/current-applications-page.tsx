@@ -4,16 +4,14 @@ import {PlusIcon} from "../../current-applications-utils/icons/plus-icon.tsx";
 import {ApplicationCard} from "../../current-applications-utils/application-card.tsx";
 import {ApplicationStatus} from "../../current-applications-utils/application-status.ts";
 import {ModeSwitchButton} from "../../current-applications-utils/mode-switch-button.tsx";
-import {
-    fetchStartConfigAction,
-    fetchUserTrainingApplicationsAction
-} from "../../../store/api-actions/api-actions.ts";
+import {fetchStartConfigAction, fetchUserTrainingApplicationsAction} from "../../../store/api-actions/api-actions.ts";
 import {Modal, ModalContext} from "../../common/Modal.tsx";
 import {CreateApplicationPage} from "../create-application/CreateApplicationPage.tsx";
 import {Header} from "../../header/header.tsx";
 import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {State} from "../../../types/state.tsx";
-import {getRole} from "../../../store/system-process/system-getters.tsx";
+import {getIsDataLoading, getRole} from "../../../store/system-process/system-getters.tsx";
+import {LoadingPage} from "../loading-page/loading-page";
 
 
 export const ApplicationsStatusTrans = {
@@ -72,35 +70,38 @@ export function CurrentApplicationsPage(): JSX.Element {
         applications.filter((appl) => appl.status !== ApplicationStatus.Approved);
 
     const {modal, open, close} = useContext(ModalContext)
+    const isDataLoading = useAppSelector(getIsDataLoading);
+    if (isDataLoading)
+        return (<LoadingPage/>)
+    else
+        return (
+            <div>
+                {modal &&
+                    <Modal onClose={close}>
+                        <CreateApplicationPage onSubmit={close}/>
+                    </Modal>}
 
-    return (
-        <div>
-            {modal &&
-                <Modal onClose={close}>
-                    <CreateApplicationPage onSubmit={close}/>
-                </Modal>}
+                <Header/>
+                <div className={"mx-[55px] mt-[40px] flex font-medium items-center justify-between"}>
+                    <ModeSwitchButton contentMode={historyMode}
+                                      setContentMode={setHistoryMode}
+                                      leftPartText={"Текущие заявки"}
+                                      rightPartText={"История"}/>
+                    <button
+                        className={newApplicationButtonStyle}
+                        onClick={open}>
+                        <PlusIcon className={"mr-4"}/>
+                        Новая заявка
+                    </button>
+                </div>
 
-            <Header/>
-            <div className={"mx-[55px] mt-[40px] flex font-medium items-center justify-between"}>
-                <ModeSwitchButton contentMode={historyMode}
-                                  setContentMode={setHistoryMode}
-                                  leftPartText={"Текущие заявки"}
-                                  rightPartText={"История"}/>
-                <button
-                    className={newApplicationButtonStyle}
-                    onClick={open}>
-                    <PlusIcon className={"mr-4"}/>
-                    Новая заявка
-                </button>
-            </div>
-
-            <div className={"flex justify-center mx-[125px] mt-[30px]"}>
-                <div className={"flex flex-wrap w-[1185px]"}>
-                    {filteredApplications.map((appl, i) => (
-                        <ApplicationCard key={i} application={appl}/>
-                    ))}
+                <div className={"flex justify-center mx-[125px] mt-[30px]"}>
+                    <div className={"flex flex-wrap w-[1185px]"}>
+                        {filteredApplications.map((appl, i) => (
+                            <ApplicationCard key={i} application={appl}/>
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
 }

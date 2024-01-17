@@ -10,6 +10,7 @@ import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
 import {CurrentApplicationsPage} from "./components/pages/current-applications/current-applications-page";
 import {CalendarPage} from "./components/pages/calendar-page/calendar-page";
 import {LoginMenu} from "./components/api-authorization/LoginMenu";
+import {LoadingPage} from "./components/pages/loading-page/loading-page";
 
 const AppRoutes = [
     {
@@ -56,6 +57,10 @@ const AppRoutes = [
     {
         path: '/logout',
         element: <LoginMenu/>
+    },
+    {
+        path: '/orange',
+        element: <LoadingPage/>
     },
     ...ApiAuthorzationRoutes
 ];
