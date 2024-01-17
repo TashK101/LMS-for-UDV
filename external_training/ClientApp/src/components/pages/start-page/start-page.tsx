@@ -3,12 +3,13 @@ import {LogoUDV} from "../../../icons/logo-with-udv";
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {fetchNotificationsAction,} from "../../../store/api-actions/api-actions";
+import {ApplicationPaths} from '../../api-authorization/ApiAuthorizationConstants';
 
 export function StartPage() : JSX.Element {
     const navigate = useNavigate();
     useEffect(() => {
             setTimeout(() => {
-                navigate('/calendar')
+                navigate(ApplicationPaths.LogOut)
             }, 2500)
     }, [])
     return (

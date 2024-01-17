@@ -24,7 +24,7 @@ export function Header () : JSX.Element {
     const userId = 1;
 
     return (
-        <div className="w-full fixed top-0 left-0">
+        <div className="w-full relative top-0 left-0">
             <div className="w-full h-[80px] inline-flex relative bg-white shadow">
                 <div className="w-1/2 px-[30px]">
                     <Logo/>
