@@ -16,6 +16,7 @@ namespace external_training.Repositories
         public async Task<IEnumerable<TrainingApplication>> GetPendingApplicationsAsync(string managerId)
         {
             return await _context.TrainingApplications
+                .Include(a => a.User)
                 .Include(a => a.Comments)
                 .Where(a => a.ManagerId == managerId && a.Status == ApplicationStatus.AwaitingManagerApproval)
                 .ToListAsync();
@@ -24,6 +25,7 @@ namespace external_training.Repositories
         public async Task<IEnumerable<TrainingApplication>> GetArchivedApplicationsAsync(string managerId)
         {
             return await _context.TrainingApplications
+                .Include(a => a.User)
                 .Include(a => a.Comments)
                 .Where(a => a.ManagerId == managerId && a.Status != ApplicationStatus.AwaitingManagerApproval)
                 .ToListAsync();

@@ -107,6 +107,7 @@ namespace external_training.Controllers
             var roles = await _userManager.GetRolesAsync(user!);
             var role = new RoleResponse
             {
+                UserId = id,
                 UserFullName = user.FullName,
                 RoleName = roles.FirstOrDefault()
             };

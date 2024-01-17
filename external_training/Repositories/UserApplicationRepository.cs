@@ -58,6 +58,7 @@ namespace external_training.Repositories
         public async Task<IEnumerable<TrainingApplication>> GetApplicationsAsync(string userId)
         {
             return await _context.TrainingApplications
+                .Include(a => a.User)
                 .Include(a => a.Comments)
                 .Where(a => a.UserId == userId && a.IsArchived == false)
                 .ToListAsync();
@@ -66,6 +67,7 @@ namespace external_training.Repositories
         public async Task<IEnumerable<TrainingApplication>> GetArchivedApplicationsAsync(string userId)
         {
             return await _context.TrainingApplications
+                .Include(a => a.User)
                 .Include(a => a.Comments)
                 .Where(a => a.UserId == userId && a.IsArchived)
                 .ToListAsync();

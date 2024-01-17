@@ -2,6 +2,7 @@
 {
     public class RoleResponse
     {
+        public string UserId { get; set; } = string.Empty;
         public string UserFullName { get; set; } = string.Empty;
         public string RoleName { get; set; } = string.Empty;
     }
