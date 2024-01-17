@@ -7,7 +7,6 @@ import {
     loadTest,
     loadTrainingApplications,
     loadStartConfig,
-    loadTest,
     redirectToRoute,
     setLoadingStatus
 } from "../system-process/system-process";
