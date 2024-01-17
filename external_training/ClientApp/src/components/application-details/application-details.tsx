@@ -1,24 +1,24 @@
 import {Comments} from "../comments/comments";
-import { useState } from "react"
-import { Form } from "./Form"
+import {useEffect, useState} from "react"
+import {afterManagerApprovalStatuses} from "./flagStatuses";
 import {ApplicationsStatusTrans} from "../pages/current-applications/current-applications-page";
 import {statusesIcons} from "../current-applications-utils/application-card";
 import {stringToDate} from "../../string-to-date";
 import './application-details.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import { getApplicationDetails} from "../../store/system-process/system-getters";
+import {getApplicationDetails} from "../../store/system-process/system-getters";
 import {fetchApplicationDetailsAction} from "../../store/api-actions/api-actions";
 import {TextValueBlock} from "./text-value-block";
-import {useEffect} from "react";
-import { CommentSendField} from "./comment-send-field";
+import {CommentSendField} from "./comment-send-field";
 import {Header} from "../header/header";
-import {ApplicationDetailsAvatar} from "../avatar/header-avatar";
-import {flash} from "react-awesome-reveal/dist/animations/attention_seekers";
+import {ModeSwitchButton} from "../current-applications-utils/mode-switch-button";
+import {IconNameCombo} from "./icon-name-combo";
 
-export type ApplicationDetailsProps={
+export type ApplicationDetailsProps = {
     id: number;
 }
-export function ApplicationDetails({id}:ApplicationDetailsProps): JSX.Element {
+
+export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
 
     const dispatch = useAppDispatch();
     useEffect(() => {
@@ -28,6 +28,7 @@ export function ApplicationDetails({id}:ApplicationDetailsProps): JSX.Element {
     const application = useAppSelector(getApplicationDetails);
     // @ts-ignore
     const status = ApplicationsStatusTrans[application?.status]
+    const [dataFlag, setDataFlag] = useState(() => false);
     return (
         <div>
             <Header/>
@@ -38,10 +39,18 @@ export function ApplicationDetails({id}:ApplicationDetailsProps): JSX.Element {
                     {statusesIcons[status]}
                     {status}
                 </div>
-                <p className='bold-text'>Подал:</p>
-                <div className='flex items-center gap-[10px]'>{application?.applicationUserName &&
-                <ApplicationDetailsAvatar userFullName={application?.applicationUserName}/>}
-                    {application?.applicationUserName}</div>
+                <div className='flex w-full gap-[50px]'>
+                    {application?.applicationUserName &&
+                        <IconNameCombo name={application?.applicationUserName} action='Подал'/>}
+                    {afterManagerApprovalStatuses.includes(status) ?
+                        application?.desiredManagerName &&
+                        <IconNameCombo name={application?.desiredManagerName} action='Одобрил'/>
+                        : null}
+                </div>
+
+                <ModeSwitchButton contentMode={dataFlag} setContentMode={setDataFlag} leftPartText={'Исходная заявка'}
+                                  rightPartText={'Утвержденные данные'}/>
+                { !dataFlag ?
                 <div className='pending-application-details'>
                     <TextValueBlock textValueProps={[
                         ['Количество участников', application?.plannedParticipantsCount],
@@ -63,6 +72,7 @@ export function ApplicationDetails({id}:ApplicationDetailsProps): JSX.Element {
                         ['Примечания', application?.applicationNotes]
                     ]}/>
                 </div>
+            : null }
                 <CommentSendField/>
             </div>
             <div className='top-bottom-20'>
