@@ -14,6 +14,8 @@ import {CommentSendField} from "./comment-send-field";
 import {Header} from "../header/header";
 import {ModeSwitchButton} from "../current-applications-utils/mode-switch-button";
 import {IconNameCombo} from "./icon-name-combo";
+import {Role} from "./comment-send-field";
+import {parseRoleFromString} from "./comment-send-field";
 
 export type ApplicationDetailsProps = {
     id: number;
@@ -31,6 +33,7 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
     const application = useAppSelector(getApplicationDetails);
     const course = useAppSelector(getCourseDetails);
     const role = useAppSelector(getRole);
+    const roleEnum = parseRoleFromString(role);
     const userId = useAppSelector(getId);
     // @ts-ignore
     const status = ApplicationsStatusTrans[application?.status]
@@ -95,8 +98,8 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
                             ['Отдел/команда', course?.team]
                         ]}/>
                     </div> }
-
-                <CommentSendField trainingApplicationId={id}/>
+                {application && role && ((role===Role.admin) || userId === application?.applicationUserId || userId === application.desiredManagerId) &&
+                <CommentSendField trainingApplicationId={id} applicationUserId={application?.applicationUserId} userId={userId} role={roleEnum}/>}
 
             </div>
             <div className='top-bottom-20'>

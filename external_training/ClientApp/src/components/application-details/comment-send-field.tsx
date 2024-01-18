@@ -1,17 +1,40 @@
 import './application-details.css'
-import React, {useId, useState} from 'react'
+import React, {useState} from 'react'
 import {SubmitButton2} from '../common/Button';
 import {
+    postAdminCommentAction,
+    postManagerCommentAction,
     postUserCommentAction
 } from '../../store/api-actions/api-actions'
 import {SentCommentType} from "../../types/comments";
 import {useAppDispatch} from "../../hooks";
 
+export enum Role {
+    admin = "Admin",
+    manager = "Manager",
+    user = "User",
+}
+export function parseRoleFromString(roleString: string): Role | undefined {
+    switch (roleString.toLowerCase()) {
+        case "admin":
+            return Role.admin;
+        case "manager":
+            return Role.manager;
+        case "user":
+            return Role.user;
+        default:
+            return undefined;
+    }
+}
 interface CreateCommentProps {
-    trainingApplicationId:number
+    trainingApplicationId:number,
+    role: Role | undefined,
+    userId: string,
+    applicationUserId: string,
+
 }
 
-export function CommentSendField({trainingApplicationId}: CreateCommentProps): JSX.Element {
+export function CommentSendField({trainingApplicationId, role, userId, applicationUserId}: CreateCommentProps): JSX.Element {
     const dispatch = useAppDispatch();
 
     const [comment, setComment] = useState("");
@@ -21,9 +44,20 @@ export function CommentSendField({trainingApplicationId}: CreateCommentProps): J
             trainingApplicationId: trainingApplicationId,
             comment: comment
         }
-        dispatch(postUserCommentAction(newComment));
+        if (userId !== applicationUserId)
+            switch (role) {
+                case Role.admin:
+                    dispatch(postAdminCommentAction(newComment));
+                    break;
+                case Role.manager:
+                    dispatch(postManagerCommentAction(newComment));
+                    break;
+                case Role.user:
+                    dispatch(postUserCommentAction(newComment));
+                    break;
+            }
+        else dispatch(postUserCommentAction(newComment));
         window.location.reload();
-
     }
 
     return (

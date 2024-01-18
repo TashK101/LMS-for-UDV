@@ -60,7 +60,7 @@ export const fetchApplicationDetailsAction = createAsyncThunk<void, number, {
                 {
                     params: {trainingApplicationId: id}
                 }).catch(err => {
-                window.location.href=addErrorToLink(window.location.href)
+                    if(err.response.status === 404) window.location.href=addErrorToLink(window.location.href)
                 console.log(err.response.data);
             });
             dispatch(loadApplicationDetails(data));
@@ -285,7 +285,7 @@ export const postAdminCommentAction = createAsyncThunk<void, SentCommentType, {
     async (_arg: SentCommentType, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.post<SentCommentType>('/api/admin/comment', _arg);
+            const {data} = await api.post<SentCommentType>('/api/Admin/comment', _arg);
         } finally {
             dispatch(setLoadingStatus(false));
         }
