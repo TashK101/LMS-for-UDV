@@ -31,6 +31,27 @@ export function TextField({ label = "", placeholder = "", required = true, value
     )
 }
 
+export function NumberField({ label = "", placeholder = "", required = true, value, onChange }: InputProps) {
+    return (
+        <Form label={label}>
+            <input
+                type="number"
+                className="font-golos font-normal 
+                text-base placeholder:text-color3 
+                w-full max-w-sm 
+                outline-0 border-[1px] border-color2 rounded 
+                h-[56px] p-[16px]
+                focus:border-color6
+                "
+                placeholder={placeholder}
+                required={required}
+                value={value}
+                onChange={(event) => onChange(event.target.value)}
+            />
+        </Form>
+    )
+}
+
 export function TextArea({ label = "", placeholder = "", required = true, value, onChange }: InputProps) {
     return (
         <Form label={label}>
@@ -150,3 +171,4 @@ export function CounterInput({ label = "", required = true, value, onChange }: C
         </Form>
     )
 }
+
