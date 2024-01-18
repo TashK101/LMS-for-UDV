@@ -1,6 +1,6 @@
 import {store} from "../store/store";
 import {Notifications} from "./notifications";
-import {Application} from "./application";
+import {Application, Course} from "./application";
 import {EventType} from "./event.tsx";
 import {ShortApplicationInfoType} from "./short-application-info.tsx";
 
@@ -14,6 +14,7 @@ export type SystemProcess = {
     notifications: Notifications;
     events: EventType[];
     trainingApplications: ShortApplicationInfoType[];
+    course: Course | undefined;
 
 };
 

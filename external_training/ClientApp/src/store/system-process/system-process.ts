@@ -1,7 +1,7 @@
 import {createSlice, createAction, PayloadAction} from '@reduxjs/toolkit';
 import {SystemProcess} from '../../types/state';
 import {Notifications} from "../../types/notifications";
-import {Application} from "../../types/application";
+import {Application, Course} from "../../types/application";
 import {EventType} from "../../types/event.tsx";
 import {StartConfig} from "../../types/startConfig";
 import {ShortApplicationInfoType} from "../../types/short-application-info.tsx";
@@ -15,6 +15,7 @@ const initialState: SystemProcess = {
     userFullName: '',
     events: [],
     trainingApplications: [],
+    course: undefined,
 };
 
 export const systemProcess = createSlice({
@@ -37,6 +38,9 @@ export const systemProcess = createSlice({
         loadTest : (state, action : PayloadAction<Application>) => {
             state.application = action.payload;
         },
+        loadCourseDetails : (state, action : PayloadAction<Course>) => {
+            state.course = action.payload;
+        },
         loadApplicationDetails : (state, action : PayloadAction<Application>) => {
             state.application = action.payload;
         },
@@ -49,6 +53,6 @@ export const systemProcess = createSlice({
     }
 });
 export const redirectToRoute = createAction<string>('app/redirectToRoute');
-export const {setLoadingStatus, setError, loadNotifications, loadTest, loadEvents, loadStartConfig, loadTrainingApplications, loadApplicationDetails} = systemProcess.actions;
+export const {setLoadingStatus, setError, loadNotifications, loadTest, loadEvents, loadStartConfig, loadTrainingApplications, loadApplicationDetails, loadCourseDetails} = systemProcess.actions;
 //export const {setLoadingStatus, setError, loadNotifications, loadTest, loadEvents, loadStartConfig, loadApplicationDetails, loadTrainingApplications} = systemProcess.actions;
 

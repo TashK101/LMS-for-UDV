@@ -4,6 +4,7 @@ import { H400, H500, H600 } from '../../common/Text';
 import { ProfileImageLarge } from '../../common/Image';
 import { PasswordField, TextField } from '../../common/InputField';
 import { RadioGroup } from '../../common/Radio';
+import {Header} from "../../header/header";
 
 
 export function SettingsPage() {
@@ -20,6 +21,8 @@ export function SettingsPage() {
   const [gender, setGender] = useState('')
 
   return (
+      <>
+    <Header/>
     <div className="flex flex-col mx-auto max-w-2xl gap-[50px] py-16">
       <Card>
         <div className='flex items-center gap-[40px]'>
@@ -62,5 +65,5 @@ export function SettingsPage() {
         <PasswordField label='Повторите пароль' value={repeatPassword} onChange={setRepeatPassword} />
       </CardWithColumn>
     </div>
-  );
+      </>);
 }

@@ -6,8 +6,9 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {fetchStartConfigAction} from "../../store/api-actions/api-actions";
-import {getfullName, getRole} from "../../store/system-process/system-getters";
+import {getfullName, getIsDataLoading, getRole} from "../../store/system-process/system-getters";
 import DropDownMenu from "../drop-down-menu/drop-down-menu";
+import {LoadingPage} from "../pages/loading-page/loading-page";
 
 export function Header () : JSX.Element {
     const [isBellHover, setIsBellHover] = useState<boolean>(false);
@@ -22,7 +23,10 @@ export function Header () : JSX.Element {
     const role = useAppSelector(getRole);
     const fullName = useAppSelector(getfullName);
     const userId = 1;
-
+    let loadingFlag = useAppSelector(getIsDataLoading);
+    if (loadingFlag && (!role && !fullName))
+        return <LoadingPage/>
+    else
     return (
         <div className="w-full relative top-0 left-0">
             <div className="w-full h-[80px] inline-flex relative bg-white shadow">

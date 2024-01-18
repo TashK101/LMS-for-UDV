@@ -6,8 +6,9 @@ import {statusesIcons} from "../current-applications-utils/application-card";
 import {stringToDate} from "../../string-to-date";
 import './application-details.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {getApplicationDetails} from "../../store/system-process/system-getters";
+import {getApplicationDetails, getCourseDetails} from "../../store/system-process/system-getters";
 import {fetchApplicationDetailsAction} from "../../store/api-actions/api-actions";
+import {fetchCourseDetailsAction} from "../../store/api-actions/api-actions";
 import {TextValueBlock} from "./text-value-block";
 import {CommentSendField} from "./comment-send-field";
 import {Header} from "../header/header";
@@ -23,9 +24,11 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchApplicationDetailsAction(id));
+        dispatch(fetchCourseDetailsAction(id));
     }, []);
 
     const application = useAppSelector(getApplicationDetails);
+    const course = useAppSelector(getCourseDetails);
     // @ts-ignore
     const status = ApplicationsStatusTrans[application?.status]
     const [dataFlag, setDataFlag] = useState(() => false);
@@ -60,7 +63,8 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
                         ['Согласующий руководитель', application?.desiredManagerName]
                     ]}/>
                     <TextValueBlock textValueProps={[
-                        ['Формат', `${application?.isTrainingOnline ? 'Онлайн' : 'Оффлайн'}, ${application?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании'}`],
+                        ['Формат', `${application ? (application?.isTrainingOnline ? 'Онлайн,' : 'Оффлайн,') : ''}
+                        ${application? (application?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании') : ''}`],
                         ['Желаемые даты', `${stringToDate(application?.desiredBegin)} - ${stringToDate(application?.desiredEnd)}`],
                         ['Похожие курсы', application?.similarPrograms],
                         ['Стоимость на одного', `${application?.estimatedCostPerParticipant} рублей`]
@@ -72,7 +76,22 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
                         ['Примечания', application?.applicationNotes]
                     ]}/>
                 </div>
-            : null }
+            : <div className='pending-application-details'>
+                        <TextValueBlock textValueProps={[
+                            ['Учебный центр', course?.educationalCenter],
+                            ['Название курса', course?.courseName],
+                            ['Формат', `${course ? (course?.isTrainingOnline ? 'Онлайн,' : 'Оффлайн,') : ''} 
+                            ${course? (course?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании') : ''}`],
+                            ['Даты', `${stringToDate(course?.begin)} - ${stringToDate(course?.end)}`],
+                            ['Стоимость на одного', course?.costPerParticipant]
+                        ]}/>
+                        <TextValueBlock textValueProps={[
+                            ['Количество участников', course?.participantsCount],
+                            ['ФИО участников', course?.participantsNames],
+                            ['Департамент', course?.department],
+                            ['Отдел/команда', course?.team]
+                        ]}/>
+                    </div> }
                 <CommentSendField/>
             </div>
             <div className='top-bottom-20'>

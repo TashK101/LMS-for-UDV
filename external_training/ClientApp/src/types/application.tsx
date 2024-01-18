@@ -24,3 +24,24 @@ export type Application = {
     applicationNotes: string;
     comments: CommentsType;
 }
+
+export type Course = {
+    trainingApplicationId: number,
+    trainingTopic: string,
+    status: string,
+    applicationUserId: string,
+    desiredManagerId: string,
+    desiredManagerName: string,
+    educationalCenter: string,
+    courseName: string,
+    participantsCount: number,
+    participantsNames: string,
+    department: string,
+    team: string,
+    isTrainingOnline: boolean,
+    isCorporateTraining: boolean,
+    begin: string,
+    end: string,
+    costPerParticipant: number,
+    comments: CommentsType;
+}

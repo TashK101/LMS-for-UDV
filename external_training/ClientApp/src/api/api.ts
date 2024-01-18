@@ -3,6 +3,7 @@ import {store} from '../store/store';
 import {setError} from '../store/system-process/system-process';
 import {StatusCodes} from 'http-status-codes';
 import authService from '../components/api-authorization/AuthorizeService'
+import {redirect} from "react-router-dom";
 
 export const BACKEND_URL = '';
 export const REQUEST_TIMEOUT = 5000;
@@ -20,7 +21,6 @@ export const createAPI = (): AxiosInstance => {
     const api = axios.create({
         baseURL: BACKEND_URL,
         timeout: REQUEST_TIMEOUT,
-
     });
 
     let isRefreshing = false;
@@ -34,6 +34,7 @@ export const createAPI = (): AxiosInstance => {
                 token = await authService.getAccessToken();
             } catch (error) {
                 console.error('Error getting access token:', error);
+                redirect('/error')
             }
 
             if (token && config.headers) {
@@ -42,7 +43,10 @@ export const createAPI = (): AxiosInstance => {
 
             return config;
         },
-    );
+    error => {
+        console.error('Error getting to page', error);
+        redirect('/error')
+    });
 
     api.interceptors.response.use(
         (response) => response,

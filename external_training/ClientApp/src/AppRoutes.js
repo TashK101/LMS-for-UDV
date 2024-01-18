@@ -10,6 +10,7 @@ import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
 import {CurrentApplicationsPage} from "./components/pages/current-applications/current-applications-page";
 import {CalendarPage} from "./components/pages/calendar-page/calendar-page";
 import {LoginMenu} from "./components/api-authorization/LoginMenu";
+import {ErrorPage} from "./components/pages/error-page/error-page";
 
 const AppRoutes = [
     {
@@ -18,6 +19,7 @@ const AppRoutes = [
     },
     {
         path: '/notifications',
+        requireAuth: true,
         element: <NotificationsPage />
     },
     {
@@ -27,35 +29,46 @@ const AppRoutes = [
     },
     {
         path: '/test',
+        requireAuth: true,
         element: <SignInErrorPage/>
     },
     {
         path: '/catalogapplications',
+        requireAuth: true,
         element: <FetchData/>
     },
     {
         path: '/calendar',
+        requireAuth: true,
         element: <CalendarPage/>
     },
     {
         path: '/cur_applications',
+        requireAuth: true,
         element: <CurrentApplicationsPage/>
     },
     {
         path: '/application_details/:id',
+        requireAuth: true,
         element: <ApplicationDetailsPage/>
     },
     {
         path: '/settings',
+        requireAuth: true,
         element: <SettingsPage/>
     },
     {
         path: '/details',
+        requireAuth: true,
         element: <ApplicationPage/>
     },
     {
         path: '/logout',
         element: <LoginMenu/>
+    },
+    {
+        path: '/error',
+        element: <ErrorPage/>
     },
     ...ApiAuthorzationRoutes
 ];

@@ -2,21 +2,22 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {AppDispatch, State} from "../../types/state";
 import {AxiosInstance} from "axios";
 import {
+    loadApplicationDetails, loadCourseDetails,
     loadEvents,
     loadNotifications,
     loadStartConfig,
-    loadTest,
     loadTrainingApplications,
-    redirectToRoute,
     setLoadingStatus
 } from "../system-process/system-process";
 import {Notifications} from "../../types/notifications";
-import {Application} from "../../types/application";
+import {Application, Course} from "../../types/application";
 import {StartConfig} from "../../types/startConfig";
 
 import {EventsType} from "../../types/event.tsx";
 import {ShortApplicationInfoType} from "../../types/short-application-info.tsx";
 import { INewApplication } from "../../types/new-application.tsx";
+import {redirect} from "react-router-dom";
+
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
@@ -48,14 +49,38 @@ export const fetchApplicationDetailsAction = createAsyncThunk<void, number, {
             const {data} = await api.get<Application>(`api/user/training_application`,
                 {
                     params: { trainingApplicationId: id }
-                } );
-            dispatch(loadTest(data));
-        } finally {
+                }).catch(err => {
+                console.log(err.response.data);
+                redirect('/error');
+            });
+            dispatch(loadApplicationDetails(data));
+        }
+
+        finally {
             dispatch(setLoadingStatus(false));
         }
     },
 );
 
+export const fetchCourseDetailsAction = createAsyncThunk<void, number, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/fetchCourseDetails',
+    async (id, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.get<Course>(`api/user/course`,
+                {
+                    params: { trainingApplicationId: id }
+                } );
+            dispatch(loadCourseDetails(data));
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
 export const fetchEventsAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
     state: State;
