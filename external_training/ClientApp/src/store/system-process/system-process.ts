@@ -83,7 +83,6 @@ export const {
     loadEvents,
     loadStartConfig,
     loadCourseDetails,
-    loadTrainingApplications,
     loadUserTrainingApplications,
     loadUserArchivedApplications,
     loadApplicationDetails,
