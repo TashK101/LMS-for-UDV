@@ -1,5 +1,5 @@
 import './application-details.css'
-import React, {useId, useState} from 'react'
+import React, {useState} from 'react'
 import {SubmitButton2} from '../common/Button';
 import {
     postAdminCommentAction,
@@ -14,11 +14,24 @@ export enum Role {
     manager = "Manager",
     user = "User",
 }
+export function parseRoleFromString(roleString: string): Role | undefined {
+    switch (roleString.toLowerCase()) {
+        case "admin":
+            return Role.admin;
+        case "manager":
+            return Role.manager;
+        case "user":
+            return Role.user;
+        default:
+            return undefined;
+    }
+}
 interface CreateCommentProps {
     trainingApplicationId:number,
-    role: Role,
+    role: Role | undefined,
     userId: string,
-    applicationUserId: string
+    applicationUserId: string,
+
 }
 
 export function CommentSendField({trainingApplicationId, role, userId, applicationUserId}: CreateCommentProps): JSX.Element {
@@ -32,20 +45,19 @@ export function CommentSendField({trainingApplicationId, role, userId, applicati
             comment: comment
         }
         if (userId !== applicationUserId)
-        switch (role) {
-            case Role.admin:
-                dispatch(postAdminCommentAction(newComment));
-                break;
-            case Role.manager:
-                dispatch(postManagerCommentAction(newComment));
-                break;
-            case Role.user:
-                dispatch(postUserCommentAction(newComment));
-                break;
-        }
+            switch (role) {
+                case Role.admin:
+                    dispatch(postAdminCommentAction(newComment));
+                    break;
+                case Role.manager:
+                    dispatch(postManagerCommentAction(newComment));
+                    break;
+                case Role.user:
+                    dispatch(postUserCommentAction(newComment));
+                    break;
+            }
         else dispatch(postUserCommentAction(newComment));
         window.location.reload();
-
     }
 
     return (

@@ -283,7 +283,7 @@ export const postAdminCommentAction = createAsyncThunk<void, SentCommentType, {
     async (_arg: SentCommentType, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.post<SentCommentType>('/api/admin/comment', _arg);
+            const {data} = await api.post<SentCommentType>('/api/Admin/comment', _arg);
         } finally {
             dispatch(setLoadingStatus(false));
         }
