@@ -17,6 +17,11 @@ const initialState: SystemProcess = {
     trainingApplications: [],
     course: undefined,
     userTrainingApplications: [],
+    userArchivedApplications: [],
+    managerPendingApplications: [],
+    managerArchivedApplications: [],
+    adminPendingApplications: [],
+    adminArchivedApplications: [],
 };
 
 export const systemProcess = createSlice({

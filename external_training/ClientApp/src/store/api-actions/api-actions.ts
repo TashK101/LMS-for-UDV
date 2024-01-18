@@ -6,12 +6,9 @@ import {
     loadAdminPendingApplications,
     loadEvents, loadManagerArchivedApplications, loadManagerPendingApplications,
     loadApplicationDetails, loadCourseDetails,
-    loadEvents,
     loadNotifications,
     loadStartConfig,
-    loadTest,
-    loadTrainingApplications, loadUserArchivedApplications, loadUserTrainingApplications,
-    redirectToRoute,
+    loadUserArchivedApplications, loadUserTrainingApplications,
     setLoadingStatus
 } from "../system-process/system-process";
 import {Notifications} from "../../types/notifications";
