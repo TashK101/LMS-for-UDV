@@ -13,6 +13,7 @@ export type SystemProcess = {
     role: string;
     userId: string;
     userFullName: string;
+    userEmail: string;
     notifications: Notifications;
     events: EventType[];
     trainingApplications: ShortApplicationInfoType[];
