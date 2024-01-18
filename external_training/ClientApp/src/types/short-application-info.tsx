@@ -12,5 +12,5 @@ export type ShortAdminPendingApplicationInfoType = {
     createdAt: string,
     status: string,
     commentsCount: number,
-    createdName: string,
+    userFullName: string,
 }
