@@ -41,6 +41,13 @@ namespace external_training.Controllers
             return BadRequest();
         }
 
+        [HttpPost("comment")]
+        public async Task<ActionResult> CreateComment(CommentCreation commentCreation)
+        {
+            await _adminApplicationService.CreateCommentAsync(commentCreation, User!.Identity!.Name!);
+            return Ok();
+        }
+
         [HttpGet("archived_applications")]
         public async Task<ActionResult<IEnumerable<ShortTrainingApplicationResponse>>> GetArchivedApplications()
         {

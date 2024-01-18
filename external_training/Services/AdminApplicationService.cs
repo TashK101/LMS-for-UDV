@@ -50,12 +50,13 @@ namespace external_training.Services
         {
             var comment = Mapper.mapToComment(commentCreation, userId);
             await _userApplicationRepository.AddCommentAsync(comment);
+            var aplication = await _userApplicationRepository.GetAsync(comment.TrainingApplicationId);
             var userNotification = new Notification
             {
                 Text = "Новый комментарий",
                 CreatedAt = DateTime.UtcNow,
                 TrainingApplicationId = comment.TrainingApplicationId,
-                UserId = comment.UserId
+                UserId = aplication.UserId
             };
             await _notificationRepository.AddNotificationAsync(userNotification);
         }
