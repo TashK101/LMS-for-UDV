@@ -1,4 +1,6 @@
 import DropDownMenuElement from './drop-down-menu-element';
+import authService from '../api-authorization/AuthorizeService';
+import {ApplicationPaths} from '../api-authorization/ApiAuthorizationConstants';
 
 const menuElementsLabels = [
     {
@@ -15,7 +17,7 @@ const menuElementsLabels = [
     },
     {
         label: 'Выход',
-        path: '/'
+        path: '/logout',
     }
 ]
 

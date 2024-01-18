@@ -33,7 +33,8 @@ export class Logout extends Component {
         this.processLogoutCallback();
         break;
       case LogoutActions.LoggedOut:
-        this.setState({ isReady: true, message: "You successfully logged out!" });
+        this.setState({ isReady: true, message: "Успешно вышли из аккаунта" });
+
         break;
       default:
         throw new Error(`Invalid action '${action}'`);

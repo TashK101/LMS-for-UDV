@@ -10,6 +10,8 @@ import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
 import {CurrentApplicationsPage} from "./components/pages/current-applications/current-applications-page";
 import {CalendarPage} from "./components/pages/calendar-page/calendar-page";
 import {InprogressApplicationPage} from "./components/pages/inprogress-applications/inprogress-application-page";
+import {LoginMenu} from "./components/api-authorization/LoginMenu";
+import {LoadingPage} from "./components/pages/loading-page/loading-page";
 
 const AppRoutes = [
     {
@@ -56,6 +58,14 @@ const AppRoutes = [
     {
         path: '/inprogress_applications',
         element: <InprogressApplicationPage/>
+    },
+    {
+        path: '/logout',
+        element: <LoginMenu/>
+    },
+    {
+        path: '/orange',
+        element: <LoadingPage/>
     },
     ...ApiAuthorzationRoutes
 ];

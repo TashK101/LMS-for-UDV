@@ -3,6 +3,7 @@
     public class ShortTrainingApplicationResponse
     {
         public int TrainingApplicationId { get; set; }
+        public string UserFullName { get; set; } = string.Empty;
         public string TrainingTopic { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
         public string Status { get; set; } = string.Empty;

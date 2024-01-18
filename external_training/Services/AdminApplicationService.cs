@@ -65,5 +65,19 @@ namespace external_training.Services
             var comments = await _userApplicationRepository.GetComments(applicationId);
             return comments.Select(Mapper.MapToCommentDto).ToList();
         }
+
+        public async Task<bool> ChangeStatusAsync(int applicationId, string status)
+        {
+            if (status == "CourseSelection"
+                || status == "AwaitingContract"
+                || status == "AwaitingPayment"
+                || status == "AwaitingContractAndPayment"
+                || status == "Approved")
+            {
+                var enumStatus = (ApplicationStatus)Enum.Parse(typeof(ApplicationStatus), status);
+                return await _adminApplicationRepository.ChangeStatusAsync(applicationId, enumStatus);
+            }
+            return false;
+        }
     }
 }
