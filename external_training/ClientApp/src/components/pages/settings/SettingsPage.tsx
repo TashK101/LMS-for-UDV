@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardWithColumn } from "../../common/Card";
 import { H400, H500, H600 } from '../../common/Text';
 import { ProfileImageLarge } from '../../common/Image';
@@ -6,11 +6,24 @@ import { PasswordField, TextField } from '../../common/InputField';
 import { RadioGroup } from '../../common/Radio';
 import {Header} from "../../header/header";
 import { SubmitButton } from '../../common/Button';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { fetchStartConfigAction } from '../../../store/api-actions/api-actions';
+import { State } from '../../../types/state';
 
+const getUserFullName = (state: State) => state.userFullName;
+const getUserEmail = (state: State) => state.userEmail;
 
 export function SettingsPage() {
-  const [surname, setSurname] = useState('')
-  const [name, setName] = useState('')
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchStartConfigAction());
+  }, []);
+
+  const userFullName = useAppSelector(getUserFullName);
+  const userEmail = useAppSelector(getUserEmail);
+  
+  const [surname, setSurname] = useState(userFullName.split(" ")[0])
+  const [name, setName] = useState(userFullName.split(" ")[1])
   const [patronymic, setPatronymic] = useState('')
   const [department, setDepartment] = useState('')
   const [team, setTeam] = useState('')
@@ -27,10 +40,10 @@ export function SettingsPage() {
     <form className="flex flex-col mx-auto max-w-2xl gap-[50px] py-16">
       <Card>
         <div className='flex items-center gap-[40px]'>
-          <ProfileImageLarge name='Иван' surname='Иванович' />
+          <ProfileImageLarge name={name} surname={surname} />
           <div className='flex flex-col gap-[20px]'>
-            <H600 text='Иван Иванович Иванов' />
-            <H400 text='iivanov@ussc.run' />
+            <H600 text={userFullName} />
+            <H400 text={userEmail}/>
           </div>
         </div>
       </Card>
