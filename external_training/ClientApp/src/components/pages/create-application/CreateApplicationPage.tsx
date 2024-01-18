@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CardIndex, CardWithColumn } from "../../common/Card";
-import { CounterInput, TextArea, TextField } from '../../common/InputField';
+import { CounterInput, NumberField, TextArea, TextField } from '../../common/InputField';
 import { RadioGroup } from '../../common/Radio';
 import { SubmitButton } from '../../common/Button';
 import { Form } from "../../common/Form";
@@ -8,6 +8,12 @@ import SmallCalendarDatePicker from "../../calendars/small-calendar/small-calend
 import { INewApplication } from "../../../types/new-application";
 import { useAppDispatch } from "../../../hooks";
 import { postNewApplicationAction } from "../../../store/api-actions/api-actions";
+import { Manager, DropDownMenu } from "../../common/DropDownMenu";
+
+const managers: Manager[] = [
+  { managerId: "1", fullName: "Николай Николаевич Николаев" },
+  { managerId: "2", fullName: "goodbye" }
+]
 
 interface CreateApplicationPageProps {
   onSubmit: () => void
@@ -20,9 +26,7 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
   const [topic, setTopic] = useState('')
   const [numberOfPeople, setNumberOfPeople] = useState(0)
   const [name, setName] = useState('')
-  const [department, setDepartment] = useState('')
-  const [team, setTeam] = useState('')
-  const [manager, setManager] = useState('')
+  const [manager, setManager] = useState<Manager | undefined>(undefined)
   const [price, setPrice] = useState('')
   const [sameCourses, setSameCourses] = useState('')
   const [motivation, setMotivation] = useState('')
@@ -42,7 +46,7 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
       trainingTopic: topic,
       plannedParticipantsCount: numberOfPeople,
       plannedParticipantsNames: name,
-      desiredManagerId: manager,
+      desiredManagerId: manager?.managerId ?? "",
       isTrainingOnline: format === '1',
       isCorporateTraining: classmates === '1',
       desiredBegin: firstSelectedDate?.toLocaleDateString() ?? "",
@@ -72,9 +76,13 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
         <CardIndex index={2} count={count} />
         <CounterInput label="Количество участников" value={numberOfPeople} onChange={setNumberOfPeople} />
         <TextField label="ФИО участников" value={name} onChange={setName} />
-        <TextField label="Департамент" value={department} onChange={setDepartment} />
-        <TextField label="Отдел/команда" value={team} onChange={setTeam} />
-        <TextField label="Согласующий руководитель" value={manager} onChange={setManager} />
+        <Form label="Согласующий руководитель">
+          <DropDownMenu
+            managers={managers}
+            selectedManager={manager}
+            onClick={value => setManager(managers.find(i => i.managerId === value))}
+          />
+        </Form>
       </CardWithColumn>
 
       <CardWithColumn>
@@ -107,7 +115,7 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
           />
         </Form>}
 
-        <TextField label="Стоимость на одного" value={price} onChange={setPrice} />
+        <NumberField label="Стоимость на одного" value={price} onChange={setPrice} />
         <TextField label="Похожие курсы (если есть)" required={false} value={sameCourses} onChange={setSameCourses} />
       </CardWithColumn>
 
