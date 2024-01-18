@@ -36,7 +36,7 @@ export function Header () : JSX.Element {
                 <div className="w-1/2 px-[50px] py-[15px]">
                     <div className="flex justify-end items-center gap-[22px]">
                         <button onMouseEnter={() => setIsBellHover(true)} onMouseLeave={() => setIsBellHover(false)} onClick={() => navigate('/notifications', {state: userId})}><Bell isHover={isBellHover}/></button>
-                        {role !== 'User' && <button onMouseEnter={() => setIsLetterHover(true)} onMouseLeave={() => setIsLetterHover(false)} onClick={() => navigate('/catalogapplications')}><Letter isHover={isLetterHover}/></button>}
+                        {role !== 'User' && <button onMouseEnter={() => setIsLetterHover(true)} onMouseLeave={() => setIsLetterHover(false)} onClick={() => navigate('/inprogress_applications')}><Letter isHover={isLetterHover}/></button>}
                         <button onClick={() => setIsMenuVisible(!isMenuVisible)}><HeaderAvatar userFullName={fullName}/></button>
                     </div>
                 </div>
