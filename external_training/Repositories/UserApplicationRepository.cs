@@ -45,6 +45,7 @@ namespace external_training.Repositories
                 .Include(a => a.Department)
                 .Include(a => a.Team)
                 .Include(a => a.Comments)
+                .ThenInclude(c => c.User)
                 .Include(a => a.SelectedCourse)
                 .FirstOrDefaultAsync(a => a.TrainingApplicationId == applicationId);
         }
