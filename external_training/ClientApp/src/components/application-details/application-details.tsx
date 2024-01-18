@@ -16,6 +16,7 @@ import {ModeSwitchButton} from "../current-applications-utils/mode-switch-button
 import {IconNameCombo} from "./icon-name-combo";
 import {Role} from "./comment-send-field";
 import {parseRoleFromString} from "./comment-send-field";
+import {AcceptDeclineButton} from "./accept-decline-buttons";
 
 export type ApplicationDetailsProps = {
     id: number;
@@ -43,6 +44,9 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
             <Header/>
             <div className='application-details left-5'>
                 <h2 className='topic-text'>{application?.trainingTopic}</h2>
+                { (role===Role.manager) && (application?.desiredManagerId === userId) && (status==='Ждёт согласования руководителя') &&
+                    <AcceptDeclineButton trainingApplicationId={application.trainingApplicationId}/>
+                }
                 <p className='bold-text'>Статус:</p>
                 <div className='flex border-2 rounded-xl items-center w-fit pr-4'>
                     {statusesIcons[status]}

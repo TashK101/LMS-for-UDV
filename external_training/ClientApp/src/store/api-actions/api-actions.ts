@@ -28,6 +28,7 @@ import {SentCommentType} from "../../types/comments";
 import {useNavigate} from "react-router-dom";
 import {getErrorPath} from "ajv/dist/compile/util";
 import { Manager } from "../../types/manager.tsx";
+import {AcceptDeclineProps} from "../../components/application-details/accept-decline-buttons";
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
@@ -286,6 +287,38 @@ export const postAdminCommentAction = createAsyncThunk<void, SentCommentType, {
         try {
             dispatch(setLoadingStatus(true));
             const {data} = await api.post<SentCommentType>('/api/Admin/comment', _arg);
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const acceptAction = createAsyncThunk<void, AcceptDeclineProps, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/accept',
+    async (_arg: AcceptDeclineProps, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.post<AcceptDeclineProps>(`/api/manager/accept_application?TrainingApplicationId=${_arg.TrainingApplicationId}`)
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const declineAction = createAsyncThunk<void, AcceptDeclineProps, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/decline',
+    async (_arg: AcceptDeclineProps, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.post<AcceptDeclineProps>(`/api/manager/decline_application?TrainingApplicationId=${_arg.TrainingApplicationId}`)
         } finally {
             dispatch(setLoadingStatus(false));
         }

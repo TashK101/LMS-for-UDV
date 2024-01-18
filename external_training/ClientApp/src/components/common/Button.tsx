@@ -19,3 +19,11 @@ export function SubmitButton2({ text }: SubmitButtonProps) {
         </button>
     )
 }
+
+export function SubmitButton3({ text }: SubmitButtonProps) {
+    return (
+        <button type="submit" className="w-[153px] h-[54px] rounded-[100px] bg-color5 hover:bg-color6">
+            <H400 text={text} fontSize={20} />
+        </button>
+    )
+}
