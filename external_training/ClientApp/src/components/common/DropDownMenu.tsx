@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Manager } from "../../types/manager";
 
 interface DropDownMenuProps {
     managers: Manager[],
@@ -37,11 +38,6 @@ export function DropDownMenu({ managers, selectedManager, onClick }: DropDownMen
         </div>
     );
 };
-
-export interface Manager {
-    managerId: string,
-    fullName: string
-}
 
 interface DropDownElementProps {
     manager: Manager,

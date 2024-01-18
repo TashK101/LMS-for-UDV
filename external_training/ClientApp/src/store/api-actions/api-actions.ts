@@ -3,6 +3,7 @@ import {AppDispatch, State} from "../../types/state";
 import {AxiosInstance} from "axios";
 import {
     loadEvents,
+    loadManagers,
     loadNotifications,
     loadTest, loadTrainingApplications,
     redirectToRoute,
@@ -12,6 +13,7 @@ import {Application} from "../../types/application";
 import {EventsType} from "../../types/event.tsx";
 import {TrainingApplicationType} from "../../types/training-application.tsx";
 import { INewApplication } from "../../types/new-application.tsx";
+import { Manager } from "../../types/manager.tsx";
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
@@ -75,6 +77,23 @@ export const postNewApplicationAction = createAsyncThunk<void, INewApplication, 
         try {
             dispatch(setLoadingStatus(true));
             const { data } = await api.post<INewApplication>('/api/user/training_application', _arg);
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const fetchManagersAction = createAsyncThunk<void, undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/fetchManagers',
+    async (_arg, { dispatch, extra: api }) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const { data } = await api.get<Manager[]>('/api/user/managers');
+            dispatch(loadManagers(data))
         } finally {
             dispatch(setLoadingStatus(false));
         }

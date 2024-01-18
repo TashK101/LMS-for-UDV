@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CardIndex, CardWithColumn } from "../../common/Card";
 import { CounterInput, NumberField, TextArea, TextField } from '../../common/InputField';
 import { RadioGroup } from '../../common/Radio';
@@ -6,14 +6,18 @@ import { SubmitButton } from '../../common/Button';
 import { Form } from "../../common/Form";
 import SmallCalendarDatePicker from "../../calendars/small-calendar/small-calendar-datepicker";
 import { INewApplication } from "../../../types/new-application";
-import { useAppDispatch } from "../../../hooks";
-import { postNewApplicationAction } from "../../../store/api-actions/api-actions";
-import { Manager, DropDownMenu } from "../../common/DropDownMenu";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { fetchManagersAction, postNewApplicationAction } from "../../../store/api-actions/api-actions";
+import { DropDownMenu } from "../../common/DropDownMenu";
+import { Manager } from "../../../types/manager";
+import { State } from "../../../types/state";
 
-const managers: Manager[] = [
-  { managerId: "1", fullName: "Николай Николаевич Николаев" },
-  { managerId: "2", fullName: "goodbye" }
-]
+// const managers: Manager[] = [
+//   { managerId: "1", fullName: "Николай Николаевич" },
+//   { managerId: "2", fullName: "goodbye" }
+// ]
+
+const getManagers = (state: State) => state.managers;
 
 interface CreateApplicationPageProps {
   onSubmit: () => void
@@ -21,12 +25,17 @@ interface CreateApplicationPageProps {
 
 export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) {
   const dispatch = useAppDispatch();
-  const count = 5;
+  useEffect(() => {
+    dispatch(fetchManagersAction());
+  }, []);
 
+  const managers = useAppSelector(getManagers);
+
+  const count = 5;
   const [topic, setTopic] = useState('')
   const [numberOfPeople, setNumberOfPeople] = useState(0)
   const [name, setName] = useState('')
-  const [manager, setManager] = useState<Manager | undefined>(undefined)
+  const [manager, setManager] = useState<Manager | undefined>(managers[0])
   const [price, setPrice] = useState('')
   const [sameCourses, setSameCourses] = useState('')
   const [motivation, setMotivation] = useState('')
