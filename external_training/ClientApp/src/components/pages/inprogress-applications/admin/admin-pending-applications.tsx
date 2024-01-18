@@ -5,6 +5,7 @@ import {fetchAdminPendingApplicationsAction} from "../../../../store/api-actions
 import {ApplicationsStatusTrans} from "../../current-applications/current-applications-page.tsx";
 import {AdminPendingApplicationCard} from "./admin-pending-application-card.tsx";
 import {ApplicationStatus} from "../../../current-applications-utils/application-status.ts";
+import {SmallCalendarSingleDatePickerWithInput} from "../../../calendars/small-calendar/small-calendar-datepicker.tsx";
 
 export type CurrentAdminPendingApplicationType = {
     id: number,
@@ -17,6 +18,8 @@ export type CurrentAdminPendingApplicationType = {
 
 export function AdminPendingApplications() {
     const [radioValue, setRadioValue] = useState<string>(() => "agreement");
+    const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>();
+    const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>();
     const getPendingApplications = (state: State) => state.adminPendingApplications
     const dispatch = useAppDispatch();
 
@@ -41,10 +44,16 @@ export function AdminPendingApplications() {
         }
     }
 
-    const agreementApplications = applications.filter((appl) => appl.status === ApplicationStatus.AwaitingManagerApproval);
-    const courseSelectionApplications = applications.filter((appl) => appl.status === ApplicationStatus.CourseSelection);
-    const contractApplications = applications.filter((appl) => appl.status === ApplicationStatus.AwaitingContract);
-    const paymentApplications = applications.filter((appl) => appl.status === ApplicationStatus.AwaitingPayment);
+    let filteredApplications = applications
+    filteredApplications = firstSelectedDate ? filteredApplications.filter((appl) => new Date(appl.date.toDateString()) >= firstSelectedDate) : filteredApplications;
+    filteredApplications = secondSelectedDate ? filteredApplications.filter((appl) => new Date(appl.date.toDateString()) <= secondSelectedDate) : filteredApplications;
+
+
+    const agreementApplications = filteredApplications.filter((appl) => appl.status === ApplicationStatus.AwaitingManagerApproval);
+    const courseSelectionApplications = filteredApplications.filter((appl) => appl.status === ApplicationStatus.CourseSelection);
+    const contractApplications = filteredApplications.filter((appl) => appl.status === ApplicationStatus.AwaitingContract);
+    const paymentApplications = filteredApplications.filter((appl) => appl.status === ApplicationStatus.AwaitingPayment);
+    const approvedApplications = filteredApplications.filter((appl) => appl.status === ApplicationStatus.Approved);
 
     switch (radioValue) {
         case "agreement":
@@ -59,6 +68,9 @@ export function AdminPendingApplications() {
         case "payment":
             applications = paymentApplications;
             break;
+        case "approved":
+            applications = approvedApplications;
+            break;
         default:
             applications = [];
             break;
@@ -66,45 +78,62 @@ export function AdminPendingApplications() {
 
     const onChangeHandler = (ev: any) => setRadioValue(() => ev.target.value);
 
+
     const labelClassName = "box-border inline-block cursor-pointer h-[40px] flex items-center px-4 rounded-b-md"
     const inputClassName = "hidden [&+label]:checked:bg-[#FFEDCF] [&+label]:checked:border-t-[2px] [&+label]:checked:border-black [&+label]:hover:bg-[#FFEDCF]"
     return (
-        <div className={"mt-[30px]"}>
-            <div className={"border-y border-black flex justify-around items-center box-border"}>
-                <div className="inline-block text-center">
-                    <input onChange={onChangeHandler} id="radio-1" type="radio" name="radio" value="agreement"
-                           className={inputClassName} defaultChecked/>
-                    <label htmlFor="radio-1" className={labelClassName}>Согласование
-                        - {agreementApplications ? agreementApplications.length : 0}</label>
-                </div>
-
-                <div className="inline-block">
-                    <input onChange={onChangeHandler} id="radio-2" type="radio" name="radio" value="courseSelection"
-                           className={inputClassName}/>
-                    <label htmlFor="radio-2" className={labelClassName}>Подбор курса
-                        - {courseSelectionApplications ? courseSelectionApplications.length : 0}</label>
-                </div>
-
-                <div className="inline-block">
-                    <input onChange={onChangeHandler} id="radio-3" type="radio" name="radio" value="contract"
-                           className={inputClassName}/>
-                    <label htmlFor="radio-3" className={labelClassName}>Договор
-                        - {contractApplications ? contractApplications.length : 0}</label>
-                </div>
-
-                <div className="inline-block">
-                    <input onChange={onChangeHandler} id="radio-4" type="radio" name="radio" value="payment"
-                           className={inputClassName}/>
-                    <label htmlFor="radio-4" className={labelClassName}>Оплата
-                        - {paymentApplications ? paymentApplications.length : 0}</label>
-                </div>
+        <div>
+            <div className={"ml-[55px] mt-[30px] flex gap-[20px]"}>
+                <SmallCalendarSingleDatePickerWithInput inRangeFrom={true} setSelectedDate={setFirstSelectedDate}
+                                                        maxDate={secondSelectedDate}/>
+                <SmallCalendarSingleDatePickerWithInput setSelectedDate={setSecondSelectedDate} inRangeFrom={false}
+                                                        minDate={firstSelectedDate}/>
             </div>
 
-            <div className={"flex justify-center mx-[125px] mt-[30px]"}>
-                <div className={"flex flex-wrap w-[1185px]"}>
-                    {applications.map((appl, i) => (
-                        <AdminPendingApplicationCard key={i} application={appl}/>
-                    ))}
+            <div className={"mt-[30px]"}>
+                <div className={"border-y border-black flex justify-around items-center box-border"}>
+                    <div className="inline-block text-center">
+                        <input onChange={onChangeHandler} id="radio-1" type="radio" name="radio" value="agreement"
+                               className={inputClassName} defaultChecked/>
+                        <label htmlFor="radio-1" className={labelClassName}>Согласование
+                            - {agreementApplications ? agreementApplications.length : 0}</label>
+                    </div>
+
+                    <div className="inline-block">
+                        <input onChange={onChangeHandler} id="radio-2" type="radio" name="radio" value="courseSelection"
+                               className={inputClassName}/>
+                        <label htmlFor="radio-2" className={labelClassName}>Подбор курса
+                            - {courseSelectionApplications ? courseSelectionApplications.length : 0}</label>
+                    </div>
+
+                    <div className="inline-block">
+                        <input onChange={onChangeHandler} id="radio-3" type="radio" name="radio" value="contract"
+                               className={inputClassName}/>
+                        <label htmlFor="radio-3" className={labelClassName}>Договор
+                            - {contractApplications ? contractApplications.length : 0}</label>
+                    </div>
+
+                    <div className="inline-block">
+                        <input onChange={onChangeHandler} id="radio-4" type="radio" name="radio" value="payment"
+                               className={inputClassName}/>
+                        <label htmlFor="radio-4" className={labelClassName}>Оплата
+                            - {paymentApplications ? paymentApplications.length : 0}</label>
+                    </div>
+
+                    <div className="inline-block">
+                        <input onChange={onChangeHandler} id="radio-5" type="radio" name="radio" value="approved"
+                               className={inputClassName}/>
+                        <label htmlFor="radio-5" className={labelClassName}>Утверждено
+                            - {paymentApplications ? approvedApplications.length : 0}</label>
+                    </div>
+                </div>
+
+                <div className={"flex justify-center mx-[125px] mt-[30px]"}>
+                    <div className={"flex flex-wrap w-[1185px]"}>
+                        {applications.map((appl, i) => (
+                            <AdminPendingApplicationCard key={i} application={appl}/>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

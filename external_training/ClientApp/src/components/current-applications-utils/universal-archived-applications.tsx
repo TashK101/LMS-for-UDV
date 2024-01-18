@@ -42,8 +42,8 @@ export function UniversalArchivedApplications({archivedApplications}: {
                                                         minDate={firstSelectedDate}/>
             </div>
 
-            <div className={"flex justify-center mx-[125px] mt-[30px]"}>
-                <div className={"flex flex-wrap w-[1185px]"}>
+            <div className={"flex justify-center mt-[30px] mx-[55px]"}>
+                <div className={"flex flex-wrap w-full"}>
                     {filteredApplications.map((appl, i) => (
                         <ApplicationCard key={i} application={appl}/>
                     ))}
@@ -51,4 +51,5 @@ export function UniversalArchivedApplications({archivedApplications}: {
             </div>
         </div>
     )
+    // flex flex-wrap w-[1185px]
 }
