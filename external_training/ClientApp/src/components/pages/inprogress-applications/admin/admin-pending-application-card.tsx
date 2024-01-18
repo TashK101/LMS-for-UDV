@@ -52,7 +52,7 @@ export function AdminPendingApplicationCard({application}: AdminPendingApplicati
                     </div>
                     <EllipsisIcon className={"mt-2"}/>
                 </div>
-                <div className={"flex mt-[20px] gap-[10px]"}>
+                <div className={"flex mt-[20px] gap-[10px] items-center"}>
                     <ApplicationDetailsAvatar userFullName={application.created_name}/>
                     <p>{application.created_name}</p>
                 </div>

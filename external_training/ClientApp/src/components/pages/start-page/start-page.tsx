@@ -14,7 +14,7 @@ export function StartPage() : JSX.Element {
 
             setTimeout(() => {
                 if (isAuthenticated) {
-                    navigate('/calendar');
+                    navigate('/inprogress_applications');
                 } else {
                     navigate(ApplicationPaths.Login);
 

@@ -7,8 +7,10 @@ export function AdminApplicationsField() {
     const [historyMode, setHistoryMode] = useState(() => false);
 
     return (
-        <div className={"mx-[55px] mt-[40px] font-medium"}>
-            <ModeSwitchButton contentMode={historyMode}
+        <div className={"mt-[40px] font-medium"}>
+            <ModeSwitchButton
+                className={"mx-[55px]"}
+                contentMode={historyMode}
                               setContentMode={setHistoryMode}
                               leftPartText={"Заявки в работе"}
                               rightPartText={"История"}/>

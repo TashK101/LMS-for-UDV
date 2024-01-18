@@ -94,7 +94,7 @@ export function SmallCalendarSingleDatePickerWithInput({
             ref={ref}
             placeholder={inRangeFrom ? "От" : "До"}
             value={selectedDateLocal ? `${inRangeFrom ? "с" : "по"} ${renderDate}` : ""}
-            className="font-normal w-[170px] placeholder:text-black text-center focus:border-[0px] text-lg h-[60px] px-1 rounded-xl text-black hover:shadow-inner hover:shados-xl bg-[#D9D9D9]" // a styling class
+            className="font-normal w-[170px] placeholder:text-black text-center focus:border-[0px] text-lg h-[40px] px-1 rounded-xl text-black hover:shadow-inner hover:shados-xl bg-[#D9D9D9]" // a styling class
         />
     )
 
@@ -108,7 +108,7 @@ export function SmallCalendarSingleDatePickerWithInput({
         colorPrimaryLight={"#FFEDCF"}
         slideAnimationDuration={"0.25s"}
         renderInput={renderCustomInput}
-        wrapperClassName={clsx("", className)}
+        wrapperClassName={clsx("relative z-[1]", className)}
         calendarRangeStartClassName={"text-black"}
         calendarRangeBetweenClassName={"text-black"}
         calendarRangeEndClassName={"text-black"}/>;
