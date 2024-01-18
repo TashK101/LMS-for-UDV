@@ -6,7 +6,7 @@ import {CounterInput, TextField} from '../../common/InputField';
 import {RadioGroup, RadioGroupWithComponent} from '../../common/Radio';
 import {SubmitButton2} from '../../common/Button';
 import {StatusComponent, StatusType} from '../../common/Status';
-import SmallCalendarDatePicker from '../../calendars/small-calendar/small-calendar-datepicker';
+import {SmallCalendarDatePicker} from '../../calendars/small-calendar/small-calendar-datepicker';
 import {Form} from '../../common/Form';
 import {ModeSwitchButton} from '../../current-applications-utils/mode-switch-button';
 import {useAppSelector} from "../../../hooks";
