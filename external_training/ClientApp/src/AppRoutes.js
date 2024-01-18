@@ -9,6 +9,7 @@ import {ApplicationPage} from "./components/pages/application/ApplicationPage";
 import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
 import {CurrentApplicationsPage} from "./components/pages/current-applications/current-applications-page";
 import {CalendarPage} from "./components/pages/calendar-page/calendar-page";
+import {InprogressApplicationPage} from "./components/pages/inprogress-applications/inprogress-application-page";
 
 const AppRoutes = [
     {
@@ -51,6 +52,10 @@ const AppRoutes = [
     {
         path: '/details',
         element: <ApplicationPage/>
+    },
+    {
+        path: '/inprogress_applications',
+        element: <InprogressApplicationPage/>
     },
     ...ApiAuthorzationRoutes
 ];

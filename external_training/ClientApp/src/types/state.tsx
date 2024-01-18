@@ -2,7 +2,7 @@ import {store} from "../store/store";
 import {Notifications} from "./notifications";
 import {Application} from "./application";
 import {EventType} from "./event.tsx";
-import {ShortApplicationInfoType} from "./short-application-info.tsx";
+import {ShortAdminPendingApplicationInfoType, ShortApplicationInfoType} from "./short-application-info.tsx";
 
 
 export type SystemProcess = {
@@ -13,8 +13,12 @@ export type SystemProcess = {
     userFullName: string;
     notifications: Notifications;
     events: EventType[];
-    trainingApplications: ShortApplicationInfoType[];
-
+    userTrainingApplications: ShortApplicationInfoType[];
+    userArchivedApplications: ShortApplicationInfoType[];
+    managerPendingApplications: ShortApplicationInfoType[];
+    managerArchivedApplications: ShortApplicationInfoType[];
+    adminPendingApplications: ShortAdminPendingApplicationInfoType[],
+    adminArchivedApplications: ShortApplicationInfoType[],
 };
 
 export type State = ReturnType<typeof store.getState>;

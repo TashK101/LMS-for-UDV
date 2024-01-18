@@ -5,3 +5,12 @@ export type ShortApplicationInfoType = {
     status: string,
     commentsCount: number,
 }
+
+export type ShortAdminPendingApplicationInfoType = {
+    trainingApplicationId: number,
+    trainingTopic: string,
+    createdAt: string,
+    status: string,
+    commentsCount: number,
+    createdName: string,
+}

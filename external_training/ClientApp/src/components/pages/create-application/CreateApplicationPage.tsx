@@ -4,7 +4,7 @@ import { CounterInput, TextArea, TextField } from '../../common/InputField';
 import { RadioGroup } from '../../common/Radio';
 import { SubmitButton } from '../../common/Button';
 import { Form } from "../../common/Form";
-import SmallCalendarDatePicker from "../../calendars/small-calendar/small-calendar-datepicker";
+import { SmallCalendarDatePicker } from "../../calendars/small-calendar/small-calendar-datepicker";
 import { INewApplication } from "../../../types/new-application";
 import { useAppDispatch } from "../../../hooks";
 import { postNewApplicationAction } from "../../../store/api-actions/api-actions";

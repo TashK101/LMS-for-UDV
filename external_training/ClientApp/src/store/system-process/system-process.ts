@@ -4,7 +4,7 @@ import {Notifications} from "../../types/notifications";
 import {Application} from "../../types/application";
 import {EventType} from "../../types/event.tsx";
 import {StartConfig} from "../../types/startConfig";
-import {ShortApplicationInfoType} from "../../types/short-application-info.tsx";
+import {ShortAdminPendingApplicationInfoType, ShortApplicationInfoType} from "../../types/short-application-info.tsx";
 
 const initialState: SystemProcess = {
     error: null,
@@ -14,7 +14,7 @@ const initialState: SystemProcess = {
     role: '',
     userFullName: '',
     events: [],
-    trainingApplications: [],
+    userTrainingApplications: [],
 };
 
 export const systemProcess = createSlice({
@@ -43,12 +43,41 @@ export const systemProcess = createSlice({
         loadEvents : (state, action : PayloadAction<EventType[]>) => {
             state.events = action.payload;
         },
-        loadTrainingApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
-            state.trainingApplications = action.payload;
+        loadUserTrainingApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
+            state.userTrainingApplications = action.payload;
+        },
+        loadUserArchivedApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
+            state.userArchivedApplications = action.payload;
+        },
+        loadManagerPendingApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
+            state.managerPendingApplications = action.payload;
+        },
+        loadManagerArchivedApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
+            state.managerArchivedApplications = action.payload;
+        },
+        loadAdminPendingApplications : (state, action : PayloadAction<ShortAdminPendingApplicationInfoType[]>) => {
+            state.adminPendingApplications = action.payload;
+        },
+        loadAdminArchivedApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
+            state.adminArchivedApplications = action.payload;
         },
     }
 });
 export const redirectToRoute = createAction<string>('app/redirectToRoute');
-export const {setLoadingStatus, setError, loadNotifications, loadTest, loadEvents, loadStartConfig, loadTrainingApplications, loadApplicationDetails} = systemProcess.actions;
+export const {
+    setLoadingStatus,
+    setError,
+    loadNotifications,
+    loadTest,
+    loadEvents,
+    loadStartConfig,
+    loadUserTrainingApplications,
+    loadUserArchivedApplications,
+    loadApplicationDetails,
+    loadManagerPendingApplications,
+    loadManagerArchivedApplications,
+    loadAdminPendingApplications,
+    loadAdminArchivedApplications,
+} = systemProcess.actions;
 //export const {setLoadingStatus, setError, loadNotifications, loadTest, loadEvents, loadStartConfig, loadApplicationDetails, loadTrainingApplications} = systemProcess.actions;
 
