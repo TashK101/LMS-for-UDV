@@ -16,7 +16,7 @@ export type CurrentAdminPendingApplicationType = {
 }
 
 export function AdminPendingApplications() {
-    const [radioValue, setRadioValue] = useState<string>();
+    const [radioValue, setRadioValue] = useState<string>(() => "agreement");
     const getPendingApplications = (state: State) => state.adminPendingApplications
     const dispatch = useAppDispatch();
 
@@ -59,37 +59,44 @@ export function AdminPendingApplications() {
         case "payment":
             applications = paymentApplications;
             break;
+        default:
+            applications = [];
+            break;
     }
 
     const onChangeHandler = (ev: any) => setRadioValue(() => ev.target.value);
 
-    const labelClassName = "inline-block cursor-pointer h-[40px] flex items-center px-4 rounded-b-md"
+    const labelClassName = "box-border inline-block cursor-pointer h-[40px] flex items-center px-4 rounded-b-md"
     const inputClassName = "hidden [&+label]:checked:bg-[#FFEDCF] [&+label]:checked:border-t-[2px] [&+label]:checked:border-black [&+label]:hover:bg-[#FFEDCF]"
     return (
         <div className={"mt-[30px]"}>
-            <div className={"border-y border-black flex justify-around items-center"}>
+            <div className={"border-y border-black flex justify-around items-center box-border"}>
                 <div className="inline-block text-center">
                     <input onChange={onChangeHandler} id="radio-1" type="radio" name="radio" value="agreement"
-                           className={inputClassName}/>
-                    <label htmlFor="radio-1" className={labelClassName}>Согласование - {agreementApplications ? agreementApplications.length : 0}</label>
+                           className={inputClassName} defaultChecked/>
+                    <label htmlFor="radio-1" className={labelClassName}>Согласование
+                        - {agreementApplications ? agreementApplications.length : 0}</label>
                 </div>
 
                 <div className="inline-block">
                     <input onChange={onChangeHandler} id="radio-2" type="radio" name="radio" value="courseSelection"
                            className={inputClassName}/>
-                    <label htmlFor="radio-2" className={labelClassName}>Подбор курса - {courseSelectionApplications ? courseSelectionApplications.length : 0}</label>
+                    <label htmlFor="radio-2" className={labelClassName}>Подбор курса
+                        - {courseSelectionApplications ? courseSelectionApplications.length : 0}</label>
                 </div>
 
                 <div className="inline-block">
-                    <input onChange={onChangeHandler} id="radio-3" type="radio" name="radio" value="contranct"
+                    <input onChange={onChangeHandler} id="radio-3" type="radio" name="radio" value="contract"
                            className={inputClassName}/>
-                    <label htmlFor="radio-3" className={labelClassName}>Договор - {contractApplications ? contractApplications.length : 0}</label>
+                    <label htmlFor="radio-3" className={labelClassName}>Договор
+                        - {contractApplications ? contractApplications.length : 0}</label>
                 </div>
 
                 <div className="inline-block">
                     <input onChange={onChangeHandler} id="radio-4" type="radio" name="radio" value="payment"
                            className={inputClassName}/>
-                    <label htmlFor="radio-4" className={labelClassName}>Оплата - {paymentApplications ? paymentApplications.length : 0}</label>
+                    <label htmlFor="radio-4" className={labelClassName}>Оплата
+                        - {paymentApplications ? paymentApplications.length : 0}</label>
                 </div>
             </div>
 

@@ -98,7 +98,6 @@ export const fetchEventsAction = createAsyncThunk<void, undefined, {
             dispatch(setLoadingStatus(true));
             const {data} = await api.get<EventsType>('/api/user/events')
                 .catch(err => {
-                    window.location.href=addErrorToLink(window.location.href)
                     console.log(err.response.data);
                 });
             dispatch(loadEvents(data))

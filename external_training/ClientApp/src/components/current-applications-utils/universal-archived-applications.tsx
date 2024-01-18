@@ -35,7 +35,7 @@ export function UniversalArchivedApplications({archivedApplications}: {
 
     return (
         <div>
-            <div className={"ml-10 mt-[50px] flex gap-[20px]"}>
+            <div className={"ml-[55px] mt-[30px] flex gap-[20px]"}>
                 <SmallCalendarSingleDatePickerWithInput inRangeFrom={true} setSelectedDate={setFirstSelectedDate}
                                                         maxDate={secondSelectedDate}/>
                 <SmallCalendarSingleDatePickerWithInput setSelectedDate={setSecondSelectedDate} inRangeFrom={false}
