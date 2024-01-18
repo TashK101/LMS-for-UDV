@@ -4,6 +4,7 @@ import { H400, H500, H600 } from '../../common/Text';
 import { ProfileImageLarge } from '../../common/Image';
 import { PasswordField, TextField } from '../../common/InputField';
 import { RadioGroup } from '../../common/Radio';
+import { SubmitButton } from '../../common/Button';
 
 
 export function SettingsPage() {
@@ -20,7 +21,7 @@ export function SettingsPage() {
   const [gender, setGender] = useState('')
 
   return (
-    <div className="flex flex-col mx-auto max-w-2xl gap-[50px] py-16">
+    <form className="flex flex-col mx-auto max-w-2xl gap-[50px] py-16">
       <Card>
         <div className='flex items-center gap-[40px]'>
           <ProfileImageLarge name='Иван' surname='Иванович' />
@@ -61,6 +62,8 @@ export function SettingsPage() {
         <PasswordField label='Новый пароль' value={newPassword} onChange={setNewPassword} />
         <PasswordField label='Повторите пароль' value={repeatPassword} onChange={setRepeatPassword} />
       </CardWithColumn>
-    </div>
+
+      <SubmitButton text="Отправить" />
+    </form>
   );
 }

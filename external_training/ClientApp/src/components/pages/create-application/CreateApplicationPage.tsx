@@ -14,7 +14,7 @@ import { State } from "../../../types/state";
 
 // const managers: Manager[] = [
 //   { managerId: "1", fullName: "Николай Николаевич" },
-//   { managerId: "2", fullName: "goodbye" }
+//   { managerId: "2", fullName: "Алексей Алексеевич" }
 // ]
 
 const getManagers = (state: State) => state.managers;
@@ -29,13 +29,13 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
     dispatch(fetchManagersAction());
   }, []);
 
-  const managers = useAppSelector(getManagers);
+  const managers: Manager[] | undefined = useAppSelector(getManagers);
 
   const count = 5;
   const [topic, setTopic] = useState('')
   const [numberOfPeople, setNumberOfPeople] = useState(0)
   const [name, setName] = useState('')
-  const [manager, setManager] = useState<Manager | undefined>(managers[0])
+  const [manager, setManager] = useState<Manager | undefined>((managers?.length === 0) ? undefined : managers[0])
   const [price, setPrice] = useState('')
   const [sameCourses, setSameCourses] = useState('')
   const [motivation, setMotivation] = useState('')
@@ -89,7 +89,7 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
           <DropDownMenu
             managers={managers}
             selectedManager={manager}
-            onClick={value => setManager(managers.find(i => i.managerId === value))}
+            onClick={value => setManager(managers?.find(i => i.managerId === value))}
           />
         </Form>
       </CardWithColumn>
