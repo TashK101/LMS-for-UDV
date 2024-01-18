@@ -36,7 +36,7 @@ export function AdminPendingApplications() {
                 // @ts-ignore
                 status: ApplicationsStatusTrans[trAppl.status],
                 comments_count: trAppl.commentsCount,
-                created_name: trAppl.createdName,
+                created_name: trAppl.userFullName,
             })
         }
     }
