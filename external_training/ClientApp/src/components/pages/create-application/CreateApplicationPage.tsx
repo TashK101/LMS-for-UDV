@@ -137,7 +137,7 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
 
       <CardWithColumn>
         <CardIndex index={5} count={count} />
-        <TextArea label="Примечания к заявке (не обязательно)" value={note} onChange={setNote} />
+        <TextArea required={false} label="Примечания к заявке (не обязательно)" value={note} onChange={setNote} />
       </CardWithColumn>
 
       <div className="mt-[15px]">

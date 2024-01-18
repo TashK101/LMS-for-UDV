@@ -24,7 +24,7 @@ export function SettingsPage() {
   
   const [surname, setSurname] = useState(userFullName.split(" ")[0])
   const [name, setName] = useState(userFullName.split(" ")[1])
-  const [patronymic, setPatronymic] = useState('')
+  const [patronymic, setPatronymic] = useState(userFullName.split(" ")[2])
   const [department, setDepartment] = useState('')
   const [team, setTeam] = useState('')
   const [jobTitle, setJobTitle] = useState('')
