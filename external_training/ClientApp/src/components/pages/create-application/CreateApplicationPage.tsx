@@ -35,7 +35,7 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
   const [topic, setTopic] = useState('')
   const [numberOfPeople, setNumberOfPeople] = useState(0)
   const [name, setName] = useState('')
-  const [manager, setManager] = useState<Manager | undefined>((managers?.length === 0) ? undefined : managers[0])
+  const [manager, setManager] = useState<Manager | undefined>(undefined) //(managers?.length === 0) ? undefined : managers[0]
   const [price, setPrice] = useState('')
   const [sameCourses, setSameCourses] = useState('')
   const [motivation, setMotivation] = useState('')

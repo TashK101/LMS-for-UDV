@@ -302,6 +302,7 @@ export const fetchManagersAction = createAsyncThunk<void, undefined, {
         try {
             dispatch(setLoadingStatus(true));
             const { data } = await api.get<Manager[]>('/api/user/managers');
+            console.log(data)
             dispatch(loadManagers(data))
         } finally {
             dispatch(setLoadingStatus(false));

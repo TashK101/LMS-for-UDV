@@ -28,14 +28,14 @@ export function DropDownMenu({ managers, selectedManager, onClick }: DropDownMen
             {isOpen && (
                 <div
                     id="dropdown"
-                    className="z-10 absolute mt-2 py-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                    className="cursor-pointer z-10 absolute mt-2 py-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
                 >
                     <ul className="font-golos text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                        {managers?.map(manager => <li><DropDownElement manager={manager} onClick={value => {
+                        {managers?.map(manager => <li key={manager.managerId}><DropDownElement manager={manager} onClick={value => {
                             setIsOpen(false)
                             onClick(value)
                         }
-                        } key={manager.managerId} /> </li>)}
+                        } /> </li>)}
                     </ul>
                 </div>
             )}
@@ -50,7 +50,7 @@ interface DropDownElementProps {
 
 function DropDownElement({ manager, onClick }: DropDownElementProps) {
     return (
-        <a className="block px-4 py-2 hover:text-color6" onClick={() => onClick(manager.managerId)}>
+        <a className="block px-4 py-2 hover:text-color6 text-[#2B2A29]" onClick={() => onClick(manager.managerId)}>
             {manager.fullName}
         </a>
     )
