@@ -42,6 +42,7 @@ export const systemProcess = createSlice({
             state.role = action.payload.roleName;
             state.userFullName = action.payload.userFullName;
             state.userId = action.payload.userId;
+            state.userEmail = action.payload.userEmail;
         },
         loadTest : (state, action : PayloadAction<Application>) => {
             state.application = action.payload;
