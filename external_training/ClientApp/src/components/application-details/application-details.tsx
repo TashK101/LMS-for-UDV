@@ -17,6 +17,7 @@ import {IconNameCombo} from "./icon-name-combo";
 import {Role} from "./comment-send-field";
 import {parseRoleFromString} from "./comment-send-field";
 import {AcceptDeclineButton} from "./accept-decline-buttons";
+import {SubmitButton4} from "../common/Button";
 
 export type ApplicationDetailsProps = {
     id: number;
@@ -45,7 +46,10 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
             <div className='application-details left-5'>
                 <h2 className='topic-text'>{application?.trainingTopic}</h2>
                 { (role===Role.manager) && (application?.desiredManagerId === userId) && (status==='Ждёт согласования руководителя') &&
-                    <AcceptDeclineButton trainingApplicationId={application.trainingApplicationId}/>
+                    <AcceptDeclineButton TrainingApplicationId={application.trainingApplicationId}/>
+                }
+                { (role===Role.admin) &&
+                    <SubmitButton4 text={'Оформление'} />
                 }
                 <p className='bold-text'>Статус:</p>
                 <div className='flex border-2 rounded-xl items-center w-fit pr-4'>

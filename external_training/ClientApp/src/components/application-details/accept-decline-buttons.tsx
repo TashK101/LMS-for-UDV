@@ -1,6 +1,6 @@
 import './application-details.css'
 import React from 'react'
-import {SubmitButton, SubmitButton2, SubmitButton3} from '../common/Button';
+import {SubmitButton2, SubmitButton3} from '../common/Button';
 import {acceptAction, declineAction} from '../../store/api-actions/api-actions'
 import {useAppDispatch} from "../../hooks";
 
@@ -8,24 +8,24 @@ export type AcceptDeclineProps = {
     TrainingApplicationId: number;
 }
 
-export function AcceptDeclineButton({trainingApplicationId}: AcceptDeclineProps): JSX.Element {
+export function AcceptDeclineButton({TrainingApplicationId}: AcceptDeclineProps): JSX.Element {
     const dispatch = useAppDispatch();
     const acceptHandler = async (event: React.FormEvent) => {
         event.preventDefault()
         const decision: AcceptDeclineProps = {
-            TrainingApplicationId: trainingApplicationId,
+            TrainingApplicationId: TrainingApplicationId,
         }
         dispatch(acceptAction(decision));
-        //window.location.reload();
+        window.location.reload();
     }
 
     const declineHandler = async (event: React.FormEvent) => {
         event.preventDefault()
         const decision: AcceptDeclineProps = {
-            TrainingApplicationId: trainingApplicationId,
+            TrainingApplicationId: TrainingApplicationId,
         }
         dispatch(declineAction(decision));
-        //window.location.reload();
+        window.location.reload();
     }
 
     return (
