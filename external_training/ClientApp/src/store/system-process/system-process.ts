@@ -5,6 +5,7 @@ import {Application, Course} from "../../types/application";
 import {EventType} from "../../types/event.tsx";
 import {StartConfig} from "../../types/startConfig";
 import {ShortAdminPendingApplicationInfoType, ShortApplicationInfoType} from "../../types/short-application-info.tsx";
+import { Manager } from '../../types/manager.tsx';
 
 const initialState: SystemProcess = {
     error: null,
@@ -73,6 +74,9 @@ export const systemProcess = createSlice({
         loadAdminArchivedApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
             state.adminArchivedApplications = action.payload;
         },
+        loadManagers: (state, action: PayloadAction<Manager[]>) => {
+            state.managers = action.payload;
+        }
     }
 });
 export const redirectToRoute = createAction<string>('app/redirectToRoute');
@@ -90,6 +94,7 @@ export const {
     loadApplicationDetails,
     loadManagerPendingApplications,
     loadManagerArchivedApplications,
+    loadManagers,
     loadAdminPendingApplications,
     loadAdminArchivedApplications,
 } = systemProcess.actions;

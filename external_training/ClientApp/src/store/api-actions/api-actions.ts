@@ -10,6 +10,7 @@ import {
     loadEvents,
     loadManagerArchivedApplications,
     loadManagerPendingApplications,
+    loadManagers,
     loadNotifications,
     loadStartConfig,
     loadUserArchivedApplications,
@@ -26,6 +27,7 @@ import {INewApplication} from "../../types/new-application.tsx";
 import {SentCommentType} from "../../types/comments";
 import {useNavigate} from "react-router-dom";
 import {getErrorPath} from "ajv/dist/compile/util";
+import { Manager } from "../../types/manager.tsx";
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
@@ -285,6 +287,23 @@ export const postAdminCommentAction = createAsyncThunk<void, SentCommentType, {
         try {
             dispatch(setLoadingStatus(true));
             const {data} = await api.post<SentCommentType>('/api/admin/comment', _arg);
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const fetchManagersAction = createAsyncThunk<void, undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/fetchManagers',
+    async (_arg, { dispatch, extra: api }) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const { data } = await api.get<Manager[]>('/api/user/managers');
+            dispatch(loadManagers(data))
         } finally {
             dispatch(setLoadingStatus(false));
         }
