@@ -58,7 +58,7 @@ export const fetchApplicationDetailsAction = createAsyncThunk<void, number, {
                 {
                     params: {trainingApplicationId: id}
                 }).catch(err => {
-                window.location.href=addErrorToLink(window.location.href)
+                    if(err.response.status === 404) window.location.href=addErrorToLink(window.location.href)
                 console.log(err.response.data);
             });
             dispatch(loadApplicationDetails(data));
@@ -98,7 +98,6 @@ export const fetchEventsAction = createAsyncThunk<void, undefined, {
             dispatch(setLoadingStatus(true));
             const {data} = await api.get<EventsType>('/api/user/events')
                 .catch(err => {
-                    window.location.href=addErrorToLink(window.location.href)
                     console.log(err.response.data);
                 });
             dispatch(loadEvents(data))
