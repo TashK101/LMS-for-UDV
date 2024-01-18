@@ -12,6 +12,7 @@ const initialState: SystemProcess = {
     notifications: [],
     application: undefined,
     role: '',
+    userId: '',
     userFullName: '',
     events: [],
     trainingApplications: [],
@@ -40,6 +41,7 @@ export const systemProcess = createSlice({
         loadStartConfig : (state, action : PayloadAction<StartConfig>) => {
             state.role = action.payload.roleName;
             state.userFullName = action.payload.userFullName;
+            state.userId = action.payload.userId;
         },
         loadTest : (state, action : PayloadAction<Application>) => {
             state.application = action.payload;

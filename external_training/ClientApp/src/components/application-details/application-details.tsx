@@ -6,8 +6,8 @@ import {statusesIcons} from "../current-applications-utils/application-card";
 import {stringToDate} from "../../string-to-date";
 import './application-details.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
-import {getApplicationDetails, getCourseDetails} from "../../store/system-process/system-getters";
-import {fetchApplicationDetailsAction} from "../../store/api-actions/api-actions";
+import {getApplicationDetails, getCourseDetails, getId, getRole} from "../../store/system-process/system-getters";
+import {fetchApplicationDetailsAction, fetchStartConfigAction} from "../../store/api-actions/api-actions";
 import {fetchCourseDetailsAction} from "../../store/api-actions/api-actions";
 import {TextValueBlock} from "./text-value-block";
 import {CommentSendField} from "./comment-send-field";
@@ -25,17 +25,20 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
     useEffect(() => {
         dispatch(fetchApplicationDetailsAction(id));
         dispatch(fetchCourseDetailsAction(id));
+        dispatch(fetchStartConfigAction);
     }, []);
 
     const application = useAppSelector(getApplicationDetails);
     const course = useAppSelector(getCourseDetails);
+    const role = useAppSelector(getRole);
+    const userId = useAppSelector(getId);
     // @ts-ignore
     const status = ApplicationsStatusTrans[application?.status]
     const [dataFlag, setDataFlag] = useState(() => false);
     return (
         <div>
             <Header/>
-            <div className='application-details'>
+            <div className='application-details left-5'>
                 <h2 className='topic-text'>{application?.trainingTopic}</h2>
                 <p className='bold-text'>Статус:</p>
                 <div className='flex border-2 rounded-xl items-center w-fit pr-4'>
@@ -92,12 +95,14 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
                             ['Отдел/команда', course?.team]
                         ]}/>
                     </div> }
-                <CommentSendField/>
+
+                <CommentSendField trainingApplicationId={id}/>
+
             </div>
             <div className='top-bottom-20'>
 
                 {application?.comments &&
-                    <Comments comments={application.comments} authorId={application.applicationUserName}/>}
+                    <Comments comments={application.comments} authorId={userId}/>}
             </div>
         </div>
     );

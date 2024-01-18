@@ -4,6 +4,7 @@ import {useEffect} from "react";
 import {fetchApplicationDetailsAction} from "../../store/api-actions/api-actions";
 import {getApplication} from "../../store/system-process/system-getters";
 import {toLocaleString} from "react-scripts";
+import {useNavigate} from "react-router-dom";
 
 type NotificationProps = {
     notification : NotificationType;
@@ -19,8 +20,10 @@ export function Notification({notification}: NotificationProps) : JSX.Element {
         minute: "2-digit",
         second: "2-digit"
     }).replace('г. в', '')
+    const navigate = useNavigate();
+
     return(
-        <button className="w-[615px] px-[50px] py-[30px] bg-[#FFFFFF] hover:bg-stone-50 rounded-[10px] shadow border-2 border-stone-300 hover:border-amber-500 justify-start items-start gap-[100px] inline-flex">
+        <button onClick={() => navigate('/application_details/'+notification.trainingApplicationId)} className="w-[615px] px-[50px] py-[30px] bg-[#FFFFFF] hover:bg-stone-50 rounded-[10px] shadow border-2 border-stone-300 hover:border-amber-500 justify-start items-start gap-[100px] inline-flex">
             <div className="w-full flex-col justify-center items-start gap-5 inline-flex">
                 <div className="text-zinc-800 text-xl font-medium font-['Golos']">{notification?.text}</div>
                 <div className="w-full flex-row justify-between items-start gap-5 inline-flex">

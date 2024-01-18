@@ -1,5 +1,6 @@
 import {CommentAvatar} from "../avatar/comment-avatar";
 import {CommentType} from "../../types/comments";
+import {stringToDate} from "../../string-to-date";
 
 type CommentProps = {
     comment: CommentType;
@@ -15,7 +16,7 @@ export function Comment({comment, authorId} : CommentProps) : JSX.Element {
                     <CommentAvatar userFullName={comment.userFullName}/>
                     <div className="flex-col justify-center items-start gap-2.5 inline-flex">
                         <p className="text-center text-zinc-800 text-xl font-normal font-['Golos']">{comment.userFullName}</p>
-                        <p className="text-zinc-500 text-base font-normal font-['Golos']">{comment.createdAt}</p>
+                        <p className="text-zinc-500 text-base font-normal font-['Golos']">{stringToDate(comment.createdAt)}</p>
                     </div>
                 </div>
                 <div className={`px-[30px] py-5 ${bg} rounded-[5px] shadow border border-stone-300 justify-center flex-col items-end flex`}>

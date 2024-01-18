@@ -16,7 +16,6 @@ export const STATUS_CODE_MAPPING: Record<number, boolean> = {
 };
 
 const shouldDisplayError = (response: AxiosResponse) => !!STATUS_CODE_MAPPING[response.status];
-
 export const createAPI = (): AxiosInstance => {
     const api = axios.create({
         baseURL: BACKEND_URL,
@@ -52,33 +51,34 @@ export const createAPI = (): AxiosInstance => {
         (response) => response,
         async (error: AxiosError) => {
             if (error.response?.status === StatusCodes.UNAUTHORIZED) {
-                const originalRequest = error.config;
-
-                if (!isRefreshing) {
-                    isRefreshing = true;
-
-                    try {
-                        const newToken = await authService.refreshToken();
-                        authService.setAccessToken(newToken);
-
-                        originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
-                        return api(originalRequest);
-                    } catch (refreshError) {
-                        console.error('Token refresh failed:', refreshError);
-                        // Redirect to login or handle the situation based on your application's requirements
-                    } finally {
-                        isRefreshing = false;
-                    }
-                } else if (!refreshPromise) {
-                    refreshPromise = new Promise((resolve) => {
-                        authService.onTokenRefresh(() => {
-                            originalRequest.headers['Authorization'] = `Bearer ${authService.getAccessToken()}`;
-                            resolve(api(originalRequest));
-                        });
-                    });
-
-                    return refreshPromise;
-                }
+                // const originalRequest = error.config;
+                //
+                // if (!isRefreshing) {
+                //     isRefreshing = true;
+                //
+                //     try {
+                //         const newToken = await authService.refreshToken();
+                //         authService.setAccessToken(newToken);
+                //
+                //         originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+                //         return api(originalRequest);
+                //     } catch (refreshError) {
+                //         console.error('Token refresh failed:', refreshError);
+                //         // Redirect to login or handle the situation based on your application's requirements
+                //     } finally {
+                //         isRefreshing = false;
+                //     }
+                // } else if (!refreshPromise) {
+                //     refreshPromise = new Promise((resolve) => {
+                //         authService.onTokenRefresh(() => {
+                //             originalRequest.headers['Authorization'] = `Bearer ${authService.getAccessToken()}`;
+                //             resolve(api(originalRequest));
+                //         });
+                //     });
+                //
+                //     return refreshPromise;
+                // }
+                redirect('/error')
             }
 
             if (error.response?.data && shouldDisplayError(error.response)) {

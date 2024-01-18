@@ -9,9 +9,6 @@ import {StatusComponent, StatusType} from '../../common/Status';
 import {SmallCalendarDatePicker} from '../../calendars/small-calendar/small-calendar-datepicker';
 import {Form} from '../../common/Form';
 import {ModeSwitchButton} from '../../current-applications-utils/mode-switch-button';
-import {useAppSelector} from "../../../hooks";
-import {getIsDataLoading} from "../../../store/system-process/system-getters";
-import {LoadingPage} from "../loading-page/loading-page";
 
 export function ApplicationPage() {
     const count = 3
@@ -34,95 +31,91 @@ export function ApplicationPage() {
         event.preventDefault()
         console.log("hello")
     }
-    const isDataLoading = useAppSelector(getIsDataLoading);
-    if (isDataLoading)
-        return (<LoadingPage/>)
-    else
-        return (
-            <div
-                className="flex flex-col mx-auto max-w-2xl gap-[40px] mt-[72px] mb-[80px]">
-                <H700 text='Компьютерное зрение'/>
+    return (
+        <div
+            className="flex flex-col mx-auto max-w-2xl gap-[40px] mt-[72px] mb-[80px]">
+            <H700 text='Компьютерное зрение'/>
 
-                <div className='flex flex-row gap-[30px] items-center'>
-                    <p className="font-golos text-color7 text-[20px] font-[600]">Статус</p>
-                    <StatusComponent statusType={StatusType.COURSE_SELECTION}/>
-                </div>
-
-                <div className='flex flex-row gap-[60px] items-center'>
-                    <InfoBlock label='Подал' fullName='Иванов Иван Иванович'/>
-                    <InfoBlock label='Согласовал' fullName='Петров Пётр Петрович'/>
-                </div>
-
-                <ModeSwitchButton contentMode={showSecond}
-                                  setContentMode={setShowSecond}
-                                  leftPartText={"Исходная заявка"}
-                                  rightPartText={"Оформление"}/>
-
-                {showSecond &&
-                    <form
-                        onSubmit={submitHandler}
-                        className='flex flex-col gap-[30px]'>
-                        <CardWithColumn>
-                            <CardIndex index={1} count={count}/>
-                            <TextField label='Учебный центр' value={eduCenter} onChange={setEduCenter}/>
-                            <TextField label='Название курса' value={courseTitle} onChange={setCourseTitle}/>
-                            <RadioGroup
-                                label='Формат'
-                                name='Формат'
-                                radios={[
-                                    {title: 'Онлайн'},
-                                    {title: 'Оффлайн'}
-                                ]}
-                                onChange={setFormat}
-                            />
-                            <RadioGroup
-                                label='Однокурсники'
-                                name='Однокурсники'
-                                radios={[
-                                    {title: 'Только коллеги'},
-                                    {title: 'Люди из других компаний'}
-                                ]}
-                                onChange={setClassmates}
-                            />
-                            {<Form label="Желаемые даты">
-                                <SmallCalendarDatePicker
-                                    setFirstSelectedDate={setFirstSelectedDate}
-                                    setSecondSelectedDate={setSecondSelectedDate}
-                                />
-                            </Form>}
-                            <TextField label='Стоимость на одного' value={price} onChange={setPrice}/>
-                        </CardWithColumn>
-
-                        <CardWithColumn>
-                            <CardIndex index={2} count={count}/>
-                            <CounterInput label="Количество участников" value={numberOfPeople}
-                                          onChange={setNumberOfPeople}/>
-                            <TextField label='ФИО участников' value={fullName} onChange={setFullName}/>
-                            <TextField label="Департамент" value={department} onChange={setDepartment}/>
-                            <TextField label="Отдел/команда" value={team} onChange={setTeam}/>
-                        </CardWithColumn>
-
-                        <CardWithColumn>
-                            <CardIndex index={3} count={count}/>
-                            <RadioGroupWithComponent
-                                label='Изменить статус'
-                                name='Изменить статус'
-                                radios={[
-                                    {children: <StatusComponent statusType={StatusType.AWAIT_CONTRACT_AND_PAYMENT}/>},
-                                    {children: <StatusComponent statusType={StatusType.AWAIT_PAYMENT}/>},
-                                    {children: <StatusComponent statusType={StatusType.APPROVED}/>}
-                                ]}
-                                onChange={setStatus}
-                            />
-                        </CardWithColumn>
-
-                        <div className='mt-[10px]'>
-                            <SubmitButton2 text='Оформить'/>
-                        </div>
-                    </form>
-                }
+            <div className='flex flex-row gap-[30px] items-center'>
+                <p className="font-golos text-color7 text-[20px] font-[600]">Статус</p>
+                <StatusComponent statusType={StatusType.COURSE_SELECTION}/>
             </div>
-        )
+
+            <div className='flex flex-row gap-[60px] items-center'>
+                <InfoBlock label='Подал' fullName='Иванов Иван Иванович'/>
+                <InfoBlock label='Согласовал' fullName='Петров Пётр Петрович'/>
+            </div>
+
+            <ModeSwitchButton contentMode={showSecond}
+                              setContentMode={setShowSecond}
+                              leftPartText={"Исходная заявка"}
+                              rightPartText={"Оформление"}/>
+
+            {showSecond &&
+                <form
+                    onSubmit={submitHandler}
+                    className='flex flex-col gap-[30px]'>
+                    <CardWithColumn>
+                        <CardIndex index={1} count={count}/>
+                        <TextField label='Учебный центр' value={eduCenter} onChange={setEduCenter}/>
+                        <TextField label='Название курса' value={courseTitle} onChange={setCourseTitle}/>
+                        <RadioGroup
+                            label='Формат'
+                            name='Формат'
+                            radios={[
+                                {title: 'Онлайн'},
+                                {title: 'Оффлайн'}
+                            ]}
+                            onChange={setFormat}
+                        />
+                        <RadioGroup
+                            label='Однокурсники'
+                            name='Однокурсники'
+                            radios={[
+                                {title: 'Только коллеги'},
+                                {title: 'Люди из других компаний'}
+                            ]}
+                            onChange={setClassmates}
+                        />
+                        {<Form label="Желаемые даты">
+                            <SmallCalendarDatePicker
+                                setFirstSelectedDate={setFirstSelectedDate}
+                                setSecondSelectedDate={setSecondSelectedDate}
+                            />
+                        </Form>}
+                        <TextField label='Стоимость на одного' value={price} onChange={setPrice}/>
+                    </CardWithColumn>
+
+                    <CardWithColumn>
+                        <CardIndex index={2} count={count}/>
+                        <CounterInput label="Количество участников" value={numberOfPeople}
+                                      onChange={setNumberOfPeople}/>
+                        <TextField label='ФИО участников' value={fullName} onChange={setFullName}/>
+                        <TextField label="Департамент" value={department} onChange={setDepartment}/>
+                        <TextField label="Отдел/команда" value={team} onChange={setTeam}/>
+                    </CardWithColumn>
+
+                    <CardWithColumn>
+                        <CardIndex index={3} count={count}/>
+                        <RadioGroupWithComponent
+                            label='Изменить статус'
+                            name='Изменить статус'
+                            radios={[
+                                {children: <StatusComponent statusType={StatusType.AWAIT_CONTRACT_AND_PAYMENT}/>},
+                                {children: <StatusComponent statusType={StatusType.AWAIT_PAYMENT}/>},
+                                {children: <StatusComponent statusType={StatusType.APPROVED}/>}
+                            ]}
+                            onChange={setStatus}
+                        />
+                    </CardWithColumn>
+
+                    <div className='mt-[10px]'>
+                        <SubmitButton2 text='Оформить'/>
+                    </div>
+                </form>
+            }
+        </div>
+    )
 }
 
 interface InfoBlockProps {

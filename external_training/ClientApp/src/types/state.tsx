@@ -10,6 +10,7 @@ export type SystemProcess = {
     error: string | null;
     application: Application | undefined;
     role: string;
+    userId: string;
     userFullName: string;
     notifications: Notifications;
     events: EventType[];

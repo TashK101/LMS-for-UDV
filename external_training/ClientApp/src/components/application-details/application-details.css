@@ -108,3 +108,15 @@ hr.solid {
 .logoutText {
     margin: auto;
 }
+
+.left-5 {
+    left: 5%;
+    position: relative;
+}
+
+.button-cont {
+    align-content: end;
+    display: flex;
+    justify-content: flex-end;
+    width: 600px;
+}
