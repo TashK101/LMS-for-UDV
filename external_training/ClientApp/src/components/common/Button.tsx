@@ -37,3 +37,12 @@ export function SubmitButton4({ text }: SubmitButtonProps) {
         </button>
     )
 }
+
+export function SubmitButton5({ text }: SubmitButtonProps) {
+    const redirect = useNavigate();
+    return (
+        <button type="submit" className="w-[153px] h-[54px] rounded-[100px] bg-color6 hover:bg-color5" onClick={() => redirect('/inprogress_applications')}>
+            <H400 text={text} fontSize={20} />
+        </button>
+    )
+}

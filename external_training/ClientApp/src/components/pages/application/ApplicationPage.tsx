@@ -4,7 +4,7 @@ import {H400, H700} from '../../common/Text';
 import {CardIndex, CardWithColumn} from "../../common/Card";
 import {CounterInput, NumberField, TextField} from '../../common/InputField';
 import {RadioGroup, RadioGroupWithStatus} from '../../common/Radio';
-import {SubmitButton2} from '../../common/Button';
+import {SubmitButton5} from '../../common/Button';
 import {StatusComponent} from '../../common/Status';
 import {SmallCalendarDatePicker} from '../../calendars/small-calendar/small-calendar-datepicker';
 import {Form} from '../../common/Form';
@@ -159,7 +159,7 @@ export function ApplicationPage() {
                     </CardWithColumn>
 
                     <div className='mt-[10px]'>
-                        <SubmitButton2 text='Оформить' />
+                        <SubmitButton5 text='Оформить' />
                     </div>
                 </form>
             }
