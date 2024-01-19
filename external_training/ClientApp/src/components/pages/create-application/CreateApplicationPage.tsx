@@ -70,6 +70,7 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
     dispatch(postNewApplicationAction(newApplication))
 
     onSubmit()
+    window.location.reload();
   }
 
   return (

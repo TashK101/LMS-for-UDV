@@ -4,7 +4,7 @@ import {H400, H700} from '../../common/Text';
 import {CardIndex, CardWithColumn} from "../../common/Card";
 import {CounterInput, NumberField, TextField} from '../../common/InputField';
 import {RadioGroup, RadioGroupWithStatus} from '../../common/Radio';
-import {SubmitButton5} from '../../common/Button';
+import {SubmitButton5,SubmitButton2} from '../../common/Button';
 import {StatusComponent} from '../../common/Status';
 import {SmallCalendarDatePicker} from '../../calendars/small-calendar/small-calendar-datepicker';
 import {Form} from '../../common/Form';
@@ -31,7 +31,7 @@ export function ApplicationPage() {
     const [format, setFormat] = useState('')
     const [classmates, setClassmates] = useState('')
     const [price, setPrice] = useState(course?.costPerParticipant?.toString() ?? application?.estimatedCostPerParticipant?.toString() ?? "")
-    const [numberOfPeople, setNumberOfPeople] = useState(course?.participantsCount ?? application?.plannedParticipantsCount ?? "")
+    const [numberOfPeople, setNumberOfPeople] = useState(course?.participantsCount ?? application?.plannedParticipantsCount ?? 0)
     const [fullName, setFullName] = useState(course?.participantsNames?? application?.plannedParticipantsNames ?? "")
     const [status, setStatus] = useState<ApplicationStatus | undefined>(undefined)
     const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>(new Date(course?.begin ?? application?.desiredBegin ?? ""));
@@ -159,7 +159,7 @@ export function ApplicationPage() {
                     </CardWithColumn>
 
                     <div className='mt-[10px]'>
-                        <SubmitButton5 text='Оформить' />
+                        <SubmitButton2 text='Оформить' />
                     </div>
                 </form>
             }
