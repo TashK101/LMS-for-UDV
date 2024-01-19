@@ -29,6 +29,7 @@ import {useNavigate} from "react-router-dom";
 import {getErrorPath} from "ajv/dist/compile/util";
 import { Manager } from "../../types/manager.tsx";
 import {AcceptDeclineProps} from "../../components/application-details/accept-decline-buttons";
+import { AdminApplication } from "../../types/admin-application.tsx";
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
@@ -335,8 +336,23 @@ export const fetchManagersAction = createAsyncThunk<void, undefined, {
         try {
             dispatch(setLoadingStatus(true));
             const { data } = await api.get<Manager[]>('/api/user/managers');
-            console.log(data)
             dispatch(loadManagers(data))
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const postAdminApplicationAction = createAsyncThunk<void, AdminApplication, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/postAdminApplicationAction',
+    async (_arg: AdminApplication, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.post<AdminApplication>('/api/Admin/course', _arg);
         } finally {
             dispatch(setLoadingStatus(false));
         }

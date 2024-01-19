@@ -1,4 +1,6 @@
+import { ApplicationStatus } from "../current-applications-utils/application-status"
 import { Form } from "./Form"
+import { StatusComponent } from "./Status"
 import { H400 } from "./Text"
 
 interface IRadio {
@@ -34,33 +36,28 @@ export function RadioGroup({ label, name, required = true, radios, onChange }: R
     )
 }
 
-interface IRadioWithComponent {
-    children: React.ReactNode
-}
-
-interface RadioGroupWithComponentProps {
+interface RadioGroupWithStatusProps {
     label: string
     name: string
     required?: boolean
-    radios: IRadioWithComponent[]
-    onChange: (value: string) => void
+    radios: ApplicationStatus[]
+    onChange: (value: ApplicationStatus) => void
 }
 
-export function RadioGroupWithComponent({ label, name, required = true, radios, onChange }: RadioGroupWithComponentProps) {
+export function RadioGroupWithStatus({ label, name, required = true, radios, onChange }: RadioGroupWithStatusProps) {
     return (
         <Form label={label}>
             <div>
-                {radios.map((radio, index) =>
+                {radios.map((status, index) =>
                     <div key={index} className="flex gap-[20px] items-center p-3.5">
                         <input
                             type="radio"
                             name={name}
                             className='w-5 h-5 accent-amber-800 border-2'
                             required={required}
-                            value={index}
-                            onChange={(event) => onChange(event.target.value)}
+                            onChange={() => onChange(status)}
                         />
-                        {radio.children}
+                        <StatusComponent statusType={status} />
                     </div>)}
             </div>
         </Form>

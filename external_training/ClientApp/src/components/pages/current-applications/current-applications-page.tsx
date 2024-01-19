@@ -19,6 +19,16 @@ export const ApplicationsStatusTrans = {
     "AwaitingContract": ApplicationStatus.AwaitingContract
 }
 
+export const ApplicationsStatusToData = new Map<ApplicationStatus, string>([
+    [ApplicationStatus.Approved, "Approved"],
+    [ApplicationStatus.NotApproved, "NotApproved"],
+    [ApplicationStatus.AwaitingManagerApproval, "AwaitingManagerApproval"],
+    [ApplicationStatus.CourseSelection, "CourseSelection"],
+    [ApplicationStatus.AwaitingPayment, "AwaitingPayment"],
+    [ApplicationStatus.AwaitingContractAndPayment, "AwaitingContractAndPayment"],
+    [ApplicationStatus.AwaitingContract, "AwaitingContract"]
+]);
+
 export type CurrentApplicationType = {
     id: number,
     title: string,

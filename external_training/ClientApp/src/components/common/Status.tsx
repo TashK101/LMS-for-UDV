@@ -1,30 +1,22 @@
+import { ApplicationStatus } from "../current-applications-utils/application-status";
 import { ApprovedIcon, AwaitManagerApprovalIcon, AwaitPaymentAndContractIcon, AwaitPaymentIcon, CourseSelectionIcon, NotApprovedIcon } from "./Icons";
-
-export enum StatusType {
-    NOT_APPROVED,
-    AWAIT_MANAGER_APPROVAL,
-    COURSE_SELECTION,
-    AWAIT_CONTRACT_AND_PAYMENT,
-    AWAIT_PAYMENT,
-    APPROVED
-}
 
 interface IStatus {
     title: string
     children: React.ReactNode
 }
 
-let statusMap = new Map<StatusType, IStatus>([
-    [StatusType.APPROVED, { title: 'утверждено', children: <ApprovedIcon /> }],
-    [StatusType.AWAIT_PAYMENT, { title: 'ждёт оплату', children: <AwaitPaymentIcon /> }],
-    [StatusType.AWAIT_CONTRACT_AND_PAYMENT, { title: 'ждёт договор и оплату', children: <AwaitPaymentAndContractIcon /> }],
-    [StatusType.COURSE_SELECTION, { title: 'идёт подбор курса', children: <CourseSelectionIcon /> }],
-    [StatusType.AWAIT_MANAGER_APPROVAL, { title: 'ждёт согласования руководителя', children: <AwaitManagerApprovalIcon /> }],
-    [StatusType.NOT_APPROVED, { title: 'не согласовано', children: <NotApprovedIcon /> }]
+let statusMap = new Map<ApplicationStatus, IStatus>([
+    [ApplicationStatus.Approved, { title: 'утверждено', children: <ApprovedIcon /> }],
+    [ApplicationStatus.AwaitingPayment, { title: 'ждёт оплату', children: <AwaitPaymentIcon /> }],
+    [ApplicationStatus.AwaitingContractAndPayment, { title: 'ждёт договор и оплату', children: <AwaitPaymentAndContractIcon /> }],
+    [ApplicationStatus.CourseSelection, { title: 'идёт подбор курса', children: <CourseSelectionIcon /> }],
+    [ApplicationStatus.AwaitingManagerApproval, { title: 'ждёт согласования руководителя', children: <AwaitManagerApprovalIcon /> }],
+    [ApplicationStatus.NotApproved, { title: 'не согласовано', children: <NotApprovedIcon /> }]
 ]);
 
 interface StatusComponentProps {
-    statusType: StatusType
+    statusType: ApplicationStatus
 }
 
 export function StatusComponent({ statusType }: StatusComponentProps) {
