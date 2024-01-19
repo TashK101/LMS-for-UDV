@@ -15,6 +15,8 @@ import { postAdminApplicationAction } from '../../../store/api-actions/api-actio
 import { getApplicationDetails, getCourseDetails } from '../../../store/system-process/system-getters';
 import { ApplicationsStatusToData, ApplicationsStatusTrans } from '../current-applications/current-applications-page';
 import { ApplicationStatus } from '../../current-applications-utils/application-status';
+import {TextValueBlock} from "../../application-details/text-value-block";
+import {stringToDate} from "../../../string-to-date";
 
 export function ApplicationPage() {
     const application = useAppSelector(getApplicationDetails);
@@ -76,6 +78,30 @@ export function ApplicationPage() {
                 leftPartText={"Исходная заявка"}
                 rightPartText={"Оформление"} />
 
+            {!showSecond &&
+                <div className='pending-application-details'>
+                    <TextValueBlock textValueProps={[
+                        ['Количество участников', application?.plannedParticipantsCount],
+                        ['ФИО участников', application?.plannedParticipantsNames],
+                        ['Департамент', application?.department],
+                        ['Отдел/команда', application?.team],
+                        ['Согласующий руководитель', application?.desiredManagerName]
+                    ]}/>
+                    <TextValueBlock textValueProps={[
+                        ['Формат', `${application ? (application?.isTrainingOnline ? 'Онлайн,' : 'Оффлайн,') : ''}
+                        ${application? (application?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании') : ''}`],
+                        ['Желаемые даты', `${stringToDate(application?.desiredBegin)} - ${stringToDate(application?.desiredEnd)}`],
+                        ['Похожие курсы', application?.similarPrograms],
+                        ['Стоимость на одного', `${application?.estimatedCostPerParticipant} рублей`]
+                    ]}/>
+                    <TextValueBlock textValueProps={[
+                        ['Мотивация', application?.relevanceReason],
+                        ['Цели обучения', application?.trainingGoals],
+                        ['Приобретаемые навыки', application?.skillsToBeAcquired],
+                        ['Примечания', application?.applicationNotes]
+                    ]}/>
+                </div>
+            }
             {showSecond &&
                 <form
                     onSubmit={submitHandler}
