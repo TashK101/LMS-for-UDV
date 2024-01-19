@@ -26,17 +26,17 @@ export function ApplicationPage() {
 
     const count = 3
 
-    const [eduCenter, setEduCenter] = useState('')
-    const [courseTitle, setCourseTitle] = useState('')
+    const [eduCenter, setEduCenter] = useState(course?.educationalCenter ?? "")
+    const [courseTitle, setCourseTitle] = useState(course?.courseName ?? application?.trainingTopic ?? "")
     const [format, setFormat] = useState('')
     const [classmates, setClassmates] = useState('')
-    const [price, setPrice] = useState('')
-    const [numberOfPeople, setNumberOfPeople] = useState(0)
-    const [fullName, setFullName] = useState('')
-    const [status, setStatus] = useState<ApplicationStatus|undefined>(undefined)
-    const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>(undefined);
-    const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>(undefined);
-    const [showSecond, setShowSecond] = useState(false);
+    const [price, setPrice] = useState(course?.costPerParticipant?.toString() ?? "")
+    const [numberOfPeople, setNumberOfPeople] = useState(course?.participantsCount ?? 0)
+    const [fullName, setFullName] = useState(course?.participantsNames?? "")
+    const [status, setStatus] = useState<ApplicationStatus | undefined>(undefined)
+    const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>(new Date(course?.begin ?? ""));
+    const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>(new Date(course?.end ?? ""));
+    const [showSecond, setShowSecond] = useState(true);
 
     const dispatch = useAppDispatch();
 
@@ -61,7 +61,7 @@ export function ApplicationPage() {
     return (
         <div
             className="flex flex-col mx-auto max-w-2xl gap-[40px] mt-[72px] mb-[80px]">
-            <H700 text={course?.courseName ?? ""} />
+            <H700 text={courseTitle} />
 
             <div className='flex flex-row gap-[30px] items-center'>
                 <p className="font-golos text-color7 text-[20px] font-[600]">Статус</p>
