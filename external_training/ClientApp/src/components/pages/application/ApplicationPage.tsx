@@ -30,12 +30,12 @@ export function ApplicationPage() {
     const [courseTitle, setCourseTitle] = useState(course?.courseName ?? application?.trainingTopic ?? "")
     const [format, setFormat] = useState('')
     const [classmates, setClassmates] = useState('')
-    const [price, setPrice] = useState(course?.costPerParticipant?.toString() ?? "")
-    const [numberOfPeople, setNumberOfPeople] = useState(course?.participantsCount ?? 0)
-    const [fullName, setFullName] = useState(course?.participantsNames?? "")
+    const [price, setPrice] = useState(course?.costPerParticipant?.toString() ?? application?.estimatedCostPerParticipant?.toString() ?? "")
+    const [numberOfPeople, setNumberOfPeople] = useState(course?.participantsCount ?? application?.plannedParticipantsCount ?? "")
+    const [fullName, setFullName] = useState(course?.participantsNames?? application?.plannedParticipantsNames ?? "")
     const [status, setStatus] = useState<ApplicationStatus | undefined>(undefined)
-    const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>(new Date(course?.begin ?? ""));
-    const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>(new Date(course?.end ?? ""));
+    const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>(new Date(course?.begin ?? application?.desiredBegin ?? ""));
+    const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>(new Date(course?.end ?? application?.desiredEnd ?? ""));
     const [showSecond, setShowSecond] = useState(true);
 
     const dispatch = useAppDispatch();
