@@ -3,6 +3,10 @@ import { Component } from 'react';
 import authService from './AuthorizeService';
 import { AuthenticationResultStatus } from './AuthorizeService';
 import { QueryParameterNames, LogoutActions, ApplicationPaths } from './ApiAuthorizationConstants';
+import {NavLink} from "reactstrap";
+import {Link} from "react-router-dom";
+import '../application-details/application-details.css'
+
 
 // The main responsibility of this component is to handle the user's logout process.
 // This is the starting point for the logout process, which is usually initiated when a
@@ -33,7 +37,7 @@ export class Logout extends Component {
         this.processLogoutCallback();
         break;
       case LogoutActions.LoggedOut:
-        this.setState({ isReady: true, message: "You successfully logged out!" });
+        this.setState({ isReady: true, message: "Вы успешно вышли из аккаунта" });
         break;
       default:
         throw new Error(`Invalid action '${action}'`);
@@ -48,7 +52,11 @@ export class Logout extends Component {
       return <div></div>
     }
     if (!!message) {
-      return (<div>{message}</div>);
+      return (
+      <div>
+        <div className='topic-text logoutText centred-text mt-20'>{message}</div>
+        {<div className='flex'> <NavLink replace tag={Link} className="logoutBtn" to={ApplicationPaths.Login}>Вернуться</NavLink></div>}
+      </div>);
     } else {
       const action = this.props.action;
       switch (action) {

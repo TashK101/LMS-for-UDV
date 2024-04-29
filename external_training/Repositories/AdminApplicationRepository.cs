@@ -16,6 +16,7 @@ namespace external_training.Repositories
         public async Task<IEnumerable<TrainingApplication>> GetPendingApplicationsAsync()
         {
             return await _context.TrainingApplications
+                .Include(a => a.User)
                 .Include(a => a.Comments)
                 .Where(a => a.IsArchived == false)
                 .ToListAsync();
@@ -24,6 +25,7 @@ namespace external_training.Repositories
         public async Task<IEnumerable<TrainingApplication>> GetArchivedApplicationsAsync()
         {
             return await _context.TrainingApplications
+                .Include(a => a.User)
                 .Include(a => a.Comments)
                 .Where(a => a.IsArchived)
                 .ToListAsync();
@@ -31,7 +33,13 @@ namespace external_training.Repositories
 
         public async Task AddCourse(SelectedTrainingCourse course)
         {
-            await _context.SelectedTrainingCourses.AddAsync(course);
+            var oldCourse = await _context.SelectedTrainingCourses.FirstOrDefaultAsync(c => c.TrainingApplicationId == course.TrainingApplicationId);
+            if (oldCourse != null)
+            {
+                course.SelectedTrainingCourseId = oldCourse.SelectedTrainingCourseId;
+                _context.Entry(oldCourse).State = EntityState.Detached;
+            }
+            _context.SelectedTrainingCourses.Update(course);
             await _context.SaveChangesAsync();
         }
 

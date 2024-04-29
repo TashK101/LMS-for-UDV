@@ -21,10 +21,12 @@ namespace external_training.Repositories
 
         public async Task<IEnumerable<Notification>> GetNotificationsAsync(string userId)
         {
-            return await _context.Notifications
+            var notifications = await _context.Notifications
                 .Include(n => n.TrainingApplication)
                 .Where(n => n.UserId == userId)
                 .ToListAsync();
+            notifications.Reverse();
+            return notifications;
         }
     }
 }

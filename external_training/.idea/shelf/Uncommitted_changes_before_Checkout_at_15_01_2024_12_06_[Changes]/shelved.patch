@@ -1,0 +1,93 @@
+Index: ../.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"2efef38b-2c48-4585-9930-6bb6b94f9c86\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"TypeScript File\" />\r\n        <option value=\"JavaScript File\" />\r\n        <option value=\"TypeScript JSX File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2a5YcqKDbWsnYr0bhcARLPIqQgi\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;settings.typescriptcompiler&quot;,\r\n    &quot;ts.external.directory.path&quot;: &quot;C:\\\\Users\\\\lisac\\\\Documents\\\\GitHub\\\\LMS-for-UDV\\\\external_training\\\\ClientApp\\\\node_modules\\\\typescript\\\\lib&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\lisac\\Documents\\GitHub\\LMS-for-UDV\\external_training\\ClientApp\\src\\store\\system-process\" />\r\n      <recent name=\"C:\\Users\\lisac\\Documents\\GitHub\\LMS-for-UDV\\external_training\\ClientApp\\src\\store\" />\r\n      <recent name=\"C:\\Users\\lisac\\Documents\\GitHub\\LMS-for-UDV\\external_training\\ClientApp\\src\\icons\" />\r\n      <recent name=\"C:\\Users\\lisac\\Documents\\GitHub\\LMS-for-UDV\\external_training\\ClientApp\\src\\components\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"apply_migrations\" type=\"BatchConfigurationType\" factoryName=\"Batch\" temporary=\"true\">\r\n      <module name=\"LMS-for-UDV\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"./external_training\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"apply_migrations.bat\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Batch.apply_migrations\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"2efef38b-2c48-4585-9930-6bb6b94f9c86\" name=\"Changes\" comment=\"\" />\r\n      <created>1703609988247</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1703609988247</updated>\r\n      <workItem from=\"1703609990730\" duration=\"4941000\" />\r\n      <workItem from=\"1703615091287\" duration=\"1887000\" />\r\n      <workItem from=\"1703627256992\" duration=\"4262000\" />\r\n      <workItem from=\"1703660654247\" duration=\"3551000\" />\r\n      <workItem from=\"1703718493728\" duration=\"666000\" />\r\n      <workItem from=\"1704283104659\" duration=\"1823000\" />\r\n      <workItem from=\"1704887627112\" duration=\"16904000\" />\r\n      <workItem from=\"1704922641330\" duration=\"1667000\" />\r\n      <workItem from=\"1704971853247\" duration=\"8883000\" />\r\n      <workItem from=\"1705135978927\" duration=\"11919000\" />\r\n      <workItem from=\"1705186137370\" duration=\"214000\" />\r\n      <workItem from=\"1705232330773\" duration=\"44914000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../.idea/workspace.xml b/../.idea/workspace.xml
+--- a/../.idea/workspace.xml	(revision 8b0035eb7f21c400ed6f9aebcc801a8f576d961c)
++++ b/../.idea/workspace.xml	(date 1705302295681)
+@@ -5,7 +5,12 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="2efef38b-2c48-4585-9930-6bb6b94f9c86" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/header/header.tsx" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/external_training/ClientApp/src/tailwind.css" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package-lock.json" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/package.json" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-file-2.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/components/pages/test-page/test-file-2.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/external_training/ClientApp/src/index.js" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -15,8 +20,6 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
+-        <option value="TypeScript File" />
+-        <option value="JavaScript File" />
+         <option value="TypeScript JSX File" />
+       </list>
+     </option>
+@@ -33,9 +36,6 @@
+     <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProjectId" id="2a5YcqKDbWsnYr0bhcARLPIqQgi" />
+-  <component name="ProjectLevelVcsManager">
+-    <ConfirmationsSetting value="2" id="Add" />
+-  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+@@ -55,30 +55,6 @@
+     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+ }</component>
+-  <component name="RecentsManager">
+-    <key name="MoveFile.RECENT_KEYS">
+-      <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\store\system-process" />
+-      <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\store" />
+-      <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\icons" />
+-      <recent name="C:\Users\lisac\Documents\GitHub\LMS-for-UDV\external_training\ClientApp\src\components" />
+-    </key>
+-  </component>
+-  <component name="RunManager">
+-    <configuration name="apply_migrations" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+-      <module name="LMS-for-UDV" />
+-      <option name="INTERPRETER_OPTIONS" value="" />
+-      <option name="WORKING_DIRECTORY" value="./external_training" />
+-      <option name="PARENT_ENVS" value="true" />
+-      <option name="SCRIPT_NAME" value="apply_migrations.bat" />
+-      <option name="PARAMETERS" value="" />
+-      <method v="2" />
+-    </configuration>
+-    <recent_temporary>
+-      <list>
+-        <item itemvalue="Batch.apply_migrations" />
+-      </list>
+-    </recent_temporary>
+-  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -88,17 +64,7 @@
+       <option name="presentableId" value="Default" />
+       <updated>1703609988247</updated>
+       <workItem from="1703609990730" duration="4941000" />
+-      <workItem from="1703615091287" duration="1887000" />
+-      <workItem from="1703627256992" duration="4262000" />
+-      <workItem from="1703660654247" duration="3551000" />
+-      <workItem from="1703718493728" duration="666000" />
+-      <workItem from="1704283104659" duration="1823000" />
+-      <workItem from="1704887627112" duration="16904000" />
+-      <workItem from="1704922641330" duration="1667000" />
+-      <workItem from="1704971853247" duration="8883000" />
+-      <workItem from="1705135978927" duration="11919000" />
+-      <workItem from="1705186137370" duration="214000" />
+-      <workItem from="1705232330773" duration="44914000" />
++      <workItem from="1703615091287" duration="1423000" />
+     </task>
+     <servers />
+   </component>

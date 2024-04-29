@@ -6,44 +6,36 @@ import { ApplicationPaths, LoginActions, LogoutActions } from './ApiAuthorizatio
 const ApiAuthorizationRoutes = [
   {
     path: ApplicationPaths.Login,
-    element: loginAction(LoginActions.Login)
+    element: <Login action={LoginActions.Login}></Login>,
   },
   {
     path: ApplicationPaths.LoginFailed,
-    element: loginAction(LoginActions.LoginFailed)
+    element: <Login action={LoginActions.LoginFailed}></Login>,
   },
   {
     path: ApplicationPaths.LoginCallback,
-    element: loginAction(LoginActions.LoginCallback)
+    element: <Login action={LoginActions.LoginCallback}></Login>,
   },
   {
     path: ApplicationPaths.Profile,
-    element: loginAction(LoginActions.Profile)
+    element: <Login action={LoginActions.Profile}></Login>,
   },
   {
     path: ApplicationPaths.Register,
-    element: loginAction(LoginActions.Register)
+    element: <Login action={LoginActions.Register}></Login>,
   },
   {
     path: ApplicationPaths.LogOut,
-    element: logoutAction(LogoutActions.Logout)
+    element: <Logout action={LogoutActions.Logout}></Logout>
   },
   {
     path: ApplicationPaths.LogOutCallback,
-    element: logoutAction(LogoutActions.LogoutCallback)
+    element: <Logout action={LogoutActions.LogoutCallback}></Logout>
   },
   {
     path: ApplicationPaths.LoggedOut,
-    element: logoutAction(LogoutActions.LoggedOut)
+    element: <Logout action={LogoutActions.LoggedOut}></Logout>
   }
 ];
-
-function loginAction(name){
-  return <Login action={name}></Login>;
-}
-
-function logoutAction(name) {
-  return <Logout action={name}></Logout>;
-}
 
 export default ApiAuthorizationRoutes;

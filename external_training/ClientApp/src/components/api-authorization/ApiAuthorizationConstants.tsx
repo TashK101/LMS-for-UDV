@@ -18,7 +18,6 @@ export const LoginActions = {
   Profile: 'profile',
   Register: 'register'
 };
-
 const prefix = '/authentication';
 
 export const ApplicationPaths = {

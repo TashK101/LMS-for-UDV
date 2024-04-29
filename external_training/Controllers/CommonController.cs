@@ -38,6 +38,15 @@ namespace external_training.Controllers
             return Ok(updateUser.FullName);
         }
 
+        [HttpPost("delete_aplication")]
+        public async Task<ActionResult<int>> DeleteAplication(int aplicationId)
+        {
+            var count = await _context.TrainingApplications
+                .Where(a => a.TrainingApplicationId == aplicationId)
+                .ExecuteDeleteAsync();
+            return Ok(count);
+        }
+
         [HttpPost("add_user_to_default_team")]
         public async Task<ActionResult<int>> AddUserToDefaultTeam()
         {

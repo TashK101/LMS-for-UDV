@@ -50,12 +50,13 @@ namespace external_training.Services
         {
             var comment = Mapper.mapToComment(commentCreation, userId);
             await _userApplicationRepository.AddCommentAsync(comment);
+            var aplication = await _userApplicationRepository.GetAsync(comment.TrainingApplicationId);
             var userNotification = new Notification
             {
                 Text = "Новый комментарий",
                 CreatedAt = DateTime.UtcNow,
                 TrainingApplicationId = comment.TrainingApplicationId,
-                UserId = comment.UserId
+                UserId = aplication.UserId
             };
             await _notificationRepository.AddNotificationAsync(userNotification);
         }
@@ -64,6 +65,20 @@ namespace external_training.Services
         {
             var comments = await _userApplicationRepository.GetComments(applicationId);
             return comments.Select(Mapper.MapToCommentDto).ToList();
+        }
+
+        public async Task<bool> ChangeStatusAsync(int applicationId, string status)
+        {
+            if (status == "CourseSelection"
+                || status == "AwaitingContract"
+                || status == "AwaitingPayment"
+                || status == "AwaitingContractAndPayment"
+                || status == "Approved")
+            {
+                var enumStatus = (ApplicationStatus)Enum.Parse(typeof(ApplicationStatus), status);
+                return await _adminApplicationRepository.ChangeStatusAsync(applicationId, enumStatus);
+            }
+            return false;
         }
     }
 }

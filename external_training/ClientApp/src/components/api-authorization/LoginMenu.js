@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import {Link, useNavigation} from 'react-router-dom';
 import authService from './AuthorizeService';
 import { ApplicationPaths } from './ApiAuthorizationConstants';
+import '../application-details/application-details.css'
+import {Header} from "../header/header";
 
 export class LoginMenu extends Component {
   constructor(props) {
@@ -46,13 +48,18 @@ export class LoginMenu extends Component {
   }
 
   authenticatedView(userName, profilePath, logoutPath, logoutState) {
+
     return (<Fragment>
-      <NavItem>
-        <NavLink tag={Link} className="text-dark" to={profilePath}>Hello {userName}</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink replace tag={Link} className="text-dark" to={logoutPath} state={logoutState}>Logout</NavLink>
-      </NavItem>
+      <Header/>
+      <div className='application-details'>
+            <div className='topic-text logoutText'> Вы уверены, что хотите выйти из аккаунта?</div>
+            {/*<NavItem>*/}
+            {/*  <NavLink tag={Link} className="text-dark" to={profilePath}>Hello {userName}</NavLink>*/}
+            {/*</NavItem>*/}
+            {/*<NavItem>*/}
+        {<div className='flex'> <NavLink replace tag={Link} className="logoutBtn" to={logoutPath} state={logoutState}>Выйти</NavLink></div>}
+            {/*</NavItem>*/}
+      </div>
     </Fragment>);
   }
 
@@ -67,3 +74,4 @@ export class LoginMenu extends Component {
     </Fragment>);
   }
 }
+
