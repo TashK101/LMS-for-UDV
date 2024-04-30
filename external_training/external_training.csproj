@@ -27,6 +27,15 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Demands" Version="3.0.1-pre2" />
+    <PackageReference Include="Demands.Ussc" Version="1.0.6" />
+    <PackageReference Include="OrgStructure" Version="4.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="organization.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
