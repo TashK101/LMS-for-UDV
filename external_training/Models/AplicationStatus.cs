@@ -2,12 +2,16 @@
 {
     public enum ApplicationStatus
     {
-        NotApproved,
+        Editing,
         AwaitingManagerApproval,
+        AwaitingDepartmentManagerApproval,
         CourseSelection,
-        AwaitingContract,
         AwaitingPayment,
         AwaitingContractAndPayment,
-        Approved
+        AwaitingTraining,
+        TrainingInProgress,
+        TrainingCompleted,
+        TrainingCanceled,
+        NotApproved
     }
-}
+} 

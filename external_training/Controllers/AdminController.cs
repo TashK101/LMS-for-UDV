@@ -25,10 +25,10 @@ namespace external_training.Controllers
             return Ok(applications);
         }
 
-        [HttpPost("course")]
-        public async Task<StatusCodeResult> AddCourse(SelectedCourseRequest courseRequest)
+        [HttpPost("edit_course")]
+        public async Task<StatusCodeResult> EditCourse(CourseDto courseDto)
         {
-            await _adminApplicationService.AddCourse(courseRequest);
+            await _adminApplicationService.EditCourse(courseDto);
             return Ok();
         }
 

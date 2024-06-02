@@ -232,3 +232,7 @@ _Pvt_Extensions
 .fake/
 .idea/workspace.xml
 *.xml
+
+LocalPackages/
+*appsettings.json
+*organization.json

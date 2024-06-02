@@ -14,21 +14,22 @@ namespace external_training.Data
 
         }
 
-        public DbSet<Team> Teams { get; set; }
-        public DbSet<Department> Departments { get; set; }
         public DbSet<TrainingApplication> TrainingApplications { get; set; }
-        public DbSet<SelectedTrainingCourse> SelectedTrainingCourses { get; set; }
+        public DbSet<Course> Courses { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<ApprovingManager> ApprovingManagers { get; set; }
+        public DbSet<ApplicationParticipant> ApplicationParticipants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<TrainingApplication>()
-                .HasOne(t => t.Manager)
-                .WithMany()
-                .HasForeignKey(t => t.ManagerId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(t => t.Course)
+                .WithOne(c => c.TrainingApplication)
+                .HasForeignKey<Course>(c => c.TrainingApplicationId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder
                 .Entity<TrainingApplication>()

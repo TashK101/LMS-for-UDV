@@ -46,41 +46,5 @@ namespace external_training.Controllers
                 .ExecuteDeleteAsync();
             return Ok(count);
         }
-
-        [HttpPost("add_user_to_default_team")]
-        public async Task<ActionResult<int>> AddUserToDefaultTeam()
-        {
-            var id = User.Identity.Name;
-            var user = await _userManager.FindByIdAsync(id);
-            await EnsureDefaultDepartmentAndTeamAsync(user);
-            var updateUser = await _userManager.FindByIdAsync(id);
-            return Ok(updateUser.TeamId);
-        }
-
-        private async Task EnsureDefaultDepartmentAndTeamAsync(ApplicationUser user)
-        {
-            var defaultDepartment = await _context.Departments.FirstOrDefaultAsync(d => d.Name == "Default");
-            if (defaultDepartment == null)
-            {
-                defaultDepartment = new Department { Name = "Default" };
-                _context.Departments.Add(defaultDepartment);
-                await _context.SaveChangesAsync();
-            }
-
-            var defaultTeam = await _context.Teams.FirstOrDefaultAsync(t => t.Name == "Default");
-            if (defaultTeam == null)
-            {
-                defaultTeam = new Team { Name = "Default", DepartmentId = defaultDepartment.DepartmentId };
-                _context.Teams.Add(defaultTeam);
-                await _context.SaveChangesAsync();
-            }
-
-            if (user.TeamId == null)
-            {
-                user.TeamId = defaultTeam.TeamId;
-                _context.Update(user);
-                await _context.SaveChangesAsync();
-            }
-        }
     }
 }

@@ -9,7 +9,7 @@ namespace external_training.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    [Authorize(Roles = "Admin,User,Manager")]
+    [Authorize(Roles = "Admin,User")]
     public class UserController : ControllerBase
     {
         private readonly IUserApplicationService _applicationService;
@@ -31,10 +31,17 @@ namespace external_training.Controllers
         }
 
         [HttpGet("managers")]
-        public async Task<ActionResult<IEnumerable<ManagerInfo>>> GetManagers()
+        public async Task<ActionResult<IEnumerable<SoloManagerDto>>> GetManagers()
         {
-            var managers = await _applicationService.GetManagersAsync();
+            var managers = await _applicationService.GetManagersAsync(User!.Identity!.Name!);
             return Ok(managers);
+        }
+
+        [HttpGet("all_solo_Employees")]
+        public async Task<ActionResult<IEnumerable<PersonInfo>>> GetAllSoloEmployees()
+        {
+            var employees = _applicationService.GetAllSoloEmployees();
+            return Ok(employees);
         }
 
         [HttpGet("training_application")]
@@ -63,9 +70,9 @@ namespace external_training.Controllers
         }
 
         [HttpGet("course")]
-        public async Task<ActionResult<SelectedCourseResponse>> GetSelectedCourseResponse(int trainingApplicationId)
+        public async Task<ActionResult<CourseDto>> GetCourseResponse(int trainingApplicationId)
         {
-            var course = await _applicationService.GetSelectedCourseAsync(trainingApplicationId);
+            var course = await _applicationService.GetCourseAsync(trainingApplicationId);
             if (course == null)
                 return NotFound();
             return Ok(course);
@@ -102,15 +109,15 @@ namespace external_training.Controllers
         [HttpGet("role")]
         public async Task<ActionResult<RoleResponse>> GetRole()
         {
-            var id = User.Identity.Name;
+            var id = User!.Identity!.Name!;
             var user = await _userManager.FindByIdAsync(id);
             var roles = await _userManager.GetRolesAsync(user!);
             var role = new RoleResponse
             {
                 UserId = id,
-                UserEmail = user.Email,
-                UserFullName = user.FullName,
-                RoleName = roles.FirstOrDefault()
+                UserEmail = user!.Email!,
+                UserFullName = user!.FullName,
+                RoleName = roles.Order().First()
             };
             return Ok(role);
         }

@@ -30,7 +30,7 @@ namespace external_training.SoloIntegration
 
             services.AddScoped(provider => provider.GetRequiredService<IDemandsApiClient>().GetContext());
 
-            services.AddScoped<OrgStructure>();
+            services.AddScoped<OrgStructureRepository>();
             services.AddScoped<ApplicationRepository>();
 
             return services;

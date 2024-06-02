@@ -40,19 +40,18 @@ namespace external_training.Repositories
         public async Task<TrainingApplication?> GetAsync(int applicationId)
         {
             return await _context.TrainingApplications
-                .Include(a => a.Manager)
+                .Include(a => a.ApprovingManagers)
+                .Include(a => a.ApplicationParticipants)
                 .Include(a => a.User)
-                .Include(a => a.Department)
-                .Include(a => a.Team)
                 .Include(a => a.Comments)
                 .ThenInclude(c => c.User)
-                .Include(a => a.SelectedCourse)
+                .Include(a => a.Course)
                 .FirstOrDefaultAsync(a => a.TrainingApplicationId == applicationId);
         }
 
-        public async Task<SelectedTrainingCourse?> GetSelectedCourseAsync(int applicationId)
+        public async Task<Course?> GetCourseAsync(int applicationId)
         {
-            return await _context.SelectedTrainingCourses
+            return await _context.Courses
                 .FirstOrDefaultAsync(c => c.TrainingApplicationId == applicationId);
         }
 
@@ -74,9 +73,9 @@ namespace external_training.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<SelectedTrainingCourse>> GetActiveCoursesAsync()
+        public async Task<IEnumerable<Course>> GetActiveCoursesAsync()
         {
-            return await _context.SelectedTrainingCourses
+            return await _context.Courses
                 .Include(c => c.TrainingApplication)
                 .Where(c => c.TrainingApplication.IsArchived == false)
                 .ToListAsync();

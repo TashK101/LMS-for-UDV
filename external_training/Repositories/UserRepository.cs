@@ -16,7 +16,6 @@ namespace external_training.Repositories
         public Task<ApplicationUser?> GetAsync(string userId)
         {
             return _context.Users
-                .Include(u => u.Team)
                 .FirstOrDefaultAsync(u => u.Id == userId);
         }
     }

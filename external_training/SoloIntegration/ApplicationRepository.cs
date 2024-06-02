@@ -25,7 +25,7 @@ namespace external_training.SoloIntegration
         public async Task CreatApplicationInSoloAsync(TrainingApplication trainingApplication)
         {
             var createCommand = await _context.Documents.GetBlank(WellKnown.TrainingRequest.DocumentTypeId);
-            createCommand.DocumentId = new Guid();
+            createCommand.DocumentId = Guid.NewGuid();
 
             //Заполняем кастомные поля документа
             fillTrainingRequestFields(createCommand, trainingApplication);
@@ -52,40 +52,34 @@ namespace external_training.SoloIntegration
         private void fillTrainingRequestFields(CreateDemandCommandApiDTO createCommand, TrainingApplication trainingApplication)
         {
             var orgUnits = _org.OrgUnits.Where(x => x.Chief.Appointment != null).Take(2).ToList();
-            var initiator = _org.People.Where(x => !x.IsFired()).Take(1).Single();
-            var participants = _org.People.Where(x => !x.IsFired()).Skip(1).Take(4).ToList();
 
-            createCommand.OuterApproversAppointmentsIds = [];
+            createCommand.OuterApproversAppointmentsIds = trainingApplication.ApprovingManagers.Select(m => m.SoloPersonId).ToList();
 
             createCommand.CustomFields[WellKnown.TrainingRequest.TrainingGoal] = trainingApplication.TrainingGoals;
             createCommand.CustomFields[WellKnown.TrainingRequest.TrainingCourse] = new TrainingCourseApiDTO
             {
-                Name = trainingApplication.TrainingTopic,
-                Type = trainingApplication.IsTrainingOnline ? "Онлайн курсы": "Очные курсы",
-                Category = "Soft skill",
-                Description = trainingApplication.TrainingTopic,
-                TrainingCenter = "",
-                Cost = trainingApplication.EstimatedCostPerParticipant.ToString() + "руб.",
+                Name = trainingApplication.Course.Name,
+                Type = trainingApplication.Course.IsTrainingOnline ? "Онлайн курсы": "Очные курсы",
+                Category = trainingApplication.Course.Category,
+                Description = trainingApplication.Course.Description,
+                TrainingCenter = trainingApplication.Course.TrainingCenter,
+                Cost = trainingApplication.Course.TotalCost.ToString() + "руб.",
             };
-            createCommand.CustomFields[WellKnown.TrainingRequest.Initiator] = initiator.Id;
-            createCommand.CustomFields[WellKnown.TrainingRequest.Participants] = new List<Guid>();
+            createCommand.CustomFields[WellKnown.TrainingRequest.Initiator] = trainingApplication.User.SoloPersonId;
+            createCommand.CustomFields[WellKnown.TrainingRequest.Participants] = trainingApplication.ApplicationParticipants.Select(m => m.SoloPersonId).ToList();
             createCommand.CustomFields[WellKnown.TrainingRequest.Period] = new PeriodApiDTO
             {
-                StartDate = trainingApplication.DesiredBegin,
-                FinishDate = trainingApplication.DesiredEnd
+                StartDate = trainingApplication.Course.Begin,
+                FinishDate = trainingApplication.Course.End
             };
-
-            throw new NotImplementedException();
         }
 
-        private async Task impersonateAndSetProfile(Guid userId)
+        private async Task impersonateAndSetProfile(Guid personId)
         {
-            _context.Impersonate(userId);
+            _context.Impersonate(personId);
 
             var profiles = await _context.Profiles.GetProfiles();
             _context.SetProfile(profiles.First(x => x.Type == ProfileType.Personal));
-
-            throw new NotImplementedException();
         }
     }
 }

@@ -31,15 +31,9 @@ namespace external_training.Repositories
                 .ToListAsync();
         }
 
-        public async Task AddCourse(SelectedTrainingCourse course)
+        public async Task EditCourse(Course course)
         {
-            var oldCourse = await _context.SelectedTrainingCourses.FirstOrDefaultAsync(c => c.TrainingApplicationId == course.TrainingApplicationId);
-            if (oldCourse != null)
-            {
-                course.SelectedTrainingCourseId = oldCourse.SelectedTrainingCourseId;
-                _context.Entry(oldCourse).State = EntityState.Detached;
-            }
-            _context.SelectedTrainingCourses.Update(course);
+            _context.Courses.Update(course);
             await _context.SaveChangesAsync();
         }
 

@@ -1,6 +1,7 @@
 ﻿using external_training.Controllers.DtoModels;
 using external_training.Models;
 using external_training.Repositories;
+using external_training.SoloIntegration;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,43 +15,49 @@ namespace external_training.Services
         private readonly IUserApplicationRepository _applicationRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserRepository _userRepository;
-        private INotificationRepository _notificationRepository;
+        private readonly INotificationRepository _notificationRepository;
+        private readonly OrgStructureRepository _orgStructureRepository;
 
-        public UserApplicationService(IUserApplicationRepository applicationRepository, UserManager<ApplicationUser> userManager, IUserRepository userRepository, INotificationRepository notificationRepository)
+        public UserApplicationService(IUserApplicationRepository applicationRepository, UserManager<ApplicationUser> userManager, IUserRepository userRepository, INotificationRepository notificationRepository, OrgStructureRepository orgStructureRepository)
         {
             _applicationRepository = applicationRepository;
             _userManager = userManager;
             _userRepository = userRepository;
             _notificationRepository = notificationRepository;
+            _orgStructureRepository = orgStructureRepository;
         }
 
         public async Task CreateTrainingApplicationAsync(TrainingApplicationRequest request, string userId)
         {
             var user = await _userRepository.GetAsync(userId);
-            TrainingApplication trainingApplication = Mapper.MapToTrainingApplication(request, user!);
+            var managers = request.ApprovingManagerSoloAppointmentIds
+                .Select(_orgStructureRepository.GetManagerByAppointment).ToList();
+            var participants = request.ParticipantSoloPersonIds
+                .Select(_orgStructureRepository.GetPerson).ToList();
+
+            TrainingApplication trainingApplication = Mapper.MapToTrainingApplication(request, user!, managers, participants);
             var applicationId = await _applicationRepository.AddAsync(trainingApplication);
-            var managerNotification = new Notification
-            {
-                Text = "Новая заявка для одобрения",
-                CreatedAt = DateTime.UtcNow,
-                TrainingApplicationId = applicationId,
-                UserId = trainingApplication.ManagerId
-            };
-            await _notificationRepository.AddNotificationAsync(managerNotification);
             var adminNotification = new Notification
             {
                 Text = "Новая заявка",
                 CreatedAt = DateTime.UtcNow,
                 TrainingApplicationId = applicationId,
-                UserId = "1e27f5cd-ba5c-48fa-bf4c-250e67a29ae9"
+                UserId = "df416651-c71f-4384-be1d-f164890218ab"
             };
             await _notificationRepository.AddNotificationAsync(adminNotification);
         }
 
-        public async Task<IEnumerable<ManagerInfo>> GetManagersAsync()
+        public async Task<IEnumerable<SoloManagerDto>> GetManagersAsync(string userId)
         {
-            var managers = await _userManager.GetUsersInRoleAsync("Manager");
-            return managers.Select(Mapper.MapToManagerInfo).ToList();
+            var user = await _userRepository.GetAsync(userId);
+            var managers = _orgStructureRepository.GetManagers(user!.UserName!);
+            return managers;
+        }
+
+        public IEnumerable<PersonInfo> GetAllSoloEmployees()
+        {
+            var persons = _orgStructureRepository.GetAllEmployees();
+            return persons.Select(Mapper.MapToPersonInfo);
         }
 
         public async Task<DetaileTrainingApplicationResponse?> GetTrainingApplicationAsync(int applicationId)
@@ -61,15 +68,14 @@ namespace external_training.Services
             return Mapper.MapToDetaileTrainingApplicationResponse(application);
         }
 
-        public async Task<SelectedCourseResponse?> GetSelectedCourseAsync(int applicationId)
+        public async Task<CourseDto?> GetCourseAsync(int applicationId)
         {
-            var selectedCourse = await _applicationRepository.GetSelectedCourseAsync(applicationId);
-            if (selectedCourse == null)
+            var course = await _applicationRepository.GetCourseAsync(applicationId);
+            if (course == null)
             {
                 return null;
             }
-            var application = await _applicationRepository.GetAsync(applicationId);
-            var response = Mapper.MapToSelectedCourseResponse(selectedCourse, application!);
+            var response = Mapper.MapToCourseResponse(course);
             return response;
         }
 
@@ -94,7 +100,7 @@ namespace external_training.Services
                 Text = "Новый комментарий",
                 CreatedAt = DateTime.UtcNow,
                 TrainingApplicationId = comment.TrainingApplicationId,
-                UserId = "1e27f5cd-ba5c-48fa-bf4c-250e67a29ae9"
+                UserId = "df416651-c71f-4384-be1d-f164890218ab"
             };
             await _notificationRepository.AddNotificationAsync(adminNotification);
         }

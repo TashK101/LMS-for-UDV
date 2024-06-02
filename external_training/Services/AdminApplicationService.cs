@@ -17,18 +17,16 @@ namespace external_training.Services
             _notificationRepository = notificationRepository;
         }
 
-        public async Task AddCourse(SelectedCourseRequest courseRequest)
+        public async Task EditCourse(CourseDto courseDto)
         {
-            var status = (ApplicationStatus)Enum.Parse(typeof(ApplicationStatus), courseRequest.Status);
-            await _adminApplicationRepository.ChangeStatusAsync(courseRequest.TrainingApplicationId, status);
-            var course = Mapper.MapToSelectedTrainingCourse(courseRequest);
-            await _adminApplicationRepository.AddCourse(course);
-            var application = await _userApplicationRepository.GetAsync(courseRequest.TrainingApplicationId);
+            var course = Mapper.MapToCourse(courseDto);
+            await _adminApplicationRepository.EditCourse(course);
+            var application = await _userApplicationRepository.GetAsync(courseDto.TrainingApplicationId);
             var userNotification = new Notification
             {
                 Text = "Подобран курс",
                 CreatedAt = DateTime.UtcNow,
-                TrainingApplicationId = courseRequest.TrainingApplicationId,
+                TrainingApplicationId = courseDto.TrainingApplicationId,
                 UserId = application.UserId
             };
             await _notificationRepository.AddNotificationAsync(userNotification);
@@ -70,10 +68,10 @@ namespace external_training.Services
         public async Task<bool> ChangeStatusAsync(int applicationId, string status)
         {
             if (status == "CourseSelection"
-                || status == "AwaitingContract"
                 || status == "AwaitingPayment"
                 || status == "AwaitingContractAndPayment"
-                || status == "Approved")
+                || status == "AwaitingTraining"
+                || status == "TrainingCanceled")
             {
                 var enumStatus = (ApplicationStatus)Enum.Parse(typeof(ApplicationStatus), status);
                 return await _adminApplicationRepository.ChangeStatusAsync(applicationId, enumStatus);

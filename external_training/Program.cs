@@ -76,11 +76,9 @@ builder.Services.AddSoloIntegration(builder.Configuration);
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserApplicationRepository, UserApplicationRepository>();
-builder.Services.AddScoped<IManagerApplicationRepository, ManagerApplicationRepository>();
 builder.Services.AddScoped<IAdminApplicationRepository, AdminApplicationRepository>();
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
-builder.Services.AddScoped<IManagerApplicationService, ManagerApplicationService>();
 builder.Services.AddScoped<IAdminApplicationService, AdminApplicationService>();
 builder.Services.AddScoped<IAdminApplicationService, AdminApplicationService>();
 builder.Services.AddTransient<IEventSink, UserRegistrationEventHandler>();
