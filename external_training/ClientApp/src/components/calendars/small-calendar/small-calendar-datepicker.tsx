@@ -1,7 +1,7 @@
-import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-import {Calendar} from 'react-modern-calendar-datepicker';
+import '@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css';
+import {Calendar} from '@hassanmojab/react-modern-calendar-datepicker';
 import React, {useState} from "react";
-import {DayRange} from "react-modern-calendar-datepicker";
+import {DayRange} from "@hassanmojab/react-modern-calendar-datepicker";
 import clsx from "clsx";
 import {customLocale} from "./custom-locale.ts";
 

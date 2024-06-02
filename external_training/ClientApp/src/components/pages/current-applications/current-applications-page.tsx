@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import clsx from "clsx";
 import {PlusIcon} from "../../current-applications-utils/icons/plus-icon.tsx";
 import {ApplicationCard} from "../../current-applications-utils/application-card.tsx";
@@ -7,6 +7,8 @@ import {ModeSwitchButton} from "../../current-applications-utils/mode-switch-but
 import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {fetchTrainingApplicationsAction} from "../../../store/api-actions/api-actions.ts";
 import {State} from "../../../types/state.tsx";
+import { Modal, ModalContext } from "../../common/Modal.tsx";
+import { CreateApplicationPage } from "../create-application/CreateApplicationPage.tsx";
 
 type ApplicationType = {
     title: string,
@@ -110,15 +112,22 @@ export function CurrentApplicationsPage(): JSX.Element {
         applications.filter((appl) => appl.status === ApplicationStatus.Approved) :
         applications.filter((appl) => appl.status !== ApplicationStatus.Approved);
 
+    const { modal, open, close } = useContext(ModalContext)
+
     return (
         <div>
+            {modal && <Modal onClose={close}>
+                <CreateApplicationPage onSubmit={close} />
+            </Modal>}
+
             <div className={"mx-[55px] mt-[40px] flex font-medium items-center justify-between"}>
                 <ModeSwitchButton contentMode={historyMode}
-                                  setContentMode={setHistoryMode}
-                                  leftPartText={"Текущие заявки"}
-                                  rightPartText={"История"}/>
+                    setContentMode={setHistoryMode}
+                    leftPartText={"Текущие заявки"}
+                    rightPartText={"История"}/>
                 <button
-                    className={newApplicationButtonStyle}>
+                    className={newApplicationButtonStyle}
+                    onClick={open}>
                     <PlusIcon className={"mr-4"}/>
                     Новая заявка
                 </button>
