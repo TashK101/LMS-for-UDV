@@ -81,6 +81,7 @@ builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
 builder.Services.AddScoped<IAdminApplicationService, AdminApplicationService>();
 builder.Services.AddScoped<IAdminApplicationService, AdminApplicationService>();
+builder.Services.AddScoped<IWebhooksService, WebhooksService>();
 builder.Services.AddTransient<IEventSink, UserRegistrationEventHandler>();
 
 var app = builder.Build();

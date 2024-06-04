@@ -12,14 +12,26 @@ namespace external_training.SoloIntegration
         {
             services.Configure<SoloIntegrationOptions>(configuration.GetSection("SoloIntegration"));
 
-            services.AddSingleton(provider =>
-            {
-                var options = provider.GetRequiredService<IOptions<SoloIntegrationOptions>>().Value;
-                return UsscDemandsApi.Build(x =>
-                    x.ConnectToHost(options.Host)
-                        .SetApplicationToken(options.ApplicationToken)
-                        .UseHttpClient());
-            });
+            services.AddUsscDemandsApi(x => x.ConnectToHost("https://solo-demo.ft-soft.ru/")
+                .SetApplicationToken("EducationPortal")
+                .UseHttpClient());
+
+            //services.AddSingleton(provider => 
+            //{
+                //var options = provider.GetRequiredService<IOptions<SoloIntegrationOptions>>().Value;
+                //return UsscDemandsApi.Build(x =>
+                    //x.ConnectToHost(options.Host)
+                        //.SetApplicationToken(options.ApplicationToken)
+                        //.UseHttpClient());
+            //});
+
+            services.AddHttpClient(nameof(DemandsApi))
+                .ConfigurePrimaryHttpMessageHandler(() =>
+                    new HttpClientHandler
+                    {
+                        UseDefaultCredentials = true,
+                        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                    });
 
             services.AddSingleton(provider =>
             {
@@ -28,10 +40,12 @@ namespace external_training.SoloIntegration
                 return OrgStructureApi.GetOrganization();
             });
 
-            services.AddScoped(provider => provider.GetRequiredService<IDemandsApiClient>().GetContext());
+            var provider = services.BuildServiceProvider();
+            var client = provider.GetRequiredService<IDemandsApiClient>();
+            services.AddScoped(provider => client.GetContext());
 
             services.AddScoped<OrgStructureRepository>();
-            services.AddScoped<ApplicationRepository>();
+            services.AddScoped<SoloApplicationRepository>();
 
             return services;
         }

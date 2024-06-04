@@ -32,6 +32,22 @@ namespace external_training.Controllers
             return Ok();
         }
 
+        [HttpPost("replace_managers")]
+        public async Task<StatusCodeResult> ReplaceManagers(ReplaceManagersDto replace)
+        {
+            await _adminApplicationService.ReplaceManagersAsync(replace);
+            return Ok();
+        }
+
+        [HttpPost("send_application_to_solo")]
+        public async Task<StatusCodeResult> SendApplicationToSolo(int applicationId)
+        {
+            var isChanged = await _adminApplicationService.SendApplicationToSolo(applicationId);
+            if (isChanged)
+                return Ok();
+            return BadRequest();
+        }
+
         [HttpPost("change_status")]
         public async Task<StatusCodeResult> ChangeStatus(int applicationId, string status)
         {
@@ -46,6 +62,13 @@ namespace external_training.Controllers
         {
             await _adminApplicationService.CreateCommentAsync(commentCreation, User!.Identity!.Name!);
             return Ok();
+        }
+
+        [HttpGet("user_managers")]
+        public async Task<ActionResult<IEnumerable<SoloManagerDto>>> GetUserManagers(string userId)
+        {
+            var managers = await _adminApplicationService.GetManagersAsync(userId);
+            return Ok(managers);
         }
 
         [HttpGet("archived_applications")]

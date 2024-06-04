@@ -38,7 +38,7 @@ namespace external_training.Controllers
         }
 
         [HttpGet("all_solo_Employees")]
-        public async Task<ActionResult<IEnumerable<PersonInfo>>> GetAllSoloEmployees()
+        public ActionResult<IEnumerable<PersonInfo>> GetAllSoloEmployees()
         {
             var employees = _applicationService.GetAllSoloEmployees();
             return Ok(employees);

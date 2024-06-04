@@ -46,5 +46,12 @@ namespace external_training.Controllers
                 .ExecuteDeleteAsync();
             return Ok(count);
         }
+
+        [HttpPost("test")]
+        public async Task<ActionResult<Guid>> test(int aplicationId)
+        {
+            var a = await _context.TrainingApplications.FirstAsync();
+            return Ok(a.SoloDocumentId);
+        }
     }
 }

@@ -49,6 +49,18 @@ namespace external_training.Repositories
                 .FirstOrDefaultAsync(a => a.TrainingApplicationId == applicationId);
         }
 
+        public async Task<TrainingApplication?> GetBySoloDocumentIdAsync(Guid soloDocumentId)
+        {
+            return await _context.TrainingApplications
+                .Include(a => a.ApprovingManagers)
+                .Include(a => a.ApplicationParticipants)
+                .Include(a => a.User)
+                .Include(a => a.Comments)
+                .ThenInclude(c => c.User)
+                .Include(a => a.Course)
+                .FirstOrDefaultAsync(a => a.SoloDocumentId == soloDocumentId);
+        }
+
         public async Task<Course?> GetCourseAsync(int applicationId)
         {
             return await _context.Courses
