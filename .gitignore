@@ -235,4 +235,5 @@ _Pvt_Extensions
 
 LocalPackages/
 *appsettings.json
+*appsettings.Development.json
 *organization.json
