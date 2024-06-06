@@ -13,7 +13,7 @@ type ModeSwitchButtonProps = {
 export function ModeSwitchButton({contentMode, setContentMode, leftPartText, rightPartText, className} : ModeSwitchButtonProps) {
     const selectedButtonStyle = "bg-[#FFEDCF] hover:bg-[#FFCE80]"
     const unselectedButtonStyle = "hover:bg-[#FFCE80]"
-    const historyModeButtonStyle = "flex py-[12px] px-[24px]  hover:bg-[#C9C9C7]"
+    const historyModeButtonStyle = "flex items-baseline py-[11px] px-[12px] leading-[19px] text-[16px] hover:bg-[#C9C9C7]"
 
     return (
         <div className={clsx(className,"flex")}>
@@ -22,7 +22,7 @@ export function ModeSwitchButton({contentMode, setContentMode, leftPartText, rig
                 className={clsx(
                     contentMode ? unselectedButtonStyle : selectedButtonStyle,
                     historyModeButtonStyle,
-                    "border-2 rounded-l-full")}
+                    "border-[#555555] border-[1px] rounded-l-full")}
                 disabled={!contentMode}>
                 <CheckMarkIcon className={clsx(contentMode ? "hidden" : "", "mr-[8px]")}/>
                 {leftPartText}
@@ -32,7 +32,7 @@ export function ModeSwitchButton({contentMode, setContentMode, leftPartText, rig
                 className={clsx(
                     contentMode ? selectedButtonStyle : unselectedButtonStyle,
                     historyModeButtonStyle,
-                    "border-y-2 border-r-2 rounded-r-full")}
+                    "border-y-[1px] border-r-[1px] border-[#555555] rounded-r-full")}
                 disabled={contentMode}>
                 {rightPartText}
                 <CheckMarkIcon className={clsx(contentMode ? "" : "hidden", "ml-[8px]")}/>

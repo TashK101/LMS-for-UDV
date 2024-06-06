@@ -100,10 +100,7 @@ export const fetchEventsAction = createAsyncThunk<void, undefined, {
     async (_arg, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.get<EventsType>('/api/user/events')
-                .catch(err => {
-                    console.log(err.response.data);
-                });
+            const {data} = await api.get<EventsType>('/api/user/events');
             dispatch(loadEvents(data))
 
         } finally {

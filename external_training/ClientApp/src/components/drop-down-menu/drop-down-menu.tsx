@@ -5,7 +5,7 @@ import {ApplicationPaths} from '../api-authorization/ApiAuthorizationConstants';
 const menuElementsLabels = [
     {
         label: 'Мои заявки',
-        path: '/cur_applications'
+        path: '/my_applications'
     },
     {
         label: 'Календарь',

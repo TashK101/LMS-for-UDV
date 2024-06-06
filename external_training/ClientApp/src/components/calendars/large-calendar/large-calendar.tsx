@@ -5,7 +5,7 @@ import LeftCalendarArrowIcon from "./icons/left-calendar-arrow-icon.tsx";
 import RightCalendarArrowIcon from "./icons/right-calendar-arrow-icon.tsx";
 
 export default function LargeCalendar() {
-    const [chosenMonth , setChosenMonth] = useState(() => (0));
+    const [chosenMonth , setChosenMonth] = useState(() => (new Date().getMonth()));
     const [chosenYear, setChosenYear] = useState(() => (new Date().getFullYear()));
     const leftArrowClickHandler = () => {
         let currentMonth = chosenMonth;

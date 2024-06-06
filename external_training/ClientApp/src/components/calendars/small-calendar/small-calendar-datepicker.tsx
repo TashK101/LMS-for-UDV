@@ -3,29 +3,50 @@ import DatePicker, {Calendar, Day, DayRange} from '@hassanmojab/react-modern-cal
 import React, {useState} from "react";
 import clsx from "clsx";
 import {customLocale} from "./custom-locale.ts";
+import {DateFilterOption} from "../../date-filter/date-filter.tsx";
+import {getMonthEdgesByDate, getWeekEdgesByOneDate} from "../calendar-utils/date-utils.ts";
 
 type SmallCalendarDatePickerProps = {
-    setFirstSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>,
-    setSecondSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>,
+    setFirstSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+    setSecondSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+    firstDate?: Date;
+    secondDate?: Date;
     className?: string;
 }
 
 type SmallCalendarSingleDatepickerProps = {
-    setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>,
-    className?: string,
-    inRangeFrom: boolean,
-    minDate?: Date | undefined,
-    maxDate?: Date | undefined,
+    setSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+    className?: string;
+    inRangeFrom: boolean;
+    minDate?: Date | undefined;
+    maxDate?: Date | undefined;
+}
+
+type SmallCalendarMonthAndWeekPickerProps = {
+    setFirstSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+    setSecondSelectedDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
+    className?: string;
+    variant: DateFilterOption.Month | DateFilterOption.Week;
 }
 
 export function SmallCalendarDatePicker({
                                             setFirstSelectedDate,
                                             setSecondSelectedDate,
-                                            className
+                                            className,
+                                            firstDate,
+                                            secondDate
                                         }: SmallCalendarDatePickerProps) {
     const [selectedDayRange, setSelectedDayRange] = useState<DayRange>({
-        from: null,
-        to: null
+        from: firstDate ? {
+            year: firstDate.getFullYear(),
+            month: firstDate?.getMonth() + 1,
+            day: firstDate?.getDate(),
+        } : null,
+        to: secondDate ? {
+            year: secondDate.getFullYear(),
+            month: secondDate?.getMonth() + 1,
+            day: secondDate?.getDate(),
+        } : null,
     });
 
     const onChangeHandler = (newVal: DayRange) => {
@@ -44,7 +65,7 @@ export function SmallCalendarDatePicker({
         locale={customLocale}
         colorPrimary={"#F59D0E"}
         colorPrimaryLight={"#FFEDCF"}
-        slideAnimationDuration={"0.25s"}
+        slideAnimationDuration={"0.15s"}
         calendarClassName={clsx("font-normal [&_abbr]:no-underline border-solid border-[#C9C9C7] border-2", className)}
         calendarRangeStartClassName={"text-black"}
         calendarRangeBetweenClassName={"text-black"}
@@ -106,9 +127,44 @@ export function SmallCalendarSingleDatePickerWithInput({
         locale={customLocale}
         colorPrimary={"#F59D0E"}
         colorPrimaryLight={"#FFEDCF"}
-        slideAnimationDuration={"0.25s"}
+        slideAnimationDuration={"0.15s"}
         renderInput={renderCustomInput}
         wrapperClassName={clsx("relative z-[1]", className)}
+        calendarRangeStartClassName={"text-black"}
+        calendarRangeBetweenClassName={"text-black"}
+        calendarRangeEndClassName={"text-black"}/>;
+}
+
+export function SmallCalendarMonthAndWeekPicker({
+                                                    className,
+                                                    setFirstSelectedDate,
+                                                    setSecondSelectedDate,
+                                                    variant
+                                                }: SmallCalendarMonthAndWeekPickerProps) {
+    const [selectedDateLocal, setSelectedDateLocal] = useState<Day>()
+    const onChangeHandler = (newVal: Day) => {
+        if (newVal) {
+            if (variant === DateFilterOption.Week) {
+                const weekEdges = getWeekEdgesByOneDate(customLocale.toNativeDate(newVal));
+                setFirstSelectedDate(() => weekEdges.weekStarts);
+                setSecondSelectedDate(() => weekEdges.weekEnds);
+            } else {
+                const monthEdges = getMonthEdgesByDate(customLocale.toNativeDate(newVal));
+                setFirstSelectedDate(() => monthEdges.monthStarts);
+                setSecondSelectedDate(() => monthEdges.monthEnds);
+            }
+        }
+        setSelectedDateLocal(() => newVal);
+    }
+
+    return <Calendar
+        value={selectedDateLocal}
+        onChange={onChangeHandler}
+        locale={customLocale}
+        colorPrimary={"#F59D0E"}
+        colorPrimaryLight={"#FFEDCF"}
+        slideAnimationDuration={"0.15s"}
+        calendarClassName={clsx("font-normal [&_abbr]:no-underline border-solid border-[#C9C9C7] border-2", className)}
         calendarRangeStartClassName={"text-black"}
         calendarRangeBetweenClassName={"text-black"}
         calendarRangeEndClassName={"text-black"}/>;

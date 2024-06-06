@@ -1,0 +1,1 @@
+export const MAX_CARDS_NOT_TO_STACK = 6;

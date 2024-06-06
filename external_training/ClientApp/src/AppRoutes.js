@@ -6,7 +6,7 @@ import {NotificationsPage} from "./components/pages/notifications-page/notificat
 import {SettingsPage} from "./components/pages/settings/SettingsPage";
 import {ApplicationPage} from "./components/pages/application/ApplicationPage";
 import {ApplicationDetailsPage} from "./ApplicationDetailsPage";
-import {CurrentApplicationsPage} from "./components/pages/current-applications/current-applications-page";
+import {MyApplicationsPage} from "./components/pages/my-applications/my-applications-page";
 import {CalendarPage} from "./components/pages/calendar-page/calendar-page";
 import {InprogressApplicationPage} from "./components/pages/inprogress-applications/inprogress-application-page";
 import {LoginMenu} from "./components/api-authorization/LoginMenu";
@@ -43,9 +43,9 @@ const AppRoutes = [
         element: <CalendarPage/>
     },
     {
-        path: '/cur_applications',
+        path: '/my_applications',
         requireAuth: true,
-        element: <CurrentApplicationsPage/>
+        element: <MyApplicationsPage/>
     },
     {
         path: '/application_details/:id',

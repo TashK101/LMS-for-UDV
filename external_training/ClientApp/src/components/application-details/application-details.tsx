@@ -1,23 +1,24 @@
 import {Comments} from "../comments/comments";
 import {useEffect, useState} from "react"
 import {afterManagerApprovalStatuses} from "./flagStatuses";
-import {ApplicationsStatusTrans} from "../pages/current-applications/current-applications-page";
-import {statusesIcons} from "../current-applications-utils/application-card";
 import {stringToDate} from "../../string-to-date";
 import './application-details.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {getApplicationDetails, getCourseDetails, getId, getRole} from "../../store/system-process/system-getters";
-import {fetchApplicationDetailsAction, fetchStartConfigAction} from "../../store/api-actions/api-actions";
-import {fetchCourseDetailsAction} from "../../store/api-actions/api-actions";
+import {
+    fetchApplicationDetailsAction,
+    fetchCourseDetailsAction,
+    fetchStartConfigAction
+} from "../../store/api-actions/api-actions";
 import {TextValueBlock} from "./text-value-block";
-import {CommentSendField} from "./comment-send-field";
+import {CommentSendField, parseRoleFromString, Role} from "./comment-send-field";
 import {Header} from "../header/header";
 import {ModeSwitchButton} from "../current-applications-utils/mode-switch-button";
 import {IconNameCombo} from "./icon-name-combo";
-import {Role} from "./comment-send-field";
-import {parseRoleFromString} from "./comment-send-field";
 import {AcceptDeclineButton} from "./accept-decline-buttons";
 import {SubmitButton4} from "../common/Button";
+import {StatusIcon} from "../current-applications-utils/icons/status-icons.tsx";
+import {ApplicationStatus} from "../current-applications-utils/application-status.ts";
 
 export type ApplicationDetailsProps = {
     id: number;
@@ -37,23 +38,22 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
     const role = useAppSelector(getRole);
     const roleEnum = parseRoleFromString(role);
     const userId = useAppSelector(getId);
-    // @ts-ignore
-    const status = ApplicationsStatusTrans[application?.status]
+    const status = ApplicationStatus[application?.status as keyof typeof ApplicationStatus]
     const [dataFlag, setDataFlag] = useState(() => false);
     return (
         <div>
             <Header/>
             <div className='application-details left-5'>
                 <h2 className='topic-text'>{application?.trainingTopic}</h2>
-                { (role===Role.manager) && (application?.desiredManagerId === userId) && (status==='Ждёт согласования руководителя') &&
+                {(role === Role.manager) && (application?.desiredManagerId === userId) && (status === 'Ждёт согласования руководителя') &&
                     <AcceptDeclineButton TrainingApplicationId={application.trainingApplicationId}/>
                 }
-                { (role===Role.admin) &&
-                    <SubmitButton4 text={'Оформление'} />
+                {(role === Role.admin) &&
+                    <SubmitButton4 text={'Оформление'}/>
                 }
                 <p className='bold-text'>Статус:</p>
                 <div className='flex border-2 rounded-xl items-center w-fit pr-4'>
-                    {statusesIcons[status]}
+                    <StatusIcon variant={status} className='mr-[8px]'/>
                     {status}
                 </div>
                 <div className='flex w-full gap-[50px]'>
@@ -67,35 +67,35 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
 
                 <ModeSwitchButton contentMode={dataFlag} setContentMode={setDataFlag} leftPartText={'Исходная заявка'}
                                   rightPartText={'Утвержденные данные'}/>
-                { !dataFlag ?
-                <div className='pending-application-details'>
-                    <TextValueBlock textValueProps={[
-                        ['Количество участников', application?.plannedParticipantsCount],
-                        ['ФИО участников', application?.plannedParticipantsNames],
-                        ['Департамент', application?.department],
-                        ['Отдел/команда', application?.team],
-                        ['Согласующий руководитель', application?.desiredManagerName]
-                    ]}/>
-                    <TextValueBlock textValueProps={[
-                        ['Формат', `${application ? (application?.isTrainingOnline ? 'Онлайн,' : 'Оффлайн,') : ''}
-                        ${application? (application?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании') : ''}`],
-                        ['Желаемые даты', `${stringToDate(application?.desiredBegin)} - ${stringToDate(application?.desiredEnd)}`],
-                        ['Похожие курсы', application?.similarPrograms],
-                        ['Стоимость на одного', `${application?.estimatedCostPerParticipant} рублей`]
-                    ]}/>
-                    <TextValueBlock textValueProps={[
-                        ['Мотивация', application?.relevanceReason],
-                        ['Цели обучения', application?.trainingGoals],
-                        ['Приобретаемые навыки', application?.skillsToBeAcquired],
-                        ['Примечания', application?.applicationNotes]
-                    ]}/>
-                </div>
-            : <div className='pending-application-details'>
+                {!dataFlag ?
+                    <div className='pending-application-details'>
+                        <TextValueBlock textValueProps={[
+                            ['Количество участников', application?.plannedParticipantsCount],
+                            ['ФИО участников', application?.plannedParticipantsNames],
+                            ['Департамент', application?.department],
+                            ['Отдел/команда', application?.team],
+                            ['Согласующий руководитель', application?.desiredManagerName]
+                        ]}/>
+                        <TextValueBlock textValueProps={[
+                            ['Формат', `${application ? (application?.isTrainingOnline ? 'Онлайн,' : 'Оффлайн,') : ''}
+                        ${application ? (application?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании') : ''}`],
+                            ['Желаемые даты', `${stringToDate(application?.desiredBegin)} - ${stringToDate(application?.desiredEnd)}`],
+                            ['Похожие курсы', application?.similarPrograms],
+                            ['Стоимость на одного', `${application?.estimatedCostPerParticipant} рублей`]
+                        ]}/>
+                        <TextValueBlock textValueProps={[
+                            ['Мотивация', application?.relevanceReason],
+                            ['Цели обучения', application?.trainingGoals],
+                            ['Приобретаемые навыки', application?.skillsToBeAcquired],
+                            ['Примечания', application?.applicationNotes]
+                        ]}/>
+                    </div>
+                    : <div className='pending-application-details'>
                         <TextValueBlock textValueProps={[
                             ['Учебный центр', course?.educationalCenter],
                             ['Название курса', course?.courseName],
                             ['Формат', `${course ? (course?.isTrainingOnline ? 'Онлайн,' : 'Оффлайн,') : ''} 
-                            ${course? (course?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании') : ''}`],
+                            ${course ? (course?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании') : ''}`],
                             ['Даты', `${stringToDate(course?.begin)} - ${stringToDate(course?.end)}`],
                             ['Стоимость на одного', course?.costPerParticipant]
                         ]}/>

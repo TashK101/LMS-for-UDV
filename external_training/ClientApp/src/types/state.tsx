@@ -23,8 +23,8 @@ export type SystemProcess = {
     userArchivedApplications: ShortApplicationInfoType[];
     managerPendingApplications: ShortApplicationInfoType[];
     managerArchivedApplications: ShortApplicationInfoType[];
-    adminPendingApplications: ShortAdminPendingApplicationInfoType[],
-    adminArchivedApplications: ShortApplicationInfoType[],
+    adminPendingApplications: ShortAdminPendingApplicationInfoType[];
+    adminArchivedApplications: ShortApplicationInfoType[];
     managers: Manager[];
 };
 

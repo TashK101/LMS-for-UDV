@@ -1,9 +1,34 @@
 import {UniversalClassAndChildrenProps} from "../../calendars/calendar-utils/universal-props.ts";
 import clsx from "clsx";
+import {ApplicationStatus} from "../application-status.ts";
 
-const universalClassName = "m-2";
+const universalClassName = "";
 
-export function ApprovedIcon({className}: UniversalClassAndChildrenProps) {
+type StatusIconProps = {
+    className?: string;
+    variant: ApplicationStatus;
+}
+
+export function StatusIcon({className, variant}: StatusIconProps) {
+    switch (variant) {
+        case ApplicationStatus.Approved:
+            return <ApprovedIcon className={className}/>;
+        case ApplicationStatus.AwaitingPayment:
+            return <AwaitingPaymentIcon className={className} />;
+        case ApplicationStatus.AwaitingContractAndPayment || ApplicationStatus.AwaitingContract:
+            return <AwaitingContractAndPaymentIcon className={className} />;
+        case ApplicationStatus.CourseSelection:
+            return <CourseSelectionIcon className={className} />;
+        case ApplicationStatus.AwaitingManagerApproval:
+            return <AwaitingManagerApprovalIcon className={className} />;
+        case ApplicationStatus.NotApproved:
+            return <NotApprovedIcon className={className} />;
+        default:
+            return <></>;
+    }
+}
+
+function ApprovedIcon({className}: UniversalClassAndChildrenProps) {
     const fullClassName = clsx(universalClassName, className)
     return (
         <svg className={fullClassName}
@@ -14,7 +39,7 @@ export function ApprovedIcon({className}: UniversalClassAndChildrenProps) {
     )
 }
 
-export function AwaitingPaymentIcon({className}: UniversalClassAndChildrenProps) {
+function AwaitingPaymentIcon({className}: UniversalClassAndChildrenProps) {
     const fullClassName = clsx(universalClassName, className)
     return (
         <svg className={fullClassName}
@@ -27,7 +52,7 @@ export function AwaitingPaymentIcon({className}: UniversalClassAndChildrenProps)
     )
 }
 
-export function AwaitingContractAndPaymentIcon({className}: UniversalClassAndChildrenProps) {
+function AwaitingContractAndPaymentIcon({className}: UniversalClassAndChildrenProps) {
     const fullClassName = clsx(universalClassName, className)
     return (
         <svg className={fullClassName}
@@ -41,7 +66,7 @@ export function AwaitingContractAndPaymentIcon({className}: UniversalClassAndChi
     )
 }
 
-export function CourseSelectionIcon({className}: UniversalClassAndChildrenProps) {
+function CourseSelectionIcon({className}: UniversalClassAndChildrenProps) {
     const fullClassName = clsx(universalClassName, className)
     return (
         <svg className={fullClassName}
@@ -54,7 +79,7 @@ export function CourseSelectionIcon({className}: UniversalClassAndChildrenProps)
     )
 }
 
-export function AwaitingManagerApprovalIcon({className}: UniversalClassAndChildrenProps) {
+function AwaitingManagerApprovalIcon({className}: UniversalClassAndChildrenProps) {
     const fullClassName = clsx(universalClassName, className)
     return (
         <svg className={fullClassName}
@@ -67,7 +92,7 @@ export function AwaitingManagerApprovalIcon({className}: UniversalClassAndChildr
     )
 }
 
-export function NotApprovedIcon({className}: UniversalClassAndChildrenProps) {
+function NotApprovedIcon({className}: UniversalClassAndChildrenProps) {
     const fullClassName = clsx(universalClassName, className)
     return (
         <svg className={fullClassName}

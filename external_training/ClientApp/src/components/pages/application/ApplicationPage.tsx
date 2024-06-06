@@ -4,7 +4,7 @@ import {H400, H700} from '../../common/Text';
 import {CardIndex, CardWithColumn} from "../../common/Card";
 import {CounterInput, NumberField, TextField} from '../../common/InputField';
 import {RadioGroup, RadioGroupWithStatus} from '../../common/Radio';
-import {SubmitButton5,SubmitButton2} from '../../common/Button';
+import {SubmitButton2} from '../../common/Button';
 import {StatusComponent} from '../../common/Status';
 import {SmallCalendarDatePicker} from '../../calendars/small-calendar/small-calendar-datepicker';
 import {Form} from '../../common/Form';
@@ -13,15 +13,14 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { AdminApplication } from '../../../types/admin-application';
 import { postAdminApplicationAction } from '../../../store/api-actions/api-actions';
 import { getApplicationDetails, getCourseDetails } from '../../../store/system-process/system-getters';
-import { ApplicationsStatusToData, ApplicationsStatusTrans } from '../current-applications/current-applications-page';
+import { ApplicationsStatusToData } from '../my-applications/my-applications-page.tsx';
 import { ApplicationStatus } from '../../current-applications-utils/application-status';
 import {TextValueBlock} from "../../application-details/text-value-block";
 import {stringToDate} from "../../../string-to-date";
 
 export function ApplicationPage() {
     const application = useAppSelector(getApplicationDetails);
-    // @ts-ignore
-    const currentStatus = ApplicationsStatusTrans[application?.status]
+    const currentStatus = ApplicationStatus[application?.status as keyof typeof ApplicationStatus];
     const course = useAppSelector(getCourseDetails);
 
     const count = 3

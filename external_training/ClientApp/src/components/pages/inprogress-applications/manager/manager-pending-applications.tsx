@@ -2,11 +2,9 @@ import {useAppDispatch, useAppSelector} from "../../../../hooks";
 import {useEffect} from "react";
 import {fetchManagerPendingApplicationsAction} from "../../../../store/api-actions/api-actions.ts";
 import {State} from "../../../../types/state.tsx";
-import {
-    ApplicationsStatusTrans,
-    CurrentApplicationType
-} from "../../current-applications/current-applications-page.tsx";
-import {ApplicationCard} from "../../../current-applications-utils/application-card.tsx";
+import {CurrentApplicationType} from "../../my-applications/my-applications-page.tsx";
+import {ApplicationCard} from "../../../application-card/application-card.tsx";
+import {ApplicationStatus} from "../../../current-applications-utils/application-status.ts";
 
 export function ManagerPendingApplications() {
     const getPendingApplications = (state: State) => state.managerPendingApplications
@@ -19,17 +17,13 @@ export function ManagerPendingApplications() {
     const applications: CurrentApplicationType[] = []
 
     if (pendingApplications) {
-        for (let i = 0; i < pendingApplications.length; i++) {
-            let trAppl = pendingApplications[i];
-            applications.push({
-                id: trAppl.trainingApplicationId,
-                title: trAppl.trainingTopic,
-                date: new Date(trAppl.createdAt),
-                // @ts-ignore
-                status: ApplicationsStatusTrans[trAppl.status],
-                comments_count: trAppl.commentsCount,
-            })
-        }
+        pendingApplications.forEach((app) => applications.push({
+            id: app.trainingApplicationId,
+            title: app.trainingTopic,
+            date: new Date(app.createdAt),
+            status: ApplicationStatus[app.status as keyof typeof ApplicationStatus],
+            comments_count: app.commentsCount,
+        }))
     }
     return (
         <div className={"flex justify-center mx-[125px] mt-[30px]"}>

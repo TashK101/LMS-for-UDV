@@ -28,3 +28,28 @@ export function getTimelineDays(chosenDate: Date) {
 export function getLastDayOfChosenMonth(date: Date) {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0);
 }
+
+export function getWeekEdgesByOneDate(date: Date) {
+    const weekDay = ( date.getDay() + 6 ) % 7;
+
+    return {
+        weekStarts: new Date(date.getFullYear(), date.getMonth(), date.getDate() - weekDay),
+        weekEnds: new Date(date.getFullYear(), date.getMonth(), date.getDate() + (6 - weekDay)),
+    }
+}
+
+export function getMonthEdgesByDate(date: Date) {
+    return {
+        monthStarts: new Date(date.getFullYear(), date.getMonth(), 1),
+        monthEnds: new Date(date.getFullYear(), date.getMonth() + 1, 0),
+    }
+}
+
+export function getMonthAndYearDateString(date: Date | undefined) {
+    const str = date?.toLocaleString("ru", {
+        month: 'long',
+        year: "numeric"
+    }).replace(' г.', '');
+
+    return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+}

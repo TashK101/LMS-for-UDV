@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {ModeSwitchButton} from "../../../current-applications-utils/mode-switch-button.tsx";
-import {ManagerArchivedApplications} from "./manager-archived-applications.tsx";
 import {ManagerPendingApplications} from "./manager-pending-applications.tsx";
+import ArchivedApplications from "../../../archived-applications/archived-applications.tsx";
 
 export function ManagerApplicationsField() {
     const [historyMode, setHistoryMode] = useState(() => false);
@@ -13,7 +13,7 @@ export function ManagerApplicationsField() {
                               leftPartText={"Заявки в работе"}
                               rightPartText={"История"}/>
             {historyMode ?
-                <ManagerArchivedApplications/> : <ManagerPendingApplications/>}
+                <ArchivedApplications/> : <ManagerPendingApplications/>}
         </div>
     )
 }

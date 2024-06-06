@@ -1,0 +1,118 @@
+.application-card {
+    font-size: 14px;
+}
+
+.application-card_basic {
+    box-shadow:
+            11px 14px 7px rgba(14, 0, 122, 0.01),
+            6px 8px 6px rgba(14, 0, 122, 0.05),
+            3px 3px 4px rgba(14, 0, 122, 0.09),
+            1px 1px 2px rgba(14, 0, 122, 0.1);
+    width: 340px;
+    padding: 36px 20px;
+    border: solid 1px #FFCE80;
+    border-radius: 20px;
+    background: linear-gradient(to bottom right, #FFF6E9, #FFFFFF);
+}
+
+.application-card_basic:hover {
+    cursor: pointer;
+    background: linear-gradient(to bottom right, #FFEFD4, #FFFBF4);
+}
+
+.application-card_stacked {
+    padding: 8px 12px;
+    width: 100%;
+    border-bottom: solid 1px #C9C9C7;
+}
+
+.application-card_stacked:hover {
+    background-color: #FFEDCF;
+    border: none;
+    cursor: pointer;
+}
+
+.application-card__content {
+    display: flex;
+}
+
+.application-card__content_basic {
+    gap: 14px;
+    flex-direction: column;
+    margin-left: 16px;
+}
+
+.application-card__content_stacked {
+    justify-content: space-between;
+}
+
+.application-card__title {
+    font-weight: 600;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.application-card__title_basic {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.application-card__title_stacked {
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.application-card__info-field {
+    color: #898989;
+    line-height: 16px;
+}
+
+.application-card__info-field_basic {
+    margin-top: 10px;
+}
+
+.application-card__info-field_stacked {
+    margin-top: 4px;
+}
+
+.application-card__comments {
+    font-size: 16px;
+}
+
+.application-card__status {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    gap: 8px;
+}
+
+.application-card__button {
+    border-radius: 100px;
+    line-height: 17px;
+    box-sizing: border-box;
+}
+
+.application-card__button_basic {
+    padding: 8px 18px;
+    margin-top: 28px;
+    background: #FFB439;
+    border: solid 2px #F59D0E;
+}
+
+.application-card__button_basic:hover {
+    border-color: #C56907;
+    background: #FFCE80;
+}
+
+.application-card__button_stacked {
+    padding: 4px 12px;
+    margin-top: 10px;
+    background: #FFEDCF;
+    border: solid 1px #FFCE80;
+}
+
+.application-card__button_stacked:hover {
+    border-color: #F59D0E;
+}

@@ -14,7 +14,7 @@ type ChooseButtonProps = {
         React.Dispatch<React.SetStateAction<number>>
 }
 
-const DropdownIndicator = (props: DropdownIndicatorProps) => {
+export const DropdownIndicator = (props: DropdownIndicatorProps) => {
     return (
         <components.DropdownIndicator {...props}>
             <DownSelectArrowIcon className={"-mb-1 ml-2"}/>

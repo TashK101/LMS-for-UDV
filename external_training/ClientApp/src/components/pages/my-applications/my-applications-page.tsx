@@ -6,18 +6,9 @@ import {ModeSwitchButton} from "../../current-applications-utils/mode-switch-but
 import {Modal, ModalContext} from "../../common/Modal.tsx";
 import {CreateApplicationPage} from "../create-application/CreateApplicationPage.tsx";
 import {Header} from "../../header/header.tsx";
-import {TrainingApplicationsField} from "../../current-applications-utils/training-applications-field.tsx";
-import {ArchivedApplicationsField} from "../../current-applications-utils/archived-applications-field.tsx";
+import {UserApplications} from "../../user-applications/user-applications.tsx";
+import ArchivedApplications from "../../archived-applications/archived-applications.tsx";
 
-export const ApplicationsStatusTrans = {
-    "Approved": ApplicationStatus.Approved,
-    "NotApproved": ApplicationStatus.NotApproved,
-    "AwaitingManagerApproval": ApplicationStatus.AwaitingManagerApproval,
-    "CourseSelection": ApplicationStatus.CourseSelection,
-    "AwaitingPayment": ApplicationStatus.AwaitingPayment,
-    "AwaitingContractAndPayment": ApplicationStatus.AwaitingContractAndPayment,
-    "AwaitingContract": ApplicationStatus.AwaitingContract
-}
 
 export const ApplicationsStatusToData = new Map<ApplicationStatus, string>([
     [ApplicationStatus.Approved, "Approved"],
@@ -37,7 +28,7 @@ export type CurrentApplicationType = {
     comments_count: number
 }
 
-export function CurrentApplicationsPage(): JSX.Element {
+export function MyApplicationsPage(): JSX.Element {
     const [historyMode, setHistoryMode] = useState(false);
     const newApplicationButtonStyle = clsx(
         "flex items-center py-[15px] px-[28px] border-[#F59D0E]",
@@ -62,11 +53,11 @@ export function CurrentApplicationsPage(): JSX.Element {
                 <button
                     className={newApplicationButtonStyle}
                     onClick={open}>
-                    <PlusIcon className={"mr-4"}/>
+                    <PlusIcon className='mr-4'/>
                     Новая заявка
                 </button>
             </div>
-            {historyMode ? <ArchivedApplicationsField/> : <TrainingApplicationsField/>}
+            {historyMode ? <ArchivedApplications/> : <UserApplications/>}
 
         </div>
     )
