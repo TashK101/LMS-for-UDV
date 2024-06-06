@@ -3,26 +3,24 @@ import {Bell} from "../../icons/bell";
 import {Letter} from "../../icons/letter";
 import {Logo} from "../../icons/logo";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {fetchStartConfigAction} from "../../store/api-actions/api-actions";
 import {getfullName, getIsDataLoading, getRole} from "../../store/system-process/system-getters";
 import DropDownMenu from "../drop-down-menu/drop-down-menu";
 import {LoadingPage} from "../pages/loading-page/loading-page";
+import {useNavigate} from "react-router-dom";
 
 export function Header () : JSX.Element {
-    const [isBellHover, setIsBellHover] = useState<boolean>(false);
-    const [isLetterHover, setIsLetterHover] = useState<boolean>(false);
     const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const userId = 1;
     useEffect(() => {
         dispatch(fetchStartConfigAction());
     }, []);
 
     const role = useAppSelector(getRole);
     const fullName = useAppSelector(getfullName);
-    const userId = 1;
     let loadingFlag = useAppSelector(getIsDataLoading);
     if (loadingFlag && (!role && !fullName))
         return <LoadingPage/>
@@ -33,11 +31,16 @@ export function Header () : JSX.Element {
                 <div className="w-1/2 px-[30px]">
                     <Logo/>
                 </div>
-                <div className="w-1/2 px-[50px] py-[15px]">
-                    <div className="flex justify-end items-center gap-[22px]">
-                        <button onMouseEnter={() => setIsBellHover(true)} onMouseLeave={() => setIsBellHover(false)} onClick={() => navigate('/notifications', {state: userId})}><Bell isHover={isBellHover}/></button>
-                        {role !== 'User' && <button onMouseEnter={() => setIsLetterHover(true)} onMouseLeave={() => setIsLetterHover(false)} onClick={() => navigate('/inprogress_applications')}><Letter isHover={isLetterHover}/></button>}
-                        <button onClick={() => setIsMenuVisible(!isMenuVisible)}><HeaderAvatar userFullName={fullName}/></button>
+                <div className="w-1/2 px-[50px] h-full">
+                    <div className="flex justify-end items-center gap-[8px] h-full">
+                        <button className="w-[74px] h-full justify-center items-center inline-flex hover:bg-[#E4E4E3]" onClick={() => navigate('/notifications', {state: userId})}>
+                            <Bell/>
+                        </button>
+
+                        {role !== 'User' && <button className="w-[74px] h-full justify-center items-center inline-flex hover:bg-[#E4E4E3]" onClick={() => navigate('/inprogress_applications')}>
+                            <Letter/>
+                        </button> }
+                        <button className="w-[74px] h-full" onClick={() => setIsMenuVisible(!isMenuVisible)}><HeaderAvatar userFullName={fullName}/></button>
                     </div>
                 </div>
             </div>

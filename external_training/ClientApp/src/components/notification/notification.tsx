@@ -1,9 +1,4 @@
 import {NotificationType} from "../../types/notifications";
-import {useAppDispatch, useAppSelector} from "../../hooks";
-import {useEffect} from "react";
-import {fetchApplicationDetailsAction} from "../../store/api-actions/api-actions";
-import {getApplication} from "../../store/system-process/system-getters";
-import {toLocaleString} from "react-scripts";
 import {useNavigate} from "react-router-dom";
 
 type NotificationProps = {
@@ -23,14 +18,14 @@ export function Notification({notification}: NotificationProps) : JSX.Element {
     const navigate = useNavigate();
 
     return(
-        <button onClick={() => navigate('/application_details/'+notification.trainingApplicationId)} className="w-[615px] px-[50px] py-[30px] bg-[#FFFFFF] hover:bg-stone-50 rounded-[10px] shadow border-2 border-stone-300 hover:border-amber-500 justify-start items-start gap-[100px] inline-flex">
-            <div className="w-full flex-col justify-center items-start gap-5 inline-flex">
-                <div className="text-zinc-800 text-xl font-medium font-['Golos']">{notification?.text}</div>
-                <div className="w-full flex-row justify-between items-start gap-5 inline-flex">
-                    <div className="text-zinc-800 text-left text-xl font-normal font-['Golos']">{`Заявка: ${notification?.trainingTopic}`}</div>
-                    <div className="text-zinc-500 text-base font-normal font-['Golos']">{dateTimeFormatted}</div>
+            <button onClick={() => navigate('/application_details/'+notification.trainingApplicationId)} className="w-[847px] px-6 !py-5 border-b border-stone-300 justify-between items-start inline-flex hover:bg-[#FFEDCF]">
+                <div className="flex-col justify-center items-start gap-2 inline-flex">
+                    <div className="text-zinc-800 text-base font-semibold font-['Golos']">{notification?.text}</div>
+                    <div className="text-zinc-800 text-base font-normal font-['Golos']">{`Заявка: ${notification?.trainingTopic}`}</div>
                 </div>
-            </div>
-        </button>
+                <div className="flex-col justify-center items-start gap-5 inline-flex">
+                    <div className="text-zinc-500 text-sm font-normal font-['Golos']">{dateTimeFormatted}</div>
+                </div>
+            </button>
     )
 }

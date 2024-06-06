@@ -15,13 +15,15 @@ export function NotificationsPage(): JSX.Element {
     return (
         <div className="w-full h-full relative bg-white">
             <Header/>
+            <div className="pl-[88px] pt-[70px]">
             <div
-                className="pl-[350px] pt-[120px] pb-[50px] text-zinc-800 text-[32px] font-semibold font-['Golos'] tracking-wider">Уведомления
+                className="px-6 pb-[32px] text-zinc-800 text-[32px] font-semibold font-['Golos'] tracking-wider">Уведомления
             </div>
-            <div className="pl-[355px] flex-col justify-start items-start gap-[40px] inline-flex">
+            <div className="flex-col justify-start items-start inline-flex">
                 {notifications.map((element) => <Notification key={element.createdAt} notification={element}/>)}
             </div>
             <div className="h-[100px]"/>
+            </div>
         </div>
     )
 }
