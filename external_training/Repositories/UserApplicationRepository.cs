@@ -135,6 +135,15 @@ namespace external_training.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Course>> GetCompletedCoursesAsync()
+        {
+            return await _context.Courses
+                .Include(c => c.TrainingApplication)
+                .ThenInclude(a => a.ApplicationParticipants)
+                .Where(c => c.TrainingApplication.Status == ApplicationStatus.TrainingCompleted)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Course>> GetActiveCoursesAsync()
         {
             return await _context.Courses
