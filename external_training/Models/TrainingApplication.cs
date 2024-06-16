@@ -32,6 +32,7 @@ namespace external_training.Models
 
         public virtual ICollection<ApplicationParticipant> ApplicationParticipants { get; set; } = new List<ApplicationParticipant>();
 
-        public virtual Course Course { get; set; } = default!;
+        public virtual DesiredCourse DesiredCourse { get; set; } = default!;
+        public virtual Course? Course { get; set; }
     }
 }

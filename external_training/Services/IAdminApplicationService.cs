@@ -12,5 +12,7 @@ namespace external_training.Services
         Task<IEnumerable<SoloManagerDto>> GetManagersAsync(string userId);
         Task<IEnumerable<ShortTrainingApplicationResponse>> GetArchivedApplicationsAsync();
         Task<IEnumerable<ShortTrainingApplicationResponse>> GetPendingApplicationsAsync();
+        Task EditDesiredCourse(CourseDto courseDto);
+        Task ReplaceParticipantsAsync(ReplaceParticipantsDto replace);
     }
 }

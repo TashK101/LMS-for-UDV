@@ -18,6 +18,7 @@
         public ICollection<CommentDto> Comments { get; set; } = new List<CommentDto>();
         public ICollection<SoloManagerDto> ApprovingManagers { get; set; } = new List<SoloManagerDto>();
         public ICollection<PersonInfo> Participants { get; set; } = new List<PersonInfo>();
-        public CourseDto Course { get; set; } = new CourseDto();
+        public CourseDto DesiredCourse { get; set; } = new CourseDto();
+        public CourseDto? SelectedCourse { get; set; }
     }
 }

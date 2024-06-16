@@ -1,4 +1,5 @@
-﻿using external_training.Controllers.DtoModels;
+﻿using Azure.Core;
+using external_training.Controllers.DtoModels;
 using external_training.Models;
 using external_training.Repositories;
 using external_training.SoloIntegration;
@@ -26,6 +27,23 @@ namespace external_training.Services
                 return;
             if (state.State == "Approved")
             {
+                var course = new Course
+                {
+                    Name = application.DesiredCourse.Name,
+                    IsTrainingOnline = application.DesiredCourse.IsTrainingOnline,
+                    IsCorporateTraining = application.DesiredCourse.IsCorporateTraining,
+                    Category = application.DesiredCourse.Category,
+                    Description = application.DesiredCourse.Description,
+                    TrainingCenter = application.DesiredCourse.TrainingCenter,
+                    CostPerParticipant = application.DesiredCourse.CostPerParticipant,
+                    TotalCost = application.DesiredCourse.TotalCost,
+                    Begin = application.DesiredCourse.Begin,
+                    End = application.DesiredCourse.End,
+                    TrainingApplicationId = application.DesiredCourse.TrainingApplicationId
+                };
+                if (application.Course != null)
+                    course.CourseId = application.Course.CourseId;
+                await _adminApplicationRepository.EditCourse(course);
                 await _adminApplicationRepository.ChangeStatusAsync(application.TrainingApplicationId, ApplicationStatus.CourseSelection);
                 var userNotification = new Notification
                 {

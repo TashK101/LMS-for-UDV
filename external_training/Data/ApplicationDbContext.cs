@@ -15,6 +15,7 @@ namespace external_training.Data
         }
 
         public DbSet<TrainingApplication> TrainingApplications { get; set; }
+        public DbSet<DesiredCourse> DesiredCourses { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Notification> Notifications { get; set; }
@@ -26,10 +27,17 @@ namespace external_training.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<TrainingApplication>()
+                .HasOne(t => t.DesiredCourse)
+                .WithOne(c => c.TrainingApplication)
+                .HasForeignKey<DesiredCourse>(c => c.TrainingApplicationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TrainingApplication>()
                 .HasOne(t => t.Course)
                 .WithOne(c => c.TrainingApplication)
                 .HasForeignKey<Course>(c => c.TrainingApplicationId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired(false);
 
             modelBuilder
                 .Entity<TrainingApplication>()

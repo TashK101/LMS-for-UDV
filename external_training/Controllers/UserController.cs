@@ -30,6 +30,27 @@ namespace external_training.Controllers
             return Ok();
         }
 
+        [HttpPost("edit_desired_course")]
+        public async Task<StatusCodeResult> EditDesiredCourse(CourseDto courseDto)
+        {
+            await _applicationService.EditDesiredCourse(courseDto);
+            return Ok();
+        }
+
+        [HttpPost("replace_participants")]
+        public async Task<StatusCodeResult> ReplaceParticipants(ReplaceParticipantsDto replace)
+        {
+            await _applicationService.ReplaceParticipantsAsync(replace);
+            return Ok();
+        }
+
+        [HttpPost("replace_managers")]
+        public async Task<StatusCodeResult> ReplaceManagers(ReplaceManagersDto replace)
+        {
+            await _applicationService.ReplaceManagersAsync(replace);
+            return Ok();
+        }
+
         [HttpGet("managers")]
         public async Task<ActionResult<IEnumerable<SoloManagerDto>>> GetManagers()
         {
@@ -70,7 +91,7 @@ namespace external_training.Controllers
         }
 
         [HttpGet("course")]
-        public async Task<ActionResult<CourseDto>> GetCourseResponse(int trainingApplicationId)
+        public async Task<ActionResult<SelectedCourseResponse>> GetCourseResponse(int trainingApplicationId)
         {
             var course = await _applicationService.GetCourseAsync(trainingApplicationId);
             if (course == null)

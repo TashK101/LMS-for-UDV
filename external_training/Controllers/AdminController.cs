@@ -25,10 +25,24 @@ namespace external_training.Controllers
             return Ok(applications);
         }
 
-        [HttpPost("edit_course")]
-        public async Task<StatusCodeResult> EditCourse(CourseDto courseDto)
+        [HttpPost("edit_desired_course")]
+        public async Task<StatusCodeResult> EditDesiredCourse(CourseDto courseDto)
+        {
+            await _adminApplicationService.EditDesiredCourse(courseDto);
+            return Ok();
+        }
+
+        [HttpPost("edit_selected_course")]
+        public async Task<StatusCodeResult> EditSelectedCourse(CourseDto courseDto)
         {
             await _adminApplicationService.EditCourse(courseDto);
+            return Ok();
+        }
+
+        [HttpPost("replace_participants")]
+        public async Task<StatusCodeResult> ReplaceParticipants(ReplaceParticipantsDto replace)
+        {
+            await _adminApplicationService.ReplaceParticipantsAsync(replace);
             return Ok();
         }
 

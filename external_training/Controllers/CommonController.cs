@@ -50,7 +50,7 @@ namespace external_training.Controllers
         [HttpPost("test")]
         public async Task<ActionResult<Guid>> test(int aplicationId)
         {
-            var a = await _context.TrainingApplications.FirstAsync();
+            var a = await _context.TrainingApplications.FirstAsync(c => c.TrainingApplicationId == 2);
             return Ok(a.SoloDocumentId);
         }
     }
