@@ -57,6 +57,7 @@
 }
 hr.solid {
     border-top: 3px solid #bbb;
+    width: 40%;
 }
 .top-bottom-20 {
     padding: 20px 0 20px 0;
