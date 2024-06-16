@@ -26,11 +26,12 @@ export function UserApplications() {
                 title: app.trainingTopic,
                 date: new Date(app.createdAt),
                 status: ApplicationStatus[app.status as keyof typeof ApplicationStatus],
-                comments_count: app.commentsCount,
+                commentsCount: app.commentsCount,
+                userFullName: app.userFullName
             }));
     }
 
     return (
-        <ApplicationCardsContainer applications={applications} showImportButtonInDatePicker showDatePicker/>
+        <ApplicationCardsContainer applications={applications} showDatePicker/>
     )
 }

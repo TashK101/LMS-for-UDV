@@ -3,10 +3,12 @@ import CalendarField from "./field/calendar-field.tsx";
 import {useState} from "react";
 import LeftCalendarArrowIcon from "./icons/left-calendar-arrow-icon.tsx";
 import RightCalendarArrowIcon from "./icons/right-calendar-arrow-icon.tsx";
+import CalendarFilters from "./calendar-filters/calendar-filters.tsx";
 
 export default function LargeCalendar() {
-    const [chosenMonth , setChosenMonth] = useState(() => (new Date().getMonth()));
+    const [chosenMonth, setChosenMonth] = useState(() => (new Date().getMonth()));
     const [chosenYear, setChosenYear] = useState(() => (new Date().getFullYear()));
+    const [isFiltersVisible, setIsFiltersVisible] = useState<boolean>(() => false);
     const leftArrowClickHandler = () => {
         let currentMonth = chosenMonth;
         setChosenMonth((ps) => ps === 0 ? 11 : ps - 1);
@@ -25,7 +27,13 @@ export default function LargeCalendar() {
 
     return (
         <div>
-            <CalendarTitle chosenMonth={chosenMonth} setChosenMonth={setChosenMonth} chosenYear={chosenYear} setChosenYear={setChosenYear}/>
+            <CalendarTitle
+                chosenMonth={chosenMonth}
+                setChosenMonth={setChosenMonth}
+                chosenYear={chosenYear}
+                setChosenYear={setChosenYear}
+                setIsFiltersVisible={setIsFiltersVisible}/>
+            <CalendarFilters isVisible={isFiltersVisible} setIsVisible={setIsFiltersVisible}/>
             <div className="flex justify-between">
                 <button className="m-4 w-[40px] hover:text-[#898989]" onClick={leftArrowClickHandler}>
                     <LeftCalendarArrowIcon className={""}/>

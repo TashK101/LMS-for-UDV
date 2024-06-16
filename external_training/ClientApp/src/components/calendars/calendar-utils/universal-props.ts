@@ -1,4 +1,4 @@
-import {CourseStatus} from "./courseStatus.ts";
+import {CourseStatus} from "./course-status.ts";
 
 export type UniversalClassAndChildrenProps = {
     children?: string;

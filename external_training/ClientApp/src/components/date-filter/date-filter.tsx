@@ -42,7 +42,7 @@ function DateFilter({
     })
 
     return (
-        <div className='flex relative items-center gap-[18px] text-normal z-[1]'>
+        <div className='flex relative items-center gap-[18px] text-normal'>
             <p>Показывать заявки за</p>
             <div>
                 <div
@@ -53,9 +53,9 @@ function DateFilter({
                 </div>
                 {firstDropdownOpen &&
                     <div
-                        className='bg-white border-[#C27800] border-[1px] w-max shadow-md py-[8px] absolute cursor-pointer'>
+                        className='bg-white border-[#C27800] border-[1px] w-[256px] shadow-md py-[8px] absolute cursor-pointer'>
                         {Object.values(DateFilterOption).map((option) => (
-                            <div key={option} className='p-[12px] hover:bg-[#FFEDCF]' onClick={handleFilterOptionClick}>
+                            <div key={option} className='p-[16px] hover:bg-[#FFEDCF]' onClick={handleFilterOptionClick}>
                                 {option}
                             </div>
                         ))}

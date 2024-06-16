@@ -11,21 +11,25 @@ import ArchivedApplications from "../../archived-applications/archived-applicati
 
 
 export const ApplicationsStatusToData = new Map<ApplicationStatus, string>([
-    [ApplicationStatus.Approved, "Approved"],
-    [ApplicationStatus.NotApproved, "NotApproved"],
+    [ApplicationStatus.Editing, 'Editing'],
     [ApplicationStatus.AwaitingManagerApproval, "AwaitingManagerApproval"],
     [ApplicationStatus.CourseSelection, "CourseSelection"],
     [ApplicationStatus.AwaitingPayment, "AwaitingPayment"],
     [ApplicationStatus.AwaitingContractAndPayment, "AwaitingContractAndPayment"],
-    [ApplicationStatus.AwaitingContract, "AwaitingContract"]
+    [ApplicationStatus.AwaitingTraining, 'AwaitingTraining'],
+    [ApplicationStatus.TrainingInProgress, 'TrainingInProgress'],
+    [ApplicationStatus.TrainingCompleted, 'TrainingCompleted'],
+    [ApplicationStatus.TrainingCanceled, 'TrainingCanceled'],
+    [ApplicationStatus.NotApproved, 'NotApproved'],
 ]);
 
 export type CurrentApplicationType = {
+    userFullName: string,
     id: number,
     title: string,
     date: Date,
     status: ApplicationStatus,
-    comments_count: number
+    commentsCount: number
 }
 
 export function MyApplicationsPage(): JSX.Element {

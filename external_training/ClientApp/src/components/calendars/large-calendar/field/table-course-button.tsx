@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import {CourseStatus} from "../../calendar-utils/courseStatus.ts";
+import {CourseStatus} from "../../calendar-utils/course-status.ts";
 import {useNavigate} from "react-router-dom";
 
 type TableCourseButtonProps = {

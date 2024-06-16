@@ -5,15 +5,23 @@ import {fetchEventsAction} from "../../../../store/api-actions/api-actions.ts";
 import {useEffect} from "react";
 import {State} from "../../../../types/state.tsx";
 import {getLastDayOfChosenMonth} from "../../calendar-utils/date-utils.ts";
-import {CourseStatus} from "../../calendar-utils/courseStatus.ts";
+import {CourseStatus} from "../../calendar-utils/course-status.ts";
+import {ApplicationStatus} from "../../../current-applications-utils/application-status.ts";
 
 type CalendarCoursesTableProps = {
     currentMonthMaxDate: number;
     chosenDate: Date;
 }
 
+const MIN_TABLE_HEIGHT = 10;
 
 const getEvents = (state: State) => state.events;
+
+const getCourseInnerStatus = (status: ApplicationStatus) =>
+    status === ApplicationStatus.TrainingInProgress
+    || status === ApplicationStatus.AwaitingTraining
+        ? CourseStatus.Confirmed
+        : CourseStatus.Waiting;
 
 export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: CalendarCoursesTableProps) {
     const dispatch = useAppDispatch();
@@ -31,18 +39,17 @@ export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: 
                 title: event.courseName,
                 startDate: new Date(event.begin),
                 endDate: new Date(event.end),
-                status: event.status === "Approved" ? CourseStatus.Confirmed : CourseStatus.Waiting
+                status: getCourseInnerStatus(event.status),
             })
         }
     }
 
-    const minTableHeight = 10;
     const filteredCourses: ICourse[] = courses.filter((c: ICourse) => {
         return (c.startDate < chosenDate && c.endDate >= chosenDate) ||
             (c.startDate >= chosenDate && c.startDate <= getLastDayOfChosenMonth(chosenDate));
     })
     const numCourses = filteredCourses.length;
-    const height = numCourses >= minTableHeight ? 0 : minTableHeight - numCourses;
+    const height = numCourses >= MIN_TABLE_HEIGHT ? 0 : MIN_TABLE_HEIGHT - numCourses;
 
     return (
         <div className="">

@@ -151,7 +151,7 @@ export function ApplicationPage() {
                             radios={[
                                 ApplicationStatus.AwaitingContractAndPayment,
                                 ApplicationStatus.AwaitingPayment,
-                                ApplicationStatus.Approved
+                                ApplicationStatus.AwaitingTraining,
                             ]}
                             onChange={setStatus}
                         />

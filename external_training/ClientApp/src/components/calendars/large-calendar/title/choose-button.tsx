@@ -10,8 +10,7 @@ type ChooseButtonProps = {
         label: string;
     }[]
     currentValue:number;
-    setCurrentValue:
-        React.Dispatch<React.SetStateAction<number>>
+    setCurrentValue: React.Dispatch<React.SetStateAction<number>>
 }
 
 export const DropdownIndicator = (props: DropdownIndicatorProps) => {
@@ -24,12 +23,12 @@ export const DropdownIndicator = (props: DropdownIndicatorProps) => {
 
 export default function ChooseButton({className, options, currentValue, setCurrentValue}: ChooseButtonProps) {
     let fullClassName = clsx(className,
-        "flex items-center gap-2 border border-[#2B2A29] rounded-lg text-[16px] h-8 px-2 hover:bg-[#FFEDCF] hover:cursor-pointer")
+        "flex items-center gap-2 border-[1px] border-[#898989] rounded-lg text-[16px] h-10 px-3 hover:bg-[#FFEDCF] hover:cursor-pointer")
     const getValue = () => {
         return options.find(c => c.value === currentValue);
     }
 
-    const onChange = (newValue: any) => {
+    const handleOnChange = (newValue: any) => {
         setCurrentValue(() => newValue.value);
     }
 
@@ -48,7 +47,7 @@ export default function ChooseButton({className, options, currentValue, setCurre
                 isSearchable={false}
                 isClearable={false}
                 value={getValue()}
-                onChange={onChange}
+                onChange={handleOnChange}
                 options={options}
             // @ts-ignore
                 components={{DropdownIndicator}}

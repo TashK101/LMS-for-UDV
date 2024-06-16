@@ -16,75 +16,6 @@ const TABLE_BORDERS_COLOR = '9B9B9B';
 const TABLE_CONTRAST_BACKGROUND_COLOR = 'E2EFDA';
 const WORKSHEET_NAME = 'Обучение Интегратор';
 
-// @ts-ignore
-const mockDataset = [
-    [
-        'УрФУ',
-        'Основы программирования',
-        'Оффлайн',
-        'Иванов И. И., Сергеев С. С.',
-        2 * 12850,
-        'UDV',
-        'Backend-разработка',
-        '',
-        '12.06.2024 - 12.09.2024',
-        12850,
-        'Разработка'
-    ],
-    [
-        'ДрайвТеч Консалтинг',
-        'Основы технической безопасности',
-        'Онлайн',
-        'Иванов И. И., Сергеев С. С., Киркоров Ф. Б., Яговкин А. Ю.',
-        4 * 19990,
-        'USSC',
-        'Тестирование',
-        '',
-        '12.06.2024 - 12.12.2024',
-        19990,
-        'Разработка'
-    ],
-    [
-        'УрФУ',
-        'Основы программирования',
-        'Оффлайн',
-        'Иванов И. И., Сергеев С. С.',
-        2 * 12850,
-        'UDV',
-        'Backend-разработка',
-        '',
-        '12.06.2024 - 12.09.2024',
-        12850,
-        'Разработка'
-    ],
-    [
-        'УрФУ',
-        'Основы программирования',
-        'Оффлайн',
-        'Иванов И. И., Сергеев С. С.',
-        2 * 12850,
-        'UDV',
-        'Backend-разработка',
-        '',
-        '12.06.2024 - 12.09.2024',
-        12850,
-        'Разработка'
-    ],
-    [
-        'УрФУ',
-        'Основы программирования',
-        'Оффлайн',
-        'Иванов И. И., Сергеев С. С.',
-        2 * 12850,
-        'UDV',
-        'Backend-разработка',
-        '',
-        '12.06.2024 - 12.09.2024',
-        12850,
-        'Разработка'
-    ],
-]
-
 export function importDataConverter({
                                         courses,
                                         firstSelectedDate,
@@ -124,7 +55,7 @@ export function importDataConverter({
         worksheet.addRow({
             educationCenter: app.educationalCenter,
             courseName: app.courseName,
-            onlineTraining: app.isTrainingOnline,
+            onlineTraining: (app.isTrainingOnline ? 'Онлайн' : 'Оффлайн').concat(app.isCorporateTraining ? ', только для нашей компании' : ', для всех желающих'),
             participantsNames: getFormattedParticipantsNames(app.participantsNames),
             totalCost: app.participantsCount * app.costPerParticipant,
             department: app.department,

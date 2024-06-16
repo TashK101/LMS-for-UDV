@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {CurrentApplicationType} from "../pages/my-applications/my-applications-page.tsx";
 import clsx from "clsx";
+import {ApplicationStatus} from "../current-applications-utils/application-status.ts";
 
 type ApplicationCardController = {
     application: CurrentApplicationType;
@@ -15,8 +16,7 @@ export function useApplicationCard({application, stacked}: ApplicationCardContro
         year: "numeric"
     }).replace(' г.', '');
 
-    // HARDCODE! WIP.
-    const applicationManager = "Иванов Иван Иванович";
+    const userFullName = application.userFullName;
     const handleCardClick = () => {
         navigate(`/application_details/${application.id}`);
     };
@@ -26,6 +26,8 @@ export function useApplicationCard({application, stacked}: ApplicationCardContro
         'application-card_stacked': stacked
     })
 
+    const showSOLOButton = application.status === ApplicationStatus.Editing;
 
-    return {handleCardClick, applicationManager, applicationDateStr, cardClassName};
+
+    return {handleCardClick, userFullName, applicationDateStr, cardClassName, showSOLOButton};
 }

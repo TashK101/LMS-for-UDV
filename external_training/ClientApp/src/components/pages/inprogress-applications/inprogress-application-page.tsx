@@ -4,7 +4,6 @@ import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {fetchStartConfigAction} from "../../../store/api-actions/api-actions.ts";
 import {getRole} from "../../../store/system-process/system-getters.tsx";
 import {Navigate} from "react-router-dom";
-import {ManagerApplicationsField} from "./manager/manager-applications-field.tsx";
 import {AdminApplications} from "./admin/admin-applications.tsx";
 
 
@@ -20,9 +19,6 @@ export function InprogressApplicationPage(): JSX.Element {
     switch (role) {
         case "User":
             toRenderElement = <Navigate to={'/my_applications'} />
-            break;
-        case "Manager":
-            toRenderElement = <ManagerApplicationsField />;
             break;
         case "Admin":
             toRenderElement = <AdminApplications />;

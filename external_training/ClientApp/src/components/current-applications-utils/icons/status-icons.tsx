@@ -11,11 +11,11 @@ type StatusIconProps = {
 
 export function StatusIcon({className, variant}: StatusIconProps) {
     switch (variant) {
-        case ApplicationStatus.Approved:
-            return <ApprovedIcon className={className}/>;
+        case ApplicationStatus.TrainingCompleted:
+            return <TrainingCompletedIcon className={className}/>;
         case ApplicationStatus.AwaitingPayment:
             return <AwaitingPaymentIcon className={className} />;
-        case ApplicationStatus.AwaitingContractAndPayment || ApplicationStatus.AwaitingContract:
+        case ApplicationStatus.AwaitingContractAndPayment:
             return <AwaitingContractAndPaymentIcon className={className} />;
         case ApplicationStatus.CourseSelection:
             return <CourseSelectionIcon className={className} />;
@@ -23,12 +23,68 @@ export function StatusIcon({className, variant}: StatusIconProps) {
             return <AwaitingManagerApprovalIcon className={className} />;
         case ApplicationStatus.NotApproved:
             return <NotApprovedIcon className={className} />;
+        case ApplicationStatus.TrainingCanceled:
+            return <TrainingCanceledIcon className={className} />;
+        case ApplicationStatus.TrainingInProgress:
+            return <TrainingInProgressIcon className={className} />;
+        case ApplicationStatus.AwaitingTraining:
+            return <AwaitingTrainingIcon className={className} />;
         default:
             return <></>;
     }
 }
 
-function ApprovedIcon({className}: UniversalClassAndChildrenProps) {
+function AwaitingTrainingIcon({className}: UniversalClassAndChildrenProps) {
+    const fullClassName = clsx(universalClassName, className)
+    return (
+        <svg className={fullClassName}
+            width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M9.99245 9.98687L14.6152 1.69642C13.1831 0.900416 11.5668 0.486995 9.92302 0.500312C8.27901 0.513631 6.6694 0.953299 5.25024 1.77261L9.99245 9.98687Z"
+                fill="#C27800" stroke="#2B2A29"/>
+            <path
+                d="M9.99245 10.0131L14.6152 18.3036C13.1831 19.0996 11.5668 19.513 9.92302 19.4997C8.27901 19.4864 6.6694 19.0467 5.25024 18.2274L9.99245 10.0131Z"
+                stroke="#2B2A29"/>
+        </svg>
+    )
+}
+
+function TrainingInProgressIcon({className}: UniversalClassAndChildrenProps) {
+    const fullClassName = clsx(universalClassName, className)
+    return (
+        <svg className={fullClassName}
+             width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="9.5" fill="white" stroke="#2B2A29"/>
+            <circle cx="10" cy="10" r="10" fill="#C27800"/>
+            <circle cx="10" cy="10" r="9.5" stroke="#2B2A29"/>
+            <path
+                d="M6 10.1821C6 9.62984 6.44772 9.18213 7 9.18213H12.6366C13.1888 9.18213 13.6366 9.62984 13.6366 10.1821V13.0463C13.6366 13.4106 13.4396 13.7487 13.1146 13.9133C10.6866 15.1424 9.08172 15.0995 6.55141 13.907C6.21068 13.7464 6 13.3994 6 13.0228V10.1821Z"
+                fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M12.6366 10.1821H7V13.0129C8.19103 13.5721 9.06729 13.8134 9.87737 13.8183C10.6781 13.8231 11.5186 13.5972 12.6366 13.0344V10.1821ZM7 9.18213C6.44772 9.18213 6 9.62984 6 10.1821V13.0228C6 13.3994 6.21068 13.7464 6.55141 13.907C9.08172 15.0995 10.6866 15.1424 13.1146 13.9133C13.4396 13.7487 13.6366 13.4106 13.6366 13.0463V10.1821C13.6366 9.62984 13.1888 9.18213 12.6366 9.18213H7Z"
+                  fill="#2B2A29"/>
+            <path d="M9.72746 6L15.4548 8.54587L9.72746 11.168L4 8.54587L9.72746 6Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M9.32128 5.08621C9.57987 4.97126 9.87506 4.97126 10.1336 5.08621L15.861 7.63208C16.2203 7.79178 16.4526 8.14718 16.4548 8.54034C16.457 8.9335 16.2286 9.29145 15.8711 9.45511L10.1437 12.0773C9.87941 12.1983 9.57551 12.1983 9.31119 12.0773L3.58373 9.45511C3.22625 9.29145 2.99784 8.9335 3.00002 8.54034C3.00219 8.14718 3.23455 7.79178 3.59382 7.63208L9.32128 5.08621ZM9.72746 6L15.4548 8.54587L9.72746 11.168L4 8.54587L9.72746 6Z"
+                  fill="#2B2A29"/>
+        </svg>
+
+    )
+}
+
+function TrainingCanceledIcon({className}: UniversalClassAndChildrenProps) {
+    const fullClassName = clsx(universalClassName, className)
+    return (
+        <svg className={fullClassName}
+             width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="9.5" fill="#D9D9D9" stroke="#2B2A29"/>
+            <path d="M3 17L16.4615 3" stroke="#2B2A29"/>
+            <path d="M3 3L17 17" stroke="#2B2A29"/>
+        </svg>
+    )
+}
+
+function TrainingCompletedIcon({className}: UniversalClassAndChildrenProps) {
     const fullClassName = clsx(universalClassName, className)
     return (
         <svg className={fullClassName}

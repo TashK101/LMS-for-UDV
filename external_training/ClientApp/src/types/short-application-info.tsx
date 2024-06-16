@@ -4,6 +4,7 @@ export type ShortApplicationInfoType = {
     createdAt: string,
     status: string,
     commentsCount: number,
+    userFullName: string,
 }
 
 export type ShortAdminPendingApplicationInfoType = {

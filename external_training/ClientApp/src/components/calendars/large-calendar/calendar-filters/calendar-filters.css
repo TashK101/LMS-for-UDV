@@ -1,0 +1,67 @@
+.calendar-filters {
+    position: fixed;
+    height: calc(100% - 80px);
+    display: flex;
+    right: 0;
+    top: 80px;
+    z-index: 30;
+    transition: .4s;
+    width: 0;
+    font-weight: 600;
+    background-color: white;
+}
+
+.calendar-filters_visible {
+    width: 400px;
+}
+
+.calendar-filters_hidden {
+    width: 0;
+}
+
+.calendar-filters__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 90px 60px 30px 40px;
+}
+
+.calendar-filters__submit {
+    background: #FFB439;
+    padding: 10px 24px;
+    border: solid 2px #FFB439;
+    align-self: flex-start;
+    border-radius: 100px;
+    box-shadow:
+            4px 8px 3px rgba(0, 21, 128, 0.01),
+            2px 4px 3px rgba(0, 21, 128, 0.05),
+            1px 2px 2px rgba(0, 21, 128, 0.09),
+            0 0 1px rgba(0, 21, 128, 0.1);
+}
+
+.calendar-filters__submit:hover {
+    border-color: #C56907;
+}
+
+.calendar-filters__submit:active {
+    box-shadow: none;
+}
+
+
+
+div.paper-test {
+    border: solid 1px #C27800;
+    border-radius: 4px;
+}
+
+.option-test {
+    padding: 8px 12px;
+}
+
+.MuiPaper-root > ul.MuiAutocomplete-listbox > .option-test[aria-selected="true"] {
+    background-color: #F59D0E;
+}
+
+ul li.option-test:hover {
+    background-color: #FFEDCF;
+}

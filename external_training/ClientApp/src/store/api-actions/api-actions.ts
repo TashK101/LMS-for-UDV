@@ -8,13 +8,11 @@ import {
     loadApplicationDetails,
     loadCourseDetails,
     loadEvents,
-    loadManagerArchivedApplications,
-    loadManagerPendingApplications,
     loadManagers,
     loadNotifications,
     loadStartConfig,
     loadUserArchivedApplications,
-    loadUserTrainingApplications, redirectToRoute,
+    loadUserTrainingApplications,
     setLoadingStatus
 } from "../system-process/system-process";
 import {Notifications} from "../../types/notifications";
@@ -25,11 +23,9 @@ import {EventsType} from "../../types/event.tsx";
 import {ShortAdminPendingApplicationInfoType, ShortApplicationInfoType} from "../../types/short-application-info.tsx";
 import {INewApplication} from "../../types/new-application.tsx";
 import {SentCommentType} from "../../types/comments";
-import {useNavigate} from "react-router-dom";
-import {getErrorPath} from "ajv/dist/compile/util";
-import { Manager } from "../../types/manager.tsx";
+import {Manager} from "../../types/manager.tsx";
 import {AcceptDeclineProps} from "../../components/application-details/accept-decline-buttons";
-import { AdminApplication } from "../../types/admin-application.tsx";
+import {AdminApplication} from "../../types/admin-application.tsx";
 
 
 export const fetchNotificationsAction = createAsyncThunk<void, undefined, {
@@ -58,14 +54,15 @@ export const fetchApplicationDetailsAction = createAsyncThunk<void, number, {
     async (id, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.get<Application>(`api/user/training_application`,
+            await api.get<Application>(`api/user/training_application`,
                 {
                     params: {trainingApplicationId: id}
-                }).catch(err => {
-                    if(err.response.status === 404) window.location.href=addErrorToLink(window.location.href)
-                console.log(err.response.data);
-            });
-            dispatch(loadApplicationDetails(data));
+                })
+                .then(({data}) => dispatch(loadApplicationDetails(data)))
+                .catch(err => {
+                    if (err.response.status === 404) window.location.href = addErrorToLink(window.location.href)
+                    console.log(err.response.data);
+                });
         } finally {
             dispatch(setLoadingStatus(false));
         }
@@ -160,40 +157,6 @@ export const fetchUserArchivedApplicationsAction = createAsyncThunk<void, undefi
     },
 );
 
-export const fetchManagerPendingApplicationsAction = createAsyncThunk<void, undefined, {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-}>(
-    'data/fetchManagerPendingApplications',
-    async (_arg, {dispatch, extra: api}) => {
-        try {
-            dispatch(setLoadingStatus(true));
-            const {data} = await api.get<ShortApplicationInfoType[]>(`api/manager/pending_applications`);
-            dispatch(loadManagerPendingApplications(data));
-        } finally {
-            dispatch(setLoadingStatus(false));
-        }
-    },
-);
-
-export const fetchManagerArchivedApplicationsAction = createAsyncThunk<void, undefined, {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-}>(
-    'data/fetchManagerArchivedApplications',
-    async (_arg, {dispatch, extra: api}) => {
-        try {
-            dispatch(setLoadingStatus(true));
-            const {data} = await api.get<ShortApplicationInfoType[]>(`api/manager/archived_applications`);
-            dispatch(loadManagerArchivedApplications(data));
-        } finally {
-            dispatch(setLoadingStatus(false));
-        }
-    },
-);
-
 export const fetchAdminPendingApplicationsAction = createAsyncThunk<void, undefined, {
     dispatch: AppDispatch;
     state: State;
@@ -234,10 +197,10 @@ export const postNewApplicationAction = createAsyncThunk<void, INewApplication, 
     extra: AxiosInstance;
 }>(
     'data/postNewApplication',
-    async (_arg: INewApplication, {dispatch, extra: api}) => {
+    async (arg: INewApplication, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.post<INewApplication>('/api/user/training_application', _arg);
+            await api.post<INewApplication>('/api/user/training_application', arg);
         } finally {
             dispatch(setLoadingStatus(false));
         }
@@ -250,10 +213,10 @@ export const postUserCommentAction = createAsyncThunk<void, SentCommentType, {
     extra: AxiosInstance;
 }>(
     'data/postUserCommentAction',
-    async (_arg: SentCommentType, {dispatch, extra: api}) => {
+    async (arg: SentCommentType, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.post<SentCommentType>('/api/user/comment', _arg);
+            await api.post<SentCommentType>('/api/user/comment', arg);
         } finally {
             dispatch(setLoadingStatus(false));
         }
@@ -265,10 +228,10 @@ export const postManagerCommentAction = createAsyncThunk<void, SentCommentType, 
     extra: AxiosInstance;
 }>(
     'data/postManagerCommentAction',
-    async (_arg: SentCommentType, {dispatch, extra: api}) => {
+    async (arg: SentCommentType, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.post<SentCommentType>('/api/manager/comment', _arg);
+            await api.post<SentCommentType>('/api/manager/comment', arg);
         } finally {
             dispatch(setLoadingStatus(false));
         }
@@ -281,10 +244,10 @@ export const postAdminCommentAction = createAsyncThunk<void, SentCommentType, {
     extra: AxiosInstance;
 }>(
     'data/postAdminCommentAction',
-    async (_arg: SentCommentType, {dispatch, extra: api}) => {
+    async (arg: SentCommentType, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.post<SentCommentType>('/api/Admin/comment', _arg);
+            await api.post<SentCommentType>('/api/Admin/comment', arg);
         } finally {
             dispatch(setLoadingStatus(false));
         }
@@ -297,10 +260,10 @@ export const acceptAction = createAsyncThunk<void, AcceptDeclineProps, {
     extra: AxiosInstance;
 }>(
     'data/accept',
-    async (_arg: AcceptDeclineProps, {dispatch, extra: api}) => {
+    async (arg: AcceptDeclineProps, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.post<AcceptDeclineProps>(`/api/manager/accept_application?TrainingApplicationId=${_arg.TrainingApplicationId}`)
+            await api.post<AcceptDeclineProps>(`/api/manager/accept_application?TrainingApplicationId=${arg.TrainingApplicationId}`)
         } finally {
             dispatch(setLoadingStatus(false));
         }
@@ -313,10 +276,10 @@ export const declineAction = createAsyncThunk<void, AcceptDeclineProps, {
     extra: AxiosInstance;
 }>(
     'data/decline',
-    async (_arg: AcceptDeclineProps, {dispatch, extra: api}) => {
+    async (arg: AcceptDeclineProps, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.post<AcceptDeclineProps>(`/api/manager/decline_application?TrainingApplicationId=${_arg.TrainingApplicationId}`)
+            await api.post<AcceptDeclineProps>(`/api/manager/decline_application?TrainingApplicationId=${arg.TrainingApplicationId}`)
         } finally {
             dispatch(setLoadingStatus(false));
         }
@@ -329,10 +292,10 @@ export const fetchManagersAction = createAsyncThunk<void, undefined, {
     extra: AxiosInstance;
 }>(
     'data/fetchManagers',
-    async (_arg, { dispatch, extra: api }) => {
+    async (_arg, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const { data } = await api.get<Manager[]>('/api/user/managers');
+            const {data} = await api.get<Manager[]>('/api/user/managers');
             dispatch(loadManagers(data))
         } finally {
             dispatch(setLoadingStatus(false));
@@ -346,10 +309,26 @@ export const postAdminApplicationAction = createAsyncThunk<void, AdminApplicatio
     extra: AxiosInstance;
 }>(
     'data/postAdminApplicationAction',
-    async (_arg: AdminApplication, {dispatch, extra: api}) => {
+    async (arg: AdminApplication, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.post<AdminApplication>('/api/Admin/course', _arg);
+            await api.post<AdminApplication>('/api/Admin/course', arg);
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const postApplicationToSoloAction = createAsyncThunk<void, number, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/postAdminApplicationAction',
+    async (id, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            await api.post<{ applicationId: string }>(`api/Admin/send_application_to_solo?${id}`);
         } finally {
             dispatch(setLoadingStatus(false));
         }

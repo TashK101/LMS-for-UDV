@@ -1,0 +1,46 @@
+.admin-navigation {
+    width: 96px;
+    display: flex;
+    flex-direction: column;
+    background: #FFEDCF;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 128px;
+    height: 100vh;
+    gap: 10px;
+    transition: .3s;
+    overflow: clip;
+    z-index: 1;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.admin-navigation:hover {
+    width: 400px;
+    background-color: white;
+    box-shadow:
+            10px 0 4px rgba(0, 5, 163, .01),
+            6px 0 4px rgba(0, 5, 163, .03),
+            3px 0 3px rgba(0, 5, 163, .04),
+            1px 0 1px rgba(0, 5, 163, .05);
+}
+
+.admin-navigation__button {
+    cursor: pointer;
+    padding: 0 32px;
+    height: 70px;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-navigation__button:hover {
+    background-color: #C9C9C7;
+}
+
+.admin-navigation__button_active {
+    background-color: #FFCE80;
+}

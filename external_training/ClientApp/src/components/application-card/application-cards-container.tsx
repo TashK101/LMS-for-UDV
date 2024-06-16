@@ -8,7 +8,6 @@ import ExcelImportButton from "../excel-importer/excel-import-button.tsx";
 
 type ApplicationCardsContainerProps = {
     applications: CurrentApplicationType[];
-    showSOLOButton?: boolean;
     showStackedVersionIcon?: boolean;
     showDatePicker?: boolean;
     showImportButtonInDatePicker?: boolean
@@ -17,7 +16,6 @@ type ApplicationCardsContainerProps = {
 function ApplicationCardsContainer({
                                        applications,
                                        showStackedVersionIcon = false,
-                                       showSOLOButton,
                                        showDatePicker = false,
                                        showImportButtonInDatePicker = false,
                                    }: ApplicationCardsContainerProps) {
@@ -56,8 +54,7 @@ function ApplicationCardsContainer({
                         <ApplicationCard key={app.id}
                                          application={app}
                                          stacked={stacked}
-                                         showStackedVersionIcon={showStackedVersionIcon}
-                                         showSOLOButton={showSOLOButton}/>
+                                         showStackedVersionIcon={showStackedVersionIcon}/>
                     ))}
                 </div>
             </div>

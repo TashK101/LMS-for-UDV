@@ -47,12 +47,6 @@ function ExcelImportButton({applications, firstSelectedDate, secondSelectedDate}
     }
 
 
-    // const getSorted = (arr: Course[]) => arr.toSorted((a, b) => {
-    //     const topic1 = a.trainingTopic;
-    //     const topic2 = b.trainingTopic;
-    //     return topic1 > topic2 ? 1 : topic1 < topic2 ? -1 : 0;
-    // });
-
     const buttonClassName = clsx('import-button',
         {'shaking': importFailed});
 

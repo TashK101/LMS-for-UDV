@@ -16,7 +16,7 @@ export function useDateFilter({
                                   setFirstSelectedDate,
                                   setSecondSelectedDate
                               }: DateFilterController) {
-    const [filterOption, setFilterOption] = useState<DateFilterOption>(DateFilterOption.Week);
+    const [filterOption, setFilterOption] = useState<DateFilterOption>(DateFilterOption.Month);
     const [firstDropdownOpen, setFirstDropdownOpen] = useState<boolean>(false);
     const [secondDropdownOpen, setSecondDropdownOpen] = useState<boolean>(false);
 
@@ -28,8 +28,13 @@ export function useDateFilter({
     }
 
     useEffect(() => {
-        setFirstSelectedDate(() => defaultWeekDates.weekStarts);
-        setSecondSelectedDate(() => defaultWeekDates.weekEnds);
+        if (filterOption === DateFilterOption.Week) {
+            setFirstSelectedDate(() => defaultWeekDates.weekStarts);
+            setSecondSelectedDate(() => defaultWeekDates.weekEnds);
+        } else if (filterOption === DateFilterOption.Month) {
+            setFirstSelectedDate(() => defaultMonthDates.monthStarts);
+            setSecondSelectedDate(() => defaultMonthDates.monthEnds);
+        }
     }, []);
 
 

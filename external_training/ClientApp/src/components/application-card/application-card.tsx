@@ -7,7 +7,7 @@ import {useApplicationCard} from "./use-application-card.ts";
 
 export type ApplicationSubCardProps = {
     application: CurrentApplicationType;
-    applicationManager: string;
+    userFullName: string;
     applicationDateStr: string;
     showSOLOButton: boolean;
     showStackedVersionIcon?: boolean;
@@ -16,17 +16,15 @@ export type ApplicationSubCardProps = {
 type ApplicationCardProps = {
     application: CurrentApplicationType;
     stacked?: boolean;
-    showSOLOButton?: boolean;
     showStackedVersionIcon?: boolean;
 }
 
 export function ApplicationCard({
                                     application,
-                                    showSOLOButton = false,
                                     stacked = false,
                                     showStackedVersionIcon = true
                                 }: ApplicationCardProps) {
-    const {handleCardClick, applicationManager, applicationDateStr, cardClassName} = useApplicationCard({
+    const {handleCardClick, userFullName, applicationDateStr, cardClassName, showSOLOButton} = useApplicationCard({
         application,
         stacked,
     });
@@ -34,11 +32,11 @@ export function ApplicationCard({
     return (
         <div className={cardClassName} onClick={handleCardClick}>
             {!stacked && <CardContentFull application={application}
-                                          applicationManager={applicationManager}
+                                          userFullName={userFullName}
                                           applicationDateStr={applicationDateStr}
                                           showSOLOButton={showSOLOButton}/>}
             {stacked && <CardContentStacked application={application}
-                                            applicationManager={applicationManager}
+                                            userFullName={userFullName}
                                             applicationDateStr={applicationDateStr}
                                             showSOLOButton={showSOLOButton}
                                             showStackedVersionIcon={showStackedVersionIcon}/>}

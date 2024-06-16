@@ -40,7 +40,8 @@ export function useArchivedApplications({adminModeArchive}: { adminModeArchive: 
                 title: app.trainingTopic,
                 date: new Date(app.createdAt),
                 status: ApplicationStatus[app.status as keyof typeof ApplicationStatus],
-                comments_count: app.commentsCount,
+                commentsCount: app.commentsCount,
+                userFullName: app.userFullName,
             })
         })
     }
