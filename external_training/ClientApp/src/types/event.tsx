@@ -3,6 +3,8 @@ import {ApplicationStatus} from "../components/current-applications-utils/applic
 export type EventType = {
     trainingApplicationId: number,
     courseName: string,
+    userFullName: string,
+    isOnline: boolean,
     status: ApplicationStatus,
     begin: string,
     end: string,

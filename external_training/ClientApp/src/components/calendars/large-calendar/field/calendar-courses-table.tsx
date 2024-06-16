@@ -1,35 +1,29 @@
 import CoursesTableRow from "./courses-table-row.tsx";
 import {ICourse} from "../../calendar-utils/universal-props.ts"
-import {useAppDispatch, useAppSelector} from "../../../../hooks";
+import {useAppDispatch} from "../../../../hooks";
 import {fetchEventsAction} from "../../../../store/api-actions/api-actions.ts";
 import {useEffect} from "react";
-import {State} from "../../../../types/state.tsx";
 import {getLastDayOfChosenMonth} from "../../calendar-utils/date-utils.ts";
 import {CourseStatus} from "../../calendar-utils/course-status.ts";
 import {ApplicationStatus} from "../../../current-applications-utils/application-status.ts";
+import {EventType} from "../../../../types/event.tsx";
 
 type CalendarCoursesTableProps = {
     currentMonthMaxDate: number;
     chosenDate: Date;
+    events: EventType[];
+    chosenUser: string;
+    chosenFormat: string;
 }
 
 const MIN_TABLE_HEIGHT = 10;
 
-const getEvents = (state: State) => state.events;
-
-const getCourseInnerStatus = (status: ApplicationStatus) =>
-    status === ApplicationStatus.TrainingInProgress
-    || status === ApplicationStatus.AwaitingTraining
-        ? CourseStatus.Confirmed
-        : CourseStatus.Waiting;
-
-export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: CalendarCoursesTableProps) {
+export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate, events, chosenUser, chosenFormat}: CalendarCoursesTableProps) {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchEventsAction());
     }, []);
 
-    const events = useAppSelector(getEvents);
     let courses: ICourse[] = [];
     if (events) {
         for (let i = 0; i < events.length; i++) {
@@ -40,14 +34,13 @@ export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: 
                 startDate: new Date(event.begin),
                 endDate: new Date(event.end),
                 status: getCourseInnerStatus(event.status),
+                userFullName: event.userFullName,
+                isOnline: event.isOnline,
             })
         }
     }
 
-    const filteredCourses: ICourse[] = courses.filter((c: ICourse) => {
-        return (c.startDate < chosenDate && c.endDate >= chosenDate) ||
-            (c.startDate >= chosenDate && c.startDate <= getLastDayOfChosenMonth(chosenDate));
-    })
+    const filteredCourses = getFilteredCourses(courses, chosenFormat, chosenUser, chosenDate);
     const numCourses = filteredCourses.length;
     const height = numCourses >= MIN_TABLE_HEIGHT ? 0 : MIN_TABLE_HEIGHT - numCourses;
 
@@ -84,4 +77,29 @@ export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate}: 
         </div>
     );
 }
+
+function getFilteredCourses(courses: ICourse[], chosenFormat: string, chosenUser: string, chosenDate: Date) {
+    let filteredCourses: ICourse[] = courses.filter((course) => {
+        return (course.startDate < chosenDate && course.endDate >= chosenDate) ||
+            (course.startDate >= chosenDate && course.startDate <= getLastDayOfChosenMonth(chosenDate));
+    });
+
+    if (chosenFormat === 'Онлайн') {
+        filteredCourses = filteredCourses.filter((course) => course.isOnline);
+    } else if (chosenFormat === 'Оффлайн') {
+        filteredCourses = filteredCourses.filter((course) => !course.isOnline);
+    }
+
+    if (chosenUser !== '') {
+        filteredCourses = filteredCourses.filter((course) => course.userFullName === chosenUser);
+    }
+
+    return filteredCourses;
+}
+
+const getCourseInnerStatus = (status: ApplicationStatus) =>
+    status === ApplicationStatus.TrainingInProgress
+    || status === ApplicationStatus.AwaitingTraining
+        ? CourseStatus.Confirmed
+        : CourseStatus.Waiting;
 

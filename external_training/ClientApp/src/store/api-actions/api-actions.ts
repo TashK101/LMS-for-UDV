@@ -23,7 +23,6 @@ import {EventsType} from "../../types/event.tsx";
 import {ShortAdminPendingApplicationInfoType, ShortApplicationInfoType} from "../../types/short-application-info.tsx";
 import {INewApplication} from "../../types/new-application.tsx";
 import {SentCommentType} from "../../types/comments";
-import {Manager} from "../../types/manager.tsx";
 import {AcceptDeclineProps} from "../../components/application-details/accept-decline-buttons";
 import {AdminApplication} from "../../types/admin-application.tsx";
 

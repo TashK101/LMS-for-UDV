@@ -11,4 +11,6 @@ export interface ICourse {
     startDate: Date;
     endDate: Date;
     status: CourseStatus;
+    userFullName: string;
+    isOnline: boolean
 }

@@ -21,12 +21,13 @@
 
 .calendar-filters__form {
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     justify-content: space-between;
-    padding: 90px 60px 30px 40px;
+    padding: 90px 30px;
 }
 
-.calendar-filters__submit {
+form .calendar-filters__submit {
     background: #FFB439;
     padding: 10px 24px;
     border: solid 2px #FFB439;
@@ -47,21 +48,53 @@
     box-shadow: none;
 }
 
+form .calendar-filters__reset {
+    background: white;
+    padding: 10px;
+    border: solid 2px #FFB439;
+    gap: 30px;
+    align-self: flex-start;
+    border-radius: 100px;
+    box-shadow:
+            4px 8px 3px rgba(0, 21, 128, 0.01),
+            2px 4px 3px rgba(0, 21, 128, 0.05),
+            1px 2px 2px rgba(0, 21, 128, 0.09),
+            0 0 1px rgba(0, 21, 128, 0.1);
+    white-space: nowrap;
+}
+
+form .calendar-filters__reset:hover {
+    background-color: #FFEDCF;
+    border-color: #F59D0E;
+}
+
+form .calendar-filters__reset:active {
+    box-shadow: none;
+}
 
 
-div.paper-test {
+
+div.autocomplete-paper {
     border: solid 1px #C27800;
     border-radius: 4px;
 }
 
-.option-test {
+.autocomplete-option {
     padding: 8px 12px;
 }
 
-.MuiPaper-root > ul.MuiAutocomplete-listbox > .option-test[aria-selected="true"] {
+.MuiPaper-root > ul.MuiAutocomplete-listbox > .autocomplete-option[aria-selected="true"] {
     background-color: #F59D0E;
 }
 
-ul li.option-test:hover {
+.MuiPaper-root > ul.MuiAutocomplete-listbox > li.autocomplete-option:hover {
     background-color: #FFEDCF;
+}
+
+.MuiAutocomplete-input {
+    border: solid 2px #79747E;
+}
+
+.MuiAutocomplete-input[aria-expanded="true"] {
+    border-color: #C27800;
 }

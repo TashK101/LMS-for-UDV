@@ -53,13 +53,13 @@ export function importDataConverter({
 
     filteredCourses.forEach((app) => {
         worksheet.addRow({
-            educationCenter: app.educationalCenter,
-            courseName: app.courseName,
+            educationCenter: app.trainingCenter,
+            courseName: app.name,
             onlineTraining: (app.isTrainingOnline ? 'Онлайн' : 'Оффлайн').concat(app.isCorporateTraining ? ', только для нашей компании' : ', для всех желающих'),
-            participantsNames: getFormattedParticipantsNames(app.participantsNames),
-            totalCost: app.participantsCount * app.costPerParticipant,
-            department: app.department,
-            team: app.team,
+            participantsNames: getFormattedParticipantsNames(app.participantFullNames),
+            totalCost: app.totalCost,
+            department: 'Unknown',
+            team: 'Unknown',
             legalEntity: '',
             dates: getTrainingDates(app.begin, app.end),
             costPerPerson: app.costPerParticipant,
@@ -124,9 +124,8 @@ export function importDataConverter({
     return true;
 }
 
-function getFormattedParticipantsNames(participants: string): string {
-    // HARDCODE! WIP
-    return participants;
+function getFormattedParticipantsNames(participants: string[]): string {
+    return participants.join(',');
 }
 
 function skipEmptyApps(applications: Course[]): Course[] {

@@ -1,39 +1,50 @@
 import './calendar-filters.css'
 import React, {useState} from "react";
-import DownSelectArrowIcon from "../icons/down-select-arrow-icon.tsx";
-import clsx from "clsx";
-import {Autocomplete, createStyles, makeStyles, Popper, TextField} from "@mui/material";
-import {Tag} from "reactstrap";
+import AutocompleteField, {AutocompleteOptionObject} from "./autocomplete-field.tsx";
 
 type CalendarFiltersProps = {
     isVisible: boolean;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    courseAuthorNames: string[];
+    setFormat: React.Dispatch<React.SetStateAction<string>>;
+    setUser: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function CalendarFilters({isVisible, setIsVisible}: CalendarFiltersProps): JSX.Element {
-    const [employee, setEmployee] = useState<string>(() => ' ');
-    const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(() => false);
-
-    const baseDropdownClassName = clsx(
-        'flex items-center justify-between w-full h-[42px] px-[16px]',
-        'border-[1px] border-[#79747E] rounded-[4px] text-[#49454F]',
-        'cursor-pointer hover:bg-gray-100');
-
-    const firstDropdownClassName = clsx(baseDropdownClassName, {
-        'border-[#C27800] border-[2px]': isDropdownOpen,
-        'border-[2px] border-[#79747E]': !isDropdownOpen,
-    });
-    const hacndleDropdownClick = () => setIsDropdownOpen((prevState) => !prevState);
-
+function CalendarFilters({
+                             isVisible,
+                             setIsVisible,
+                             courseAuthorNames,
+                             setUser,
+                             setFormat
+                         }: CalendarFiltersProps): JSX.Element {
+    const [employee, setEmployee] = useState<AutocompleteOptionObject<number> | null>(null);
+    const [courseFormat, setCourseFormat] = useState<string>('');
+    const [autocompleteUniqueKey, setAutocompleteUniqueKey] = useState<string>(new Date().toISOString());
 
     const visibility = isVisible ? 'calendar-filters_visible' : 'calendar-filters_hidden';
     const handleSubmit = (evt: React.FormEvent) => {
         evt.preventDefault();
 
-
+        setUser(() => employee?.label ?? '');
+        setFormat(() => courseFormat);
         setIsVisible((prevState) => !prevState);
     }
-    const options = ['Корнилов Геннадий Константинович', 'Евтущенко Петр Сергеевич', 'Мамонтова Жанна Юрьевна', 'Угаров Юрий Витальевич', 'Путин Владимир Владимирович']
+
+    const handleReset = (evt: React.FormEvent) => {
+        evt.preventDefault();
+
+        setEmployee(() => null);
+        setAutocompleteUniqueKey(() => new Date().toISOString());
+        setCourseFormat(() => '');
+        setUser(() => '');
+        setFormat(() => '');
+        setIsVisible((prevState) => !prevState);
+    }
+
+    const autocompleteOptions = courseAuthorNames?.toSorted().map((name, index): AutocompleteOptionObject<number> => ({
+        uniqueValue: index,
+        label: name,
+    }));
 
     return (
         <>
@@ -41,69 +52,37 @@ function CalendarFilters({isVisible, setIsVisible}: CalendarFiltersProps): JSX.E
                 className={`${isVisible ? 'visible' : 'hidden'} left-0 w-screen h-screen fixed top-0 backdrop-opacity-10 backdrop-invert bg-black/30 z-[20]`}
                 onClick={() => setIsVisible((prevState) => !prevState)}/>
             <div className={`calendar-filters ${visibility}`}>
-                <form className='calendar-filters__form' onSubmit={handleSubmit}>
+                <form className='calendar-filters__form' onSubmit={handleSubmit} onReset={handleReset}>
                     <div className='gap-[32px] flex flex-column'>
                         <div className='flex flex-column gap-[20px]'>
                             Сотрудник
-                            <Autocomplete
-                                style={{width: '300px'}}
-                                options={options.toSorted()}
-                                classes={{
-                                    option: 'option-test',
-                                    paper: 'paper-test'
-                                }}
-                                renderInput={(params) => {
-                                    return (
-                                        <div ref={params.InputProps.ref} key={params.id} className='border-[2px] border-[#C27800]'>
-                                            <input
-                                                id='pets-lists'
-                                                type='text'
-                                                // placeholder='Начните печатать...'
-                                                style={{
-                                                    // border: "1px solid #cccccc",
-                                                    padding: "10px",
-                                                    width: "100%",
-                                                    outline: 'none'
-                                                }}
-                                                {...params.inputProps}
-                                            />
-                                        </div>
-                                    );
-                                }}
-                                // renderOption={(option, state) => {
-                                //     return (
-                                //         <div onClick={(event) => option.} className='p-[16px] hover:cursor-pointer hover:bg-blue-300'>
-                                //             {state}
-                                //         </div>
-                                //     );
-                                // }}
-                            ></Autocomplete>
-
-                            {/*<div>*/}
-                            {/*    <div*/}
-                            {/*        onClick={hacndleDropdownClick}*/}
-                            {/*        className={firstDropdownClassName}>*/}
-                            {/*        <p>{employee}</p>*/}
-                            {/*        <DownSelectArrowIcon/>*/}
-                            {/*    </div>*/}
-                            {/*    {isDropdownOpen &&*/}
-                            {/*        <div*/}
-                            {/*            className='bg-white border-[#C27800] border-[1px] w-[300px] shadow-md py-[8px] absolute cursor-pointer max-h-[300px] overflow-auto'>*/}
-                            {/*            {options.map((option) => (*/}
-                            {/*                <div key={option} className='px-[16px] py-[8px] hover:bg-[#FFEDCF]'>*/}
-                            {/*                    {option}*/}
-                            {/*                </div>*/}
-                            {/*            ))}*/}
-                            {/*        </div>*/}
-                            {/*    }*/}
-                            {/*</div>*/}
+                            <AutocompleteField<number>
+                                options={autocompleteOptions}
+                                setOption={setEmployee}
+                                uniqueKey={autocompleteUniqueKey}/>
                         </div>
                         <div className='flex flex-column gap-[20px]'>
                             Формат
-                            <div className='w-[300px] h-[42px] bg-blue-500'></div>
+                            <div>
+                                {['Онлайн', 'Оффлайн'].map((radio, index) =>
+                                    <div key={index} className="flex gap-[20px] items-center py-[14px]">
+                                        <input
+                                            type="radio"
+                                            name={'Формат'}
+                                            className='w-5 h-5 accent-amber-800 border-2'
+                                            value={radio}
+                                            checked={radio === courseFormat}
+                                            onChange={(event) => setCourseFormat(event.target.value)}
+                                        />
+                                        <p className="font-golos text-color7 text-[16px] font-[400]">{radio}</p>
+                                    </div>)}
+                            </div>
                         </div>
                     </div>
-                    <button className='calendar-filters__submit'>Сохранить</button>
+                    <div className='flex justify-between'>
+                        <button className='calendar-filters__submit' type='submit'>Сохранить</button>
+                        <button className='calendar-filters__reset' type='reset'>Сбросить фильтры</button>
+                    </div>
                 </form>
             </div>
         </>

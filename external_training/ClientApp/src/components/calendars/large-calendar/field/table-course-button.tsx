@@ -13,8 +13,8 @@ type TableCourseButtonProps = {
 }
 
 const ButtonVariants = {
-    [CourseStatus.Confirmed]: "bg-[#FFBB4B] hover:bg-[#FFCE80] hover:border-2 hover:border-[#FFBB4B]",
-    [CourseStatus.Waiting]: "bg-[#C9C9C7] hover:bg-[#C9C9C7] hover:border-2 hover:border-[#898989]",
+    [CourseStatus.Confirmed]: "bg-[#FFBB4B] border-[2px] border-[#FFBB4B] hover:bg-[#FFCE80] hover:border-2 hover:border-[#FFBB4B]",
+    [CourseStatus.Waiting]: "bg-[#C9C9C7] border-[2px] border-[#C9C9C7] hover:bg-[#C9C9C7] hover:border-2 hover:border-[#898989]",
 }
 
 export default function TableCourseButton({
