@@ -99,6 +99,13 @@ namespace external_training.Controllers
             return Ok(course);
         }
 
+        [HttpGet("active_courses")]
+        public async Task<ActionResult<IEnumerable<SelectedCourseResponse>>> GetActiveCourses()
+        {
+            var courses = await _applicationService.GetActiveCoursesAsync();
+            return Ok(courses);
+        }
+
         [HttpPost("comment")] 
         public async Task<ActionResult> CreateComment(CommentCreation commentCreation)
         {

@@ -168,6 +168,18 @@ namespace external_training.Services
             return notifications.Select(Mapper.MapToNotificationResponse).ToList();
         }
 
+        public async Task<IEnumerable<SelectedCourseResponse>> GetActiveCoursesAsync()
+        {
+            var courses = await _applicationRepository.GetActiveCoursesAsync();
+            var mappedCourses = new List<SelectedCourseResponse>();
+            foreach (var course in courses)
+            {
+                Course? c = course;
+                mappedCourses.Add(Mapper.MapToSelectedCourseResponse(c)!);
+            }
+            return mappedCourses;
+        }
+
         public async Task<IEnumerable<EventResponse>> GetEventsAsync()
         {
             var events = await _applicationRepository.GetActiveCoursesAsync();

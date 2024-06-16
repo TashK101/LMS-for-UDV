@@ -140,6 +140,8 @@ namespace external_training.Repositories
             return await _context.Courses
                 .Include(c => c.TrainingApplication)
                 .ThenInclude(a => a.User)
+                .Include(c => c.TrainingApplication)
+                .ThenInclude(a => a.ApplicationParticipants)
                 .Where(c => c.TrainingApplication.IsArchived == false)
                 .ToListAsync();
         }
