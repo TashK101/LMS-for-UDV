@@ -45,6 +45,7 @@ namespace external_training.Repositories
                 .Include(a => a.User)
                 .Include(a => a.Comments)
                 .ThenInclude(c => c.User)
+                .Include(a => a.DesiredCourse)
                 .Include(a => a.Course)
                 .FirstOrDefaultAsync(a => a.TrainingApplicationId == applicationId);
         }
@@ -57,6 +58,7 @@ namespace external_training.Repositories
                 .Include(a => a.User)
                 .Include(a => a.Comments)
                 .ThenInclude(c => c.User)
+                .Include(a => a.DesiredCourse)
                 .Include(a => a.Course)
                 .FirstOrDefaultAsync(a => a.SoloDocumentId == soloDocumentId);
         }
@@ -65,6 +67,52 @@ namespace external_training.Repositories
         {
             return await _context.Courses
                 .FirstOrDefaultAsync(c => c.TrainingApplicationId == applicationId);
+        }
+
+        public async Task ReplaceParticipantsAsync(int applicationId, IEnumerable<ApplicationParticipant> newParticipants)
+        {
+            var application = await _context.TrainingApplications
+                .Include(a => a.ApplicationParticipants)
+                .FirstOrDefaultAsync(a => a.TrainingApplicationId == applicationId);
+            if (application == null)
+                return;
+
+            foreach (var oldParticipant in application.ApplicationParticipants)
+                _context.ApplicationParticipants.Remove(oldParticipant);
+
+            foreach (var newParticipant in newParticipants)
+            {
+                newParticipant.TrainingApplicationId = applicationId;
+                _context.ApplicationParticipants.Add(newParticipant);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task ReplaceManagersAsync(int applicationId, IEnumerable<ApprovingManager> newManagers)
+        {
+            var application = await _context.TrainingApplications
+                .Include(a => a.ApprovingManagers)
+                .FirstOrDefaultAsync(a => a.TrainingApplicationId == applicationId);
+            if (application == null)
+                return;
+
+            foreach (var oldManager in application.ApprovingManagers)
+                _context.ApprovingManagers.Remove(oldManager);
+
+            foreach (var newManager in newManagers)
+            {
+                newManager.TrainingApplicationId = applicationId;
+                _context.ApprovingManagers.Add(newManager);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EditDesiredCourse(DesiredCourse course)
+        {
+            _context.DesiredCourses.Update(course);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<TrainingApplication>> GetApplicationsAsync(string userId)

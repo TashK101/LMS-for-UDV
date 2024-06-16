@@ -62,19 +62,19 @@ namespace external_training.SoloIntegration
             createCommand.CustomFields[WellKnown.TrainingRequest.TrainingGoal] = trainingApplication.TrainingGoals;
             createCommand.CustomFields[WellKnown.TrainingRequest.TrainingCourse] = new TrainingCourseApiDTO
             {
-                Name = trainingApplication.Course.Name,
-                Type = trainingApplication.Course.IsTrainingOnline ? "Онлайн курсы": "Очные курсы",
-                Category = trainingApplication.Course.Category,
-                Description = trainingApplication.Course.Description,
-                TrainingCenter = trainingApplication.Course.TrainingCenter,
-                Cost = trainingApplication.Course.TotalCost.ToString() + "руб.",
+                Name = trainingApplication.DesiredCourse.Name,
+                Type = trainingApplication.DesiredCourse.IsTrainingOnline ? "Онлайн курсы": "Очные курсы",
+                Category = trainingApplication.DesiredCourse.Category,
+                Description = trainingApplication.DesiredCourse.Description,
+                TrainingCenter = trainingApplication.DesiredCourse.TrainingCenter,
+                Cost = trainingApplication.DesiredCourse.CostPerParticipant.ToString() + "руб. на человека",
             };
             createCommand.CustomFields[WellKnown.TrainingRequest.Initiator] = trainingApplication.User.SoloPersonId;
             createCommand.CustomFields[WellKnown.TrainingRequest.Participants] = trainingApplication.ApplicationParticipants.Select(m => m.SoloPersonId).ToList();
             createCommand.CustomFields[WellKnown.TrainingRequest.Period] = new PeriodApiDTO
             {
-                StartDate = trainingApplication.Course.Begin,
-                FinishDate = trainingApplication.Course.End
+                StartDate = trainingApplication.DesiredCourse.Begin,
+                FinishDate = trainingApplication.DesiredCourse.End
             };
         }
 

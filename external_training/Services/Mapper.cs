@@ -22,18 +22,18 @@ namespace external_training.Services
                 UserId = user.Id,
                 ApprovingManagers = managers.Select(MapToApprovingManager).ToList(),
                 ApplicationParticipants = participants.Select(MapToApplicationParticipant).ToList(),
-                Course = new Course
+                DesiredCourse = new DesiredCourse
                 {
-                    Name = request.Course.Name,
-                    IsTrainingOnline = request.Course.IsTrainingOnline,
-                    IsCorporateTraining = request.Course.IsCorporateTraining,
-                    Category = request.Course.Category,
-                    Description = request.Course.Description,
-                    TrainingCenter = request.Course.TrainingCenter,
-                    CostPerParticipant = request.Course.CostPerParticipant,
-                    TotalCost = request.Course.TotalCost,
-                    Begin = request.Course.Begin,
-                    End = request.Course.End,
+                    Name = request.DesiredCourse.Name,
+                    IsTrainingOnline = request.DesiredCourse.IsTrainingOnline,
+                    IsCorporateTraining = request.DesiredCourse.IsCorporateTraining,
+                    Category = request.DesiredCourse.Category,
+                    Description = request.DesiredCourse.Description,
+                    TrainingCenter = request.DesiredCourse.TrainingCenter,
+                    CostPerParticipant = request.DesiredCourse.CostPerParticipant,
+                    TotalCost = request.DesiredCourse.TotalCost,
+                    Begin = request.DesiredCourse.Begin,
+                    End = request.DesiredCourse.End
                 }
             };
         }
@@ -83,7 +83,8 @@ namespace external_training.Services
                 Comments = application.Comments.Select(MapToCommentDto).ToList(),
                 ApprovingManagers = application.ApprovingManagers.Select(MapToSoloManagerDto).ToList(),
                 Participants = application.ApplicationParticipants.Select(MapToPersonInfo).ToList(),
-                Course = MapToCourseResponse(application.Course)
+                DesiredCourse = MapToCourseResponse(application.DesiredCourse),
+                SelectedCourse = MapToCourseResponse(application.Course)
             };
             return applicationDto;
         }
@@ -126,8 +127,29 @@ namespace external_training.Services
             };
         }
 
-        public static CourseDto MapToCourseResponse(Course course)
+        public static CourseDto MapToCourseResponse(DesiredCourse course)
         {
+            return new CourseDto
+            {
+                CourseId = course.DesiredCourseId,
+                TrainingApplicationId = course.TrainingApplicationId,
+                Name = course.Name,
+                IsTrainingOnline = course.IsTrainingOnline,
+                IsCorporateTraining = course.IsCorporateTraining,
+                Category = course.Category,
+                Description = course.Description,
+                TrainingCenter = course.TrainingCenter,
+                CostPerParticipant = course.CostPerParticipant,
+                TotalCost = course.TotalCost,
+                Begin = course.Begin,
+                End = course.End,
+            };
+        }
+
+        public static CourseDto? MapToCourseResponse(Course? course)
+        {
+            if (course == null)
+                return null;
             return new CourseDto
             {
                 CourseId = course.CourseId,
@@ -142,6 +164,25 @@ namespace external_training.Services
                 TotalCost = course.TotalCost,
                 Begin = course.Begin,
                 End = course.End,
+            };
+        }
+
+        public static DesiredCourse MapToDesiredCourse(CourseDto courseDto)
+        {
+            return new DesiredCourse
+            {
+                DesiredCourseId = courseDto.CourseId,
+                TrainingApplicationId = courseDto.TrainingApplicationId,
+                Name = courseDto.Name,
+                IsTrainingOnline = courseDto.IsTrainingOnline,
+                IsCorporateTraining = courseDto.IsCorporateTraining,
+                Category = courseDto.Category,
+                Description = courseDto.Description,
+                TrainingCenter = courseDto.TrainingCenter,
+                CostPerParticipant = courseDto.CostPerParticipant,
+                TotalCost = courseDto.TotalCost,
+                Begin = courseDto.Begin,
+                End = courseDto.End,
             };
         }
 

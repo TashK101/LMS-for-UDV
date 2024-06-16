@@ -47,6 +47,57 @@ namespace external_training.Services
             await _notificationRepository.AddNotificationAsync(adminNotification);
         }
 
+        public async Task ReplaceParticipantsAsync(ReplaceParticipantsDto replace)
+        {
+            var newParticipants = replace.NewPersonIds.Select(_orgStructureRepository.GetPerson).Select(Mapper.MapToApplicationParticipant);
+            await _applicationRepository.ReplaceParticipantsAsync(replace.ApplicationId, newParticipants);
+            var application = await _applicationRepository.GetAsync(replace.ApplicationId);
+            if (application == null)
+                return;
+            var adminNotification = new Notification
+            {
+                Text = "Изменён состав участников",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = application.TrainingApplicationId,
+                UserId = "df416651-c71f-4384-be1d-f164890218ab"
+            };
+            await _notificationRepository.AddNotificationAsync(adminNotification);
+        }
+
+        public async Task ReplaceManagersAsync(ReplaceManagersDto replace)
+        {
+            var newManagers = replace.NewManagerAppointmentIds.Select(_orgStructureRepository.GetManagerByAppointment).Select(Mapper.MapToApprovingManager);
+            await _applicationRepository.ReplaceManagersAsync(replace.ApplicationId, newManagers);
+            var application = await _applicationRepository.GetAsync(replace.ApplicationId);
+            if (application == null)
+                return;
+            var adminNotification = new Notification
+            {
+                Text = "Изменён состав согласующих",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = application.TrainingApplicationId,
+                UserId = "df416651-c71f-4384-be1d-f164890218ab"
+            };
+            await _notificationRepository.AddNotificationAsync(adminNotification);
+        }
+
+        public async Task EditDesiredCourse(CourseDto courseDto)
+        {
+            var course = Mapper.MapToDesiredCourse(courseDto);
+            await _applicationRepository.EditDesiredCourse(course);
+            var application = await _applicationRepository.GetAsync(courseDto.TrainingApplicationId);
+            if (application == null)
+                return;
+            var adminNotification = new Notification
+            {
+                Text = "Предполагаемый курс был изменён",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = courseDto.TrainingApplicationId,
+                UserId = "df416651-c71f-4384-be1d-f164890218ab"
+            };
+            await _notificationRepository.AddNotificationAsync(adminNotification);
+        }
+
         public async Task<IEnumerable<SoloManagerDto>> GetManagersAsync(string userId)
         {
             var user = await _userRepository.GetAsync(userId);

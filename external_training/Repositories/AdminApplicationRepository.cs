@@ -32,29 +32,23 @@ namespace external_training.Repositories
                 .ToListAsync();
         }
 
-        public async Task ReplaceManagersAsync(int applicationId, IEnumerable<ApprovingManager> newManagers)
-        {
-            var application = await _context.TrainingApplications
-                .Include(a => a.ApprovingManagers)
-                .FirstOrDefaultAsync(a => a.TrainingApplicationId == applicationId);
-            if (application == null)
-                return;
-
-            foreach (var oldManager in application.ApprovingManagers)
-                _context.ApprovingManagers.Remove(oldManager);
-
-            foreach (var newManager in newManagers)
-            {
-                newManager.TrainingApplicationId = applicationId;
-                _context.ApprovingManagers.Add(newManager);
-            }
-
-            await _context.SaveChangesAsync();
-        }
-
         public async Task EditCourse(Course course)
         {
-            _context.Courses.Update(course);
+            if (course.CourseId == 0)
+                _context.Courses.Add(course);
+            else
+            {
+                var trackedCourse = _context.Courses.Local.FirstOrDefault(c => c.CourseId == course.CourseId);
+                if (trackedCourse != null)
+                {
+                    _context.Entry(trackedCourse).CurrentValues.SetValues(course);
+                }
+                else
+                {
+                    _context.Courses.Attach(course);
+                    _context.Entry(course).State = EntityState.Modified;
+                }
+            }
             await _context.SaveChangesAsync();
         }
 

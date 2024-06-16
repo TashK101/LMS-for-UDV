@@ -26,6 +26,23 @@ namespace external_training.Services
             _userManager = userManager;
         }
 
+        public async Task EditDesiredCourse(CourseDto courseDto)
+        {
+            var course = Mapper.MapToDesiredCourse(courseDto);
+            await _userApplicationRepository.EditDesiredCourse(course);
+            var application = await _userApplicationRepository.GetAsync(courseDto.TrainingApplicationId);
+            if (application == null)
+                return;
+            var userNotification = new Notification
+            {
+                Text = "Предполагаемый курс был изменён",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = courseDto.TrainingApplicationId,
+                UserId = application.UserId
+            };
+            await _notificationRepository.AddNotificationAsync(userNotification);
+        }
+
         public async Task EditCourse(CourseDto courseDto)
         {
             var course = Mapper.MapToCourse(courseDto);
@@ -43,10 +60,27 @@ namespace external_training.Services
             await _notificationRepository.AddNotificationAsync(userNotification);
         }
 
+        public async Task ReplaceParticipantsAsync(ReplaceParticipantsDto replace)
+        {
+            var newParticipants = replace.NewPersonIds.Select(_orgStructureRepository.GetPerson).Select(Mapper.MapToApplicationParticipant);
+            await _userApplicationRepository.ReplaceParticipantsAsync(replace.ApplicationId, newParticipants);
+            var application = await _userApplicationRepository.GetAsync(replace.ApplicationId);
+            if (application == null)
+                return;
+            var userNotification = new Notification
+            {
+                Text = "Изменён состав участников",
+                CreatedAt = DateTime.UtcNow,
+                TrainingApplicationId = application.TrainingApplicationId,
+                UserId = application.UserId
+            };
+            await _notificationRepository.AddNotificationAsync(userNotification);
+        }
+
         public async Task ReplaceManagersAsync(ReplaceManagersDto replace)
         {
             var newManagers = replace.NewManagerAppointmentIds.Select(_orgStructureRepository.GetManagerByAppointment).Select(Mapper.MapToApprovingManager);
-            await _adminApplicationRepository.ReplaceManagersAsync(replace.ApplicationId, newManagers);
+            await _userApplicationRepository.ReplaceManagersAsync(replace.ApplicationId, newManagers);
             var application = await _userApplicationRepository.GetAsync(replace.ApplicationId);
             if (application == null)
                 return;

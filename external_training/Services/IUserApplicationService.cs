@@ -15,5 +15,8 @@ namespace external_training.Services
         Task<CourseDto?> GetCourseAsync(int applicationId);
         Task<IEnumerable<NotificationResponse>> GetNotificationsAsync(string userId);
         Task<IEnumerable<EventResponse>> GetEventsAsync();
+        Task EditDesiredCourse(CourseDto courseDto);
+        Task ReplaceManagersAsync(ReplaceManagersDto replace);
+        Task ReplaceParticipantsAsync(ReplaceParticipantsDto replace);
     }
 }
