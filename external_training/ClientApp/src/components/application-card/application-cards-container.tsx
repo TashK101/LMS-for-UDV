@@ -42,8 +42,7 @@ function ApplicationCardsContainer({
                                 firstSelectedDate={firstSelectedDate}
                                 secondSelectedDate={secondSelectedDate}/>
                     {showImportButtonInDatePicker &&
-                        <ExcelImportButton applications={filteredApplications}
-                                           firstSelectedDate={firstSelectedDate}
+                        <ExcelImportButton firstSelectedDate={firstSelectedDate}
                                            secondSelectedDate={secondSelectedDate}/>
                     }
                 </div>

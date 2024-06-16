@@ -7,7 +7,7 @@ import {
     loadAdminPendingApplications,
     loadApplicationDetails,
     loadCourseDetails,
-    loadEvents,
+    loadEvents, loadExportCourses,
     loadManagers,
     loadNotifications,
     loadStartConfig,
@@ -323,11 +323,28 @@ export const postApplicationToSoloAction = createAsyncThunk<void, number, {
     state: State;
     extra: AxiosInstance;
 }>(
-    'data/postAdminApplicationAction',
+    'data/postApplicationToSolo',
     async (id, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
             await api.post<{ applicationId: string }>(`api/Admin/send_application_to_solo?${id}`);
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const fetchExportCoursesAction = createAsyncThunk<void, undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/fetchExportCourses',
+    async (_arg, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.get<Course[]>('/api/user/completed_courses');
+            dispatch(loadExportCourses(data))
         } finally {
             dispatch(setLoadingStatus(false));
         }

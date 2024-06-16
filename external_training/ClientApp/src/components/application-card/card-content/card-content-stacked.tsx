@@ -1,7 +1,7 @@
 import {ApplicationSubCardProps} from "../application-card.tsx";
 import {JSX} from "react/jsx-runtime";
 import {StatusIcon} from "../../current-applications-utils/icons/status-icons.tsx";
-import PostToSoloButton from "../../../post-to-solo-button/post-to-solo-button.tsx";
+import PostToSoloButton from "../../post-to-solo-button/post-to-solo-button.tsx";
 
 function CardContentStacked({
                                 application,

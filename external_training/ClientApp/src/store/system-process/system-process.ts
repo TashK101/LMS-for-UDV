@@ -19,10 +19,11 @@ const initialState: SystemProcess = {
     course: undefined,
     userTrainingApplications: [],
     userArchivedApplications: [],
-    managerPendingApplications: [],
-    managerArchivedApplications: [],
     adminPendingApplications: [],
     adminArchivedApplications: [],
+    exportCourses: [],
+    managers: [],
+    userEmail: '',
 };
 
 export const systemProcess = createSlice({
@@ -44,9 +45,6 @@ export const systemProcess = createSlice({
             state.userId = action.payload.userId;
             state.userEmail = action.payload.userEmail;
         },
-        loadTest : (state, action : PayloadAction<Application>) => {
-            state.application = action.payload;
-        },
         loadCourseDetails : (state, action : PayloadAction<Course>) => {
             state.course = action.payload;
         },
@@ -62,12 +60,6 @@ export const systemProcess = createSlice({
         loadUserArchivedApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
             state.userArchivedApplications = action.payload;
         },
-        loadManagerPendingApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
-            state.managerPendingApplications = action.payload;
-        },
-        loadManagerArchivedApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
-            state.managerArchivedApplications = action.payload;
-        },
         loadAdminPendingApplications : (state, action : PayloadAction<ShortAdminPendingApplicationInfoType[]>) => {
             state.adminPendingApplications = action.payload;
         },
@@ -76,6 +68,9 @@ export const systemProcess = createSlice({
         },
         loadManagers: (state, action: PayloadAction<ApprovingManager[]>) => {
             state.managers = action.payload;
+        },
+        loadExportCourses: (state, action) => {
+            state.exportCourses = action.payload;
         }
     }
 });
@@ -85,18 +80,14 @@ export const {
     setLoadingStatus,
     setError,
     loadNotifications,
-    loadTest,
     loadEvents,
     loadStartConfig,
     loadCourseDetails,
     loadUserTrainingApplications,
     loadUserArchivedApplications,
     loadApplicationDetails,
-    loadManagerPendingApplications,
-    loadManagerArchivedApplications,
     loadManagers,
     loadAdminPendingApplications,
     loadAdminArchivedApplications,
+    loadExportCourses
 } = systemProcess.actions;
-//export const {setLoadingStatus, setError, loadNotifications, loadTest, loadEvents, loadStartConfig, loadApplicationDetails, loadTrainingApplications} = systemProcess.actions;
-

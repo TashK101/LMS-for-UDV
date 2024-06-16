@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import {useAppDispatch} from "../hooks";
-import {postApplicationToSoloAction} from "../store/api-actions/api-actions.ts";
+import {useAppDispatch} from "../../hooks";
+import {postApplicationToSoloAction} from "../../store/api-actions/api-actions.ts";
 
 type PostToSoloButtonProps = {
     applicationId: number,

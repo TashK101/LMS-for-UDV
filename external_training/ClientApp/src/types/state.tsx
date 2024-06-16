@@ -20,11 +20,10 @@ export type SystemProcess = {
 
     userTrainingApplications: ShortApplicationInfoType[];
     userArchivedApplications: ShortApplicationInfoType[];
-    managerPendingApplications: ShortApplicationInfoType[];
-    managerArchivedApplications: ShortApplicationInfoType[];
     adminPendingApplications: ShortAdminPendingApplicationInfoType[];
     adminArchivedApplications: ShortApplicationInfoType[];
     managers: ApprovingManager[];
+    exportCourses: Course[];
 };
 
 export type State = ReturnType<typeof store.getState>;
