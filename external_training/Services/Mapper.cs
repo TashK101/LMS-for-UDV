@@ -146,6 +146,28 @@ namespace external_training.Services
             };
         }
 
+        public static SelectedCourseResponse? MapToSelectedCourseResponse(Course? course)
+        {
+            if (course == null)
+                return null;
+            return new SelectedCourseResponse
+            {
+                CourseId = course.CourseId,
+                TrainingApplicationId = course.TrainingApplicationId,
+                Name = course.Name,
+                IsTrainingOnline = course.IsTrainingOnline,
+                IsCorporateTraining = course.IsCorporateTraining,
+                Category = course.Category,
+                Description = course.Description,
+                TrainingCenter = course.TrainingCenter,
+                CostPerParticipant = course.CostPerParticipant,
+                TotalCost = course.TotalCost,
+                Begin = course.Begin,
+                End = course.End,
+                ParticipantFullNames = course.TrainingApplication.ApplicationParticipants.Select(p => p.LastName + " " + p.FirstName + " " + p.MiddleName).ToList()
+            };
+        }
+
         public static CourseDto? MapToCourseResponse(Course? course)
         {
             if (course == null)
@@ -263,6 +285,8 @@ namespace external_training.Services
             {
                 TrainingApplicationId = course.TrainingApplicationId,
                 CourseName = course.Name,
+                UserFullName = course.TrainingApplication.User.FullName,
+                IsOnline = course.IsTrainingOnline,
                 Status = course.TrainingApplication.Status.ToString(),
                 Begin = course.Begin,
                 End = course.End

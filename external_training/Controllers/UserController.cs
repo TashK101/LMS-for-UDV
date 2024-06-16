@@ -91,7 +91,7 @@ namespace external_training.Controllers
         }
 
         [HttpGet("course")]
-        public async Task<ActionResult<CourseDto>> GetCourseResponse(int trainingApplicationId)
+        public async Task<ActionResult<SelectedCourseResponse>> GetCourseResponse(int trainingApplicationId)
         {
             var course = await _applicationService.GetCourseAsync(trainingApplicationId);
             if (course == null)

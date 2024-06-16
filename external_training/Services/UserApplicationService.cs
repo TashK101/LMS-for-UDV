@@ -119,14 +119,14 @@ namespace external_training.Services
             return Mapper.MapToDetaileTrainingApplicationResponse(application);
         }
 
-        public async Task<CourseDto?> GetCourseAsync(int applicationId)
+        public async Task<SelectedCourseResponse?> GetCourseAsync(int applicationId)
         {
             var course = await _applicationRepository.GetCourseAsync(applicationId);
             if (course == null)
             {
                 return null;
             }
-            var response = Mapper.MapToCourseResponse(course);
+            var response = Mapper.MapToSelectedCourseResponse(course);
             return response;
         }
 

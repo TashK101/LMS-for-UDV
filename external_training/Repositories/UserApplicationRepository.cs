@@ -66,6 +66,8 @@ namespace external_training.Repositories
         public async Task<Course?> GetCourseAsync(int applicationId)
         {
             return await _context.Courses
+                .Include(c => c.TrainingApplication)
+                .ThenInclude(a => a.ApplicationParticipants)
                 .FirstOrDefaultAsync(c => c.TrainingApplicationId == applicationId);
         }
 
@@ -137,6 +139,7 @@ namespace external_training.Repositories
         {
             return await _context.Courses
                 .Include(c => c.TrainingApplication)
+                .ThenInclude(a => a.User)
                 .Where(c => c.TrainingApplication.IsArchived == false)
                 .ToListAsync();
         }
