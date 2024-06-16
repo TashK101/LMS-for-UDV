@@ -17,7 +17,8 @@ export type Application = {
     comments: CommentsType;
     approvingManagers: ApprovingManager[];
     participants: Participant[];
-    course: Course;
+    desiredCourse: Course;
+    selectedCourse: Course;
 }
 
 export type ApprovingManager = {

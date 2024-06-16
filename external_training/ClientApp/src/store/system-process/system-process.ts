@@ -1,11 +1,10 @@
 import {createSlice, createAction, PayloadAction} from '@reduxjs/toolkit';
 import {SystemProcess} from '../../types/state';
 import {Notifications} from "../../types/notifications";
-import {Application, Course} from "../../types/application";
+import {Application, ApprovingManager, Course} from "../../types/application";
 import {EventType} from "../../types/event.tsx";
 import {StartConfig} from "../../types/startConfig";
 import {ShortAdminPendingApplicationInfoType, ShortApplicationInfoType} from "../../types/short-application-info.tsx";
-import { Manager } from '../../types/manager.tsx';
 
 const initialState: SystemProcess = {
     error: null,
@@ -75,7 +74,7 @@ export const systemProcess = createSlice({
         loadAdminArchivedApplications : (state, action : PayloadAction<ShortApplicationInfoType[]>) => {
             state.adminArchivedApplications = action.payload;
         },
-        loadManagers: (state, action: PayloadAction<Manager[]>) => {
+        loadManagers: (state, action: PayloadAction<ApprovingManager[]>) => {
             state.managers = action.payload;
         }
     }

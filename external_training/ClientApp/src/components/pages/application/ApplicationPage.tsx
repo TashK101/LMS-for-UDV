@@ -16,7 +16,7 @@ import { getApplicationDetails, getCourseDetails } from '../../../store/system-p
 import { ApplicationsStatusToData } from '../my-applications/my-applications-page.tsx';
 import { ApplicationStatus } from '../../current-applications-utils/application-status';
 import {TextValueBlock} from "../../application-details/text-value-block";
-import {stringToDate} from "../../../string-to-date";
+import {stringToDate} from "../../../helpers/string-to-date";
 
 export function ApplicationPage() {
     const application = useAppSelector(getApplicationDetails);

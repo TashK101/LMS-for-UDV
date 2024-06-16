@@ -1,21 +1,25 @@
-﻿import {stringToDate} from "../../string-to-date";
+﻿
 import {TextValueBlock} from "./text-value-block";
 import './application-details.css'
+import {Application, Course} from "../../types/application";
+import {stringToDate} from "../../helpers/string-to-date";
 
-function ApprovedApplicationDetails({ course, application }) {
+function ApprovedApplicationDetails({ application }: {application: Application}) {
+    const course = application.selectedCourse;
     return (
         <div className='pending-application-details'>
             <TextValueBlock textValueProps={[
-                ['Учебный центр', course?.educationalCenter],
-                ['Название курса', course?.courseName],
+                ['Учебный центр', course.trainingCenter],
+                ['Название курса', course?.name],
                 ['Формат', `${course ? (course?.isTrainingOnline ? 'Онлайн,' : 'Оффлайн,') : ''} 
-                ${course ? (course?.isCorporateTraining ? 'только для нашей компании' : 'не только для нашей компании') : ''}`],
+                ${course ? (course?.isCorporateTraining ? 
+                    'только для нашей компании' : 'не только для нашей компании') : ''}`],
                 ['Даты', `${stringToDate(course?.begin)} - ${stringToDate(course?.end)}`],
                 ['Стоимость на одного', course?.costPerParticipant]
             ]}/>
             <TextValueBlock textValueProps={[
-                ['Количество участников', course?.participantsCount],
-                ['ФИО участников', course?.participantsNames]
+                ['Количество участников', application.participants.length],
+                ['ФИО участников', getFullNames(application.participants)]
             ]}/>
             <TextValueBlock textValueProps={[
                 ['Мотивация', application?.relevanceReason],

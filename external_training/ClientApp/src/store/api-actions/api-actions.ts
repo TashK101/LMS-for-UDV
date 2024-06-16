@@ -16,7 +16,7 @@ import {
     setLoadingStatus
 } from "../system-process/system-process";
 import {Notifications} from "../../types/notifications";
-import {Application, Course} from "../../types/application";
+import {Application, ApprovingManager, Course} from "../../types/application";
 import {StartConfig} from "../../types/startConfig";
 
 import {EventsType} from "../../types/event.tsx";
@@ -295,7 +295,7 @@ export const fetchManagersAction = createAsyncThunk<void, undefined, {
     async (_arg, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            const {data} = await api.get<Manager[]>('/api/user/managers');
+            const {data} = await api.get<ApprovingManager[]>('/api/user/managers');
             dispatch(loadManagers(data))
         } finally {
             dispatch(setLoadingStatus(false));

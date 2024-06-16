@@ -1,7 +1,6 @@
 import {Comments} from "../comments/comments";
 import {useEffect, useState} from "react"
-import {afterManagerApprovalStatuses} from "./flagStatuses";
-import {stringToDate} from "../../string-to-date";
+import {afterAdminWorkStatuses, afterManagerApprovalStatuses} from "./flagStatuses";
 import './application-details.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {getApplicationDetails, getCourseDetails, getId, getRole} from "../../store/system-process/system-getters";
@@ -10,7 +9,6 @@ import {
     fetchCourseDetailsAction,
     fetchStartConfigAction
 } from "../../store/api-actions/api-actions";
-import {TextValueBlock} from "./text-value-block";
 import {CommentSendField, parseRoleFromString, Role} from "./comment-send-field";
 import {Header} from "../header/header";
 import {ModeSwitchButton} from "../current-applications-utils/mode-switch-button";
@@ -21,6 +19,8 @@ import {StatusIcon} from "../current-applications-utils/icons/status-icons.tsx";
 import {ApplicationStatus} from "../current-applications-utils/application-status.ts";
 import PendingApplicationDetails from "./pending-application-details";
 import ApprovedApplicationDetails from "./approved-application-details";
+import {ApplicationPage} from "../pages/application/ApplicationPage";
+import {Application} from "../../types/application";
 
 export type ApplicationDetailsProps = {
     id: number;
@@ -42,17 +42,13 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
     const userId = useAppSelector(getId);
     const status = ApplicationStatus[application?.status as keyof typeof ApplicationStatus]
     const [dataFlag, setDataFlag] = useState(() => false);
+    
     return (
         <div>
             <Header/>
             <div className='application-details left-5'>
                 <h2 className='topic-text'>{application?.trainingTopic}</h2>
-                {/*(role === Role.manager) && (application?.desiredManagerId === userId) && (status === 'Ждёт согласования руководителя') &&
-                    <AcceptDeclineButton TrainingApplicationId={application.trainingApplicationId}/>
-                }
-                {(role === Role.admin) &&
-                    <SubmitButton4 text={'Оформление'}/>
-                */}
+                
                 <div className='flex border-2 rounded-xl items-center w-fit pr-4'>
                     <StatusIcon variant={status} className='mr-[8px]'/>
                     {status}
@@ -60,23 +56,36 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
                 
                 <div className='flex w-full gap-[50px]'>
                     {application?.applicationUserName &&
-                        <IconNameCombo name={application?.applicationUserName} action='Подал'/>}
+                        <IconNameCombo names={[application?.applicationUserName]} action='Подал'/>}
                     
-                    {application?.desiredManagerName &&
-                        <IconNameCombo name={application?.desiredManagerName} action='Согласует'/>}
+                    {application?.approvingManagers?.length > 0 &&
+                    <IconNameCombo
+                        names={getFullNames(application.approvingManagers)}
+                        action='Согласует'
+                    />
+                    }
                 </div>
 
-                <ModeSwitchButton contentMode={dataFlag} setContentMode={setDataFlag} leftPartText={'Исходная заявка'}
-                                  rightPartText={'Утвержденные данные'}/>
-                {!dataFlag ?
-                    <PendingApplicationDetails application={application} />
-                    : <ApprovedApplicationDetails course={course} application={application} /> }
-                {application && role && ((role===Role.admin) || userId === application?.applicationUserId || userId === application.desiredManagerId) &&
+                {(role === Role.admin && status !== "Ждёт согласования руководителя") && (
+                    <ModeSwitchButton contentMode={dataFlag} setContentMode={setDataFlag} leftPartText={'Исходные данные'}
+                                  rightPartText={'Оформление'}/>)}
+                
+                {role === Role.admin && dataFlag ?
+                    <div className="flex">
+                        <PendingApplicationDetails application={application} />
+                        <ApplicationPage/>
+                    </div>
+                    :
+                    (afterAdminWorkStatuses.includes(status) ?
+                        <ApprovedApplicationDetails course={course} application={application} />
+                        :
+                        <PendingApplicationDetails application={application} />) }
+                
+                {application && role && ((role===Role.admin) || userId === application?.applicationUserId) &&
                 <CommentSendField trainingApplicationId={id} applicationUserId={application?.applicationUserId} userId={userId} role={roleEnum}/>}
-
+                
             </div>
             <div className='top-bottom-20'>
-
                 {application?.comments &&
                     <Comments comments={application.comments} authorId={userId}/>}
             </div>

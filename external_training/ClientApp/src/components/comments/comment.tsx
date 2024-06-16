@@ -1,6 +1,6 @@
 import {CommentAvatar} from "../avatar/comment-avatar";
 import {CommentType} from "../../types/comments";
-import {stringToDate} from "../../string-to-date";
+import {stringToDate} from "../../helpers/string-to-date";
 
 type CommentProps = {
     comment: CommentType;

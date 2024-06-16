@@ -5,12 +5,12 @@ import { RadioGroup } from '../../common/Radio';
 import { SubmitButton } from '../../common/Button';
 import { Form } from "../../common/Form";
 import { SmallCalendarDatePicker } from "../../calendars/small-calendar/small-calendar-datepicker";
-import { INewApplication } from "../../../types/new-application";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { fetchManagersAction, postNewApplicationAction } from "../../../store/api-actions/api-actions";
-import { DropDownMenu } from "../../common/DropDownMenu";
-import { Manager } from "../../../types/manager";
 import { State } from "../../../types/state";
+import {ManagerDropDownMenu} from "../../common/ManagerDropDownMenu";
+import {Application, ApprovingManager, Course} from "../../../types/application";
+import {INewApplication} from "../../../types/new-application";
 
 // const managers: Manager[] = [
 //   { managerId: "1", fullName: "Николай Николаевич" },
@@ -29,13 +29,13 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
     dispatch(fetchManagersAction());
   }, []);
 
-  const managers: Manager[] | undefined = useAppSelector(getManagers);
+  const managers: ApprovingManager[] = useAppSelector(getManagers);
 
   const count = 5;
   const [topic, setTopic] = useState('')
   const [numberOfPeople, setNumberOfPeople] = useState(0)
   const [name, setName] = useState('')
-  const [manager, setManager] = useState<Manager | undefined>(undefined) //(managers?.length === 0) ? undefined : managers[0]
+  const [manager, setManager] = useState<ApprovingManager | undefined>(undefined) //(managers?.length === 0) ? undefined : managers[0]
   const [price, setPrice] = useState('')
   const [sameCourses, setSameCourses] = useState('')
   const [motivation, setMotivation] = useState('')
@@ -52,21 +52,26 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
     event.preventDefault()
 
     const newApplication: INewApplication = {
-      trainingTopic: topic,
-      plannedParticipantsCount: numberOfPeople,
-      plannedParticipantsNames: name,
-      desiredManagerId: manager?.managerId ?? "",
-      isTrainingOnline: format === '1',
-      isCorporateTraining: classmates === '1',
-      desiredBegin: firstSelectedDate?.toISOString() ?? "",
-      desiredEnd: secondSelectedDate?.toISOString() ?? "",
-      estimatedCostPerParticipant: +price,
-      similarPrograms: sameCourses,
-      relevanceReason: motivation,
-      trainingGoals: goals,
-      skillsToBeAcquired: skills,
-      applicationNotes: note,
+        trainingTopic: topic,
+        similarPrograms: sameCourses,
+        approvingManagerSoloAppointmentIds: [manager?.appointmentId],
+        participantSoloPersonIds: [manager?.appointmentId],
+        relevanceReason: motivation,
+        trainingGoals: goals,
+        skillsToBeAcquired: skills,
+        applicationNotes: note,
+    
+        desiredCourse: {
+            name: topic,
+            isTrainingOnline: format === '1',
+            isCorporateTraining: classmates === '1',
+            begin: firstSelectedDate?.toISOString() ?? "",
+            end: secondSelectedDate?.toISOString() ?? "",
+            costPerParticipant: +price,
+            totalCost: price * numberOfPeople
+      }
     }
+    
     dispatch(postNewApplicationAction(newApplication))
 
     onSubmit()
@@ -86,11 +91,11 @@ export function CreateApplicationPage({ onSubmit }: CreateApplicationPageProps) 
         <CardIndex index={2} count={count} />
         <CounterInput label="Количество участников" value={numberOfPeople} onChange={setNumberOfPeople} />
         <TextField label="ФИО участников" value={name} onChange={setName} />
-        <Form label="Согласующий руководитель">
-          <DropDownMenu
+        <Form label="Согласующие руководители">
+          <ManagerDropDownMenu
             managers={managers}
             selectedManager={manager}
-            onClick={value => setManager(managers?.find(i => i.managerId === value))}
+            onClick={value => setManager(managers?.find(i => i.appointmentId === value))}
           />
         </Form>
       </CardWithColumn>

@@ -1,17 +1,19 @@
 import {ApplicationDetailsAvatar} from "../avatar/header-avatar";
 export type IconNameComboType = {
-    name: string,
+    names: string[],
     action: string
 }
 
-export function IconNameCombo({name, action}:IconNameComboType): JSX.Element {
+export function IconNameCombo({names, action}:IconNameComboType): JSX.Element {
     return (
         <div>
             <p className='bold-text'>{action}:</p><br/>
-            <div className='flex items-center gap-[15px]'>{name &&
-                <ApplicationDetailsAvatar userFullName={name}/>}
-                {name}
-            </div>
+            {names.length > 0 && names.map((name, index) => (
+                <div key={index} className='flex items-center gap-[15px] m-b4'>
+                    <ApplicationDetailsAvatar userFullName={name} />
+                    {name}
+                </div>
+            ))}
         </div>
     )
 }

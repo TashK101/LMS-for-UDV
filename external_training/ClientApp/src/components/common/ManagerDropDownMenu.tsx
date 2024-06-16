@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Manager } from "../../types/manager";
+import {ApprovingManager, Participant} from "../../types/application";
 
-interface DropDownMenuProps {
-    managers: Manager[] | undefined,
-    selectedManager: Manager | undefined,
+interface ManagerDropDownMenuProps {
+    managers: ApprovingManager[] | undefined,
+    selectedManager: ApprovingManager | undefined,
     onClick: (value: string) => void
 }
-export function DropDownMenu({ managers, selectedManager, onClick }: DropDownMenuProps) {
+export function ManagerDropDownMenu({ managers, selectedManager, onClick }: ManagerDropDownMenuProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -23,7 +23,7 @@ export function DropDownMenu({ managers, selectedManager, onClick }: DropDownMen
                 focus:border-color6
                 "
             >
-                {selectedManager?.fullName}
+                {selectedManager && getFullNames([selectedManager])}
             </button>
             {isOpen && (
                 <div
@@ -31,7 +31,7 @@ export function DropDownMenu({ managers, selectedManager, onClick }: DropDownMen
                     className="cursor-pointer z-10 absolute mt-2 py-2 w-[300px] bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
                 >
                     <ul className="font-golos text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                        {managers?.map(manager => <li key={manager.managerId}><DropDownElement manager={manager} onClick={value => {
+                        {managers?.map(manager => <li key={manager.appointmentId}><ManagerDropDownElement manager={manager} onClick={value => {
                             setIsOpen(false)
                             onClick(value)
                         }
@@ -43,15 +43,15 @@ export function DropDownMenu({ managers, selectedManager, onClick }: DropDownMen
     );
 };
 
-interface DropDownElementProps {
-    manager: Manager,
+interface ManagerDropDownElementProps {
+    manager: ApprovingManager,
     onClick: (value: string) => void
 }
 
-function DropDownElement({ manager, onClick }: DropDownElementProps) {
+function ManagerDropDownElement({ manager, onClick }: ManagerDropDownElementProps) {
     return (
-        <a className="block px-4 py-2 hover:text-color6 text-[#2B2A29]" onClick={() => onClick(manager.managerId)}>
-            {manager.fullName}
+        <a className="block px-4 py-2 hover:text-color6 text-[#2B2A29]" onClick={() => onClick(manager.appointmentId)}>
+            {getFullNames([manager])}
         </a>
     )
 }
