@@ -18,6 +18,6 @@ namespace external_training.Services
         Task EditDesiredCourse(CourseDto courseDto);
         Task ReplaceManagersAsync(ReplaceManagersDto replace);
         Task ReplaceParticipantsAsync(ReplaceParticipantsDto replace);
-        Task<IEnumerable<SelectedCourseResponse>> GetActiveCoursesAsync();
+        Task<IEnumerable<SelectedCourseResponse>> GetCompletedCoursesAsync();
     }
 }

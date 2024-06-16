@@ -99,10 +99,10 @@ namespace external_training.Controllers
             return Ok(course);
         }
 
-        [HttpGet("active_courses")]
-        public async Task<ActionResult<IEnumerable<SelectedCourseResponse>>> GetActiveCourses()
+        [HttpGet("completed_courses")]
+        public async Task<ActionResult<IEnumerable<SelectedCourseResponse>>> GetCompletedCourses()
         {
-            var courses = await _applicationService.GetActiveCoursesAsync();
+            var courses = await _applicationService.GetCompletedCoursesAsync();
             return Ok(courses);
         }
 

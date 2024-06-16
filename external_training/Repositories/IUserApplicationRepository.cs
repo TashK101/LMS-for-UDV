@@ -16,5 +16,6 @@ namespace external_training.Repositories
         Task EditDesiredCourse(DesiredCourse course);
         Task ReplaceManagersAsync(int applicationId, IEnumerable<ApprovingManager> newManagers);
         Task ReplaceParticipantsAsync(int applicationId, IEnumerable<ApplicationParticipant> newParticipants);
+        Task<IEnumerable<Course>> GetCompletedCoursesAsync();
     }
 }

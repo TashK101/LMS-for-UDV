@@ -168,9 +168,9 @@ namespace external_training.Services
             return notifications.Select(Mapper.MapToNotificationResponse).ToList();
         }
 
-        public async Task<IEnumerable<SelectedCourseResponse>> GetActiveCoursesAsync()
+        public async Task<IEnumerable<SelectedCourseResponse>> GetCompletedCoursesAsync()
         {
-            var courses = await _applicationRepository.GetActiveCoursesAsync();
+            var courses = await _applicationRepository.GetCompletedCoursesAsync();
             var mappedCourses = new List<SelectedCourseResponse>();
             foreach (var course in courses)
             {
