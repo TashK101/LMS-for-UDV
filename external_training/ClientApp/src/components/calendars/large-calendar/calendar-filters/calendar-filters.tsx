@@ -54,7 +54,7 @@ function CalendarFilters({isVisible, setIsVisible}: CalendarFiltersProps): JSX.E
                                 }}
                                 renderInput={(params) => {
                                     return (
-                                        <div ref={params.InputProps.ref} key={params.id} className='border-[20px]'>
+                                        <div ref={params.InputProps.ref} key={params.id} className='border-[2px] border-[#C27800]'>
                                             <input
                                                 id='pets-lists'
                                                 type='text'
@@ -63,7 +63,7 @@ function CalendarFilters({isVisible, setIsVisible}: CalendarFiltersProps): JSX.E
                                                     // border: "1px solid #cccccc",
                                                     padding: "10px",
                                                     width: "100%",
-
+                                                    outline: 'none'
                                                 }}
                                                 {...params.inputProps}
                                             />

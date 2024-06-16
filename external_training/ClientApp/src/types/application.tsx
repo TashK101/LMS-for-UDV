@@ -51,4 +51,5 @@ export type Course = {
     totalCost: number;
     begin: string;
     end: string;
+    participantFullNames: string[];
 }
