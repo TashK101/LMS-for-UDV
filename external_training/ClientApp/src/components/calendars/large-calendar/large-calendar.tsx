@@ -15,7 +15,7 @@ export default function LargeCalendar() {
 
     const [isFiltersVisible, setIsFiltersVisible] = useState<boolean>(() => false);
     const events = useAppSelector((state: State) => state.events);
-    const allCourseAuthorNames = events.map((event) => event.userFullName)
+    const allCourseAuthorNames = [...new Set(events.map((event) => event.userFullName))];
 
     const leftArrowClickHandler = () => {
         let currentMonth = filterMonth;
