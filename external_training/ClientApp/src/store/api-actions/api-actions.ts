@@ -7,7 +7,9 @@ import {
     loadAdminPendingApplications,
     loadApplicationDetails,
     loadCourseDetails,
-    loadEvents, loadExportCourses,
+    loadEvents, 
+    loadExportCourses,
+    loadEmployees,
     loadManagers,
     loadNotifications,
     loadStartConfig,
@@ -16,7 +18,7 @@ import {
     setLoadingStatus
 } from "../system-process/system-process";
 import {Notifications} from "../../types/notifications";
-import {Application, ApprovingManager, Course} from "../../types/application";
+import {Application, ApprovingManager, Course, Participant} from "../../types/application";
 import {StartConfig} from "../../types/startConfig";
 
 import {EventsType} from "../../types/event.tsx";
@@ -296,6 +298,23 @@ export const fetchManagersAction = createAsyncThunk<void, undefined, {
             dispatch(setLoadingStatus(true));
             const {data} = await api.get<ApprovingManager[]>('/api/user/managers');
             dispatch(loadManagers(data))
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+export const fetchEmployeesAction = createAsyncThunk<void, undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/fetchEmployees',
+    async (_arg, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            const {data} = await api.get<Participant[]>('/api/user/all_solo_Employees');
+            dispatch(loadEmployees(data))
         } finally {
             dispatch(setLoadingStatus(false));
         }

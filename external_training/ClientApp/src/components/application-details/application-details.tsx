@@ -1,6 +1,6 @@
 import {Comments} from "../comments/comments";
 import {useEffect, useState} from "react"
-import {afterAdminWorkStatuses, afterManagerApprovalStatuses} from "./flagStatuses";
+import {afterAdminWorkStatuses} from "./flagStatuses";
 import './application-details.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {getApplicationDetails, getCourseDetails, getId, getRole} from "../../store/system-process/system-getters";
@@ -10,17 +10,16 @@ import {
     fetchStartConfigAction
 } from "../../store/api-actions/api-actions";
 import {CommentSendField, parseRoleFromString, Role} from "./comment-send-field";
+import {getFullNames} from "../../helpers/get-full-names"
 import {Header} from "../header/header";
 import {ModeSwitchButton} from "../current-applications-utils/mode-switch-button";
 import {IconNameCombo} from "./icon-name-combo";
-import {AcceptDeclineButton} from "./accept-decline-buttons";
-import {SubmitButton4} from "../common/Button";
 import {StatusIcon} from "../current-applications-utils/icons/status-icons.tsx";
 import {ApplicationStatus} from "../current-applications-utils/application-status.ts";
 import PendingApplicationDetails from "./pending-application-details";
 import ApprovedApplicationDetails from "./approved-application-details";
 import {ApplicationPage} from "../pages/application/ApplicationPage";
-import {Application} from "../../types/application";
+import {ApplicationChangeForm} from "./application-change-form";
 
 export type ApplicationDetailsProps = {
     id: number;
@@ -72,14 +71,13 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
                 
                 {role === Role.admin && dataFlag ?
                     <div className="flex">
-                        <PendingApplicationDetails application={application} />
-                        <ApplicationPage/>
+                        <PendingApplicationDetails id={id} />
                     </div>
                     :
                     (afterAdminWorkStatuses.includes(status) ?
                         <ApprovedApplicationDetails course={course} application={application} />
                         :
-                        <PendingApplicationDetails application={application} />) }
+                        <PendingApplicationDetails id={id} />) }
                 
                 {application && role && ((role===Role.admin) || userId === application?.applicationUserId) &&
                 <CommentSendField trainingApplicationId={id} applicationUserId={application?.applicationUserId} userId={userId} role={roleEnum}/>}

@@ -60,12 +60,6 @@ export function ApplicationPage() {
     return (
         <div
             className="flex flex-col mx-auto max-w-2xl gap-[40px] mt-[72px] mb-[80px]">
-            <H700 text={courseTitle} />
-
-            <div className='flex flex-row gap-[30px] items-center'>
-                <p className="font-golos text-color7 text-[20px] font-[600]">Статус</p>
-                <StatusComponent statusType={currentStatus} />
-            </div>
 
             <div className='flex flex-row gap-[60px] items-center'>
                 <InfoBlock label='Подал' fullName={application?.applicationUserName ?? ""} />
