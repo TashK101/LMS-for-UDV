@@ -13,14 +13,14 @@ export enum AdminBarTab {
 }
 
 export const AdminTabsMapping = {
-    [AdminBarTab.Coordination]: ApplicationStatus.AwaitingManagerApproval,
-    [AdminBarTab.Editing]: ApplicationStatus.Editing,
-    [AdminBarTab.InProcess]: ApplicationStatus.CourseSelection,
-    [AdminBarTab.AwaitingContract]: ApplicationStatus.AwaitingContractAndPayment,
-    [AdminBarTab.AwaitingPayment]: ApplicationStatus.AwaitingPayment || ApplicationStatus.AwaitingContractAndPayment,
-    [AdminBarTab.AwaitingLearning]: ApplicationStatus.AwaitingTraining,
-    [AdminBarTab.LearningInProcess]: ApplicationStatus.TrainingInProgress,
-    [AdminBarTab.History]: ApplicationStatus.TrainingCompleted || ApplicationStatus.TrainingCanceled || ApplicationStatus.NotApproved,
+    [AdminBarTab.Coordination]: [ApplicationStatus.AwaitingManagerApproval],
+    [AdminBarTab.Editing]: [ApplicationStatus.Editing],
+    [AdminBarTab.InProcess]: [ApplicationStatus.CourseSelection],
+    [AdminBarTab.AwaitingContract]: [ApplicationStatus.AwaitingContractAndPayment],
+    [AdminBarTab.AwaitingPayment]: [ApplicationStatus.AwaitingPayment, ApplicationStatus.AwaitingContractAndPayment],
+    [AdminBarTab.AwaitingLearning]: [ApplicationStatus.AwaitingTraining],
+    [AdminBarTab.LearningInProcess]: [ApplicationStatus.TrainingInProgress],
+    [AdminBarTab.History]: [ApplicationStatus.TrainingCompleted, ApplicationStatus.TrainingCanceled, ApplicationStatus.NotApproved],
 }
 
 export function getFilteredApplications(filteredApplications: { [key in AdminBarTab]: CurrentApplicationType[] }, filterOption: AdminBarTab) {

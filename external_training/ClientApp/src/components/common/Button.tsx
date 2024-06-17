@@ -15,7 +15,7 @@ export function SubmitButton({ text }: SubmitButtonProps) {
 
 export function SubmitButton2({ text }: SubmitButtonProps) {
     return (
-        <button type="submit" className="w-[153px] h-[54px] rounded-[100px] bg-color6 hover:bg-color5">
+        <button type="submit" className="w-[153px] h-[54px] border-[2px] border-color6 rounded-[100px] bg-color6 hover:bg-[#FFB439]  hover:border-[#C56907]">
             <H400 text={text} fontSize={20} />
         </button>
     )

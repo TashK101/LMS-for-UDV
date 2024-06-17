@@ -135,7 +135,7 @@ export function CounterInput({ label = "", required = true, value, onChange }: C
             <div className='relative flex items-center gap-[9px]'>
                 <button type='button' onClick={() => {
                     const number = value - 1
-                    if (number < 0) return
+                    if (number < 1) return
                     onChange(number)
                 }}>
                     <DecrementIcon />

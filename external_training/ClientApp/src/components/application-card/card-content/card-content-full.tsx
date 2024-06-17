@@ -29,7 +29,7 @@ function CardContentFull({
                     </>
                 }
             </div>
-            {showSOLOButton && <PostToSoloButton applicationId={application.id} />}
+            {showSOLOButton && <PostToSoloButton applicationId={application.id} variant={'small'}/>}
         </>
     );
 }

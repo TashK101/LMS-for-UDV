@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {CardIndex, CardWithColumn} from "../../common/Card";
-import {CounterInput, NumberField, TextArea, TextField} from '../../common/InputField';
+import {NumberField, TextArea, TextField} from '../../common/InputField';
 import {RadioGroup} from '../../common/Radio';
 import {SubmitButton} from '../../common/Button';
 import {Form} from "../../common/Form";
@@ -12,14 +12,16 @@ import {
     postNewApplicationAction
 } from "../../../store/api-actions/api-actions";
 import {State} from "../../../types/state";
-import {ManagerDropDownMenu} from "../../common/ManagerDropDownMenu";
-import {Application, ApprovingManager, Course, Participant} from "../../../types/application";
+import {ApprovingManager, Participant} from "../../../types/application";
 import {INewApplication} from "../../../types/new-application";
 import AutocompleteField, {
     AutocompleteOptionObject
 } from "../../calendars/large-calendar/calendar-filters/autocomplete-field";
 import {getFullNames} from "../../../helpers/get-full-names";
 import {H400} from "../../common/Text";
+import {ApplicationDetailsAvatar} from "../../avatar/header-avatar.tsx";
+import DeleteUserIcon from "../../application-details/delete-user-icon.tsx";
+import clsx from "clsx";
 
 const getManagers = (state: State) => state.managers;
 const getEmployees = (state: State) => state.employees;
@@ -36,16 +38,15 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
     }, []);
 
     const managers: ApprovingManager[] = useAppSelector(getManagers);
-    const people : Participant[] = useAppSelector(getEmployees);
+    const people: Participant[] = useAppSelector(getEmployees);
 
     const count = 5;
     const [topic, setTopic] = useState('')
-    const [numberOfPeople, setNumberOfPeople] = useState(0)
 
-    const [manager, setManager] = useState<AutocompleteOptionObject<number> | null>(null);
-    const [employee, setEmployee] = useState<AutocompleteOptionObject<number> | null>(null);
+    const [manager, setManager] = useState<AutocompleteOptionObject<string> | null>(null);
+    const [employee, setEmployee] = useState<AutocompleteOptionObject<Participant> | null>(null);
     const [autocompleteUniqueKey, setAutocompleteUniqueKey] = useState<string>(new Date().toISOString());
-    
+
     const [price, setPrice] = useState('')
     const [sameCourses, setSameCourses] = useState('')
     const [motivation, setMotivation] = useState('')
@@ -54,10 +55,12 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
     const [note, setNote] = useState('')
     const [format, setFormat] = useState('')
     const [classmates, setClassmates] = useState('')
-    
+
     const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>(new Date("2024-06-15"));
     const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>(new Date("2024-06-17"));
-    
+
+    const [selectedEmployeeIds, setSelectedEmployeeIds] = useState<(Participant | undefined)[]>([]);
+
     const autocompleteManagerOptions = managers?.toSorted().map((m, index): AutocompleteOptionObject<string> => ({
         uniqueValue: m.appointmentId,
         label: getFullNames([m]).join(),
@@ -80,8 +83,8 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
         console.log(Array.from(newSelectedIds))
     };*/
 
-    const autocompleteEmployeeOptions = people?.toSorted().map((m, index): AutocompleteOptionObject<string> => ({
-        uniqueValue: m.soloPersonId,
+    const autocompleteEmployeeOptions = !people ? [] : people?.toSorted().map((m): AutocompleteOptionObject<Participant> => ({
+        uniqueValue: m,
         label: getFullNames([m]).join(),
     }));
 
@@ -91,8 +94,8 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
         const newApplication: INewApplication = {
             trainingTopic: topic,
             similarPrograms: sameCourses,
-            approvingManagerSoloAppointmentIds: [manager?.uniqueValue.toString()],
-            participantSoloPersonIds: [employee?.uniqueValue.toString()],
+            approvingManagerSoloAppointmentIds: [manager?.uniqueValue ?? ''],
+            participantSoloPersonIds: selectedEmployeeIds.map((employee) => employee ? employee.soloPersonId : ''),
             relevanceReason: motivation,
             trainingGoals: goals,
             skillsToBeAcquired: skills,
@@ -105,7 +108,7 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
                 begin: firstSelectedDate?.toISOString() ?? "",
                 end: secondSelectedDate?.toISOString() ?? "",
                 costPerParticipant: +price,
-                totalCost: price * numberOfPeople
+                totalCost: price * selectedEmployeeIds.length
             }
         }
 
@@ -113,6 +116,19 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
 
         onSubmit()
         window.location.reload();
+    }
+
+    const handleEmployeesChange = (newOptionValue: (typeof employee)) => {
+        setSelectedEmployeeIds((prevState) => {
+            if (!prevState.includes(newOptionValue?.uniqueValue)) {
+                return [...prevState, newOptionValue?.uniqueValue];
+            } else {
+                return [...prevState];
+            }
+
+        });
+        setEmployee(() => null);
+        setAutocompleteUniqueKey(() => new Date().toISOString())
     }
 
     return (
@@ -126,22 +142,52 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
 
             <CardWithColumn>
                 <CardIndex index={2} count={count}/>
-                <CounterInput label="Количество участников" value={numberOfPeople} onChange={setNumberOfPeople}/>
-                
-                <H400 text={"ФИО Участников"} />
-                <AutocompleteField<string>
+                <div className='text-[24px] flex items-center gap-[20px]'>
+                    <p>Количество участников:</p>
+                    {<div className='relative'>
+                        <label id='soloUsersCount' className={
+                            clsx('text-[20px] pl-[10px] text-center p-2 bg-[#FFEDCF] border-[1px] border-[#F59D0E] w-[40px] h-[40px] flex justify-center items-center rounded-full',
+                                {'bg-red-300': selectedEmployeeIds.length === 0})}>
+                            {selectedEmployeeIds.length}
+                        </label>
+                        <input
+                            placeholder=''
+                            id='soloUsersCount'
+                            type='number'
+                            required
+                            min={1}
+                            value={selectedEmployeeIds.length < 1 ? undefined : selectedEmployeeIds.length}
+                            className='bg-transparent absolute z-[-1] text-center p-2 bg-[#FFEDCF] border-[1px] border-[#F59D0E] w-[40px] h-[40px] top-0'/>
+                    </div>}
+                </div>
+
+                <H400 text={"ФИО Участников"}/>
+                {selectedEmployeeIds.length > 0 && <div className='flex flex-column gap-[8px]'>
+                    {selectedEmployeeIds.map((emp, index) => (
+                        <div key={index} className='pl-[8px] py-[4px] flex justify-between items-center pr-[20px]'>
+                            <div className='flex items-center gap-[10px]'>
+                                <ApplicationDetailsAvatar userFullName={emp?.fullName ?? ''}/>
+                                <p>{emp?.fullName}</p>
+                            </div>
+                            <button className='float-right right-0' onClick={(evt) => {
+                                evt.preventDefault();
+                                setSelectedEmployeeIds((prevState) => prevState.toSpliced(prevState.indexOf(emp), 1))
+                            }}>
+                                <DeleteUserIcon/>
+                            </button>
+                        </div>
+                    ))}
+                </div>}
+                <AutocompleteField<Participant>
+                    uniqueKey={autocompleteUniqueKey}
                     options={autocompleteEmployeeOptions}
                     setOption={setEmployee}
-                    uniqueKey={autocompleteUniqueKey}/>
-                <button type="submit" className="bg-orange-50 text-black px-4 py-2 rounded">
-                    Добавить участника
-                </button>
-                
-                <H400 text={"Согласующий руководитель"} />
+                    onChange={handleEmployeesChange}/>
+
+                <H400 text={"Согласующий руководитель"}/>
                 <AutocompleteField<string>
                     options={autocompleteManagerOptions}
-                    setOption={setManager}
-                    uniqueKey={autocompleteUniqueKey}/>
+                    setOption={setManager}/>
                 <button className="bg-orange-50 text-black px-4 py-2 rounded">
                     Добавить согласующего руководителя
                 </button>

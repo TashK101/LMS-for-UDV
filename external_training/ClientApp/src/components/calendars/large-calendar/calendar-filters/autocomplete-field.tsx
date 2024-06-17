@@ -11,17 +11,20 @@ type AutocompleteFieldProps<T> = {
     options: AutocompleteOptionObject<T>[];
     setOption: React.Dispatch<React.SetStateAction<AutocompleteOptionObject<T> | null>>;
     uniqueKey?: string;
+    onChange?: (newOptionValue: AutocompleteOptionObject<T> | null) => void;
 }
 
-function AutocompleteField<T>({options, setOption, uniqueKey = ''}: AutocompleteFieldProps<T>): JSX.Element {
+function AutocompleteField<T>({options, setOption, uniqueKey = '', onChange}: AutocompleteFieldProps<T>): JSX.Element {
     const [innerOptionInputValue, setInnerOptionInputValue] = useState<string>('');
-
 
     return (
         <Autocomplete
             key={uniqueKey}
             onChange={(_event, newOptionValue) => {
                 setOption(() => newOptionValue);
+                if (onChange) {
+                    onChange(newOptionValue);
+                }
             }}
             inputValue={innerOptionInputValue}
             onInputChange={(_event, newInputValue) => {

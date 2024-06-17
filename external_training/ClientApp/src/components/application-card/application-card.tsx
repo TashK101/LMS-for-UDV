@@ -17,16 +17,19 @@ type ApplicationCardProps = {
     application: CurrentApplicationType;
     stacked?: boolean;
     showStackedVersionIcon?: boolean;
+    showSOLOButtonIfNeed?: boolean;
 }
 
 export function ApplicationCard({
                                     application,
                                     stacked = false,
-                                    showStackedVersionIcon = true
+                                    showStackedVersionIcon = true,
+                                    showSOLOButtonIfNeed = false,
                                 }: ApplicationCardProps) {
     const {handleCardClick, userFullName, applicationDateStr, cardClassName, showSOLOButton} = useApplicationCard({
         application,
         stacked,
+        showSOLOButtonIfNeed
     });
 
     return (

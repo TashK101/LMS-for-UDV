@@ -24,7 +24,7 @@ function CardContentStacked({
             </div>
             <div className='flex-shrink-0 flex items-center flex-col justify-center'>
                 <p className='application-card__info-field'>{applicationDateStr}</p>
-                {showSOLOButton && <PostToSoloButton applicationId={application.id} stacked />}
+                {showSOLOButton && <PostToSoloButton applicationId={application.id} stacked variant={'small'}/>}
             </div>
         </div>
     );

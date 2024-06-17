@@ -42,7 +42,7 @@ export function AdminPendingApplications() {
     let filteredApplications: { [key in AdminBarTab]: CurrentApplicationType[] } = {};
     Object.keys(AdminBarTab).forEach((statusString) => {
         const status = AdminBarTab[statusString as keyof typeof AdminBarTab];
-        filteredApplications[status] = applications.filter((app) => app.status === AdminTabsMapping[status]);
+        filteredApplications[status] = applications.filter((app) => AdminTabsMapping[status].includes(app.status));
     })
 
     applications = getFilteredApplications(filteredApplications, navigationStatus);
@@ -55,7 +55,8 @@ export function AdminPendingApplications() {
                 <ApplicationCardsContainer
                     applications={applications}
                     showImportButtonInDatePicker={navigationStatus === AdminBarTab.History}
-                    showDatePicker/>
+                    showDatePicker
+                    showSOLOButtonIfNeed/>
             </div>
         </div>
     )

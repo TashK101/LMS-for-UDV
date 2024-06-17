@@ -44,7 +44,7 @@ function EditingIcon({className}: UniversalClassAndChildrenProps) {
             <circle cx="10" cy="10" r="9.5" fill="white" stroke="#2B2A29"/>
             <path
                 d="M10 0C12.1118 2.51829e-08 14.1694 0.66855 15.8779 1.90983C17.5863 3.15111 18.858 4.9014 19.5106 6.90983L10 10L10 0Z"
-                fill="#FFCE80"/>
+                fill="#FFB337"/>
             <circle cx="10" cy="10" r="9.5" stroke="#2B2A29"/>
         </svg>
 

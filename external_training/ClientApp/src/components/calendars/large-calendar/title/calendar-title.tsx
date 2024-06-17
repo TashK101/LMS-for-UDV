@@ -87,7 +87,7 @@ export default function CalendarTitle({chosenMonth, chosenYear, setChosenMonth, 
                 </div>
                 <div className="h-8 flex items-center gap-[10px]">
                     <div className="w-[25px] h-[25px] bg-[#C9C9C7] rounded"></div>
-                    <div>- курс ждёт оплату или договор</div>
+                    <div>- курс ждёт договор, оплату или начало обучения</div>
                 </div>
             </div>
         </div>

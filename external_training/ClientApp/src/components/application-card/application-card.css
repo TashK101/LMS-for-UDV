@@ -90,13 +90,22 @@
 
 .application-card__button {
     border-radius: 100px;
-    line-height: 17px;
     box-sizing: border-box;
 }
 
-.application-card__button_basic {
+.application-card__button_small {
+    line-height: 17px;
     padding: 8px 18px;
     margin-top: 28px;
+}
+
+.application-card__button_big {
+    line-height: 24px;
+    font-size: 20px;
+    padding: 15px 24px;
+}
+
+.application-card__button_basic {
     background: #FFB439;
     border: solid 2px #F59D0E;
 }

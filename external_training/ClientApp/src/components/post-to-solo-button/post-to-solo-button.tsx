@@ -8,16 +8,19 @@ import {
 
 type PostToSoloButtonProps = {
     applicationId: number,
+    variant: 'big' | 'small';
     stacked?: boolean;
 }
 
-function PostToSoloButton({applicationId, stacked = false}: PostToSoloButtonProps): JSX.Element {
+function PostToSoloButton({applicationId, variant, stacked = false}: PostToSoloButtonProps): JSX.Element {
     const dispatch = useAppDispatch();
 
-    const className = clsx('application-card__button',
+    const className = clsx('application-card__button shadow-md active:shadow-none',
         {
             'application-card__button_basic': !stacked,
-            'application-card__button_stacked': stacked
+            'application-card__button_stacked': stacked,
+            'application-card__button_small': variant === 'small',
+            'application-card__button_big': variant === 'big',
         })
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

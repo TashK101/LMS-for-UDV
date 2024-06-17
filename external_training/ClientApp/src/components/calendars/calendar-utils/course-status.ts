@@ -1,4 +1,5 @@
 export enum CourseStatus {
     Confirmed,
-    Waiting
+    Waiting,
+    Hidden
 }

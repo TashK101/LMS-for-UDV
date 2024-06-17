@@ -4,9 +4,9 @@ import {useAppDispatch} from "../../../../hooks";
 import {fetchEventsAction} from "../../../../store/api-actions/api-actions.ts";
 import {useEffect} from "react";
 import {getLastDayOfChosenMonth} from "../../calendar-utils/date-utils.ts";
-import {CourseStatus} from "../../calendar-utils/course-status.ts";
 import {ApplicationStatus} from "../../../current-applications-utils/application-status.ts";
 import {EventType} from "../../../../types/event.tsx";
+import {CourseStatus} from "../../calendar-utils/course-status.ts";
 
 type CalendarCoursesTableProps = {
     currentMonthMaxDate: number;
@@ -18,12 +18,19 @@ type CalendarCoursesTableProps = {
 
 const MIN_TABLE_HEIGHT = 10;
 
-export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate, events, chosenUser, chosenFormat}: CalendarCoursesTableProps) {
+export default function CalendarCoursesTable({
+                                                 currentMonthMaxDate,
+                                                 chosenDate,
+                                                 events,
+                                                 chosenUser,
+                                                 chosenFormat
+                                             }: CalendarCoursesTableProps) {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchEventsAction());
     }, []);
 
+    console.log('Events: ',events)
     let courses: ICourse[] = [];
     if (events) {
         for (let i = 0; i < events.length; i++) {
@@ -33,7 +40,7 @@ export default function CalendarCoursesTable({currentMonthMaxDate, chosenDate, e
                 title: event.courseName,
                 startDate: new Date(event.begin),
                 endDate: new Date(event.end),
-                status: getCourseInnerStatus(event.status),
+                status: getCourseInnerStatus(ApplicationStatus[event.status as keyof typeof ApplicationStatus]),
                 userFullName: event.userFullName,
                 isOnline: event.isOnline,
             })
@@ -94,12 +101,23 @@ function getFilteredCourses(courses: ICourse[], chosenFormat: string, chosenUser
         filteredCourses = filteredCourses.filter((course) => course.userFullName === chosenUser);
     }
 
+    console.log('Filtered',filteredCourses);
+    filteredCourses = filteredCourses.filter((course) => course.status !== CourseStatus.Hidden);
+
     return filteredCourses;
 }
 
-const getCourseInnerStatus = (status: ApplicationStatus) =>
-    status === ApplicationStatus.TrainingInProgress
-    || status === ApplicationStatus.AwaitingTraining
-        ? CourseStatus.Confirmed
-        : CourseStatus.Waiting;
+const getCourseInnerStatus = (status: ApplicationStatus) => {
+    console.log(status);
+    return (
+    status === ApplicationStatus.AwaitingPayment ||
+    status === ApplicationStatus.AwaitingContractAndPayment ||
+    status === ApplicationStatus.AwaitingTraining ||
+    status === ApplicationStatus.CourseSelection
+        ? CourseStatus.Waiting
+        : status === ApplicationStatus.TrainingCompleted || status === ApplicationStatus.TrainingInProgress
+            ? CourseStatus.Confirmed
+            : CourseStatus.Hidden);
+}
+
 

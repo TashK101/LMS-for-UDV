@@ -6,9 +6,10 @@ import {ApplicationStatus} from "../current-applications-utils/application-statu
 type ApplicationCardController = {
     application: CurrentApplicationType;
     stacked: boolean;
+    showSOLOButtonIfNeed: boolean;
 }
 
-export function useApplicationCard({application, stacked}: ApplicationCardController) {
+export function useApplicationCard({application, stacked, showSOLOButtonIfNeed}: ApplicationCardController) {
     const navigate = useNavigate();
     const applicationDateStr = application.date.toLocaleString("ru", {
         day: '2-digit',
@@ -26,7 +27,7 @@ export function useApplicationCard({application, stacked}: ApplicationCardContro
         'application-card_stacked': stacked
     })
 
-    const showSOLOButton = application.status === ApplicationStatus.Editing;
+    const showSOLOButton = showSOLOButtonIfNeed && application.status === ApplicationStatus.Editing;
 
 
     return {handleCardClick, userFullName, applicationDateStr, cardClassName, showSOLOButton};

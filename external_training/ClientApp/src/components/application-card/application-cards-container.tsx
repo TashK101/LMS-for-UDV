@@ -10,7 +10,8 @@ type ApplicationCardsContainerProps = {
     applications: CurrentApplicationType[];
     showStackedVersionIcon?: boolean;
     showDatePicker?: boolean;
-    showImportButtonInDatePicker?: boolean
+    showImportButtonInDatePicker?: boolean;
+    showSOLOButtonIfNeed?: boolean;
 }
 
 function ApplicationCardsContainer({
@@ -18,6 +19,7 @@ function ApplicationCardsContainer({
                                        showStackedVersionIcon = false,
                                        showDatePicker = false,
                                        showImportButtonInDatePicker = false,
+                                       showSOLOButtonIfNeed = false,
                                    }: ApplicationCardsContainerProps) {
     const [firstSelectedDate, setFirstSelectedDate] = useState<Date | undefined>();
     const [secondSelectedDate, setSecondSelectedDate] = useState<Date | undefined>();
@@ -25,6 +27,7 @@ function ApplicationCardsContainer({
     let filteredApplications = applications
     filteredApplications = firstSelectedDate ? filteredApplications.filter((app) => new Date(app.date.toDateString()) >= firstSelectedDate) : filteredApplications;
     filteredApplications = secondSelectedDate ? filteredApplications.filter((app) => new Date(app.date.toDateString()) <= secondSelectedDate) : filteredApplications;
+    filteredApplications.sort((a, b) => a.date > b.date ? -1 : a.date < b.date ? 1 : 0)
 
     const stacked = filteredApplications.length > MAX_CARDS_NOT_TO_STACK;
     const containerClassName = clsx({
@@ -53,7 +56,8 @@ function ApplicationCardsContainer({
                         <ApplicationCard key={app.id}
                                          application={app}
                                          stacked={stacked}
-                                         showStackedVersionIcon={showStackedVersionIcon}/>
+                                         showStackedVersionIcon={showStackedVersionIcon}
+                                         showSOLOButtonIfNeed={showSOLOButtonIfNeed}/>
                     ))}
                 </div>
             </div>

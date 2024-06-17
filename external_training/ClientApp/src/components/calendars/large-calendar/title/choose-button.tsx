@@ -23,7 +23,7 @@ export const DropdownIndicator = (props: DropdownIndicatorProps) => {
 
 export default function ChooseButton({className, options, currentValue, setCurrentValue}: ChooseButtonProps) {
     let fullClassName = clsx(className,
-        "flex items-center gap-2 border-[1px] border-[#898989] rounded-lg text-[16px] h-10 px-3 hover:bg-[#FFEDCF] hover:cursor-pointer")
+        "flex items-center gap-2 w-[120px] border-[1px] border-[#898989] rounded-lg text-[16px] h-10 px-3 hover:bg-[#FFEDCF] hover:cursor-pointer")
     const getValue = () => {
         return options.find(c => c.value === currentValue);
     }

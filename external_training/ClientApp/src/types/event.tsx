@@ -1,11 +1,9 @@
-import {ApplicationStatus} from "../components/current-applications-utils/application-status.ts";
-
 export type EventType = {
     trainingApplicationId: number,
     courseName: string,
     userFullName: string,
     isOnline: boolean,
-    status: ApplicationStatus,
+    status: string,
     begin: string,
     end: string,
 }
