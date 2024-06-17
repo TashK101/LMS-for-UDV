@@ -34,19 +34,54 @@ namespace external_training.SoloIntegration
                 return new List<SoloManagerDto>();
             var orgUnits = employee.GetOperationOrgUnits();
             var managers = new List<SoloManagerDto>();
-            foreach ( var orgUnit in orgUnits)
+            foreach ( var tmpOrgUnit in orgUnits)
             {
-                var dto = new SoloManagerDto
+                var orgUnit = tmpOrgUnit;
+                var hasAppointedPerson = true;
+                while (true)
                 {
-                    PersonId = orgUnit.Chief.GetAppointedPerson().Id,
-                    AppointmentId = orgUnit.Chief.Appointment.Id,
-                    PostName = orgUnit.Chief.PostName,
-                    OrgUnitName = orgUnit.Name,
-                    LastName = orgUnit.Chief.GetAppointedPerson().LastName,
-                    FirstName = orgUnit.Chief.GetAppointedPerson().FirstName,
-                    MiddleName = orgUnit.Chief.GetAppointedPerson().MiddleName
-                };
-                managers .Add(dto);
+                    hasAppointedPerson = true;
+                    try
+                    {
+                        if (orgUnit.Chief.Appointment == null)
+                            hasAppointedPerson = false;
+                    }
+                    catch (NullReferenceException)
+                    {
+                        hasAppointedPerson = false;
+                    }
+                    if (!hasAppointedPerson)
+                    {
+                        try
+                        {
+                            orgUnit = orgUnit.ParentOrgUnit;
+                            continue;
+                        }
+                        catch (NullReferenceException)
+                        {
+                            break;
+                        }
+                    }
+                    var dto = new SoloManagerDto
+                    {
+                        PersonId = orgUnit.Chief.GetAppointedPerson().Id,
+                        AppointmentId = orgUnit.Chief.Appointment.Id,
+                        PostName = orgUnit.Chief.PostName,
+                        OrgUnitName = orgUnit.Name,
+                        LastName = orgUnit.Chief.GetAppointedPerson().LastName,
+                        FirstName = orgUnit.Chief.GetAppointedPerson().FirstName,
+                        MiddleName = orgUnit.Chief.GetAppointedPerson().MiddleName
+                    };
+                    managers.Add(dto);
+                    try
+                    {
+                        orgUnit = orgUnit.ParentOrgUnit;
+                    }
+                    catch (NullReferenceException)
+                    {
+                        break;
+                    }
+                }
             }
             return managers;
         }
