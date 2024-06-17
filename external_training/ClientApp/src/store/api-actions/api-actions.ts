@@ -346,7 +346,7 @@ export const postApplicationToSoloAction = createAsyncThunk<void, number, {
     async (id, {dispatch, extra: api}) => {
         try {
             dispatch(setLoadingStatus(true));
-            await api.post<{ applicationId: string }>(`api/Admin/send_application_to_solo?${id}`);
+            await api.post<{ applicationId: string }>(`api/Admin/send_application_to_solo?applicationId=${id}`);
         } finally {
             dispatch(setLoadingStatus(false));
         }

@@ -1,6 +1,10 @@
 import clsx from "clsx";
 import {useAppDispatch} from "../../hooks";
-import {postApplicationToSoloAction} from "../../store/api-actions/api-actions.ts";
+import {
+    fetchAdminPendingApplicationsAction,
+    fetchUserTrainingApplicationsAction,
+    postApplicationToSoloAction
+} from "../../store/api-actions/api-actions.ts";
 
 type PostToSoloButtonProps = {
     applicationId: number,
@@ -16,8 +20,11 @@ function PostToSoloButton({applicationId, stacked = false}: PostToSoloButtonProp
             'application-card__button_stacked': stacked
         })
 
-    const handleClick = () => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         dispatch(postApplicationToSoloAction(applicationId))
+            .then(() => dispatch(fetchAdminPendingApplicationsAction()))
+            .then(() => dispatch(fetchUserTrainingApplicationsAction()));
+        event.stopPropagation();
     }
 
     return (
