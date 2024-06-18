@@ -20,6 +20,8 @@ import PendingApplicationDetails from "./pending-application-details";
 import ApprovedApplicationDetails from "./approved-application-details";
 import PostToSoloButton from "../post-to-solo-button/post-to-solo-button.tsx";
 import clsx from "clsx";
+import {ApplicationChangeForm} from "./application-change-form";
+import ApplicationInitForm from "./application-init-form";
 
 export type ApplicationDetailsProps = {
     id: number;
@@ -80,7 +82,8 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
 
                 {role === Role.admin && dataFlag ?
                     <div className="flex">
-                        <PendingApplicationDetails id={id} />
+                        <ApplicationInitForm id={id} />
+                        <ApplicationChangeForm id={id} />
                     </div>
                     :
                     (afterAdminWorkStatuses.includes(status) ?

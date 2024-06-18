@@ -44,6 +44,7 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
     const [topic, setTopic] = useState('')
 
     const [manager, setManager] = useState<AutocompleteOptionObject<string> | null>(null);
+    const [depManager, setDepManager] = useState<AutocompleteOptionObject<string> | null>(null);
     const [employee, setEmployee] = useState<AutocompleteOptionObject<Participant> | null>(null);
     const [autocompleteUniqueKey, setAutocompleteUniqueKey] = useState<string>(new Date().toISOString());
 
@@ -66,22 +67,10 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
         label: getFullNames([m]).join(),
     }));
 
-    /*const addField = () => {
-        setFields([...fields, { key: new Date().toISOString(), value: null }]);
-    };*/
-
-    /*const handleOptionChange = (index: number, option: AutocompleteOptionObject<number> | null) => {
-        const newFields = [...fields];
-        newFields[index].value = option ? option.uniqueValue : null;
-        setFields(newFields);
-
-        const newSelectedIds = new Set(selectedIds);
-        if (option && option.uniqueValue !== null) {
-            newSelectedIds.add(option.uniqueValue);
-        }
-        setSelectedIds(newSelectedIds);
-        console.log(Array.from(newSelectedIds))
-    };*/
+    const autocompleteDepManagerOptions = managers?.toSorted().map((m, index): AutocompleteOptionObject<string> => ({
+        uniqueValue: m.appointmentId,
+        label: getFullNames([m]).join(),
+    }));
 
     const autocompleteEmployeeOptions = !people ? [] : people?.toSorted().map((m): AutocompleteOptionObject<Participant> => ({
         uniqueValue: m,
@@ -91,10 +80,20 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
     const submitHandler = async (event: React.FormEvent) => {
         event.preventDefault()
 
+        const managerValue = manager?.uniqueValue ?? '';
+        const depManagerValue = depManager?.uniqueValue ?? '';
+
+        const mvalues = [];
+        if (managerValue) mvalues.push(managerValue);
+        if (depManagerValue) mvalues.push(depManagerValue);
+
+        if (mvalues.length === 0) mvalues.push('');
+
+
         const newApplication: INewApplication = {
             trainingTopic: topic,
             similarPrograms: sameCourses,
-            approvingManagerSoloAppointmentIds: [manager?.uniqueValue ?? ''],
+            approvingManagerSoloAppointmentIds: mvalues,
             participantSoloPersonIds: selectedEmployeeIds.map((employee) => employee ? employee.soloPersonId : ''),
             relevanceReason: motivation,
             trainingGoals: goals,
@@ -128,7 +127,7 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
 
         });
         setEmployee(() => null);
-        setAutocompleteUniqueKey(() => new Date().toISOString())
+        setAutocompleteUniqueKey(() => new Date().toISOString());
     }
 
     return (
@@ -185,12 +184,13 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
                     onChange={handleEmployeesChange}/>
 
                 <H400 text={"Согласующий руководитель"}/>
+                {manager && <div className='flex items-center gap-[10px]'>
+                    <ApplicationDetailsAvatar userFullName={manager?.label ?? ''}/>
+                    <p>{manager?.label}</p>
+                </div>}
                 <AutocompleteField<string>
                     options={autocompleteManagerOptions}
                     setOption={setManager}/>
-                <button className="bg-orange-50 text-black px-4 py-2 rounded">
-                    Добавить согласующего руководителя
-                </button>
             </CardWithColumn>
 
             <CardWithColumn>
@@ -224,6 +224,23 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
                 </Form>}
 
                 <NumberField label="Стоимость на одного" value={price} onChange={setPrice}/>
+
+                {(price * selectedEmployeeIds.length) >= 100000 ? (
+                    <>
+                        <H400 text={"Согласующий руководитель департамента"} />
+                        {depManager && (
+                            <div className='flex items-center gap-[10px]'>
+                                <ApplicationDetailsAvatar userFullName={depManager?.label ?? ''} />
+                                <p>{depManager?.label}</p>
+                            </div>
+                        )}
+                        <AutocompleteField<string>
+                            options={autocompleteDepManagerOptions}
+                            setOption={setDepManager}
+                        />
+                    </>
+                ) : null}
+                
                 <TextField label="Похожие курсы (если есть)" required={false} value={sameCourses}
                            onChange={setSameCourses}/>
             </CardWithColumn>
@@ -231,9 +248,9 @@ export function CreateApplicationPage({onSubmit}: CreateApplicationPageProps) {
             <CardWithColumn>
                 <CardIndex index={4} count={count}/>
                 <TextArea label="Мотивация - почему этот курс актуален именно сейчас?" value={motivation}
-                          onChange={setMotivation}/>
-                <TextArea label="Цели обучения" value={goals} onChange={setGoals}/>
-                <TextArea label="Приобретаемые навыки" value={skills} onChange={setSkills}/>
+                          onChange={setMotivation} required={false}/>
+                <TextArea label="Цели обучения" value={goals} onChange={setGoals} required={false}/>
+                <TextArea label="Приобретаемые навыки" value={skills} onChange={setSkills} required={false}/>
             </CardWithColumn>
 
             <CardWithColumn>

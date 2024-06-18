@@ -27,7 +27,7 @@ function PendingApplicationDetails({ id }: {id: number}) {
         <div className='pending-application-details'>
             <TextValueBlock textValueProps={[
                 ['Количество участников', application?.participants.length],
-                ['ФИО участников', getFullNames(application.participants).join()],
+                ['ФИО участников', getFullNames(application.participants).join(', ')],
             ]}/>
             <TextValueBlock textValueProps={[
                 ['Формат', `${course ? (course?.isTrainingOnline ? 'Онлайн,' : 'Оффлайн,') : ''} 
