@@ -1,6 +1,6 @@
 import './calendar-filters.css'
 import React, {useState} from "react";
-import AutocompleteField, {AutocompleteOptionObject} from "./autocomplete-field.tsx";
+import AutocompleteField, {AutocompleteOptionObject} from "../../../autocomplete-field/autocomplete-field.tsx";
 
 type CalendarFiltersProps = {
     isVisible: boolean;

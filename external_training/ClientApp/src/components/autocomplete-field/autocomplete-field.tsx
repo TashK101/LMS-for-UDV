@@ -1,6 +1,6 @@
 import {Autocomplete} from "@mui/material";
 import React, {useState} from "react";
-import './calendar-filters.css';
+import './autocomplete-field.css';
 
 export type AutocompleteOptionObject<T> = {
     label: string;
@@ -48,7 +48,8 @@ function AutocompleteField<T>({options, setOption, uniqueKey = '', onChange}: Au
                             style={{
                                 padding: "10px",
                                 width: "100%",
-                                outline: 'none'
+                                outline: 'none',
+                                borderRadius: '5px'
                             }}
                             {...params.inputProps}
                         />

@@ -16,7 +16,7 @@ import {ApprovingManager, Participant} from "../../../types/application";
 import {INewApplication} from "../../../types/new-application";
 import AutocompleteField, {
     AutocompleteOptionObject
-} from "../../calendars/large-calendar/calendar-filters/autocomplete-field";
+} from "../../autocomplete-field/autocomplete-field.tsx";
 import {getFullNames} from "../../../helpers/get-full-names";
 import {H400} from "../../common/Text";
 import {ApplicationDetailsAvatar} from "../../avatar/header-avatar.tsx";

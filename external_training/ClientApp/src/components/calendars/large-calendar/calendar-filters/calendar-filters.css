@@ -74,27 +74,3 @@ form .calendar-filters__reset:active {
 
 
 
-div.autocomplete-paper {
-    border: solid 1px #C27800;
-    border-radius: 4px;
-}
-
-.autocomplete-option {
-    padding: 8px 12px;
-}
-
-.MuiPaper-root > ul.MuiAutocomplete-listbox > .autocomplete-option[aria-selected="true"] {
-    background-color: #F59D0E;
-}
-
-.MuiPaper-root > ul.MuiAutocomplete-listbox > li.autocomplete-option:hover {
-    background-color: #FFEDCF;
-}
-
-.MuiAutocomplete-input {
-    border: solid 2px #79747E;
-}
-
-.MuiAutocomplete-input[aria-expanded="true"] {
-    border-color: #C27800;
-}
