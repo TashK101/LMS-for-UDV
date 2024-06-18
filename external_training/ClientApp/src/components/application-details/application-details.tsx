@@ -44,12 +44,14 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
     const status = ApplicationStatus[application?.status as keyof typeof ApplicationStatus]
     const [dataFlag, setDataFlag] = useState(() => false);
 
+    console.log(role)
+
     return (
         <div>
             <Header/>
             <div className='application-details left-5'>
                 <h2 className='topic-text'>{application?.trainingTopic}</h2>
-                {status === ApplicationStatus.Editing &&
+                {role === 'Admin' && status === ApplicationStatus.Editing &&
                     <div className='flex gap-[15px]'>
                         <PostToSoloButton applicationId={application?.trainingApplicationId} variant={'big'}/>
                         <button
@@ -68,7 +70,7 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
                     {application?.applicationUserName &&
                         <IconNameCombo names={[application?.applicationUserName]} action='Подал'/>}
 
-                    {application?.approvingManagers?.length > 0 &&
+                    {application && application?.approvingManagers?.length > 0 &&
                     <IconNameCombo
                         names={getFullNames(application.approvingManagers)}
                         action='Согласует'

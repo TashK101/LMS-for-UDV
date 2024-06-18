@@ -1,7 +1,7 @@
 ﻿
 import {TextValueBlock} from "./text-value-block";
 import './application-details.css'
-import {Application, Course} from "../../types/application";
+import {Application} from "../../types/application";
 import {stringToDate} from "../../helpers/string-to-date";
 import {getFullNames} from "../../helpers/get-full-names"
 

@@ -2,7 +2,7 @@
 import './application-details.css'
 import {stringToDate} from "../../helpers/string-to-date";
 import {getFullNames} from "../../helpers/get-full-names"
-import {Application, Course} from "../../types/application";
+import {Application} from "../../types/application";
 import {useEffect} from "react";
 import {
     fetchApplicationDetailsAction,
@@ -17,7 +17,7 @@ function PendingApplicationDetails({ id }: {id: number}) {
         dispatch(fetchApplicationDetailsAction(id));
     }, []);
 
-    const application : Application = useAppSelector(getApplicationDetails);
+    const application : Application | undefined = useAppSelector(getApplicationDetails);
     const course = application?.desiredCourse;
     let loadingFlag = useAppSelector(getIsDataLoading);
     if (loadingFlag || (!application))
