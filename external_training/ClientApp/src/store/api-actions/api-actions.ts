@@ -208,6 +208,43 @@ export const postNewApplicationAction = createAsyncThunk<void, INewApplication, 
     },
 );
 
+export const postAdminEditSelectedCourse = createAsyncThunk<void, Course, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/postAdminEditCourse',
+    async (arg: Course, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            await api.post<Course>('/api/Admin/edit_selected_course', arg);
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
+interface EditCourseParams {
+    applicationId: number;
+    status: string;
+}
+
+export const postAdminChangeStatus = createAsyncThunk<void, EditCourseParams, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/postAdminChangeStatus',
+    async ({ applicationId, status }, { dispatch, extra: api }) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            await api.post<EditCourseParams>(`/api/Admin/change_status?applicationId=${applicationId}&status=${status}`);
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
 export const postUserCommentAction = createAsyncThunk<void, SentCommentType, {
     dispatch: AppDispatch;
     state: State;
