@@ -105,7 +105,8 @@ export function ApplicationChangeForm({ id }) {
         };
 
         dispatch(postAdminEditSelectedCourse(adminCourse));
-        dispatch(postAdminChangeStatus({id, adminApplicationStatus}))
+        dispatch(postAdminChangeStatus({applicationId:id, status:adminApplicationStatus}))
+            .then(() => dispatch(fetchApplicationDetailsAction(id)))
         console.log(adminApplicationStatus)
         
     };
