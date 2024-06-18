@@ -46,6 +46,7 @@ namespace external_training.SoloIntegration
 
             services.AddScoped<OrgStructureRepository>();
             services.AddScoped<SoloApplicationRepository>();
+            services.AddHostedService<UpdateApplicationStatusesBackgroundService>();
 
             return services;
         }
