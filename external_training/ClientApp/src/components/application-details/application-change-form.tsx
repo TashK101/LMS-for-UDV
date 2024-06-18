@@ -94,6 +94,8 @@ export function ApplicationChangeForm({ id }) {
 
         const adminApplicationStatus = (formData.status === undefined) ? application.status : ApplicationsStatusToData.get(formData.status) ?? "";
         const adminCourse: Course = {
+            courseId: application.selectedCourse.courseId === null ? application.desiredCourse.courseId : application.selectedCourse.courseId,
+            trainingApplicationId: id,
             name: formData.courseTitle ?? courseTitle,
             isTrainingOnline: formData.format === '1',
             isCorporateTraining: formData.classmates === '1',
@@ -102,6 +104,9 @@ export function ApplicationChangeForm({ id }) {
             totalCost: formData.price*formData.numberOfPeople,
             begin: formData.firstSelectedDate?.toISOString() ?? firstSelectedDate,
             end: formData.secondSelectedDate?.toISOString() ?? secondSelectedDate,
+            category: "",
+            description: "",
+            participantFullNames: application.participants.map((part) => part.fullName),
         };
 
         dispatch(postAdminEditSelectedCourse(adminCourse));
