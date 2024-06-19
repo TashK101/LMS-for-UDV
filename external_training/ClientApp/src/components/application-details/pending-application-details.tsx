@@ -20,7 +20,7 @@ function PendingApplicationDetails({ id }: {id: number}) {
     const application : Application | undefined = useAppSelector(getApplicationDetails);
     const course = application?.desiredCourse;
     let loadingFlag = useAppSelector(getIsDataLoading);
-    if (loadingFlag || (!application))
+    if (loadingFlag || (!application) || (!application.participants))
         return <LoadingPage/>
     else
     return (

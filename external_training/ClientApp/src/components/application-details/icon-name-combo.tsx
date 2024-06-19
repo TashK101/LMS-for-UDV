@@ -9,7 +9,7 @@ export function IconNameCombo({names, action}:IconNameComboType): JSX.Element {
         <div>
             <p className='bold-text'>{action}:</p><br/>
             {names.length > 0 && names.map((name, index) => (
-                <div key={index} className='flex items-center gap-[15px] m-b4'>
+                <div key={index} className='flex items-center gap-[15px] m-b4 py-1'>
                     <ApplicationDetailsAvatar userFullName={name} />
                     {name}
                 </div>

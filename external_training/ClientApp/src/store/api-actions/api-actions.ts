@@ -224,6 +224,22 @@ export const postAdminEditSelectedCourse = createAsyncThunk<void, Course, {
     },
 );
 
+export const postAdminEditDesiredCourse = createAsyncThunk<void, Course, {
+    dispatch: AppDispatch; 
+    state: State;
+    extra: AxiosInstance;
+}>(
+    'data/postAdminEditCourse',
+    async (arg: Course, {dispatch, extra: api}) => {
+        try {
+            dispatch(setLoadingStatus(true));
+            await api.post<Course>('/api/Admin/edit_desired_course', arg);
+        } finally {
+            dispatch(setLoadingStatus(false));
+        }
+    },
+);
+
 interface EditCourseParams {
     applicationId: number;
     status: string;

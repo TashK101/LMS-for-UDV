@@ -4,9 +4,24 @@ import './application-details.css'
 import {Application} from "../../types/application";
 import {stringToDate} from "../../helpers/string-to-date";
 import {getFullNames} from "../../helpers/get-full-names"
+import {useEffect} from "react";
+import {fetchApplicationDetailsAction} from "../../store/api-actions/api-actions";
+import {getApplicationDetails, getIsDataLoading} from "../../store/system-process/system-getters";
+import {LoadingPage} from "../pages/loading-page/loading-page";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 
-function ApprovedApplicationDetails({ application }: {application: Application}) {
-    const course = application?.selectedCourse;
+function ApprovedApplicationDetails({ id }: {id: number}) {
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(fetchApplicationDetailsAction(id));
+    }, []);
+
+    const application : Application | undefined = useAppSelector(getApplicationDetails);
+    const course = application?.selectedCourse ?? application?.desiredCourse;
+    let loadingFlag = useAppSelector(getIsDataLoading);
+    if (loadingFlag || (!application) || (!application.participants))
+        return <LoadingPage/>
+    else
     return (
         <div className='pending-application-details'>
             <TextValueBlock textValueProps={[

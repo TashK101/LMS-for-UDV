@@ -1,2 +1,4 @@
-export const afterAdminWorkStatuses = ["Ждёт обучение", "Ждёт оплату", "Ждёт договор и оплату", "Идёт обучение", "Обучение пройдено", "Обучение отменено"];
-export const afterManagerApprovalStatuses = ["Утверждено", "Идёт подбор курса", "Ждёт оплату", "Ждёт договор и оплату", "Ждёт договор"];
+import {ApplicationStatus} from "../current-applications-utils/application-status";
+export const noManagerApprovalStatuses = [
+    'Редактирование', 'Ждёт согласования руководителя', 'Не согласовано'
+];

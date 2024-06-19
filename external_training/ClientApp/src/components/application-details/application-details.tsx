@@ -1,6 +1,6 @@
 import {Comments} from "../comments/comments";
 import {useEffect, useState} from "react"
-import {afterAdminWorkStatuses} from "./flagStatuses";
+import {noManagerApprovalStatuses} from "./flagStatuses";
 import './application-details.css'
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {getApplicationDetails, getCourseDetails, getId, getRole} from "../../store/system-process/system-getters";
@@ -43,21 +43,21 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
     const userId = useAppSelector(getId);
     const status = ApplicationStatus[application?.status as keyof typeof ApplicationStatus]
     const [dataFlag, setDataFlag] = useState(() => false);
-
-    console.log(role)
+    let isCourseSet = !noManagerApprovalStatuses.includes(status);
 
     return (
         <div>
             <Header/>
             <div className='application-details left-5'>
                 <h2 className='topic-text'>{application?.trainingTopic}</h2>
-                {role === 'Admin' && status === ApplicationStatus.Editing &&
+                {role === Role.admin && status === ApplicationStatus.Editing &&
                     <div className='flex gap-[15px]'>
                         <PostToSoloButton applicationId={application?.trainingApplicationId} variant={'big'}/>
                         <button
                             className={clsx('rounded-[100px] box-border leading-[24px] text-[20px] py-[15px]',
-                            'px-[24px] border-[2px] border-[#FFCE80] text-[#724600] hover:bg-[#FFEDCF]',
-                            'hover:border-[#F59D0E] shadow-md active:shadow-none')}>Отправить в историю</button>
+                                'px-[24px] border-[2px] border-[#FFCE80] text-[#724600] hover:bg-[#FFEDCF]',
+                                'hover:border-[#F59D0E] shadow-md active:shadow-none')}>Отправить в историю
+                        </button>
                     </div>
                 }
 
@@ -71,31 +71,35 @@ export function ApplicationDetails({id}: ApplicationDetailsProps): JSX.Element {
                         <IconNameCombo names={[application?.applicationUserName]} action='Подал'/>}
 
                     {application && application?.approvingManagers?.length > 0 &&
-                    <IconNameCombo
-                        names={getFullNames(application.approvingManagers)}
-                        action='Согласует'
-                    />
+                        <IconNameCombo
+                            names={getFullNames(application.approvingManagers)}
+                            action='Согласует'
+                        />
                     }
                 </div>
 
-                {(role === Role.admin && status !== "Ждёт согласования руководителя") && (
-                    <ModeSwitchButton contentMode={dataFlag} setContentMode={setDataFlag} leftPartText={'Исходные данные'}
-                                  rightPartText={'Оформление'}/>)}
+                {(role === Role.admin && (isCourseSet || status === ApplicationStatus.Editing)) && (
+                    <ModeSwitchButton contentMode={dataFlag} setContentMode={setDataFlag}
+                                      leftPartText={noManagerApprovalStatuses.includes(status) 
+                                          ? 'Исходные данные' : 'Текущие данные'}
+                                      rightPartText={ status === ApplicationStatus.Editing 
+                                          ? "Редактирование" : 'Оформление'}/>)}
 
                 {role === Role.admin && dataFlag ?
                     <div className="flex">
-                        <ApplicationInitForm id={id} />
-                        <ApplicationChangeForm id={id} />
+                        <ApplicationInitForm id={id}/>
+                        <ApplicationChangeForm id={id}/>
                     </div>
                     :
-                    (afterAdminWorkStatuses.includes(status) ?
-                        <ApprovedApplicationDetails course={course} application={application} />
+                    (noManagerApprovalStatuses.includes(status) ?
+                        <PendingApplicationDetails id={id}/>
                         :
-                        <PendingApplicationDetails id={id} />) }
+                        <ApprovedApplicationDetails id={id}/>)}
 
-                {application && role && ((role===Role.admin) || userId === application?.applicationUserId) &&
-                <CommentSendField trainingApplicationId={id} applicationUserId={application?.applicationUserId} userId={userId} role={roleEnum}/>}
-
+                {application && role && ((role === Role.admin) || userId === application?.applicationUserId) &&
+                    <CommentSendField trainingApplicationId={id} applicationUserId={application?.applicationUserId}
+                                      userId={userId} role={roleEnum}/>}
+                
             </div>
             <div className='top-bottom-20'>
                 {application?.comments &&
